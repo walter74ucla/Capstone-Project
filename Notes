@@ -1,0 +1,520 @@
+
+===============================================================================
+Figure out how to get free NBA data via an API.
+https://rapidapi.com/ <-- this site gives Freemium data, up to 1000 requests per day
+
+GET /leagues/
+{"api":{
+		"status":200,
+		"message":"GET leagues\/",
+		"results":6,
+			"filters":[],
+			"leagues":[
+						"standard",
+						"africa",
+						"sacramento",
+						"vegas",
+						"utah",
+						"orlando"]
+		}
+}
+
+===============================================================================
+*********Could not get the any-api.com site to work*********
+https://any-api.com/nba_com/nba_com/docs/API_Description <-- this site is free
+
+0021900212 <-- this is a GameID of an overtime game
+
+https://stats.nba.com/game/0021900253/?RangeType=0&StartRange=0&EndRange=28800
+The following GET references the url above...
+GET https://stats.nba.com/stats/boxscoreadvancedv2
+"parameters": {
+    "GameID": "0021900253",
+    "StartPeriod": 1,
+    "EndPeriod": 14, The field EndPeriod must be between 0 and 14.
+    "StartRange": 0,
+    "EndRange": 28800, 2880 is for four quarters in seconds...put in 28800 to account for overtime periods
+    "RangeType": 0
+  }
+"resultSets": [
+    {
+      "name": "PlayerStats",
+      "headers": [
+        "GAME_ID",
+        "TEAM_ID",
+        "TEAM_ABBREVIATION",
+        "TEAM_CITY",
+        "PLAYER_ID",
+        "PLAYER_NAME",
+        "START_POSITION",
+        "COMMENT",
+        "MIN",
+        "E_OFF_RATING",
+        "OFF_RATING",
+        "E_DEF_RATING",
+        "DEF_RATING",
+        "E_NET_RATING",
+        "NET_RATING",
+        "AST_PCT",
+        "AST_TOV",
+        "AST_RATIO",
+        "OREB_PCT",
+        "DREB_PCT",
+        "REB_PCT",
+        "TM_TOV_PCT",
+        "EFG_PCT",
+        "TS_PCT",
+        "USG_PCT",
+        "E_USG_PCT",
+        "E_PACE",
+        "PACE",
+        "PACE_PER40",
+        "POSS",
+        "PIE"
+      ]
+
+
+
+GET https://stats.nba.com/stats/boxscorefourfactorsv2
+ "resultSets": [
+    {
+      "name": "sqlPlayersFourFactors",
+      "headers": [
+        "GAME_ID",
+        "TEAM_ID",
+        "TEAM_ABBREVIATION",
+        "TEAM_CITY",
+        "PLAYER_ID",
+        "PLAYER_NAME",
+        "START_POSITION",
+        "COMMENT",
+        "MIN",
+        "EFG_PCT",
+        "FTA_RATE",
+        "TM_TOV_PCT",
+        "OREB_PCT",
+        "OPP_EFG_PCT",
+        "OPP_FTA_RATE",
+        "OPP_TOV_PCT",
+        "OPP_OREB_PCT"
+      ],
+
+GET https://stats.nba.com/stats/boxscoremiscv2
+"resultSets": [
+    {
+      "name": "sqlPlayersMisc",
+      "headers": [
+        "GAME_ID",
+        "TEAM_ID",
+        "TEAM_ABBREVIATION",
+        "TEAM_CITY",
+        "PLAYER_ID",
+        "PLAYER_NAME",
+        "START_POSITION",
+        "COMMENT",
+        "MIN",
+        "PTS_OFF_TOV",
+        "PTS_2ND_CHANCE",
+        "PTS_FB",
+        "PTS_PAINT",
+        "OPP_PTS_OFF_TOV",
+        "OPP_PTS_2ND_CHANCE",
+        "OPP_PTS_FB",
+        "OPP_PTS_PAINT",
+        "BLK",
+        "BLKA",
+        "PF",
+        "PFD"
+      ],
+
+
+GET https://stats.nba.com/stats/boxscoreplayertrackv2
+"resultSets": [
+    {
+      "name": "PlayerStats",
+      "headers": [
+        "GAME_ID",
+        "TEAM_ID",
+        "TEAM_ABBREVIATION",
+        "TEAM_CITY",
+        "PLAYER_ID",
+        "PLAYER_NAME",
+        "START_POSITION",
+        "COMMENT",
+        "MIN",
+        "SPD",
+        "DIST",
+        "ORBC",
+        "DRBC",
+        "RBC",
+        "TCHS",
+        "SAST",
+        "FTAST",
+        "PASS",
+        "AST",
+        "CFGM",
+        "CFGA",
+        "CFG_PCT",
+        "UFGM",
+        "UFGA",
+        "UFG_PCT",
+        "FG_PCT",
+        "DFGM",
+        "DFGA",
+        "DFG_PCT"
+      ],
+
+
+GET https://stats.nba.com/stats/boxscorescoringv2
+"resultSets": [
+    {
+      "name": "sqlPlayersScoring",
+      "headers": [
+        "GAME_ID",
+        "TEAM_ID",
+        "TEAM_ABBREVIATION",
+        "TEAM_CITY",
+        "PLAYER_ID",
+        "PLAYER_NAME",
+        "START_POSITION",
+        "COMMENT",
+        "MIN",
+        "PCT_FGA_2PT",
+        "PCT_FGA_3PT",
+        "PCT_PTS_2PT",
+        "PCT_PTS_2PT_MR",
+        "PCT_PTS_3PT",
+        "PCT_PTS_FB",
+        "PCT_PTS_FT",
+        "PCT_PTS_OFF_TOV",
+        "PCT_PTS_PAINT",
+        "PCT_AST_2PM",
+        "PCT_UAST_2PM",
+        "PCT_AST_3PM",
+        "PCT_UAST_3PM",
+        "PCT_AST_FGM",
+        "PCT_UAST_FGM"
+      ],
+
+********************************************************************
+GET https://stats.nba.com/stats/boxscoresummaryv2
+********************************************************************
+check out "name": "OtherStats" / "Officials" / "InactivePlayers" / "GameInfo" / "LineScore" here as well
+"resource": "boxscoresummary",
+  "parameters": {
+    "GameID": "0021900253"
+  },
+"resultSets": [
+    {
+      "name": "GameSummary",
+      "headers": [
+        "GAME_DATE_EST",
+        "GAME_SEQUENCE",
+        "GAME_ID",
+        "GAME_STATUS_ID",
+        "GAME_STATUS_TEXT",
+        "GAMECODE",
+        "HOME_TEAM_ID",
+        "VISITOR_TEAM_ID",
+        "SEASON",
+        "LIVE_PERIOD",
+        "LIVE_PC_TIME",
+        "NATL_TV_BROADCASTER_ABBREVIATION",
+        "LIVE_PERIOD_TIME_BCAST",
+        "WH_STATUS"
+      ],
+
+********************************************************************
+GET https://stats.nba.com/stats/boxscoretraditionalv2
+********************************************************************
+check out "name": "TeamStats" / "TeamStarterBenchStats" here as well
+"resource": "boxscore",
+  "parameters": {
+    "GameID": "0021900253",
+    "StartPeriod": 1,
+    "EndPeriod": 14,
+    "StartRange": 0,
+    "EndRange": 28800,
+    "RangeType": 0
+  },
+  "resultSets": [
+    {
+      "name": "PlayerStats",
+      "headers": [
+        "GAME_ID",
+        "TEAM_ID",
+        "TEAM_ABBREVIATION",
+        "TEAM_CITY",
+        "PLAYER_ID",
+        "PLAYER_NAME",
+        "START_POSITION",
+        "COMMENT",
+        "MIN",
+        "FGM",
+        "FGA",
+        "FG_PCT",
+        "FG3M",
+        "FG3A",
+        "FG3_PCT",
+        "FTM",
+        "FTA",
+        "FT_PCT",
+        "OREB",
+        "DREB",
+        "REB",
+        "AST",
+        "STL",
+        "BLK",
+        "TO",
+        "PF",
+        "PTS",
+        "PLUS_MINUS"
+      ],
+
+
+GET https://stats.nba.com/stats/boxscoreusagev2
+"resultSets": [
+    {
+      "name": "sqlPlayersUsage",
+      "headers": [
+        "GAME_ID",
+        "TEAM_ID",
+        "TEAM_ABBREVIATION",
+        "TEAM_CITY",
+        "PLAYER_ID",
+        "PLAYER_NAME",
+        "START_POSITION",
+        "COMMENT",
+        "MIN",
+        "USG_PCT",
+        "PCT_FGM",
+        "PCT_FGA",
+        "PCT_FG3M",
+        "PCT_FG3A",
+        "PCT_FTM",
+        "PCT_FTA",
+        "PCT_OREB",
+        "PCT_DREB",
+        "PCT_REB",
+        "PCT_AST",
+        "PCT_TOV",
+        "PCT_STL",
+        "PCT_BLK",
+        "PCT_BLKA",
+        "PCT_PF",
+        "PCT_PFD",
+        "PCT_PTS"
+      ],
+
+
+GET https://stats.nba.com/stats/commonTeamYears
+"resource": "commonteamyears",
+  "parameters": {
+    "LeagueID": "00"
+  },
+  "resultSets": [
+    {
+      "name": "TeamYears",
+      "headers": [
+        "LEAGUE_ID",
+        "TEAM_ID",
+        "MIN_YEAR",
+        "MAX_YEAR",
+        "ABBREVIATION"
+      ],
+
+
+GET https://stats.nba.com/stats/commonallplayers
+"resource": "commonallplayers",
+  "parameters": {
+    "LeagueID": "00",
+    "Season": "2019-20",
+    "IsOnlyCurrentSeason": 1 <-- 0 gave a boatload of players
+  },
+  "resultSets": [
+    {
+      "name": "CommonAllPlayers",
+      "headers": [
+        "PERSON_ID",
+        "DISPLAY_LAST_COMMA_FIRST",
+        "DISPLAY_FIRST_LAST",
+        "ROSTERSTATUS",
+        "FROM_YEAR",
+        "TO_YEAR",
+        "PLAYERCODE",
+        "TEAM_ID",
+        "TEAM_CITY",
+        "TEAM_NAME",
+        "TEAM_ABBREVIATION",
+        "TEAM_CODE",
+        "GAMES_PLAYED_FLAG",
+        "OTHERLEAGUE_EXPERIENCE_CH"
+      ],
+
+
+GET https://stats.nba.com/stats/commonplayerinfo
+"resource": "commonplayerinfo",
+  "parameters": [
+    {
+      "PlayerID": 201935
+    },
+    {
+      "LeagueID": null
+    }
+  ],
+
+
+GET https://stats.nba.com/stats/commonteamroster
+"resource": "commonteamroster",
+  "parameters": {
+    "TeamID": 1610612749,
+    "LeagueID": null,
+    "Season": "2019-20"
+  },
+  "resultSets": [
+    {
+      "name": "CommonTeamRoster",
+      "headers": [
+        "TeamID",
+        "SEASON",
+        "LeagueID", <-- 00 may work
+        "PLAYER",
+        "NUM",
+        "POSITION",
+        "HEIGHT",
+        "WEIGHT",
+        "BIRTH_DATE",
+        "AGE",
+        "EXP",
+        "SCHOOL",
+        "PLAYER_ID"
+      ],
+
+
+GET https://stats.nba.com/stats/teaminfocommon
+check out "name": "TeamSeasonRanks" / "AvailableSeasons"
+guess for SeasonID --> 1YYYY = pre-season, 2YYYY = regular season, 4YYYY = playoffs
+"resource": "teaminfocommon",
+  "parameters": {
+    "LeagueID": "00",
+    "Season": "2019-20",
+    "SeasonType": "0",
+    "TeamID": 1610612749
+  },
+  "resultSets": [
+    {
+      "name": "TeamInfoCommon",
+      "headers": [
+        "TEAM_ID",
+        "SEASON_YEAR",
+        "TEAM_CITY",
+        "TEAM_NAME",
+        "TEAM_ABBREVIATION",
+        "TEAM_CONFERENCE",
+        "TEAM_DIVISION",
+        "TEAM_CODE",
+        "W",
+        "L",
+        "PCT",
+        "CONF_RANK",
+        "DIV_RANK",
+        "MIN_YEAR",
+        "MAX_YEAR"
+      ],
+
+
+GET https://stats.nba.com/stats/scoreboardV2
+"resource": "scoreboardV2",
+  "parameters": {
+    "GameDate": "11/26/2019",
+    "LeagueID": "00",
+    "DayOffset": "0"
+  },
+  "resultSets": [
+    {
+      "name": "GameHeader",
+      "headers": [
+        "GAME_DATE_EST",
+        "GAME_SEQUENCE",
+        "GAME_ID",
+        "GAME_STATUS_ID",
+        "GAME_STATUS_TEXT",
+        "GAMECODE",
+        "HOME_TEAM_ID",
+        "VISITOR_TEAM_ID",
+        "SEASON",
+        "LIVE_PERIOD",
+        "LIVE_PC_TIME",
+        "NATL_TV_BROADCASTER_ABBREVIATION",
+        "HOME_TV_BROADCASTER_ABBREVIATION",
+        "AWAY_TV_BROADCASTER_ABBREVIATION",
+        "LIVE_PERIOD_TIME_BCAST",
+        "ARENA_NAME",
+        "WH_STATUS"
+      ],
+
+
+GET https://stats.nba.com/stats/teamgamelog
+Status Code 400: Bad request - bad parameters
+The field SeasonType must match the regular expression '^(Regular Season)|(Pre Season)|(Playoffs)|(All-Star)|(All Star)|(Preseason)$'.
+"resource": "teamgamelog",
+  "parameters": {
+    "TeamID": 1610612749,
+    "LeagueID": null,
+    "Season": "2019-20",
+    "SeasonType": "Regular Season",
+    "DateFrom": null,
+    "DateTo": null
+  },
+  "resultSets": [
+    {
+      "name": "TeamGameLog",
+      "headers": [
+        "Team_ID",
+        "Game_ID",
+        "GAME_DATE",
+        "MATCHUP",
+        "WL",
+        "W",
+        "L",
+        "W_PCT",
+        "MIN",
+        "FGM",
+        "FGA",
+        "FG_PCT",
+        "FG3M",
+        "FG3A",
+        "FG3_PCT",
+        "FTM",
+        "FTA",
+        "FT_PCT",
+        "OREB",
+        "DREB",
+        "REB",
+        "AST",
+        "STL",
+        "BLK",
+        "TOV",
+        "PF",
+        "PTS"
+      ],
+
+
+===============================================================================
+example usage...
+stats.nba.com/stats/{endpoint}/?{params1&params2&params3...}
+stats.nba.com/stats/scoreboard/?GameDate=02/14/2015&LeagueID=00&DayOffset=0
+      	
+*********Could not get the any-api.com site to work*********
+===============================================================================
+Logo URL example
+https://stats.nba.com/media/img/teams/logos/WAS_logo.svg
+===============================================================================
+Steps for creating a react app
+$ npm i -g create-react-app <-- did this already (during the first react.js lesson)
+$ create-react-app folder-name
+$ npm run start <-- this fires up the server
+
+update the .gitignore file as necessary
+https://github.com/facebook/react/blob/master/.gitignore
+===============================================================================
