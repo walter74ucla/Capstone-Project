@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GameList from '../GameList';
-
+import DropdownExampleControlled from '../DateInputForm';
 
 class BoxscoreContainer extends Component {
 	constructor() {
@@ -32,6 +32,12 @@ class BoxscoreContainer extends Component {
 		}
 	}
 	
+	getGender = async (e, genderFromTheForm) => {
+	    e.preventDefault();
+	    console.log(genderFromTheForm)
+    
+    }
+
 	getBoxscoreData = async () => {
 		
 		try {
@@ -96,13 +102,19 @@ class BoxscoreContainer extends Component {
     
   	}
 
+  	
+    	
   	render() {
 	  	console.log(this.state.date.api.games);
 	  	console.log(this.state.datePlusOne.api.games);
 	  	return(
 	  		<React.Fragment>
       			Some BoxscoreContainer text.
-      			<GameList gameDate={this.state.date.api.games} gameDatePlusOne={this.state.datePlusOne.api.games}/>
+      			<DropdownExampleControlled inputDate={this.getGender}/>
+      			<GameList 
+      				gameDate={this.state.date.api.games}
+      				gameDatePlusOne={this.state.datePlusOne.api.games}
+      			/>
     		</React.Fragment>
   		)
   	}
