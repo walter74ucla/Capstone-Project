@@ -19,6 +19,27 @@ GET /leagues/
 		}
 }
 
+GET /gameDetails/ <-- needs gameid, startTimeUTC and endTimeUTC /home and visiting team --> teamId / linescore
+
+GET /statistics/games/gameId/ <-- needs gameid, gives game totals for each team
+
+GET /statistics/players/gameId/ <-- needs gameid, stats have gameId, teamId, playerId
+
+GET /statistics/players/playerId/ <-- needs playerid, stats have gameId, teamId, playerId
+
+GET /games/date/ <-- needs date in YYYY-MM-DD format.
+Also, must figure out the startTimeUTC to filter out the correct games.
+
+********************************************************************
+Independent of input format, JavaScript will (by default) output dates in full text string format:
+Tue Mar 24 2015 18:00:00 GMT-0600 (Mountain Daylight Time)
+
+//if ( FirstThreeLettersOf(new Date("YYYY-MM-DDT07:00:00.00Z")) === FirstThreeLettersOf(new Date("startTimeUTC")) ){ // first three letters of is someVariable.slice(0,3)
+	use those game id's
+} //YYYY-MM-DDT07:00:00.00Z" -->07:00:00.00Z helps get to input date the correct day.  The 7 gets you to midnight Mountain Standard Time or 1am Mountain Daylight Time. 
+********************************************************************
+
+
 ===============================================================================
 *********Could not get the any-api.com site to work*********
 https://any-api.com/nba_com/nba_com/docs/API_Description <-- this site is free
