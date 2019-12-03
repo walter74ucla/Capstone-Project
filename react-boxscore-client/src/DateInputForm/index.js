@@ -1,112 +1,39 @@
-// this code came from here...
-// https://react.semantic-ui.com/modules/dropdown/#usage-controlled
-import React, { Component } from 'react'
-import { Dropdown, Grid, Segment } from 'semantic-ui-react'
+// the base code came from here...
+// http://react-day-picker.js.org/docs/getting-started
+import React from 'react';
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 
-const options = [
-  { key: 1, text: 'One', value: 1 },
-  { key: 2, text: 'Two', value: 2 },
-  { key: 3, text: 'Three', value: 3 },
-]
 
-export default class DropdownExampleControlled extends Component {
-  state = {}
+export default class DateInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleDayClick = this.handleDayClick.bind(this);
+    this.state = {
+      selectedDay: null,
+    };
+  }
 
-  handleChange = (e, { value }) => 
-    this.setState({ value },
-      console.log(value), // I added this
-      this.props.inputDate(e, { value })// I added this
-    )
+  handleDayClick(day, { selected }) {
+    this.setState({
+      selectedDay: selected ? undefined : day,
+    });
+    console.log(day);// I added this
+  }
 
   render() {
-    const { value } = this.state
-
     return (
-      <Grid columns={2}>
-        <Grid.Column>
-          <Dropdown
-            onChange={this.handleChange}
-            options={options}
-            placeholder='Choose an option'
-            selection
-            value={value}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <Segment secondary>
-            <pre>Current value: {value}</pre>
-          </Segment>
-        </Grid.Column>
-      </Grid>
-    )
+      <div>
+        <DayPicker
+          selectedDays={this.state.selectedDay}
+          onDayClick={this.handleDayClick}
+        />
+        <p>
+          {this.state.selectedDay
+            ? this.state.selectedDay.toLocaleDateString()
+            : 'Please select a day 👻'}
+        </p>
+      </div>
+    );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// This code did not work...
-// import React, { Component } from 'react';
-// import { Form } from 'semantic-ui-react';
-
-// const options = [
-//   { key: 'm', text: 'Male', value: 'male' },
-//   { key: 'f', text: 'Female', value: 'female' },
-//   { key: 'o', text: 'Other', value: 'other' },
-// ]
-
-// class DateInputForm extends Component {
-//   constructor(){
-//     super();
-
-//     this.state = {
-//       gender: ''
-//     }
-//   }
-
-//   handleSelectChange = (e) => {
-//     // es6 computed properties [e.currentTarget.value]
-//     this.setState({[e.currentTarget.name]: e.currentTarget.value})
-//     console.log(this.state);
-//   }
-
-//   handleSubmit = (e) =>{
-//     console.log(this.state);
-//     this.props.inputDate(e, this.state);
-//     // this.setState({gender:''})
-//   }
-
-//   render() {
-    
-//     return (
-//       <Form onSubmit={this.handleSubmit}>
-//         <Form.Group widths='equal'>
-//           <Form.Select
-//             label='Gender'
-//             options={options}
-//             placeholder='Gender'
-//             name='gender' 
-//             value={value} /*stuck here */
-//             onChange={this.handleSelectChange}
-//           />
-//         </Form.Group>
-        
-//         <Form.Button color="teal" type="submit">
-//           Submit 
-//         </Form.Button>
-      
-//       </Form>
-//     )
-//   }
-// }
-
-// export default DateInputForm

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GameList from '../GameList';
-import DropdownExampleControlled from '../DateInputForm';
+// import DropdownExampleControlled from '../DateInputFormV1';
+import DateInput from '../DateInputForm';
 
 class BoxscoreContainer extends Component {
 	constructor() {
@@ -110,7 +111,7 @@ class BoxscoreContainer extends Component {
 	  	return(
 	  		<React.Fragment>
       			Some BoxscoreContainer text.
-      			<DropdownExampleControlled inputDate={this.getGender}/>
+      			<DateInput inputDate={this.getGender}/>
       			<GameList 
       				gameDate={this.state.date.api.games}
       				gameDatePlusOne={this.state.datePlusOne.api.games}
