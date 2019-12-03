@@ -5,9 +5,7 @@
 ![wireframe](/react-boxscore-client/public/images/entityRelationshipDiagram_ERD-rot.jpg)
 
 
-## React-Boxscore-Client???
-
-### Boxscore User Experience
+## Boxscore User Experience
 
 The ultimate goal is to display daily NBA boxscores on a single, web page, just like you would read a newspaper boxscore.  This will eliminate the need for multiple clicks when searching for boxscore information on your favorite website.
 
