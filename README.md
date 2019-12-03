@@ -1,8 +1,8 @@
 # Capstone-Project
 
-![wireframe](/react-boxscore-client/public/images/BoxscoreHomepage.png)
+![wireframe](/react-boxscore-client/public/images/BoxscoreHomepage-rot.jpg)
 
-![wireframe](/react-boxscore-client/public/images/entityRelationshipDiagram_ERD.png)
+![wireframe](/react-boxscore-client/public/images/entityRelationshipDiagram_ERD-rot.jpg)
 
 
 ## React-Boxscore-Client???
