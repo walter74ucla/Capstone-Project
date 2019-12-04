@@ -3,6 +3,7 @@ import GameList from '../GameList';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DateInputForm';
 
+
 class BoxscoreContainer extends Component {
 	constructor() {
 		super();
@@ -34,21 +35,10 @@ class BoxscoreContainer extends Component {
 		}
 	}
 	
-	getInputDate = (day, selected) => {
-	    // e.preventDefault();
-	    console.log('Lifted day', day)
-    	 this.setState({
-	      selectedDay: selected ? undefined : day,
-	    });
-    }
-
-	getBoxscoreData = async (day) => {
-		// page defaults to today's date
-		// when another date is selected update API call
-		
-		// Today's date conversion: 1) Get today's date 2) Adjust it by 7 hours
-		let dateString = new Date();
+	convertDateStr = (dateString) => {// this function converts a date string to YYYY-MM-DD
 		let inputDateYear = dateString.getFullYear();//Get the year as a four digit number (yyyy)
+		// console.log(inputDateYear);
+		
 		let inputDateMonth = dateString.getMonth() + 1;//Get the month as a number (0-11)
 		// console.log(typeof inputDateMonth);//number
 		let iDMStr = inputDateMonth.toString();
@@ -72,49 +62,63 @@ class BoxscoreContainer extends Component {
 		}
 
 		let inputDate = inputDateYear + "-" + inputDateMonth + "-" + inputDateDay
-		console.log(inputDate);
-		
-		let inputDatePlus7 = inputDate + "T07:00:00.00Z";
-		console.log(inputDatePlus7);
-		// "YYYY-MM-DDT07:00:00.00Z" -->07:00:00.00Z helps get the input date the correct day.
-		// The 7 gets you to midnight Mountain Standard Time or 1am Mountain Daylight Time. 
 		// console.log(inputDate);
 
-		let dateStringAPI = new Date(inputDatePlus7);
-		let inputDateYearAPI = dateStringAPI.getFullYear();//Get the year as a four digit number (yyyy)
-		let inputDateMonthAPI = dateStringAPI.getMonth() + 1;//Get the month as a number (0-11)
-		// console.log(typeof inputDateMonthAPI);//number
-		let iDMAPIStr = inputDateMonthAPI.toString();
-		// console.log(iDMAPIStr.length);
-		if(iDMAPIStr.length === 1){
-			inputDateMonthAPI = "0" + iDMAPIStr
-			// console.log(inputDateMonthAPI)
-		} else {
-			inputDateMonthAPI = iDMAPIStr
-			// console.log(inputDateMonthAPI)
-		}
+		return inputDate
+		
+	};
 
-		let inputDateDayAPI = dateStringAPI.getDate();//Get the day as a number (1-31)
-		let iDDAPIStr = inputDateDayAPI.toString();
-		if(iDDAPIStr.length === 1){
-			inputDateDayAPI = "0" + iDDAPIStr
-			// console.log(inputDateDayAPI)
-		} else {
-			inputDateDayAPI = iDDAPIStr
-			// console.log(inputDateDayAPI)
-		}
+	getInputDate = (day, selected) => {
+	    // e.preventDefault();
+	    console.log('Lifted day', day)
+    	 this.setState({
+	      selectedDay: selected ? undefined : day,
+	    });
+    }
 
-		let inputDateAPI = inputDateYearAPI + "-" + inputDateMonthAPI + "-" + inputDateDayAPI
-		console.log(inputDateAPI);
+	getBoxscoreData = async (day) => {
+		// page defaults to today's date
+		// when another date is selected update API call
+		
+		// Today's date conversion: 1) Get today's date 2) Adjust it by 7 hours
+		// 1) Get today's date
+		let today = new Date();
+		let todayConverted = this.convertDateStr(today);
+		// console.log(todayConverted);
 
-		//figure out how to add 1 day to inputDateAPI
+		// 2) Adjust today's date by 7 hours
+		let tCPlus7 = todayConverted + "T07:00:00.00Z";
+		// console.log(tCPlus7);
+		// "YYYY-MM-DDT07:00:00.00Z" -->07:00:00.00Z helps get the input date the correct day.
+		// The 7 gets you to midnight Mountain Standard Time or 1am Mountain Daylight Time. 
+
+		let dateStringAPI = new Date(tCPlus7);
+		let dSAPIConverted = this.convertDateStr(dateStringAPI);
+		// console.log(dSAPIConverted);
+
+		//Add 1 day to dateStringAPI
+		let time = dateStringAPI.getTime(); //Get the time (milliseconds since January 1, 1970)
+		console.log(time);
+		let oneDay = 1000*60*60*24; //1000 milliseconds times 60 seconds times 60 minutes times 24 hours 
+		console.log(oneDay);
+		let timePlusOne = time + oneDay;
+		console.log(timePlusOne);
+		let dateStringAPIPlusOne = new Date(timePlusOne);
+		console.log(dateStringAPIPlusOne);
+		let dSAPIPOConverted = this.convertDateStr(dateStringAPIPlusOne);
+		console.log(dSAPIPOConverted);
+		// let dSAPICPlusOne = dSAPIConverted + "T24:00:00.00Z";
+		// console.log(dSAPICPlusOne);
+		// let dateStringAPIPlusOne = new Date(dSAPICPlusOne);
+		// let dSAPIPOConverted = this.convertDateStr(dateStringAPIPlusOne);
+		// console.log(dSAPIPOConverted);
 
 		try {
 			// the endpoint is the url we are making our request to.
 	      	// fetch is a native js function that makes http requests
 	      	// by default it makes a get request
 	      	// we use fetch when we don't want to refresh the page
-	      	const date = await fetch(`https://api-nba-v1.p.rapidapi.com/games/date/${inputDateAPI}`, {
+	      	const date = await fetch(`https://api-nba-v1.p.rapidapi.com/games/date/${dSAPIConverted}`, {
 				"method": "GET",
 				"headers": {
 					"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
@@ -122,7 +126,7 @@ class BoxscoreContainer extends Component {
 				}
 			})
 
-			const datePlusOne = await fetch("https://api-nba-v1.p.rapidapi.com/games/date/2019-12-01", {
+			const datePlusOne = await fetch(`https://api-nba-v1.p.rapidapi.com/games/date/${dSAPIPOConverted}`, {
 				"method": "GET",
 				"headers": {
 					"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
