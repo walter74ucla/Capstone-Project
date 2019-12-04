@@ -43,20 +43,78 @@ class BoxscoreContainer extends Component {
     }
 
 	getBoxscoreData = async (day) => {
+		// page defaults to today's date
+		// when another date is selected update API call
 		
+		// Today's date conversion: 1) Get today's date 2) Adjust it by 7 hours
 		let dateString = new Date();
 		let inputDateYear = dateString.getFullYear();//Get the year as a four digit number (yyyy)
 		let inputDateMonth = dateString.getMonth() + 1;//Get the month as a number (0-11)
+		// console.log(typeof inputDateMonth);//number
+		let iDMStr = inputDateMonth.toString();
+		// console.log(iDMStr.length);
+		if(iDMStr.length === 1){
+			inputDateMonth = "0" + iDMStr
+			// console.log(inputDateMonth)
+		} else {
+			inputDateMonth = iDMStr
+			// console.log(inputDateMonth)
+		}
+
 		let inputDateDay = dateString.getDate();//Get the day as a number (1-31)
-		let inputDateAPI = inputDateYear + "-" + inputDateMonth + "-" + inputDateDay
-		console.log(inputDateAPI);
+		let iDDStr = inputDateDay.toString();
+		if(iDDStr.length === 1){
+			inputDateDay = "0" + iDDStr
+			// console.log(inputDateDay)
+		} else {
+			inputDateDay = iDDStr
+			// console.log(inputDateDay)
+		}
+
+		let inputDate = inputDateYear + "-" + inputDateMonth + "-" + inputDateDay
+		console.log(inputDate);
 		
+		let inputDatePlus7 = inputDate + "T07:00:00.00Z";
+		console.log(inputDatePlus7);
+		// "YYYY-MM-DDT07:00:00.00Z" -->07:00:00.00Z helps get the input date the correct day.
+		// The 7 gets you to midnight Mountain Standard Time or 1am Mountain Daylight Time. 
+		// console.log(inputDate);
+
+		let dateStringAPI = new Date(inputDatePlus7);
+		let inputDateYearAPI = dateStringAPI.getFullYear();//Get the year as a four digit number (yyyy)
+		let inputDateMonthAPI = dateStringAPI.getMonth() + 1;//Get the month as a number (0-11)
+		// console.log(typeof inputDateMonthAPI);//number
+		let iDMAPIStr = inputDateMonthAPI.toString();
+		// console.log(iDMAPIStr.length);
+		if(iDMAPIStr.length === 1){
+			inputDateMonthAPI = "0" + iDMAPIStr
+			// console.log(inputDateMonthAPI)
+		} else {
+			inputDateMonthAPI = iDMAPIStr
+			// console.log(inputDateMonthAPI)
+		}
+
+		let inputDateDayAPI = dateStringAPI.getDate();//Get the day as a number (1-31)
+		let iDDAPIStr = inputDateDayAPI.toString();
+		if(iDDAPIStr.length === 1){
+			inputDateDayAPI = "0" + iDDAPIStr
+			// console.log(inputDateDayAPI)
+		} else {
+			inputDateDayAPI = iDDAPIStr
+			// console.log(inputDateDayAPI)
+		}
+
+		let inputDateAPI = inputDateYearAPI + "-" + inputDateMonthAPI + "-" + inputDateDayAPI
+		console.log(inputDateAPI);
+
+		//figure out how to add 1 day to inputDateAPI
+
 		try {
 			// the endpoint is the url we are making our request to.
 	      	// fetch is a native js function that makes http requests
 	      	// by default it makes a get request
 	      	// we use fetch when we don't want to refresh the page
-	      	const date = await fetch("https://api-nba-v1.p.rapidapi.com/games/date/2019-11-30", {
+	      	const date = await fetch(`https://api-nba-v1.p.rapidapi.com/games/date/${inputDateAPI}`, {
 				"method": "GET",
 				"headers": {
 					"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
