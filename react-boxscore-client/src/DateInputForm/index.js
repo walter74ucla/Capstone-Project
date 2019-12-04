@@ -9,28 +9,25 @@ export default class DateInput extends React.Component {
   constructor(props) {
     super(props);
     this.handleDayClick = this.handleDayClick.bind(this);
-    this.state = {
-      selectedDay: null,
-    };
+
   }
 
   handleDayClick(day, { selected }) {
-    this.setState({
-      selectedDay: selected ? undefined : day,
-    });
-    console.log(day);// I added this
+    console.log('handleDayClick:', day, selected);
+    this.props.inputDate(day, selected)
   }
 
   render() {
+    console.log('Render SelectedDay:', this.props.selectedDay)
     return (
       <div>
         <DayPicker
-          selectedDays={this.state.selectedDay}
+          selectedDays={this.props.selectedDay}
           onDayClick={this.handleDayClick}
         />
         <p>
-          {this.state.selectedDay
-            ? this.state.selectedDay.toLocaleDateString()
+          {this.props.selectedDay
+            ? this.props.selectedDay.toLocaleDateString()
             : 'Please select a day 👻'}
         </p>
       </div>

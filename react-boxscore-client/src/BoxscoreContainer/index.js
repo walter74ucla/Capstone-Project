@@ -9,6 +9,7 @@ class BoxscoreContainer extends Component {
 		// this is the initial "state" of our boxscore object
 	 	// this is mimicking the structure of our API information. 
 	    this.state = {
+	      selectedDay: null, //added this here to get the selectedDay from the calendar
 	      date: {// need to define all key-value pairs (properties) if you want to lift state
 	      	api: {
 	      		filters: [],
@@ -33,13 +34,22 @@ class BoxscoreContainer extends Component {
 		}
 	}
 	
-	getGender = async (e, genderFromTheForm) => {
-	    e.preventDefault();
-	    console.log(genderFromTheForm)
-    
+	getInputDate = (day, selected) => {
+	    // e.preventDefault();
+	    console.log('Lifted day', day)
+    	 this.setState({
+	      selectedDay: selected ? undefined : day,
+	    });
     }
 
-	getBoxscoreData = async () => {
+	getBoxscoreData = async (day) => {
+		
+		let dateString = new Date();
+		let inputDateYear = dateString.getFullYear();//Get the year as a four digit number (yyyy)
+		let inputDateMonth = dateString.getMonth() + 1;//Get the month as a number (0-11)
+		let inputDateDay = dateString.getDate();//Get the day as a number (1-31)
+		let inputDateAPI = inputDateYear + "-" + inputDateMonth + "-" + inputDateDay
+		console.log(inputDateAPI);
 		
 		try {
 			// the endpoint is the url we are making our request to.
@@ -111,7 +121,7 @@ class BoxscoreContainer extends Component {
 	  	return(
 	  		<React.Fragment>
       			Some BoxscoreContainer text.
-      			<DateInput inputDate={this.getGender}/>
+      			<DateInput selectedDay={this.state.selectedDay} inputDate={this.getInputDate}/>
       			<GameList 
       				gameDate={this.state.date.api.games}
       				gameDatePlusOne={this.state.datePlusOne.api.games}
