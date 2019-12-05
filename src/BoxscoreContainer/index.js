@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import GameListToday from '../GameListToday';
 import GameListSelectedDate from '../GameListSelectedDate';
 // import DropdownExampleControlled from '../DateInputFormV1';
-import DateInput from '../DateInputForm';
+import DateInput from '../DatePicker';
 
-
-
+	
 class BoxscoreContainer extends Component {
 	constructor() {
 		super();
@@ -136,8 +135,8 @@ class BoxscoreContainer extends Component {
 			// we should always log out the response before we 
 	      	// write any other code!
 	      	// console logging the parsed data did not work until creating the componentDidMount() method
-			console.log(parsedToday);
-			console.log(parsedTodayPlusOne);
+			// console.log(parsedToday);
+			// console.log(parsedTodayPlusOne);
 			
 			this.setState({
 				today: parsedToday,
@@ -145,7 +144,7 @@ class BoxscoreContainer extends Component {
 				tInputDate: dateStringAPI,
 				tInputDatePlusOne: dateStringAPIPlusOne,
 			})
-			console.log(this.state);
+			// console.log(this.state);
 		} catch(err){
 			console.log(err);
 		}
@@ -155,7 +154,7 @@ class BoxscoreContainer extends Component {
 	getSelectedDateGameData = async (day) => {
 		// page defaults to today's date
 		// when another date is selected update API call
-		console.log(day);
+		// console.log(day);
 		// Get selected day's date
 		let dateStringAPI = new Date(day);//selected day
 		let dSAPIConverted = this.convertDateStr(dateStringAPI);
@@ -193,8 +192,8 @@ class BoxscoreContainer extends Component {
 
 	      	const parsedSelectedDate = await selectedDate.json();
 	      	const parsedSelectedDatePlusOne = await selectedDatePlusOne.json();
-			console.log(parsedSelectedDate);
-			console.log(parsedSelectedDatePlusOne);
+			// console.log(parsedSelectedDate);
+			// console.log(parsedSelectedDatePlusOne);
 			
 			this.setState({
 				selectedDate: parsedSelectedDate,
@@ -220,7 +219,7 @@ class BoxscoreContainer extends Component {
 
   	getInputDate = (day, selected) => {
 	    // e.preventDefault();
-	    console.log('Lifted day', day)
+	    // console.log('Lifted day', day)
     	 this.setState({
 	      selectedDay: selected ? undefined : day,
 	    });
@@ -229,10 +228,10 @@ class BoxscoreContainer extends Component {
   	
     	
   	render() {
-	  	console.log(this.state.today.api.games);
-	  	console.log(this.state.todayPlusOne.api.games);
-	  	console.log(this.state.tInputDate);
-	  	console.log(this.state.tInputDatePlusOne);
+	  	// console.log(this.state.today.api.games);
+	  	// console.log(this.state.todayPlusOne.api.games);
+	  	// console.log(this.state.tInputDate);
+	  	// console.log(this.state.tInputDatePlusOne);
 	  	return(
 	  		<React.Fragment>
       			Some BoxscoreContainer text.

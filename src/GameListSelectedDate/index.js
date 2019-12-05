@@ -9,7 +9,7 @@ function GameListSelectedDate (props) {
 		// console.log(gamesByDate);
 	
 		let dateString = new Date(gamesByDate.startTimeUTC);
-		console.log(dateString);
+		// console.log(dateString);
 		
 		// let inputDate = new Date("2019-11-30T07:00:00.00Z");
 		let inputDate = props.inputDate;
@@ -22,12 +22,12 @@ function GameListSelectedDate (props) {
 		// "YYYY-MM-DDT07:00:00.00Z" -->07:00:00.00Z helps get the input date the correct day.
 		// The 7 gets you to midnight Mountain Standard Time or 1am Mountain Daylight Time. 
 		let updatedInputDate = new Date(iDCPlus7);
-		console.log(updatedInputDate);
+		// console.log(updatedInputDate);
 		let startTimeDayCheck = dateString.getDay();
-		console.log(startTimeDayCheck);
+		// console.log(startTimeDayCheck);
 
 		let inputDay = updatedInputDate.getDay();
-		console.log(inputDay);
+		// console.log(inputDay);
 
 		// console.log(dateString[0]);// why doesn't this work?
 		// let dayCheck = dateString.slice(0,3);// why doesn't this work?
@@ -51,7 +51,7 @@ function GameListSelectedDate (props) {
 		// console.log(gamesByDatePlusOne);
 	
 		let dateStringPlusOne = new Date(gamesByDatePlusOne.startTimeUTC);
-		console.log(dateStringPlusOne);
+		// console.log(dateStringPlusOne);
 		
 		let inputDate = props.inputDatePlusOne;
 		// console.log(inputDate);
@@ -63,12 +63,12 @@ function GameListSelectedDate (props) {
 		// "YYYY-MM-DDT07:00:00.00Z" -->07:00:00.00Z helps get the input date the correct day.
 		// The 7 gets you to midnight Mountain Standard Time or 1am Mountain Daylight Time. 
 		let updatedInputDate = new Date(iDCPlus7);
-		console.log(updatedInputDate);
+		// console.log(updatedInputDate);
 		let startTimeDayPlusOneCheck = dateStringPlusOne.getDay();
-		console.log(startTimeDayPlusOneCheck);
+		// console.log(startTimeDayPlusOneCheck);
 
 		let inputDay = updatedInputDate.getDay();
-		console.log(inputDay);
+		// console.log(inputDay);
 
 		if (startTimeDayPlusOneCheck !== inputDay) {
 			return(
