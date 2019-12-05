@@ -13,12 +13,12 @@ export default class DateInput extends React.Component {
   }
 
   handleDayClick(day, { selected }) {
-    console.log('handleDayClick:', day, selected);
+    // console.log('handleDayClick:', day, selected);
     this.props.inputDate(day, selected)
   }
 
   render() {
-    console.log('Render SelectedDay:', this.props.selectedDay)
+    // console.log('Render SelectedDay:', this.props.selectedDay)
     return (
       <div>
         <DayPicker
