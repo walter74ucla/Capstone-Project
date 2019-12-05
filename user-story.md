@@ -1,8 +1,8 @@
 # Capstone-Project
 
-![wireframe](/public/images/BoxscoreHomepage-rot.jpg)
+![wireframe](/react-boxscore-client/public/images/BoxscoreHomepage-rot.jpg)
 
-![wireframe](/public/images/entityRelationshipDiagram_ERD-rot.jpg)
+![wireframe](/react-boxscore-client/public/images/entityRelationshipDiagram_ERD-rot.jpg)
 
 
 ## Boxscore User Experience
