@@ -2,26 +2,32 @@ import React from 'react';
 
 
 // passing props from boxscore container
-function GameList (props) {
+function GameListToday (props) {
 
 	//map needs to be passed an array, not an object.
 	const gameDateListItems = props.gameDate.map((gamesByDate) => {
 		// console.log(gamesByDate);
 	
 		let dateString = new Date(gamesByDate.startTimeUTC);
-		// console.log(dateString);
+		console.log(dateString);
 		
-		let inputDate = new Date("2019-11-30T07:00:00.00Z");
-		// Gotta figure out a way to make the stuff in the Date() variable
+		// let inputDate = new Date("2019-11-30T07:00:00.00Z");
+		let inputDate = props.inputDate;
+		// console.log(inputDate);
+		//Adjust inputDate by 7 hours
+		let iDConverted = props.convertDateToString(inputDate);
+		// console.log(iDConverted);
+		let iDCPlus7 = iDConverted + "T07:00:00.00Z";
+		// console.log(iDCPlus7);
 		// "YYYY-MM-DDT07:00:00.00Z" -->07:00:00.00Z helps get the input date the correct day.
 		// The 7 gets you to midnight Mountain Standard Time or 1am Mountain Daylight Time. 
-		// console.log(inputDate);
-
+		let updatedInputDate = new Date(iDCPlus7);
+		console.log(updatedInputDate);
 		let startTimeDayCheck = dateString.getDay();
-		// console.log(startTimeDayCheck);
+		console.log(startTimeDayCheck);
 
-		let inputDay = inputDate.getDay();
-		// console.log(inputDay);
+		let inputDay = updatedInputDate.getDay();
+		console.log(inputDay);
 
 		// console.log(dateString[0]);// why doesn't this work?
 		// let dayCheck = dateString.slice(0,3);// why doesn't this work?
@@ -42,21 +48,26 @@ function GameList (props) {
 
 	//map needs to be passed an array, not an object.
 	const gameDatePlusOneListItems = props.gameDatePlusOne.map((gamesByDatePlusOne) => {
-		console.log(gamesByDatePlusOne);
+		// console.log(gamesByDatePlusOne);
 	
 		let dateStringPlusOne = new Date(gamesByDatePlusOne.startTimeUTC);
 		console.log(dateStringPlusOne);
 		
-		let inputDate = new Date("2019-11-30T07:00:00.00Z");
-		// Gotta figure out a way to make the stuff in the Date() variable
+		let inputDate = props.inputDatePlusOne;
+		// console.log(inputDate);
+		//Adjust inputDate by 7 hours
+		let iDConverted = props.convertDateToString(inputDate);
+		// console.log(iDConverted);
+		let iDCPlus7 = iDConverted + "T07:00:00.00Z";
+		// console.log(iDCPlus7);
 		// "YYYY-MM-DDT07:00:00.00Z" -->07:00:00.00Z helps get the input date the correct day.
 		// The 7 gets you to midnight Mountain Standard Time or 1am Mountain Daylight Time. 
-		console.log(inputDate);
-
+		let updatedInputDate = new Date(iDCPlus7);
+		console.log(updatedInputDate);
 		let startTimeDayPlusOneCheck = dateStringPlusOne.getDay();
 		console.log(startTimeDayPlusOneCheck);
 
-		let inputDay = inputDate.getDay();
+		let inputDay = inputDate.getDay() - 1;//had to subtract one to make it work (for today=12/4/2019)
 		console.log(inputDay);
 
 		if (startTimeDayPlusOneCheck === inputDay) {
@@ -85,4 +96,4 @@ function GameList (props) {
 }
 
 
-export default GameList;
+export default GameListToday;

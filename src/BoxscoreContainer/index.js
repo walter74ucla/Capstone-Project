@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GameList from '../GameList';
+import GameListToday from '../GameList';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DateInputForm';
 
@@ -76,42 +76,27 @@ class BoxscoreContainer extends Component {
 	    });
     }
 
-	getBoxscoreData = async (day) => {
+	getTodaysGameData = async () => {
 		// page defaults to today's date
 		// when another date is selected update API call
 		
-		// Today's date conversion: 1) Get today's date 2) Adjust it by 7 hours
-		// 1) Get today's date
-		let today = new Date();
-		let todayConverted = this.convertDateStr(today);
-		// console.log(todayConverted);
-
-		// 2) Adjust today's date by 7 hours
-		let tCPlus7 = todayConverted + "T07:00:00.00Z";
-		// console.log(tCPlus7);
-		// "YYYY-MM-DDT07:00:00.00Z" -->07:00:00.00Z helps get the input date the correct day.
-		// The 7 gets you to midnight Mountain Standard Time or 1am Mountain Daylight Time. 
-
-		let dateStringAPI = new Date(tCPlus7);
+		// Get today's date
+		let dateStringAPI = new Date();//today
 		let dSAPIConverted = this.convertDateStr(dateStringAPI);
 		// console.log(dSAPIConverted);
 
-		//Add 1 day to dateStringAPI
+		// Add 1 day to dateStringAPI
 		let time = dateStringAPI.getTime(); //Get the time (milliseconds since January 1, 1970)
-		console.log(time);
+		// console.log(time);
 		let oneDay = 1000*60*60*24; //1000 milliseconds times 60 seconds times 60 minutes times 24 hours 
-		console.log(oneDay);
+		// console.log(oneDay);
 		let timePlusOne = time + oneDay;
-		console.log(timePlusOne);
+		// console.log(timePlusOne);
 		let dateStringAPIPlusOne = new Date(timePlusOne);
-		console.log(dateStringAPIPlusOne);
+		// console.log(dateStringAPIPlusOne);
 		let dSAPIPOConverted = this.convertDateStr(dateStringAPIPlusOne);
-		console.log(dSAPIPOConverted);
-		// let dSAPICPlusOne = dSAPIConverted + "T24:00:00.00Z";
-		// console.log(dSAPICPlusOne);
-		// let dateStringAPIPlusOne = new Date(dSAPICPlusOne);
-		// let dSAPIPOConverted = this.convertDateStr(dateStringAPIPlusOne);
 		// console.log(dSAPIPOConverted);
+		
 
 		try {
 			// the endpoint is the url we are making our request to.
@@ -134,30 +119,22 @@ class BoxscoreContainer extends Component {
 				}
 			})
 
-			const teamsLeagueStandard = await fetch("https://api-nba-v1.p.rapidapi.com/teams/league/standard", {
-				"method": "GET",
-				"headers": {
-					"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-					"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
-				}
-			})
 			// our response will be in the form of JSON, a string
 	      	// data is sent across the internet as JSON
 	      	// parse the JSON is turning the string into objects
 	      	const parsedDate = await date.json();
 	      	const parsedDatePlusOne = await datePlusOne.json();
-	      	const parsedteamsLeagueStandard = await teamsLeagueStandard.json();
 			// we should always log out the response before we 
 	      	// write any other code!
 	      	// console logging the parsed data did not work until creating the componentDidMount() method
 			console.log(parsedDate);
 			console.log(parsedDatePlusOne);
-			console.log(parsedteamsLeagueStandard);
 			
 			this.setState({
 				date: parsedDate,
 				datePlusOne: parsedDatePlusOne,
-				teamsLeagueStandard: parsedteamsLeagueStandard
+				inputDate: dateStringAPI,
+				inputDatePlusOne: dateStringAPIPlusOne,
 			})
 			console.log(this.state);
 		} catch(err){
@@ -166,12 +143,80 @@ class BoxscoreContainer extends Component {
 		
 	}	
 
+	getSelectedDateGameData = async (day) => {
+		// page defaults to today's date
+		// when another date is selected update API call
+		
+		// Get selected day's date
+		let dateStringAPI = new Date(day);//selected day
+		let dSAPIConverted = this.convertDateStr(dateStringAPI);
+		// console.log(dSAPIConverted);
+
+		// Add 1 day to dateStringAPI
+		let time = dateStringAPI.getTime(); //Get the time (milliseconds since January 1, 1970)
+		// console.log(time);
+		let oneDay = 1000*60*60*24; //1000 milliseconds times 60 seconds times 60 minutes times 24 hours 
+		// console.log(oneDay);
+		let timePlusOne = time + oneDay;
+		// console.log(timePlusOne);
+		let dateStringAPIPlusOne = new Date(timePlusOne);
+		// console.log(dateStringAPIPlusOne);
+		let dSAPIPOConverted = this.convertDateStr(dateStringAPIPlusOne);
+		// console.log(dSAPIPOConverted);
+		
+
+		try {
+			// the endpoint is the url we are making our request to.
+	      	// fetch is a native js function that makes http requests
+	      	// by default it makes a get request
+	      	// we use fetch when we don't want to refresh the page
+	      	const date = await fetch(`https://api-nba-v1.p.rapidapi.com/games/date/${dSAPIConverted}`, {
+				"method": "GET",
+				"headers": {
+					"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+					"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
+				}
+			})
+
+			const datePlusOne = await fetch(`https://api-nba-v1.p.rapidapi.com/games/date/${dSAPIPOConverted}`, {
+				"method": "GET",
+				"headers": {
+					"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+					"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
+				}
+			})
+
+			// our response will be in the form of JSON, a string
+	      	// data is sent across the internet as JSON
+	      	// parse the JSON is turning the string into objects
+	      	const parsedDate = await date.json();
+	      	const parsedDatePlusOne = await datePlusOne.json();
+			// we should always log out the response before we 
+	      	// write any other code!
+	      	// console logging the parsed data did not work until creating the componentDidMount() method
+			console.log(parsedDate);
+			console.log(parsedDatePlusOne);
+			
+			this.setState({
+				date: parsedDate,
+				datePlusOne: parsedDatePlusOne,
+				inputDate: dateStringAPI,
+				inputDatePlusOne: dateStringAPIPlusOne,
+			})
+			console.log(this.state);
+		} catch(err){
+			console.log(err);
+		}
+		
+	}
+
 	componentDidMount(){
     // get called once, after the initial render
     // is the component on the dom? ComponentDidMount
     // any calls to an external data source that we want connected
     // as soon as our app is loaded we call it in componentDidMount
-    	this.getBoxscoreData()
+    	this.getTodaysGameData()
+    	this.getSelectedDateGameData()
     
   	}
 
@@ -180,13 +225,18 @@ class BoxscoreContainer extends Component {
   	render() {
 	  	console.log(this.state.date.api.games);
 	  	console.log(this.state.datePlusOne.api.games);
+	  	console.log(this.state.inputDate);
+	  	console.log(this.state.inputDatePlusOne);
 	  	return(
 	  		<React.Fragment>
       			Some BoxscoreContainer text.
       			<DateInput selectedDay={this.state.selectedDay} inputDate={this.getInputDate}/>
-      			<GameList 
+      			<GameListToday
       				gameDate={this.state.date.api.games}
       				gameDatePlusOne={this.state.datePlusOne.api.games}
+      				inputDate={this.state.inputDate}
+      				inputDatePlusOne={this.state.inputDatePlusOne}
+      				convertDateToString={this.convertDateStr}
       			/>
     		</React.Fragment>
   		)
