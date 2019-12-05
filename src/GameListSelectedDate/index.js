@@ -67,10 +67,10 @@ function GameListSelectedDate (props) {
 		let startTimeDayPlusOneCheck = dateStringPlusOne.getDay();
 		console.log(startTimeDayPlusOneCheck);
 
-		let inputDay = inputDate.getDay() - 1;//had to subtract one to make it work (for today=12/4/2019)
+		let inputDay = updatedInputDate.getDay();
 		console.log(inputDay);
 
-		if (startTimeDayPlusOneCheck === inputDay) {
+		if (startTimeDayPlusOneCheck !== inputDay) {
 			return(
 				<li key={gamesByDatePlusOne.gameId}>
 					{gamesByDatePlusOne.vTeam.shortName} versus {gamesByDatePlusOne.hTeam.shortName}
