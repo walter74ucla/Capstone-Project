@@ -9,11 +9,11 @@ function GameListToday (props) {
 		// console.log(gamesByDate);
 	
 		let dateString = new Date(gamesByDate.startTimeUTC);
-		// console.log(dateString);
+		console.log(dateString);
 		
 		// let inputDate = new Date("2019-11-30T07:00:00.00Z");
 		let inputDate = props.inputDate;
-		// console.log(inputDate);
+		console.log(inputDate);
 		//Adjust inputDate by 7 hours
 		let iDConverted = props.convertDateToString(inputDate);
 		// console.log(iDConverted);
@@ -24,10 +24,10 @@ function GameListToday (props) {
 		let updatedInputDate = new Date(iDCPlus7);
 		// console.log(updatedInputDate);
 		let startTimeDayCheck = dateString.getDay();
-		// console.log(startTimeDayCheck);
+		console.log(startTimeDayCheck);
 
 		let inputDay = updatedInputDate.getDay();
-		// console.log(inputDay);
+		console.log(inputDay);
 
 		// console.log(dateString[0]);// why doesn't this work?
 		// let dayCheck = dateString.slice(0,3);// why doesn't this work?
@@ -51,10 +51,10 @@ function GameListToday (props) {
 		// console.log(gamesByDatePlusOne);
 	
 		let dateStringPlusOne = new Date(gamesByDatePlusOne.startTimeUTC);
-		// console.log(dateStringPlusOne);
+		console.log(dateStringPlusOne);
 		
 		let inputDate = props.inputDatePlusOne;
-		// console.log(inputDate);
+		console.log(inputDate);
 		//Adjust inputDate by 7 hours
 		let iDConverted = props.convertDateToString(inputDate);
 		// console.log(iDConverted);
@@ -65,10 +65,10 @@ function GameListToday (props) {
 		let updatedInputDate = new Date(iDCPlus7);
 		// console.log(updatedInputDate);
 		let startTimeDayPlusOneCheck = dateStringPlusOne.getDay();
-		// console.log(startTimeDayPlusOneCheck);
+		console.log(startTimeDayPlusOneCheck);
 
 		let inputDay = updatedInputDate.getDay();
-		// console.log(inputDay);
+		console.log(inputDay);
 
 		if (startTimeDayPlusOneCheck !== inputDay) {
 			return(
@@ -83,12 +83,18 @@ function GameListToday (props) {
 		
 	})
 
+	const todaysGames = props.todaysGames.map(game => (
+		<li key={game.gameId}>
+		    {game.vTeam.shortName} versus {game.hTeam.shortName}
+		</li>
+
+	))
+
 	return(
 	    <React.Fragment>
 	      <h4>Today's Games</h4>
 	      <ul>
-	        { gameDateListItems }
-	        { gameDatePlusOneListItems }
+	        {todaysGames}
 	      </ul>
 	    </React.Fragment>
     )

@@ -12,6 +12,7 @@ class BoxscoreContainer extends Component {
 		// this is the initial "state" of our boxscore object
 	 	// this is mimicking the structure of our API information. 
 	    this.state = {
+	      todaysGames: [],	
 	      selectedDay: null, //added this here to get the selectedDay from the calendar
 	      today: {// need to define all key-value pairs (properties) if you want to lift state
 	      	api: {
@@ -147,10 +148,45 @@ class BoxscoreContainer extends Component {
 	      	// console logging the parsed data did not work until creating the componentDidMount() method
 			// console.log(parsedToday);
 			// console.log(parsedTodayPlusOne);
+			let todaysGames = parsedToday.api.games.filter((gamesByDate) => {
+	
+				let dateString = new Date(gamesByDate.startTimeUTC);
+				let iDConverted = this.convertDateStr(dateStringAPI);
+				let iDCPlus7 = iDConverted + "T07:00:00.00Z"; 
+				let updatedInputDate = new Date(iDCPlus7);
+				let startTimeDayCheck = dateString.getDay();
+				let inputDay = updatedInputDate.getDay();
+
+				return startTimeDayCheck === inputDay
+			}).concat(parsedTodayPlusOne.api.games.filter((gamesByDatePlusOne) => {
+				let dateStringPlusOne = new Date(gamesByDatePlusOne.startTimeUTC);
+				let iDConverted = this.convertDateStr(dateStringAPIPlusOne);
+				let iDCPlus7 = iDConverted + "T07:00:00.00Z";
+				let updatedInputDate = new Date(iDCPlus7);
+				let startTimeDayPlusOneCheck = dateStringPlusOne.getDay();
+				let inputDay = updatedInputDate.getDay();
+
+				return startTimeDayPlusOneCheck !== inputDay
+			}));
+
+
+			console.log(todaysGames)
+			let todaysDetailedGames
+			Promise.all(todaysGames.map(game => {
+				console.log('Fetching:', game.gameId)
+				let detailedGame = this.getGameTotalsDataForOneGame(game.gameId);
+				return detailedGame;
+			})).then(values => {
+				let todaysDetailedGames = values;
+				console.log('todaysDetailedGames in promiseall:', todaysDetailedGames)
+			})
+
+			console.log(todaysDetailedGames)
 			
 			this.setState({
 				today: parsedToday,
 				todayPlusOne: parsedTodayPlusOne,
+				todaysGames: todaysGames,
 				tInputDate: dateStringAPI,
 				tInputDatePlusOne: dateStringAPIPlusOne,
 			})
@@ -177,10 +213,11 @@ class BoxscoreContainer extends Component {
 		const parsedGameTotals = await gameTotals.json();
 		console.log(parsedGameTotals);
 		
-		this.setState({
-			gameTotals: parsedGameTotals,
-		})
-		console.log(this.state);	
+		// this.setState({
+		// 	gameTotals: parsedGameTotals,
+		// })
+		// console.log(this.state);	
+		return parsedGameTotals;
 
 		} catch(err) {
 			console.log(err);
@@ -273,6 +310,7 @@ class BoxscoreContainer extends Component {
       			Some BoxscoreContainer text.
       			<DateInput selectedDay={this.state.selectedDay} inputDate={this.getInputDate}/>
       			<GameListToday
+      				todaysGames={this.state.todaysGames}
       				getGame={this.getGameTotalsDataForOneGame}
       				gameDate={this.state.today.api.games}
       				gameDatePlusOne={this.state.todayPlusOne.api.games}
