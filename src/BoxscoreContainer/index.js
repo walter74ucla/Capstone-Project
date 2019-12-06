@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GameListToday from '../GameListToday';
 import GameListSelectedDate from '../GameListSelectedDate';
-import GameTotals from '../GameTotals';
+// import GameTotalsList from '../GameTotals';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
 
@@ -49,6 +49,15 @@ class BoxscoreContainer extends Component {
 	      		status: 0
 	      	}
 	      },
+	      gameTotals: {// need to define all key-value pairs (properties) if you want to lift state
+				api: {
+		      		filters: [],
+		      		statistics: [],
+		      		message: "",
+		      		results: 0,
+		      		status: 0
+		      	},
+			}
 		}
 	}
 	
@@ -146,11 +155,38 @@ class BoxscoreContainer extends Component {
 				tInputDatePlusOne: dateStringAPIPlusOne,
 			})
 			console.log(this.state);
+			console.log(this.state.today.api.games[0].gameId);
 		} catch(err){
 			console.log(err);
 		}
 		
 	}	
+
+	getGameTotalsDataForOneGame = async (gameId) => {
+		console.log('GameID: ', gameId);
+
+		try {														//need to make this gameId variable
+			const gameTotals = await fetch('https://api-nba-v1.p.rapidapi.com/statistics/games/gameId/' + gameId, {
+				"method": "GET",
+				"headers": {
+					"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+					"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
+				}
+			})
+
+		const parsedGameTotals = await gameTotals.json();
+		console.log(parsedGameTotals);
+		
+		this.setState({
+			gameTotals: parsedGameTotals,
+		})
+		console.log(this.state);	
+
+		} catch(err) {
+			console.log(err);
+		}
+
+	}
 
 	getSelectedDateGameData = async (day) => {
 		// page defaults to today's date
@@ -209,10 +245,6 @@ class BoxscoreContainer extends Component {
 		
 	}
 
-	// getGameTotals = async () => {//maybe???
-
-	// }
-
 	componentDidMount(){
     // get called once, after the initial render
     // is the component on the dom? ComponentDidMount
@@ -230,8 +262,7 @@ class BoxscoreContainer extends Component {
 	    });
     	this.getSelectedDateGameData(day)
     }
-  	
-    	
+
   	render() {
 	  	// console.log(this.state.today.api.games);
 	  	// console.log(this.state.todayPlusOne.api.games);
@@ -242,6 +273,7 @@ class BoxscoreContainer extends Component {
       			Some BoxscoreContainer text.
       			<DateInput selectedDay={this.state.selectedDay} inputDate={this.getInputDate}/>
       			<GameListToday
+      				getGame={this.getGameTotalsDataForOneGame}
       				gameDate={this.state.today.api.games}
       				gameDatePlusOne={this.state.todayPlusOne.api.games}
       				inputDate={this.state.tInputDate}
@@ -249,13 +281,18 @@ class BoxscoreContainer extends Component {
       				convertDateToString={this.convertDateStr}
       			/>
       			<GameListSelectedDate
+      				getGame={this.getGameTotalsDataForOneGame}
       				gameDate={this.state.selectedDate.api.games}
       				gameDatePlusOne={this.state.selectedDatePlusOne.api.games}
       				inputDate={this.state.sInputDate}
       				inputDatePlusOne={this.state.sInputDatePlusOne}
       				convertDateToString={this.convertDateStr}
       			/>
-      			<GameTotals />
+      			{/*<GameTotalsList
+      				gameDate={this.state.today.api.games}
+      				gameDatePlusOne={this.state.todayPlusOne.api.games}
+      				getGameTotalsDataForOneGame={this.getGameTotalsDataForOneGame}
+      			/>*/}
     		</React.Fragment>
   		)
   	}

@@ -35,7 +35,7 @@ function GameListSelectedDate (props) {
 
 		if (startTimeDayCheck === inputDay) {
 			return(
-				<li key={gamesByDate.gameId}>
+				<li key={gamesByDate.gameId} onClick={() => props.getGame(gamesByDate.gameId)}>
 					{gamesByDate.vTeam.shortName} versus {gamesByDate.hTeam.shortName}
 				</li>
 
@@ -72,7 +72,7 @@ function GameListSelectedDate (props) {
 
 		if (startTimeDayPlusOneCheck !== inputDay) {
 			return(
-				<li key={gamesByDatePlusOne.gameId}>
+				<li key={gamesByDatePlusOne.gameId} onClick={() => props.getGame(gamesByDatePlusOne.gameId)}>
 					{gamesByDatePlusOne.vTeam.shortName} versus {gamesByDatePlusOne.hTeam.shortName}
 				</li>
 
