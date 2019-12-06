@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GameListToday from '../GameListToday';
 import GameListSelectedDate from '../GameListSelectedDate';
+import GameTotals from '../GameTotals';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
 
@@ -144,7 +145,7 @@ class BoxscoreContainer extends Component {
 				tInputDate: dateStringAPI,
 				tInputDatePlusOne: dateStringAPIPlusOne,
 			})
-			// console.log(this.state);
+			console.log(this.state);
 		} catch(err){
 			console.log(err);
 		}
@@ -208,6 +209,10 @@ class BoxscoreContainer extends Component {
 		
 	}
 
+	// getGameTotals = async () => {//maybe???
+
+	// }
+
 	componentDidMount(){
     // get called once, after the initial render
     // is the component on the dom? ComponentDidMount
@@ -250,6 +255,7 @@ class BoxscoreContainer extends Component {
       				inputDatePlusOne={this.state.sInputDatePlusOne}
       				convertDateToString={this.convertDateStr}
       			/>
+      			<GameTotals />
     		</React.Fragment>
   		)
   	}
