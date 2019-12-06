@@ -12,7 +12,8 @@ class BoxscoreContainer extends Component {
 		// this is the initial "state" of our boxscore object
 	 	// this is mimicking the structure of our API information. 
 	    this.state = {
-	      todaysGames: [],	
+	      todaysGames: [],
+	      selectedGames: [],	
 	      selectedDay: null, //added this here to get the selectedDay from the calendar
 	      today: {// need to define all key-value pairs (properties) if you want to lift state
 	      	api: {
@@ -371,6 +372,7 @@ class BoxscoreContainer extends Component {
       				convertDateToString={this.convertDateStr}
       			/>
       			<GameListSelectedDate
+      				selectedGames={this.state.selectedGames}
       				getGame={this.getGameTotalsDataForOneGame}
       				gameDate={this.state.selectedDate.api.games}
       				gameDatePlusOne={this.state.selectedDatePlusOne.api.games}
