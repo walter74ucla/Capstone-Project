@@ -95,14 +95,23 @@ class BoxscoreContainer extends Component {
 		
 	};
 
+	// This function gives us the correct day's information due to the strange UTC time stuff
 	correctDayFilter = (game, filterDateString, expectEqual) => {
 		let dateString = new Date(game.startTimeUTC);
 		// console.log(dateString);
-		let iDConverted = this.convertDateStr(filterDateString);
-		let iDCPlus7 = iDConverted + "T07:00:00.00Z"; 
-		let updatedInputDate = new Date(iDCPlus7);
+		let fDSConverted = this.convertDateStr(filterDateString);
+		// console.log(fDSConverted);
+		//Adjust fDSConverted by 7 hours
+		let fDSConvertedPlus7 = fDSConverted + "T07:00:00.00Z";
+		// console.log(fDSConvertedPlus7);
+		// "YYYY-MM-DDT07:00:00.00Z" -->07:00:00.00Z helps get the input date the correct day.
+		// The 7 gets you to midnight Mountain Standard Time or 1am Mountain Daylight Time.  
+		let updatedFDSCP7 = new Date(fDSConvertedPlus7);
+		// console.log(fDSConvertedPlus7);
 		let startTimeDayCheck = dateString.getDay();
-		let inputDay = updatedInputDate.getDay();
+		// console.log(startTimeDayCheck);
+		let inputDay = updatedFDSCP7.getDay();
+		// console.log(inputDay);
 		if (expectEqual) {
 			return startTimeDayCheck === inputDay
 		} else {
@@ -112,6 +121,9 @@ class BoxscoreContainer extends Component {
 	}
 
 	getSelectedDateGameData = async (day, today=false) => {
+		// page defaults to today's date
+		// when another date is selected update API call
+		// console.log('TOOOOOOOOODAY', day);
 		let dateStringAPI;
 		if (today) {
 			dateStringAPI = new Date();//today
@@ -119,10 +131,6 @@ class BoxscoreContainer extends Component {
 			dateStringAPI = new Date(day);//selected day
 		}
 
-		// page defaults to today's date
-		// when another date is selected update API call
-		console.log('TOOOOOOOOODAY', day);
-		// Get selected day's date
 		let dSAPIConverted = this.convertDateStr(dateStringAPI);
 		// console.log(dSAPIConverted);
 
@@ -173,9 +181,9 @@ class BoxscoreContainer extends Component {
 			// console.log(parsedSelectedDatePlusOne);
 			if (today) {
 				this.setState({
+					todaysGames: selectedGames,
 					today: parsedSelectedDate,
 					todayPlusOne: parsedSelectedDatePlusOne,
-					todaysGames: selectedGames,
 					tInputDate: dateStringAPI,
 					tInputDatePlusOne: dateStringAPIPlusOne,
 				})
@@ -326,9 +334,6 @@ class BoxscoreContainer extends Component {
 
 	}
 
-
-
-
 	componentDidMount(){
     // get called once, after the initial render
     // is the component on the dom? ComponentDidMount
@@ -344,7 +349,7 @@ class BoxscoreContainer extends Component {
     	 this.setState({
 	      selectedDay: selected ? undefined : day,
 	    });
-    	this.getSelectedDateGameData(day)
+    	this.getSelectedDateGameData(day, false)
     }
 
   	render() {
