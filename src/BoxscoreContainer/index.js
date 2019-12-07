@@ -12,54 +12,63 @@ class BoxscoreContainer extends Component {
 		// this is the initial "state" of our boxscore object
 	 	// this is mimicking the structure of our API information. 
 	    this.state = {
-	      todaysGames: [], //added this to dry the code
-	      selectedGames: [], //added this to dry the code
-	      selectedDay: null, //added this here to get the selectedDay from the calendar
-	      today: {// need to define all key-value pairs (properties) if you want to lift state
-	      	api: {
-	      		filters: [],
-	      		games: [],
-	      		message: "",
-	      		results: 0,
-	      		status: 0
-	      	}
-	      },
-	      todayPlusOne: {// need to define all key-value pairs (properties) if you want to lift state
-	      	api: {
-	      		filters: [],
-	      		games: [],
-	      		message: "",
-	      		results: 0,
-	      		status: 0
-	      	}
-	      },
-	      selectedDate: {// need to define all key-value pairs (properties) if you want to lift state
-	      	api: {
-	      		filters: [],
-	      		games: [],
-	      		message: "",
-	      		results: 0,
-	      		status: 0
-	      	}
-	      },
-	      selectedDatePlusOne: {// need to define all key-value pairs (properties) if you want to lift state
-	      	api: {
-	      		filters: [],
-	      		games: [],
-	      		message: "",
-	      		results: 0,
-	      		status: 0
-	      	}
-	      },
-	      gameTotals: {// need to define all key-value pairs (properties) if you want to lift state
+	    	todaysGames: [], //added this to dry the code
+	      	selectedGames: [], //added this to dry the code
+	      	selectedDay: null, //added this here to get the selectedDay from the calendar
+	      	today: {// need to define all key-value pairs (properties) if you want to lift state
+		      	api: {
+		      		filters: [],
+		      		games: [],
+		      		message: "",
+		      		results: 0,
+		      		status: 0
+		      	}
+	      	},
+	      	todayPlusOne: {// need to define all key-value pairs (properties) if you want to lift state
+		      	api: {
+		      		filters: [],
+		      		games: [],
+		      		message: "",
+		      		results: 0,
+		      		status: 0
+		      	}
+		    },
+		    selectedDate: {// need to define all key-value pairs (properties) if you want to lift state
+		      	api: {
+		      		filters: [],
+		      		games: [],
+		      		message: "",
+		      		results: 0,
+		      		status: 0
+		      	}
+		    },
+		    selectedDatePlusOne: {// need to define all key-value pairs (properties) if you want to lift state
+		      	api: {
+		      		filters: [],
+		      		games: [],
+		      		message: "",
+		      		results: 0,
+		      		status: 0
+		      	}
+		    },
+	      	gameTotals: {// need to define all key-value pairs (properties) if you want to lift state
 				api: {
 		      		filters: [],
 		      		statistics: [],
 		      		message: "",
 		      		results: 0,
 		      		status: 0
-		      	},
-			}
+		      	}
+		   	},
+		   	playerDataByGame: {// need to define all key-value pairs (properties) if you want to lift state
+				api: {
+		      		filters: [],
+		      		statistics: [],
+		      		message: "",
+		      		results: 0,
+		      		status: 0
+		      	}
+		   	},
 		}
 	}
 	
@@ -335,6 +344,33 @@ class BoxscoreContainer extends Component {
 
 	}
 
+	getPlayerDataForOneGame = async (gameId) => {
+		// console.log('GameID: ', gameId);
+
+		try {														//need to make this gameId variable
+			const playersByGame = await fetch('https://api-nba-v1.p.rapidapi.com/statistics/players/gameId/' + gameId, {
+				"method": "GET",
+				"headers": {
+					"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+					"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
+				}
+			})
+
+		const parsedPlayersByGame = await playersByGame.json();
+		// console.log(parsedPlayersByGame);
+		
+		// this.setState({
+		// 	gameTotals: parsedGameTotals,
+		// })
+		// console.log(this.state);	
+		return parsedPlayersByGame;
+
+		} catch(err) {
+			console.log(err);
+		}
+
+	}
+
 	componentDidMount(){
     // get called once, after the initial render
     // is the component on the dom? ComponentDidMount
@@ -382,7 +418,8 @@ class BoxscoreContainer extends Component {
       			/>
       			<GameTotalsList
       				selectedGames={this.state.selectedGames}
-      				getGame={this.getGameTotalsDataForOneGame}
+      				getGameTotals={this.getGameTotalsDataForOneGame}
+      				getPlayerDataByGame={this.getPlayerDataForOneGame}
       			/>
     		</React.Fragment>
   		)

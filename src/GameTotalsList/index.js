@@ -12,7 +12,7 @@ function GameTotalsList (props) {
 	} else {
 		Promise.all(props.selectedGames.map(game => {
 		// console.log('Fetching:', game.gameId)
-		let gameTotals = props.getGame(game.gameId);
+		let gameTotals = props.getGameTotals(game.gameId);
 		return gameTotals;
 		})).then(values => {
 			let selectedGamesGameTotals = values;
@@ -21,7 +21,21 @@ function GameTotalsList (props) {
 		// console.log(selectedGamesGameTotals)
 	}
 	
-	
+	let selectedGamesPlayerTotals
+	// console.log(props.selectedGames);
+	if (props.selectedGames.length === 0) {
+		return null
+	} else {
+		Promise.all(props.selectedGames.map(game => {
+		// console.log('Fetching:', game.gameId)
+		let playerTotals = props.getPlayerDataByGame(game.gameId);
+		return playerTotals;
+		})).then(values => {
+			let selectedGamesPlayerTotals = values;
+			console.log('selectedGamesPlayerTotals in promiseall:', selectedGamesPlayerTotals)
+		})
+		// console.log(selectedGamesGameTotals)
+	}
 
 	return(
 	    <React.Fragment>
