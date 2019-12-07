@@ -69,10 +69,20 @@ class BoxscoreContainer extends Component {
 		      		status: 0
 		      	}
 		   	},
+		  //  	playerStats: {// need to define all key-value pairs (properties) if you want to lift state
+				// api: {
+		  //     		filters: [],
+		  //     		statistics: [],
+		  //     		message: "",
+		  //     		results: 0,
+		  //     		status: 0
+		  //     	}
+		  //  	},
 		}
 	}
 	
-	convertDateStr = (dateString) => {// this function converts a date string to YYYY-MM-DD
+	// this function converts a date string to YYYY-MM-DD
+	convertDateStr = (dateString) => {
 		let inputDateYear = dateString.getFullYear();//Get the year as a four digit number (yyyy)
 		// console.log(inputDateYear);
 		
@@ -371,11 +381,11 @@ class BoxscoreContainer extends Component {
 
 	}
 
-	// getPlayerDataForOneGame = async (gameId) => {
-	// 	// console.log('GameID: ', gameId);
+	// getPlayerStatsForOneGame = async (playerId) => {
+	// 	// console.log('PlayerID: ', playerId);
 
 	// 	try {														//need to make this gameId variable
-	// 		const playersByGame = await fetch('https://api-nba-v1.p.rapidapi.com/statistics/players/gameId/' + gameId, {
+	// 		const playerStatsByGame = await fetch('https://api-nba-v1.p.rapidapi.com/statistics/players/playerId/' + playerId, {
 	// 			"method": "GET",
 	// 			"headers": {
 	// 				"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
@@ -383,14 +393,14 @@ class BoxscoreContainer extends Component {
 	// 			}
 	// 		})
 
-	// 	const parsedPlayersByGame = await playersByGame.json();
-	// 	// console.log(parsedPlayersByGame);
+	// 	const parsedPlayerStatsByGame = await playerStatsByGame.json();
+	// 	// console.log(parsedPlayerStatsByGame);
 		
 	// 	// this.setState({
 	// 	// 	gameTotals: parsedGameTotals,
 	// 	// })
 	// 	// console.log(this.state);	
-	// 	return parsedPlayersByGame;
+	// 	return parsedPlayerStatsByGame;
 
 	// 	} catch(err) {
 	// 		console.log(err);
@@ -427,21 +437,21 @@ class BoxscoreContainer extends Component {
       			<DateInput selectedDay={this.state.selectedDay} inputDate={this.getInputDate}/>
       			<GameListToday
       				todaysGames={this.state.todaysGames}
-      				getGame={this.getGameTotalsDataForOneGame}
-      				gameDate={this.state.today.api.games}
-      				gameDatePlusOne={this.state.todayPlusOne.api.games}
-      				inputDate={this.state.tInputDate}
-      				inputDatePlusOne={this.state.tInputDatePlusOne}
-      				convertDateToString={this.convertDateStr}
+      				// getGame={this.getGameTotalsDataForOneGame}
+      				// gameDate={this.state.today.api.games}
+      				// gameDatePlusOne={this.state.todayPlusOne.api.games}
+      				// inputDate={this.state.tInputDate}
+      				// inputDatePlusOne={this.state.tInputDatePlusOne}
+      				// convertDateToString={this.convertDateStr}
       			/>
       			<GameListSelectedDate
       				selectedGames={this.state.selectedGames}
-      				getGame={this.getGameTotalsDataForOneGame}
-      				gameDate={this.state.selectedDate.api.games}
-      				gameDatePlusOne={this.state.selectedDatePlusOne.api.games}
-      				inputDate={this.state.sInputDate}
-      				inputDatePlusOne={this.state.sInputDatePlusOne}
-      				convertDateToString={this.convertDateStr}
+      				// getGame={this.getGameTotalsDataForOneGame}
+      				// gameDate={this.state.selectedDate.api.games}
+      				// gameDatePlusOne={this.state.selectedDatePlusOne.api.games}
+      				// inputDate={this.state.sInputDate}
+      				// inputDatePlusOne={this.state.sInputDatePlusOne}
+      				// convertDateToString={this.convertDateStr}
       			/>
       			<BoxscoreDataList
       				selectedGames={this.state.selectedGames}
