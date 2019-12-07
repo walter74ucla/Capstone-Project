@@ -17,11 +17,25 @@ function BoxscoreDataList (props) {
 		return gameTotals;
 		})).then(values => {
 			let selectedGamesGameTotals = values;
+			
 			console.log('selectedGamesGameTotals in promiseall:', selectedGamesGameTotals)
+			console.log(selectedGamesGameTotals[0].api.statistics[0].assists);
+			
+			// const gTDisplay = selectedGamesGameTotals.api.statistics.map(gameGTD => (
+			// 	<li key={gameGTD.gameId}>
+			// 	    {gameGTD.assists}
+			// 	</li>
+
+			// ))
 		})
-		// console.log(selectedGamesGameTotals)
+		
+		// console.log(selectedGamesGameTotals)//undefined
 	}
 	
+	// console.log(selectedGamesGameTotals)//undefined
+	// console.log(props.gameTotals);//undefined
+	// console.log(selectedGamesGameTotals[0].api.statistics[0].assists);//TypeError: Cannot read property '0' of undefined
+
 	let selectedGamesPlayerInfo
 	// console.log(props.selectedGames);
 	if (props.selectedGames.length === 0) {
@@ -35,17 +49,16 @@ function BoxscoreDataList (props) {
 			let selectedGamesPlayerInfo = values;
 			console.log('selectedGamesPlayerInfo in promiseall:', selectedGamesPlayerInfo)
 		})
-		// console.log(selectedGamesPlayerInfo)
+		// console.log(selectedGamesPlayerInfo)//undefined
 	}
-
 
 	return(
 	    <React.Fragment>
 	      <h4>Boxscores</h4>
 	      {/*<ul>
-	        {}
+	        {gTDisplay}
 	      </ul>*/}
-	      <Table celled>
+	      <Table celled striped>
 		    <Table.Header>
 		      <Table.Row>
 		        <Table.HeaderCell>Header</Table.HeaderCell>
@@ -73,7 +86,9 @@ function BoxscoreDataList (props) {
 		    </Table.Body>
 		  </Table>
 	    </React.Fragment>
-    )
+    )		
+	
+	
 
 }
 
