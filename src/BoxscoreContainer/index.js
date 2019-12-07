@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GameListToday from '../GameListToday';
 import GameListSelectedDate from '../GameListSelectedDate';
-// import GameTotalsList from '../GameTotals';
+import GameTotalsList from '../GameTotalsList';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
 
@@ -12,8 +12,8 @@ class BoxscoreContainer extends Component {
 		// this is the initial "state" of our boxscore object
 	 	// this is mimicking the structure of our API information. 
 	    this.state = {
-	      todaysGames: [],
-	      selectedGames: [],	
+	      todaysGames: [], //added this to dry the code
+	      selectedGames: [], //added this to dry the code
 	      selectedDay: null, //added this here to get the selectedDay from the calendar
 	      today: {// need to define all key-value pairs (properties) if you want to lift state
 	      	api: {
@@ -309,7 +309,7 @@ class BoxscoreContainer extends Component {
 	// }	
 
 	getGameTotalsDataForOneGame = async (gameId) => {
-		console.log('GameID: ', gameId);
+		// console.log('GameID: ', gameId);
 
 		try {														//need to make this gameId variable
 			const gameTotals = await fetch('https://api-nba-v1.p.rapidapi.com/statistics/games/gameId/' + gameId, {
@@ -321,7 +321,7 @@ class BoxscoreContainer extends Component {
 			})
 
 		const parsedGameTotals = await gameTotals.json();
-		console.log(parsedGameTotals);
+		// console.log(parsedGameTotals);
 		
 		// this.setState({
 		// 	gameTotals: parsedGameTotals,
@@ -380,11 +380,10 @@ class BoxscoreContainer extends Component {
       				inputDatePlusOne={this.state.sInputDatePlusOne}
       				convertDateToString={this.convertDateStr}
       			/>
-      			{/*<GameTotalsList
-      				gameDate={this.state.today.api.games}
-      				gameDatePlusOne={this.state.todayPlusOne.api.games}
-      				getGameTotalsDataForOneGame={this.getGameTotalsDataForOneGame}
-      			/>*/}
+      			<GameTotalsList
+      				selectedGames={this.state.selectedGames}
+      				getGame={this.getGameTotalsDataForOneGame}
+      			/>
     		</React.Fragment>
   		)
   	}
