@@ -1,4 +1,5 @@
 import React from 'react';
+import { Table } from 'semantic-ui-react';
 
 
 // passing props from boxscore container
@@ -34,15 +35,43 @@ function BoxscoreDataList (props) {
 			let selectedGamesPlayerInfo = values;
 			console.log('selectedGamesPlayerInfo in promiseall:', selectedGamesPlayerInfo)
 		})
-		// console.log(selectedGamesGameTotals)
+		// console.log(selectedGamesPlayerInfo)
 	}
+
 
 	return(
 	    <React.Fragment>
-	      <h4>Game Totals List</h4>
-	      <ul>
+	      <h4>Boxscores</h4>
+	      {/*<ul>
 	        {}
-	      </ul>
+	      </ul>*/}
+	      <Table celled>
+		    <Table.Header>
+		      <Table.Row>
+		        <Table.HeaderCell>Header</Table.HeaderCell>
+		        <Table.HeaderCell>Header</Table.HeaderCell>
+		        <Table.HeaderCell>Header</Table.HeaderCell>
+		      </Table.Row>
+		    </Table.Header>
+
+		    <Table.Body>
+		      <Table.Row>
+		        <Table.Cell>Cell</Table.Cell>
+		        <Table.Cell>Cell</Table.Cell>
+		        <Table.Cell>Cell</Table.Cell>
+		      </Table.Row>
+		      <Table.Row>
+		        <Table.Cell>Cell</Table.Cell>
+		        <Table.Cell>Cell</Table.Cell>
+		        <Table.Cell>Cell</Table.Cell>
+		      </Table.Row>
+		      <Table.Row>
+		        <Table.Cell>Cell</Table.Cell>
+		        <Table.Cell>Cell</Table.Cell>
+		        <Table.Cell>Cell</Table.Cell>
+		      </Table.Row>
+		    </Table.Body>
+		  </Table>
 	    </React.Fragment>
     )
 
