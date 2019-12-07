@@ -21,18 +21,18 @@ function GameTotalsList (props) {
 		// console.log(selectedGamesGameTotals)
 	}
 	
-	let selectedGamesPlayerTotals
+	let selectedGamesPlayerInfo
 	// console.log(props.selectedGames);
 	if (props.selectedGames.length === 0) {
 		return null
 	} else {
 		Promise.all(props.selectedGames.map(game => {
 		// console.log('Fetching:', game.gameId)
-		let playerTotals = props.getPlayerDataByGame(game.gameId);
-		return playerTotals;
+		let playerInfo = props.getPlayerInfoByGame(game.gameId);
+		return playerInfo;
 		})).then(values => {
-			let selectedGamesPlayerTotals = values;
-			console.log('selectedGamesPlayerTotals in promiseall:', selectedGamesPlayerTotals)
+			let selectedGamesPlayerInfo = values;
+			console.log('selectedGamesPlayerTotals in promiseall:', selectedGamesPlayerInfo)
 		})
 		// console.log(selectedGamesGameTotals)
 	}

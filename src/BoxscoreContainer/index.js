@@ -344,6 +344,33 @@ class BoxscoreContainer extends Component {
 
 	}
 
+	getPlayerInfoForOneGame = async (gameId) => {
+		// console.log('GameID: ', gameId);
+
+		try {														//need to make this gameId variable
+			const playersByGame = await fetch('https://api-nba-v1.p.rapidapi.com/statistics/players/gameId/' + gameId, {
+				"method": "GET",
+				"headers": {
+					"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+					"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
+				}
+			})
+
+		const parsedPlayersByGame = await playersByGame.json();
+		// console.log(parsedPlayersByGame);
+		
+		// this.setState({
+		// 	gameTotals: parsedGameTotals,
+		// })
+		// console.log(this.state);	
+		return parsedPlayersByGame;
+
+		} catch(err) {
+			console.log(err);
+		}
+
+	}
+
 	getPlayerDataForOneGame = async (gameId) => {
 		// console.log('GameID: ', gameId);
 
@@ -419,7 +446,7 @@ class BoxscoreContainer extends Component {
       			<GameTotalsList
       				selectedGames={this.state.selectedGames}
       				getGameTotals={this.getGameTotalsDataForOneGame}
-      				getPlayerDataByGame={this.getPlayerDataForOneGame}
+      				getPlayerInfoByGame={this.getPlayerInfoForOneGame}
       			/>
     		</React.Fragment>
   		)
