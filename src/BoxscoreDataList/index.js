@@ -2,7 +2,7 @@ import React from 'react';
 
 
 // passing props from boxscore container
-function GameTotalsList (props) {
+function BoxscoreDataList (props) {
 	
 	//map needs to be passed an array, not an object.
 	let selectedGamesGameTotals
@@ -32,7 +32,7 @@ function GameTotalsList (props) {
 		return playerInfo;
 		})).then(values => {
 			let selectedGamesPlayerInfo = values;
-			console.log('selectedGamesPlayerTotals in promiseall:', selectedGamesPlayerInfo)
+			console.log('selectedGamesPlayerInfo in promiseall:', selectedGamesPlayerInfo)
 		})
 		// console.log(selectedGamesGameTotals)
 	}
@@ -49,4 +49,4 @@ function GameTotalsList (props) {
 }
 
 
-export default GameTotalsList;
+export default BoxscoreDataList;

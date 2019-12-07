@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GameListToday from '../GameListToday';
 import GameListSelectedDate from '../GameListSelectedDate';
-import GameTotalsList from '../GameTotalsList';
+import BoxscoreDataList from '../BoxscoreDataList';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
 
@@ -60,7 +60,7 @@ class BoxscoreContainer extends Component {
 		      		status: 0
 		      	}
 		   	},
-		   	playerDataByGame: {// need to define all key-value pairs (properties) if you want to lift state
+		   	playerInfo: {// need to define all key-value pairs (properties) if you want to lift state
 				api: {
 		      		filters: [],
 		      		statistics: [],
@@ -371,32 +371,32 @@ class BoxscoreContainer extends Component {
 
 	}
 
-	getPlayerDataForOneGame = async (gameId) => {
-		// console.log('GameID: ', gameId);
+	// getPlayerDataForOneGame = async (gameId) => {
+	// 	// console.log('GameID: ', gameId);
 
-		try {														//need to make this gameId variable
-			const playersByGame = await fetch('https://api-nba-v1.p.rapidapi.com/statistics/players/gameId/' + gameId, {
-				"method": "GET",
-				"headers": {
-					"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-					"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
-				}
-			})
+	// 	try {														//need to make this gameId variable
+	// 		const playersByGame = await fetch('https://api-nba-v1.p.rapidapi.com/statistics/players/gameId/' + gameId, {
+	// 			"method": "GET",
+	// 			"headers": {
+	// 				"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+	// 				"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
+	// 			}
+	// 		})
 
-		const parsedPlayersByGame = await playersByGame.json();
-		// console.log(parsedPlayersByGame);
+	// 	const parsedPlayersByGame = await playersByGame.json();
+	// 	// console.log(parsedPlayersByGame);
 		
-		// this.setState({
-		// 	gameTotals: parsedGameTotals,
-		// })
-		// console.log(this.state);	
-		return parsedPlayersByGame;
+	// 	// this.setState({
+	// 	// 	gameTotals: parsedGameTotals,
+	// 	// })
+	// 	// console.log(this.state);	
+	// 	return parsedPlayersByGame;
 
-		} catch(err) {
-			console.log(err);
-		}
+	// 	} catch(err) {
+	// 		console.log(err);
+	// 	}
 
-	}
+	// }
 
 	componentDidMount(){
     // get called once, after the initial render
@@ -443,7 +443,7 @@ class BoxscoreContainer extends Component {
       				inputDatePlusOne={this.state.sInputDatePlusOne}
       				convertDateToString={this.convertDateStr}
       			/>
-      			<GameTotalsList
+      			<BoxscoreDataList
       				selectedGames={this.state.selectedGames}
       				getGameTotals={this.getGameTotalsDataForOneGame}
       				getPlayerInfoByGame={this.getPlayerInfoForOneGame}
