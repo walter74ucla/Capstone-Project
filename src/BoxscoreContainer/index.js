@@ -4,6 +4,7 @@ import GameListSelectedDate from '../GameListSelectedDate';
 import GameInfo from '../GameInfo';
 import GameTotals from '../GameTotals';
 import PlayerInfo from '../PlayerInfo';
+import FavoriteTeamsList from '../FavoriteTeamsList';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
 
@@ -18,6 +19,7 @@ class BoxscoreContainer extends Component {
 	      	selectedGames: [], //added this to dry the code
 	      	gameTotalsByGame: [], //receiving fetched data from the Promise.all
 	      	playerInfoByGame: [], //receiving fetched data from the Promise.all
+	      	favoriteTeams: [],//this comes from the flask server
 	      	selectedDay: null, //added this here to get the selectedDay from the calendar
 	      	today: {// need to define all key-value pairs (properties) if you want to lift state
 		      	api: {
@@ -324,6 +326,49 @@ class BoxscoreContainer extends Component {
     	this.getSelectedDateGameData(day, false)
     }
 
+    // Getting logged in user favorite teams from the flask server
+    getFavoriteTeams = async () => {
+
+		try {
+			const favoriteTeams = await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/',
+				{ // added this callback to send over the session cookie
+					credentials: 'include',
+					method: "GET"
+				});
+			const parsedfavoriteTeams = await favoriteTeams.json();
+			console.log(parsedfavoriteTeams);
+
+			this.setState({
+				favoriteTeams: parsedfavoriteTeams.data
+			})
+		
+	} catch(err){
+		console.log(err);
+		}
+	}
+
+	deleteFavoriteTeam = async (id) => {
+
+		console.log(id)
+		const deleteFavoriteTeamResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/' + id + '/', {// strange + '/' CORS error again
+													method: 'DELETE',
+													credentials: 'include' // Send a session cookie along with our request
+												});
+		const deleteFavoriteTeamParsed = await deleteFavoriteTeamResponse.json();
+		console.log(deleteFavoriteTeamResponse)
+		if (deleteFavoriteTeamParsed.status.code === 200) {
+			// now that the db has deleted our item, we need to remove it from state
+			this.setState({favoriteTeams: this.state.favoriteTeams.filter((favoriteTeam) => favoriteTeam.id !== id )})
+
+		} else {
+			alert ("You cannot delete a Favorite Team that you did not create")
+		}
+
+		console.log(deleteFavoriteTeamParsed, ' response from Flask server')
+			// then make the delete request, then remove the dog from the state array using filter
+
+	}
+
   	render() {
 	  	return(
 	  		<React.Fragment>
@@ -340,11 +385,14 @@ class BoxscoreContainer extends Component {
       			<GameInfo
       				selectedGames={this.state.selectedGames}
       			/>
+      			<PlayerInfo
+      				byGamePlayerInfo={this.state.playerInfoByGame}
+      			/>
       			<GameTotals
       				byGameTotals={this.state.gameTotalsByGame}
       			/>
-      			<PlayerInfo
-      				byGamePlayerInfo={this.state.playerInfoByGame}
+      			<FavoriteTeamsList
+      				favoriteTeams={this.state.favoriteTeams}
       			/>
     		</React.Fragment>
   		)
