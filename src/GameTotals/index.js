@@ -20,8 +20,6 @@ function GameTotals (props) {
 	    </li>
 	))
 
-	// console.log(game.api.statistics.gameId);
-
 
 	return(
 	    <React.Fragment>
@@ -32,8 +30,6 @@ function GameTotals (props) {
 	    </React.Fragment>
     )		
 	
-	
-
 }
 
 

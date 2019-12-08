@@ -26,9 +26,8 @@ function GameInfo (props) {
 	      <h4>Game Info</h4>
 	      <ul>
 	        {selectedGames}
-	    {/*{byGameTotals}*/}
 	      </ul>
-	      <Table celled striped>
+	      {/*<Table celled striped>
 		    <Table.Header>
 		      <Table.Row>
 		        <Table.HeaderCell>Header</Table.HeaderCell>
@@ -54,11 +53,9 @@ function GameInfo (props) {
 		        <Table.Cell>Cell</Table.Cell>
 		      </Table.Row>
 		    </Table.Body>
-		  </Table>
+		  </Table>*/}
 	    </React.Fragment>
     )		
-	
-	
 
 }
 
