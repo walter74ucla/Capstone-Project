@@ -192,6 +192,8 @@ class BoxscoreContainer extends Component {
 	      	const parsedSelectedDatePlusOne = await selectedDatePlusOne.json();
 	      	// console.log(parsedSelectedDate);
 			// console.log(parsedSelectedDatePlusOne);
+	      	
+			// This creates a selected games array
 	      	const selectedGames = parsedSelectedDate.api.games.filter((game) => {
 	      		// Filter for select dates games return games corrected for timezone 
 				return this.correctDayFilter(game, dateStringAPI, true);
@@ -200,7 +202,7 @@ class BoxscoreContainer extends Component {
 				return this.correctDayFilter(game, dateStringAPIPlusOne, false);
 			}));
 
-			console.log('Selected Day Games: ', selectedGames)
+			// console.log('Selected Day Games: ', selectedGames)
 
 			//Fill the gameTotalsByGame array here
 			let selectedGamesGameTotals
@@ -256,115 +258,12 @@ class BoxscoreContainer extends Component {
 			console.log(err);
 		}
 		
-	}
-
-	// getTodaysGameData = async () => {
-	// 	// page defaults to today's date
-	// 	// when another date is selected update API call
-		
-	// 	// Get today's date
-	// 	let dateStringAPI = new Date();//today
-	// 	let dSAPIConverted = this.convertDateStr(dateStringAPI);
-	// 	// console.log(dSAPIConverted);
-
-	// 	// Add 1 day to dateStringAPI
-	// 	let time = dateStringAPI.getTime(); //Get the time (milliseconds since January 1, 1970)
-	// 	// console.log(time);
-	// 	let oneDay = 1000*60*60*24; //1000 milliseconds times 60 seconds times 60 minutes times 24 hours 
-	// 	// console.log(oneDay);
-	// 	let timePlusOne = time + oneDay;
-	// 	// console.log(timePlusOne);
-	// 	let dateStringAPIPlusOne = new Date(timePlusOne);
-	// 	// console.log(dateStringAPIPlusOne);
-	// 	let dSAPIPOConverted = this.convertDateStr(dateStringAPIPlusOne);
-	// 	// console.log(dSAPIPOConverted);
-		
-
-	// 	try {
-	// 		// the endpoint is the url we are making our request to.
-	//       	// fetch is a native js function that makes http requests
-	//       	// by default it makes a get request
-	//       	// we use fetch when we don't want to refresh the page
-	//       	const today = await fetch(`https://api-nba-v1.p.rapidapi.com/games/date/${dSAPIConverted}`, {
-	// 			"method": "GET",
-	// 			"headers": {
-	// 				"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-	// 				"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
-	// 			}
-	// 		})
-
-	// 		const todayPlusOne = await fetch(`https://api-nba-v1.p.rapidapi.com/games/date/${dSAPIPOConverted}`, {
-	// 			"method": "GET",
-	// 			"headers": {
-	// 				"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-	// 				"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
-	// 			}
-	// 		})
-
-	// 		// our response will be in the form of JSON, a string
-	//       	// data is sent across the internet as JSON
-	//       	// parse the JSON is turning the string into objects
-	//       	const parsedToday = await today.json();
-	//       	const parsedTodayPlusOne = await todayPlusOne.json();
-	// 		// we should always log out the response before we 
-	//       	// write any other code!
-	//       	// console logging the parsed data did not work until creating the componentDidMount() method
-	// 		// console.log(parsedToday);
-	// 		// console.log(parsedTodayPlusOne);
-	// 		let todaysGames = parsedToday.api.games.filter((gamesByDate) => {
-	
-	// 			let dateString = new Date(gamesByDate.startTimeUTC);
-	// 			let iDConverted = this.convertDateStr(dateStringAPI);
-	// 			let iDCPlus7 = iDConverted + "T07:00:00.00Z"; 
-	// 			let updatedInputDate = new Date(iDCPlus7);
-	// 			let startTimeDayCheck = dateString.getDay();
-	// 			let inputDay = updatedInputDate.getDay();
-
-	// 			return startTimeDayCheck === inputDay
-	// 		}).concat(parsedTodayPlusOne.api.games.filter((gamesByDatePlusOne) => {
-	// 			let dateStringPlusOne = new Date(gamesByDatePlusOne.startTimeUTC);
-	// 			let iDConverted = this.convertDateStr(dateStringAPIPlusOne);
-	// 			let iDCPlus7 = iDConverted + "T07:00:00.00Z";
-	// 			let updatedInputDate = new Date(iDCPlus7);
-	// 			let startTimeDayPlusOneCheck = dateStringPlusOne.getDay();
-	// 			let inputDay = updatedInputDate.getDay();
-
-	// 			return startTimeDayPlusOneCheck !== inputDay
-	// 		}));
-
-
-			// console.log(todaysGames);
-			// let todaysDetailedGames
-			// Promise.all(todaysGames.map(game => {
-			// 	console.log('Fetching:', game.gameId)
-			// 	let detailedGame = this.getGameTotalsDataForOneGame(game.gameId);
-			// 	return detailedGame;
-			// })).then(values => {
-			// 	let todaysDetailedGames = values;
-			// 	console.log('todaysDetailedGames in promiseall:', todaysDetailedGames)
-			// })
-
-			// console.log(todaysDetailedGames)
-			
-	// 		this.setState({
-	// 			today: parsedToday,
-	// 			todayPlusOne: parsedTodayPlusOne,
-	// 			todaysGames: todaysGames,
-	// 			tInputDate: dateStringAPI,
-	// 			tInputDatePlusOne: dateStringAPIPlusOne,
-	// 		})
-	// 		console.log(this.state);
-	// 		console.log(this.state.today.api.games[0].gameId);
-	// 	} catch(err){
-	// 		console.log(err);
-	// 	}
-		
-	// }	
+	}	
 
 	getGameTotalsDataForOneGame = async (gameId) => {
 		// console.log('GameID: ', gameId);
 
-		try {														//need to make this gameId variable
+		try {														
 			const gameTotals = await fetch('https://api-nba-v1.p.rapidapi.com/statistics/games/gameId/' + gameId, {
 				"method": "GET",
 				"headers": {
@@ -374,12 +273,7 @@ class BoxscoreContainer extends Component {
 			})
 
 		const parsedGameTotals = await gameTotals.json();
-		// console.log(parsedGameTotals);
-		
-		// this.setState({
-		// 	gameTotals: parsedGameTotals,
-		// })
-		// console.log(this.state);	
+		// console.log(parsedGameTotals);	
 		return parsedGameTotals;
 
 		} catch(err) {
@@ -391,7 +285,7 @@ class BoxscoreContainer extends Component {
 	getPlayerInfoForOneGame = async (gameId) => {
 		// console.log('GameID: ', gameId);
 
-		try {														//need to make this gameId variable
+		try {														
 			const playersByGame = await fetch('https://api-nba-v1.p.rapidapi.com/statistics/players/gameId/' + gameId, {
 				"method": "GET",
 				"headers": {
@@ -401,12 +295,7 @@ class BoxscoreContainer extends Component {
 			})
 
 		const parsedPlayersByGame = await playersByGame.json();
-		// console.log(parsedPlayersByGame);
-		
-		// this.setState({
-		// 	gameTotals: parsedGameTotals,
-		// })
-		// console.log(this.state);	
+		// console.log(parsedPlayersByGame);	
 		return parsedPlayersByGame;
 
 		} catch(err) {
@@ -414,33 +303,6 @@ class BoxscoreContainer extends Component {
 		}
 
 	}
-
-	// getPlayerStatsForOneGame = async (playerId) => {
-	// 	// console.log('PlayerID: ', playerId);
-
-	// 	try {														//need to make this gameId variable
-	// 		const playerStatsByGame = await fetch('https://api-nba-v1.p.rapidapi.com/statistics/players/playerId/' + playerId, {
-	// 			"method": "GET",
-	// 			"headers": {
-	// 				"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-	// 				"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
-	// 			}
-	// 		})
-
-	// 	const parsedPlayerStatsByGame = await playerStatsByGame.json();
-	// 	// console.log(parsedPlayerStatsByGame);
-		
-	// 	// this.setState({
-	// 	// 	gameTotals: parsedGameTotals,
-	// 	// })
-	// 	// console.log(this.state);	
-	// 	return parsedPlayerStatsByGame;
-
-	// 	} catch(err) {
-	// 		console.log(err);
-	// 	}
-
-	// }
 
 	componentDidMount(){
     // get called once, after the initial render
@@ -461,36 +323,22 @@ class BoxscoreContainer extends Component {
     }
 
   	render() {
-	  	// console.log(this.state.today.api.games);
-	  	// console.log(this.state.todayPlusOne.api.games);
-	  	// console.log(this.state.tInputDate);
-	  	// console.log(this.state.tInputDatePlusOne);
 	  	return(
 	  		<React.Fragment>
       			Some BoxscoreContainer text.
-      			<DateInput selectedDay={this.state.selectedDay} inputDate={this.getInputDate}/>
+      			<DateInput selectedDay={this.state.selectedDay}
+      				inputDate={this.getInputDate}
+      			/>
       			<GameListToday
       				todaysGames={this.state.todaysGames}
-      				// getGame={this.getGameTotalsDataForOneGame}
-      				// gameDate={this.state.today.api.games}
-      				// gameDatePlusOne={this.state.todayPlusOne.api.games}
-      				// inputDate={this.state.tInputDate}
-      				// inputDatePlusOne={this.state.tInputDatePlusOne}
-      				// convertDateToString={this.convertDateStr}
       			/>
       			<GameListSelectedDate
       				selectedGames={this.state.selectedGames}
-      				// getGame={this.getGameTotalsDataForOneGame}
-      				// gameDate={this.state.selectedDate.api.games}
-      				// gameDatePlusOne={this.state.selectedDatePlusOne.api.games}
-      				// inputDate={this.state.sInputDate}
-      				// inputDatePlusOne={this.state.sInputDatePlusOne}
-      				// convertDateToString={this.convertDateStr}
       			/>
       			<BoxscoreDataList
       				selectedGames={this.state.selectedGames}
-      				getGameTotals={this.getGameTotalsDataForOneGame}
-      				getPlayerInfoByGame={this.getPlayerInfoForOneGame}
+      				byGameTotals={this.state.gameTotalsByGame}
+  					byGamePlayerInfo={this.state.playerInfoByGame}
       			/>
     		</React.Fragment>
   		)
