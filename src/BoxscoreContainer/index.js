@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import GameListToday from '../GameListToday';
 import GameListSelectedDate from '../GameListSelectedDate';
-import BoxscoreDataList from '../BoxscoreDataList';
+import GameInfo from '../GameInfo';
+import GameTotals from '../GameTotals';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
 
@@ -335,10 +336,12 @@ class BoxscoreContainer extends Component {
       			<GameListSelectedDate
       				selectedGames={this.state.selectedGames}
       			/>
-      			<BoxscoreDataList
+      			<GameInfo
       				selectedGames={this.state.selectedGames}
-      				byGameTotals={this.state.gameTotalsByGame}
   					byGamePlayerInfo={this.state.playerInfoByGame}
+      			/>
+      			<GameTotals
+      				byGameTotals={this.state.gameTotalsByGame}
       			/>
     		</React.Fragment>
   		)

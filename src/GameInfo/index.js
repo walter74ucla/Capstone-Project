@@ -3,7 +3,7 @@ import { Table } from 'semantic-ui-react';
 
 
 // passing props from boxscore container
-function BoxscoreDataList (props) {
+function GameInfo (props) {
 	
 	//map needs to be passed an array, not an object.
 	const selectedGames = props.selectedGames.map(game => (
@@ -20,23 +20,10 @@ function BoxscoreDataList (props) {
 
 	))
 
-	// const byGameTotals = props.byGameTotals.map(game => (
-	// 	<li key={game.api.statistics.gameId}>
-	// 		<Table celled>
-	// 		    <Table.Header>
-	// 		      <Table.Row>
-	// 		        <Table.HeaderCell>Totals:</Table.HeaderCell>
-	// 		        <Table.HeaderCell>game.api.statistics.points</Table.HeaderCell>
-	// 		      </Table.Row>
-	// 		    </Table.Header>
-	// 		</Table>
-	//     </li>
-	// ))
-
 
 	return(
 	    <React.Fragment>
-	      <h4>Boxscores</h4>
+	      <h4>Game Info</h4>
 	      <ul>
 	        {selectedGames}
 	    {/*{byGameTotals}*/}
@@ -76,4 +63,4 @@ function BoxscoreDataList (props) {
 }
 
 
-export default BoxscoreDataList;
+export default GameInfo;
