@@ -14,6 +14,8 @@ class BoxscoreContainer extends Component {
 	    this.state = {
 	    	todaysGames: [], //added this to dry the code
 	      	selectedGames: [], //added this to dry the code
+	      	gameTotalsByGame: [], //receiving fetched data from the Promise.all
+	      	playerInfoByGame: [], //receiving fetched data from the Promise.all
 	      	selectedDay: null, //added this here to get the selectedDay from the calendar
 	      	today: {// need to define all key-value pairs (properties) if you want to lift state
 		      	api: {
@@ -51,6 +53,7 @@ class BoxscoreContainer extends Component {
 		      		status: 0
 		      	}
 		    },
+		    // This property is used in the fetch
 	      	gameTotals: {// need to define all key-value pairs (properties) if you want to lift state
 				api: {
 		      		filters: [],
@@ -60,6 +63,7 @@ class BoxscoreContainer extends Component {
 		      		status: 0
 		      	}
 		   	},
+		   	// This property is used in the fetch
 		   	playerInfo: {// need to define all key-value pairs (properties) if you want to lift state
 				api: {
 		      		filters: [],
@@ -186,7 +190,8 @@ class BoxscoreContainer extends Component {
 
 	      	const parsedSelectedDate = await selectedDate.json();
 	      	const parsedSelectedDatePlusOne = await selectedDatePlusOne.json();
-
+	      	// console.log(parsedSelectedDate);
+			// console.log(parsedSelectedDatePlusOne);
 	      	const selectedGames = parsedSelectedDate.api.games.filter((game) => {
 	      		// Filter for select dates games return games corrected for timezone 
 				return this.correctDayFilter(game, dateStringAPI, true);
@@ -196,9 +201,38 @@ class BoxscoreContainer extends Component {
 			}));
 
 			console.log('Selected Day Games: ', selectedGames)
+
+			//Fill the gameTotalsByGame array here
+			let selectedGamesGameTotals
+			await Promise.all(selectedGames.map(game => {
+				// console.log('Fetching:', game.gameId)
+				let gameTotals = this.getGameTotalsDataForOneGame(game.gameId);
+				return gameTotals;
+				})).then(values => {
+					let selectedGamesGameTotals = values;
+					this.setState({
+				      gameTotalsByGame: selectedGamesGameTotals,
+				    })
+					// console.log('selectedGamesGameTotals in promiseall:', selectedGamesGameTotals)
+					// console.log(selectedGamesGameTotals[0].api.statistics[0].assists);	
+				})
 			
-			// console.log(parsedSelectedDate);
-			// console.log(parsedSelectedDatePlusOne);
+			//Fill the playerInfoByGame array here
+			let selectedGamesPlayerInfo
+			await Promise.all(selectedGames.map(game => {
+				// console.log('Fetching:', game.gameId)
+				let playerInfo = this.getPlayerInfoForOneGame(game.gameId);
+				return playerInfo;
+				})).then(values => {
+					let selectedGamesPlayerInfo = values;
+					this.setState({
+				      playerInfoByGame: selectedGamesPlayerInfo,
+				    })
+					// console.log('selectedGamesPlayerInfo in promiseall:', selectedGamesPlayerInfo)
+					// console.log(selectedGamesPlayerInfo[0].api.statistics[0].points);	
+				})
+
+			
 			if (today) {
 				this.setState({
 					todaysGames: selectedGames,
@@ -299,18 +333,18 @@ class BoxscoreContainer extends Component {
 	// 		}));
 
 
-	// 		console.log(todaysGames)
-	// 		let todaysDetailedGames
-	// 		Promise.all(todaysGames.map(game => {
-	// 			console.log('Fetching:', game.gameId)
-	// 			let detailedGame = this.getGameTotalsDataForOneGame(game.gameId);
-	// 			return detailedGame;
-	// 		})).then(values => {
-	// 			let todaysDetailedGames = values;
-	// 			console.log('todaysDetailedGames in promiseall:', todaysDetailedGames)
-	// 		})
+			// console.log(todaysGames);
+			// let todaysDetailedGames
+			// Promise.all(todaysGames.map(game => {
+			// 	console.log('Fetching:', game.gameId)
+			// 	let detailedGame = this.getGameTotalsDataForOneGame(game.gameId);
+			// 	return detailedGame;
+			// })).then(values => {
+			// 	let todaysDetailedGames = values;
+			// 	console.log('todaysDetailedGames in promiseall:', todaysDetailedGames)
+			// })
 
-	// 		console.log(todaysDetailedGames)
+			// console.log(todaysDetailedGames)
 			
 	// 		this.setState({
 	// 			today: parsedToday,
