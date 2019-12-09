@@ -365,9 +365,44 @@ class BoxscoreContainer extends Component {
 		}
 
 		console.log(deleteFavoriteTeamParsed, ' response from Flask server')
-			// then make the delete request, then remove the dog from the state array using filter
+			// then make the delete request, then remove the favorite team from the state array using filter
+			// what about handling multiple delete requests at once?
 
 	}
+
+	addFavoriteTeam = async (e, favoriteTeam) => {
+		e.preventDefault();
+		console.log(favoriteTeam);
+
+		try {
+
+			// Send JSON
+			// createdIssue variable storing response from Flask API
+			const createdFavoriteTeamResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/', {
+				method: 'POST',
+				credentials: 'include', // added this to send over the session cookie
+				body: JSON.stringify(issue),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+			
+			// turn the response from Flask into an object we can use
+			const parsedResponse = await createdFavoriteTeamResponse.json();
+			console.log(parsedResponse, ' this is response');
+
+			// empty all issues in state to new array then
+			// adding issue we created to the end of it (created shows up first until refresh then at the bottom)
+			// what about handling multiple add requests at once?
+
+			this.setState({favoriteTeams: [parsedResponse.data, ...this.state.favoriteTeams]})
+		
+		} catch(err){
+			console.log('error')
+			console.log(err)
+		}
+	}
+
 
   	render() {
 	  	return(
