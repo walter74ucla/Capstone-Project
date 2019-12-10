@@ -62,7 +62,7 @@ class Login extends Component {
                     <Label>Email</Label>
                     <Form.Input type="email" name="email" onChange={this.handleChange} required />
                     <Label>Password</Label>
-                    <Form.Input type="password" name="password" onChange={this.handleChange} required />
+                    <Form.Input type="password" name="password_hash" onChange={this.handleChange} required />
                     <Button type="submit" color="green">Login</Button>
                     { this.state.errorMsg ? <Message negative>{this.state.errorMsg}</Message> : null }
                 </Form>
