@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Form, Label, Button, Message } from 'semantic-ui-react';
 
 
 class Login extends Component {
@@ -57,12 +57,15 @@ class Login extends Component {
 	render(){
 	    return (
 	    	<React.Fragment>
-	    		<h4>Login</h4>
-		      	<form onSubmit={this.handleSubmit}>
-			        <input type='text' name="screen_name" placeholder="screen name" />
-			        <input type='password' name="password" placeholder="password" />
-			        <input type='submit' value="Submit" />
-		      	</form>
+	    		<Form onSubmit={this.handleSubmit}>
+                    <h4>Sign In</h4>
+                    <Label>Email</Label>
+                    <Form.Input type="email" name="email" onChange={this.handleChange} required />
+                    <Label>Password</Label>
+                    <Form.Input type="password" name="password" onChange={this.handleChange} required />
+                    <Button type="submit" color="green">Login</Button>
+                    { this.state.errorMsg ? <Message negative>{this.state.errorMsg}</Message> : null }
+                </Form>
 	      	</React.Fragment>
 	    )
 	}
