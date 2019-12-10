@@ -11,7 +11,7 @@ function FavoriteTeamsList(props){
         <Item key={team.favoriteTeam.id}>
           <Item.Image size='tiny' src='https://imgur.com/Ox5WIoz' alt='team logo' />
           <Item.Content verticalAlign='middle'>Favorite Team</Item.Content>
-          <Button floated='right' onClick={() => props.deleteFavoriteTeam(favoriteTeam.id)}>Remove</Button>
+          <Button floated='right' onClick={() => props.deleteFavoriteTeam(team.favoriteTeam.id)}>Remove</Button>
         </Item>
       </Item.Group>
     )

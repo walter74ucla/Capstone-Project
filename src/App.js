@@ -2,19 +2,43 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import BoxscoreContainer from './BoxscoreContainer';
+import SelectFavoriteTeams from './SelectFavoriteTeamsForm';
+import { Route, Switch } from 'react-router-dom';
 
 
-function App() {
-    
-  return(
-    <React.Fragment>
-        Some App text.
-        <h2>A heading</h2>
-        <BoxscoreContainer />
-    </React.Fragment>
-  )
+const My404 = () => {
+  return (
+    <div>
+      You are Lost
+    </div>
+    )
+};
 
-}
+const App = () => {
+  return (
+    <main>
+      <Switch>
+        <Route exact path="/" component={ BoxscoreContainer } />
+        <Route exact path="/favorite_teams" component={ SelectFavoriteTeams } />
+        <Route component={My404} />
+      </Switch>
+    </main>
+    )
+};
 
 
 export default App;
+
+
+// old code before react router
+// function App() {
+    
+//   return(
+//     <React.Fragment>
+//         Some App text.
+//         <h2>A heading</h2>
+//         <BoxscoreContainer />
+//     </React.Fragment>
+//   )
+
+// }

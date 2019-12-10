@@ -151,7 +151,7 @@ class BoxscoreContainer extends Component {
 	getSelectedDateGameData = async (day, today=false) => {
 		// page defaults to today's date
 		// when another date is selected update API call
-		// console.log('TOOOOOOOOODAY', day);
+		console.log('TOOOOOOOOODAY', day);
 		let dateStringAPI;
 		if (today) {
 			dateStringAPI = new Date();//today
@@ -206,7 +206,7 @@ class BoxscoreContainer extends Component {
 				return this.correctDayFilter(game, dateStringAPIPlusOne, false);
 			}));
 
-			// console.log('Selected Day Games: ', selectedGames)
+			console.log('Selected Day Games: ', selectedGames)
 
 			//Fill the gameTotalsByGame array here
 			let selectedGamesGameTotals
@@ -381,7 +381,7 @@ class BoxscoreContainer extends Component {
 			const createdFavoriteTeamResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/', {
 				method: 'POST',
 				credentials: 'include', // added this to send over the session cookie
-				body: JSON.stringify(issue),
+				body: JSON.stringify(favoriteTeam),
 				headers: {
 					'Content-Type': 'application/json'
 				}
@@ -417,15 +417,20 @@ class BoxscoreContainer extends Component {
       			<GameListSelectedDate
       				selectedGames={this.state.selectedGames}
       			/>
-      			<GameInfo
-      				selectedGames={this.state.selectedGames}
-      			/>
-      			<PlayerInfo
-      				byGamePlayerInfo={this.state.playerInfoByGame}
-      			/>
-      			<GameTotals
-      				byGameTotals={this.state.gameTotalsByGame}
-      			/>
+      			{/*//if this game is over, then do this...*/}
+      			{ this.state.selectedGames.api.games.statusGame === "Finished" 
+      				? <React.Fragment>	
+	      					<GameInfo
+			      				selectedGames={this.state.selectedGames}
+			      			/>
+			      			<GameTotals
+	      						byGameTotals={this.state.gameTotalsByGame}
+	      					/>
+	      					<PlayerInfo
+			      				byGamePlayerInfo={this.state.playerInfoByGame}
+			      			/>
+			      			</React.Fragment>
+      				: null }
       			<FavoriteTeamsList
       				favoriteTeams={this.state.favoriteTeams}
       			/>
