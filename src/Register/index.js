@@ -23,7 +23,7 @@ class Register extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
         console.log('hello');
-        const registerResponse = await fetch(process.env.REACT_APP_API_URL + '/user/register', {
+        const registerResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/users/register', {
             method: 'POST',
             credentials: 'include', // this sends our session cookie with our request
             body: JSON.stringify(this.state),
