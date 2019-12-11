@@ -4,6 +4,8 @@ import { Table } from 'semantic-ui-react';
 
 // passing props from boxscore container
 function GameTotals (props) {
+	console.log(props);
+	//if this game is over, then do this...
 	
 	//map needs to be passed an array, not an object.
 	const byGameTotals = props.byGameTotals.map(game => (
