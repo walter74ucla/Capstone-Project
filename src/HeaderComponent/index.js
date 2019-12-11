@@ -29,7 +29,7 @@ class HeaderComponent extends Component {
 				      <Menu stackable>
 				        <Menu.Item>Update Favorites</Menu.Item>
 				        <Menu.Item>Log Out</Menu.Item>
-				        <Menu.Item>Hi User</Menu.Item>
+				        <Menu.Item>Hi {this.props.screen_name}!</Menu.Item>
 				        <Button>Edit Screen Name</Button>
 				      </Menu>
 				    </Container>
