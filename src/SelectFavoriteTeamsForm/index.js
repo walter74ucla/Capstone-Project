@@ -26,6 +26,37 @@ class SelectFavoriteTeams extends Component {
 	// 	this.props.deleteFavoriteTeam(e, this.state);//multiple???
 	// }
 	// need to eventually add this --> onSubmit={this.handleSubmit}
+	componentDidMount(){
+    	this.getFavoriteTeams()
+    
+  	}
+	
+	getFavoriteTeams = async () => {
+
+		try {
+			const favoriteTeams = await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/',
+				{ // added this callback to send over the session cookie
+					credentials: 'include',
+					method: "GET"
+				});
+			const parsedfavoriteTeams = await favoriteTeams.json();
+			console.log(parsedfavoriteTeams);
+
+			//https://stackoverflow.com/questions/15125920/how-to-get-distinct-values-from-an-array-of-objects-in-javascript
+			let getFTArray = parsedfavoriteTeams.data.map(item => item.name)
+  							.filter((value, index, self) => self
+  							.indexOf(value) === index)
+
+  			console.log(getFTArray);
+
+			this.setState({
+				favoriteTeams: getFTArray
+			})
+		
+	} catch(err){
+		console.log(err);
+		}
+	}
 
 	//code help from Will...
 	handleFavoriteTeamsChange = (e) => {
@@ -34,10 +65,6 @@ class SelectFavoriteTeams extends Component {
 	    // let teamIdx;
 	    if (this.state.favoriteTeams.includes(team)) {
 	      // We are deleting Favorite
-	      // fetch(route, {
-	      //   method: 'DELETE',
-	      //   ...
-	      // })
 	      // teamIdx = this.state.favoriteTeams.indexOf(team);
 	      this.deleteFavoriteTeam(team);
 	      // favoriteTeams.splice(teamIdx, 1);
@@ -57,7 +84,7 @@ class SelectFavoriteTeams extends Component {
 													credentials: 'include' // Send a session cookie along with our request
 												});
 		const deleteFavoriteTeamParsed = await deleteFavoriteTeamResponse.json();
-		console.log(deleteFavoriteTeamResponse)
+		// console.log(deleteFavoriteTeamResponse)
 		if (deleteFavoriteTeamParsed.status.code === 200) {
 			// now that the db has deleted our item, we need to remove it from state
 			this.setState({favoriteTeams: this.state.favoriteTeams.filter((favoriteTeam) => favoriteTeam !== name )})
