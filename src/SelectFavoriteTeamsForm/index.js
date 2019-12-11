@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Radio, Button } from 'semantic-ui-react'
+import { Form, Radio, Button, Container, Menu } from 'semantic-ui-react'
 
 class SelectFavoriteTeams extends Component {
   	constructor(){//How do I link this to the flask db???
@@ -11,21 +11,7 @@ class SelectFavoriteTeams extends Component {
 			favoriteTeams: [],
 		}
 	}
-//FavoriteTeam(Model)
-//may only need two models if favorite teams are 
-//defined in this container
-//this form should display previously selected favorite
-//teams for the user
-  
-  	// How do I link this to the flask db???
-  	
 
-	// handleSubmit = (e) =>{//should update favorite teams based on selections
-	// 	this.props.addFavoriteTeam(e, this.state);//multiple???
-	// 	// this.setState({name:''})//I do not want the form to be reset
-	// 	this.props.deleteFavoriteTeam(e, this.state);//multiple???
-	// }
-	// need to eventually add this --> onSubmit={this.handleSubmit}
 	componentDidMount(){
     	this.getFavoriteTeams()
     
@@ -147,12 +133,14 @@ class SelectFavoriteTeams extends Component {
 	          />
 	    ))
 	    return (
-	      <Form>
-	        <Form.Group grouped>
-	          <label>Favorite Teams: {this.state.favoriteTeams.join(', ')}</label>
-	          { teamCheckbox }
-	        </Form.Group>
-	      </Form>
+	    	<React.Fragment>
+		      	<Form>
+			        <Form.Group grouped>
+			          <label>Favorite Teams: {this.state.favoriteTeams.join(', ')}</label>
+			          { teamCheckbox }
+			        </Form.Group>
+		      	</Form>
+	      	</React.Fragment>
 	    )
   	}
 }

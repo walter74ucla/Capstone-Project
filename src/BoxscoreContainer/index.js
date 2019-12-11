@@ -5,10 +5,12 @@ import GameInfo from '../GameInfo';
 import GameTotals from '../GameTotals';
 import PlayerInfo from '../PlayerInfo';
 import FavoriteTeamsList from '../FavoriteTeamsList';
+import Login from '../Login';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
+import { Header, Container, Menu, Button } from 'semantic-ui-react'
 
-	
+
 class BoxscoreContainer extends Component {
 	constructor() {
 		super();
@@ -408,7 +410,6 @@ class BoxscoreContainer extends Component {
   		// console.log(this.state.selectedDate.api.games[0].statusGame);//Fix This
 	  	return(
 	  		<React.Fragment>
-      			Some BoxscoreContainer text.
       			<DateInput selectedDay={this.state.selectedDay}
       				inputDate={this.getInputDate}
       			/>

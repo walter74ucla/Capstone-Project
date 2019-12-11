@@ -9,9 +9,20 @@ class Login extends Component {
 		this.state = {
 			screen_name: '',
 			email: '',
-			password_hash: ''
+			password_hash: '',
+            // logged: false,
 		}
 	}
+
+    // 1. Create a method in the parent component
+    // login = (screen_name) => {
+    //     // console.log(screen_name);
+    //     this.setState({
+    //       screen_name: screen_name,
+    //       logged: true  
+    //     })
+    //     console.log(this.state);//REMOVE THIS Console.log so the password does not show
+    // }
 
 	// Handling of form value change
 	handleChange = (e) => {
@@ -27,7 +38,7 @@ class Login extends Component {
 	// Submission of login in form
 	handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log('Email & Password:', this.state);//want to see the hash
+		console.log('Email & Password:', this.state);//REMOVE THIS Console.log so the password does not show
 		const loginUrl = `${process.env.REACT_APP_API_URL}/api/v1/users/login`; //localhost:8000/api/v1/users/login
 		// this is users.  this matches flask app.py: app.register_blueprint(user, url_prefix='/api/v1/users')
 		const loginResponse = await fetch(loginUrl, {
