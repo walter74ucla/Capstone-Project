@@ -5,10 +5,10 @@ class SelectFavoriteTeams extends Component {
   	constructor(){//How do I link this to the flask db???
 		super();
 
-		this.state = {
+		this.state = {//does this need props???
 			name: '', //this should add favortite teams to the flask db 
-			favoriteTeams: ['Atlanta Hawks'], // insert user props in the [] to get existing Favorite Teams	 
-
+			// favoriteTeams: [props.favoriteTeams], // insert user props in the [] to get existing Favorite Teams	 
+			favoriteTeams: [],
 		}
 	}
 //FavoriteTeam(Model)
@@ -31,33 +31,86 @@ class SelectFavoriteTeams extends Component {
 	handleFavoriteTeamsChange = (e) => {
 	    let favoriteTeams = this.state.favoriteTeams;
 	    let team = e.currentTarget.name;
-	    let teamIdx;
+	    // let teamIdx;
 	    if (this.state.favoriteTeams.includes(team)) {
 	      // We are deleting Favorite
 	      // fetch(route, {
 	      //   method: 'DELETE',
 	      //   ...
 	      // })
-	      teamIdx = this.state.favoriteTeams.indexOf(team);
-	      favoriteTeams.splice(teamIdx, 1);
+	      // teamIdx = this.state.favoriteTeams.indexOf(team);
+	      this.deleteFavoriteTeam(team);
+	      // favoriteTeams.splice(teamIdx, 1);
 	    } else {
-	      favoriteTeams.push(team)
-	      // We are creating Favorite
-	      // fetch(route, {
-	      //   method: 'POST',
-	      //   ...
-	      // })
+	      this.addFavoriteTeam(team);    
 	    }
 	    this.setState({
 	      favoriteTeams: favoriteTeams
 	    })
 	}
 
+	deleteFavoriteTeam = async (name) => {
+
+		console.log(name)
+		const deleteFavoriteTeamResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/' + name + '/', {// strange + '/' CORS error again
+													method: 'DELETE',
+													credentials: 'include' // Send a session cookie along with our request
+												});
+		const deleteFavoriteTeamParsed = await deleteFavoriteTeamResponse.json();
+		console.log(deleteFavoriteTeamResponse)
+		if (deleteFavoriteTeamParsed.status.code === 200) {
+			// now that the db has deleted our item, we need to remove it from state
+			this.setState({favoriteTeams: this.state.favoriteTeams.filter((favoriteTeam) => favoriteTeam !== name )})
+
+		} else {
+			alert ("You cannot delete a Favorite Team that you did not create")
+		}
+
+		console.log(deleteFavoriteTeamParsed, ' response from Flask server')
+			// then make the delete request, then remove the favorite team from the state array using filter
+			// what about handling multiple delete requests at once?
+
+	}
+
+	addFavoriteTeam = async (favoriteTeam) => {
+		// e.preventDefault();
+		console.log(favoriteTeam);
+
+		try {
+
+			// Send JSON
+			// createdIssue variable storing response from Flask API
+			const createdFavoriteTeamResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/', {
+				method: 'POST',
+				credentials: 'include', // added this to send over the session cookie
+				body: JSON.stringify({name: favoriteTeam}),//passing an object here
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+			
+			// turn the response from Flask into an object we can use
+			const parsedResponse = await createdFavoriteTeamResponse.json();
+			console.log(parsedResponse, ' this is response');
+			const team =  parsedResponse.data.name;
+
+			// empty all issues in state to new array then
+			// adding issue we created to the end of it (created shows up first until refresh then at the bottom)
+			// what about handling multiple add requests at once?
+
+			this.setState({favoriteTeams: [team, ...this.state.favoriteTeams]})
+		
+		} catch(err){
+			console.log('error')
+			console.log(err)
+		}
+	}
+
 
   	render() {//Select Multiple Teams???
   		const teams = ['Atlanta Hawks', 'Boston Celtics', 'Brooklyn Nets', 'Charlotte Hornets', 'Chicago Bulls', 'Cleveland Cavaliers', 'Dallas Mavericks', 'Denver Nuggets', 'Detroit Pistons', 'Golden State Warriors', 'Houston Rockets', 'Indiana Pacers', 'Los Angeles Clippers', 'Los Angeles Lakers', 'Memphis Grizzlies', 'Miami Heat', 'Milwaukee Bucks', 'Minnesota Timberwolves', 'New Orleans Hornets', 'New York Knicks', 'Oklahoma City Thunder', 'Orlando Magic', 'Philadelphia 76ers', 'Phoenix Suns', 'Portland Trail Blazers', 'Sacramento Kings', 'San Antonio Spurs', 'Toronto Raptors', 'Utah Jazz', 'Washington Wizards']
-	    const teamCheckbox = teams.map(team => (
-	    	<Form.Field
+	    const teamCheckbox = teams.map((team, i) => (
+	    	<Form.Field key={i}
 	            label={team}
 	            name={team}
 	            control='input'

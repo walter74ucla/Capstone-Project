@@ -405,6 +405,7 @@ class BoxscoreContainer extends Component {
 
 
   	render() {
+  		// console.log(this.state.selectedDate.api.games[0].statusGame);//Fix This
 	  	return(
 	  		<React.Fragment>
       			Some BoxscoreContainer text.
@@ -418,17 +419,19 @@ class BoxscoreContainer extends Component {
       				selectedGames={this.state.selectedGames}
       			/>
       			{/*//if this game is over, then do this...*/}
-      			{ this.state.selectedGames.api.games.statusGame === "Finished" 
+      			{this.state.selectedGames.length 
       				? <React.Fragment>	
 	      					<GameInfo
 			      				selectedGames={this.state.selectedGames}
+			      				byGameTotals={this.state.gameTotalsByGame}
+			      				byGamePlayerInfo={this.state.playerInfoByGame}
 			      			/>
-			      			<GameTotals
+			      			{/*<GameTotals
 	      						byGameTotals={this.state.gameTotalsByGame}
 	      					/>
 	      					<PlayerInfo
 			      				byGamePlayerInfo={this.state.playerInfoByGame}
-			      			/>
+			      			/>*/}
 			      			</React.Fragment>
       				: null }
       			<FavoriteTeamsList
