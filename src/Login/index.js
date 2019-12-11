@@ -9,20 +9,9 @@ class Login extends Component {
 		this.state = {
 			screen_name: '',
 			email: '',
-			password_hash: '',
-            // logged: false,
+			password_hash: ''
 		}
-	}
-
-    // 1. Create a method in the parent component
-    // login = (screen_name) => {
-    //     // console.log(screen_name);
-    //     this.setState({
-    //       screen_name: screen_name,
-    //       logged: true  
-    //     })
-    //     console.log(this.state);//REMOVE THIS Console.log so the password does not show
-    // }
+	}  
 
 	// Handling of form value change
 	handleChange = (e) => {
@@ -38,6 +27,7 @@ class Login extends Component {
 	// Submission of login in form
 	handleSubmit = async (e) => {
 		e.preventDefault();
+        this.props.login(this.state.screen_name);//added this to receive props from a component rendered by react router
 		console.log('Email & Password:', this.state);//REMOVE THIS Console.log so the password does not show
 		const loginUrl = `${process.env.REACT_APP_API_URL}/api/v1/users/login`; //localhost:8000/api/v1/users/login
 		// this is users.  this matches flask app.py: app.register_blueprint(user, url_prefix='/api/v1/users')
@@ -51,9 +41,17 @@ class Login extends Component {
 		});
 
 		const parsedResponse = await loginResponse.json();
-
+        // console.log(parsedResponse);// this is an object
 		if (parsedResponse.status.code === 200) {
 			console.log('Login successful');
+            // Do something to make React know a user logged in
+            let loginScreenName = parsedResponse.data.screen_name;
+            console.log(loginScreenName);
+
+            this.setState({
+                screen_name: loginScreenName
+            });
+            this.props.login(this.state.screen_name)
 			this.props.history.push('/favorite_teams'); // Change url to /favorite_teams programmatically with react-router
 		} else {
 			// Else display error message to the user
@@ -77,6 +75,7 @@ class Login extends Component {
                     <Button type="submit" color="green">Login</Button>
                     { this.state.errorMsg ? <Message negative>{this.state.errorMsg}</Message> : null }
                 </Form>
+                
 	      	</React.Fragment>
 	    )
 	}

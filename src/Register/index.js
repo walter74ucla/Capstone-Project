@@ -51,7 +51,7 @@ class Register extends Component {
             <React.Fragment>
                 <Form onSubmit={this.handleSubmit}>
                     <Label> Screen Name (10 character limit)</Label>
-                    <Form.Input type='text' name="screen_name" onChange={this.handleChange} />
+                    <Form.Input type='text' name="screen_name" maxLength="10" onChange={this.handleChange} />
                     <Label> Email</Label>
                     <Form.Input type='text' name="email" onChange={this.handleChange} />
                     <Label> Password</Label>
