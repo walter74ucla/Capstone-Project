@@ -23,7 +23,7 @@ class App extends Component {
     super(props);
     this.state = {
       screen_name: '',
-      logged: true
+      logged: false
     }
   }
 
@@ -46,7 +46,11 @@ class App extends Component {
   render() {
     return (
       <main>
-        <HeaderComponent screen_name={this.state.screen_name} logout={this.logout}/>
+        <HeaderComponent 
+          logged={this.state.logged} 
+          screen_name={this.state.screen_name} 
+          logout={this.logout}
+        />
           <Switch>
             <Route exact path="/login" render={(props) => <Login {...props} login={this.login} />} />
             <Route exact path="/register" component= { Register } />

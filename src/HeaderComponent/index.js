@@ -18,22 +18,27 @@ class HeaderComponent extends Component {
 		console.log(this.props);
 	    return (
 	    	<React.Fragment>
-	    		<Header>
-					<Container>
-				      <Menu stackable>
-				        <Menu.Item>Sign-in</Menu.Item>
-				        <Menu.Item>Register</Menu.Item>
-				      </Menu>
-				    </Container>
-				    <Container>
-				      <Menu stackable>
-				        <Menu.Item>Update Favorites</Menu.Item>
-				        <Menu.Item>Log Out</Menu.Item>
-				        <Menu.Item>Hi {this.props.screen_name}!</Menu.Item>
-				        <Button>Edit Screen Name</Button>
-				      </Menu>
-				    </Container>
-				</Header>
+	    		{this.props.logged ?
+	    			<Header>
+						<Container>
+					      <Menu stackable>
+					        <Menu.Item>Update Favorites</Menu.Item>
+					        <Menu.Item>Log Out</Menu.Item>
+					        <Menu.Item>Hi {this.props.screen_name}!</Menu.Item>
+					        <Button>Edit Screen Name</Button>
+					      </Menu>
+					    </Container>
+					</Header> 
+				    :
+				    <Header>
+					    <Container>
+					      <Menu stackable>
+					        <Menu.Item>Sign-in</Menu.Item>
+					        <Menu.Item>Register</Menu.Item>
+					      </Menu>
+					    </Container>  
+					</Header>
+	    		}
 	      	</React.Fragment>
 	    )
 	}
@@ -42,6 +47,37 @@ class HeaderComponent extends Component {
 
 
 export default HeaderComponent;
+
+
+
+
+// This worked...
+// render(){
+// 		console.log(this.props);
+// 	    return (
+// 	    	<React.Fragment>
+// 	    		<Header>
+// 					<Container>
+// 				      <Menu stackable>
+// 				        <Menu.Item>Update Favorites</Menu.Item>
+// 				        <Menu.Item>Log Out</Menu.Item>
+// 				        <Menu.Item>Hi {this.props.screen_name}!</Menu.Item>
+// 				        <Button>Edit Screen Name</Button>
+// 				      </Menu>
+// 				    </Container>
+// 				    <Container>
+// 				      <Menu stackable>
+// 				        <Menu.Item>Sign-in</Menu.Item>
+// 				        <Menu.Item>Register</Menu.Item>
+// 				      </Menu>
+// 				    </Container>  
+// 				</Header>
+// 	      	</React.Fragment>
+// 	    )
+// 	}
+
+
+
 
 
 
