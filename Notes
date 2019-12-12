@@ -554,6 +554,23 @@ $ npm install react-router-dom
 import { BrowserRouter } from 'react-router-dom'; (in index.js)
 Then wrap our whole app in the browserRouter from the react-router-dom module.
 ===============================================================================
+Steps for react deployment on heroku
+1. create a file called .env.development (on same level as package.json)
+    o inside of that file insert REACT_APP_BACKEND_URL=http://localhost:8000
+    o that is the local host for the back end
+2. create a file called .env.production (on same level as package.json)
+    o inside of that file insert REACT_APP_BACKEND_URL=https://flask-boxscore-api.herokuapp.com
+    o that is the production host for the back end
+$ heroku git:remote -a react-boxscore-app
+$ heroku buildpacks:set mars/create-react-app -a react-boxscore-app
+$ git remote -v
+should get long github url (fetch) (push)
+$ git add .
+$ git commit -m "Set up heroku for deployment"
+$ git push heroku master
+$ heroku open
+
+===============================================================================
 Needs fixing:
 <Button onClick={() => this.openEditModal()}>Edit Screen Name</Button>
 
