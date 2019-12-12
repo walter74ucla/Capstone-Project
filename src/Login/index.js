@@ -52,7 +52,7 @@ class Login extends Component {
                 screen_name: loginScreenName
             });
             this.props.login(this.state.screen_name)// lift this up to the parent container App.js
-			this.props.history.push('/favorite_teams'); // Change url to /favorite_teams programmatically with react-router
+			this.props.history.push('/'); // Change url to / programmatically with react-router
 		} else {
 			// Else display error message to the user
 			this.setState({

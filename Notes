@@ -553,6 +553,9 @@ Steps for setting up react router
 $ npm install react-router-dom
 import { BrowserRouter } from 'react-router-dom'; (in index.js)
 Then wrap our whole app in the browserRouter from the react-router-dom module.
+===============================================================================
+Needs fixing:
+<Button onClick={() => this.openEditModal()}>Edit Screen Name</Button>
 
 
 
