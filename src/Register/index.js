@@ -22,6 +22,7 @@ class Register extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
+        this.props.login(this.state.screen_name);//added this to receive props from a component rendered by react router
         console.log('hello');
         const registerResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/users/register', {
             method: 'POST',
@@ -34,9 +35,17 @@ class Register extends Component {
 
         const parsedResponse = await registerResponse.json();
 
-        if (parsedResponse.status.code === 200) {
+        if (parsedResponse.status.code === 201) {
             console.log('Registration successful');
-            this.props.history.push('/favorite_teams'); // Change url to /favorite_teams programmatically with react-router
+            
+            let loginScreenName = parsedResponse.data.screen_name;
+            console.log(loginScreenName);
+
+            this.setState({
+                screen_name: loginScreenName
+            });
+            this.props.login(this.state.screen_name)// lift this up to the parent container App.js
+            this.props.history.push('/'); // Change url to / programmatically with react-router
         } else {
             // Else display error message to the user
             this.setState({
