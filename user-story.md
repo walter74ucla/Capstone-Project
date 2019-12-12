@@ -20,22 +20,22 @@ the app uses react-day-picker component for the main calendar.
 https://rapidapi.com/ <-- this site gives Freemium data, up to 1000 requests per day
 
 # Steps for creating a react app
-$ npm i -g create-react-app <-- did this already (during the first react.js lesson)
-$ create-react-app folder-name
-$ npm run start <-- this fires up the server
+$ npm i -g create-react-app <-- did this already (during the first react.js lesson)<br />
+$ create-react-app folder-name<br />
+$ npm run start <-- this fires up the server<br />
 
-update the .gitignore file as necessary
+update the .gitignore file as necessary<br />
 https://github.com/facebook/react/blob/master/.gitignore
 
 # Steps for setting up react-day-picker
-$ npm install react-day-picker --save
-import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
+$ npm install react-day-picker --save<br />
+import DayPicker from 'react-day-picker';<br />
+import 'react-day-picker/lib/style.css';<br />
 
 # Steps for setting up react router
-$ npm install react-router-dom
-import { BrowserRouter } from 'react-router-dom'; (in index.js)
-Then wrap our whole app in the browserRouter from the react-router-dom module.
+$ npm install react-router-dom<br />
+import { BrowserRouter } from 'react-router-dom'; (in index.js)<br />
+Then wrap our whole app in the browserRouter from the react-router-dom module.<br />
 
 
 * User lands on a home page that displays the daily boxscores.  On this page, the user has the option to Sign Up or Log In.  If the User Signs Up or Logs In, the User’s Favorite Team(s) boxscores will be displayed at the top of the boxscores list
