@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Header, List, Container, Menu, Button } from 'semantic-ui-react';
 import EditScreenNameModal from '../EditScreenNameModal';
 
@@ -115,8 +115,8 @@ class HeaderComponent extends Component {
 				    <Header>
 					    <Container>
 					      <Menu stackable>
-					        <Menu.Item>Sign-in</Menu.Item>
-					        <Menu.Item>Register</Menu.Item>
+					        <Menu.Item><Link to = '/login'>Sign-in</Link></Menu.Item>
+					        <Menu.Item><Link to = '/register'>Register</Link></Menu.Item>
 					      </Menu>
 					    </Container>  
 					</Header>
