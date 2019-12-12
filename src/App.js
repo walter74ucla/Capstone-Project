@@ -53,7 +53,7 @@ class App extends Component {
         />
           <Switch>
             <Route exact path="/login" render={(props) => <Login {...props} login={this.login} />} />
-            <Route exact path="/register" component= { Register } />
+            <Route exact path="/register" render={(props) => <Register {...props} login={this.login} />} />
             <Route exact path="/" component={ BoxscoreContainer } />
             <Route exact path="/favorite_teams" component={ SelectFavoriteTeams } />
             <Route component={My404} />

@@ -103,7 +103,6 @@ class HeaderComponent extends Component {
 						<Container>
 					      <Menu stackable>
 					        <Menu.Item>Update Favorites</Menu.Item>
-					        <Menu.Item>Log Out</Menu.Item>
 					        <Menu.Item>Hi {this.props.screen_name}!</Menu.Item>
 					        <Button onClick={() => this.openEditModal()}>Edit Screen Name</Button>
 					        <Button onClick={() => this.props.logout()}>Log Out</Button>
