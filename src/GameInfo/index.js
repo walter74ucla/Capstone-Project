@@ -6,18 +6,40 @@ import { Table } from 'semantic-ui-react';
 function GameInfo (props) {
 	console.log(props)
 	//map needs to be passed an array, not an object.
-	const selectedGames = props.selectedGames.map(game => (
-		<li key={game.gameId}>
-		    {game.vTeam.shortName} versus {game.hTeam.shortName}
-			    <Table celled>
-				    <Table.Header>
-				      <Table.Row>
-				        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
-				      </Table.Row>
-				    </Table.Header>
-			    </Table>
-		</li>
+	const selectedGames = props.selectedGames.map(game => {
+		const byGameTotalsGame = props.byGameTotals.find(totalsGame => totalsGame.api.statistics[0].gameId === game.gameId);
+		return (
+			<li key={game.gameId}>
+			    {game.vTeam.shortName} versus {game.hTeam.shortName}
+				    <Table celled>
+					    <Table.Header>
+					      <Table.Row>
+					        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
+					      </Table.Row>
+					    </Table.Header>
+					    <Table.Header>
+					      <Table.Row>
+					        <Table.HeaderCell>Visitor's Totals:</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGame.api.statistics[0].points}</Table.HeaderCell>
+					      </Table.Row>
+					    </Table.Header>
+				    </Table>
+			</li>
+	
+		)})
 
+	const byGameTotals = props.byGameTotals.map(game => (
+		<li key={game.api.statistics[0].gameId}>
+
+			<Table celled>
+			    <Table.Header>
+			      <Table.Row>
+			        <Table.HeaderCell>Visitor's Totals:</Table.HeaderCell>
+			        <Table.HeaderCell>{game.api.statistics[0].points}</Table.HeaderCell>
+			      </Table.Row>
+			    </Table.Header>
+			</Table>
+	    </li>
 	))
 
 
@@ -26,6 +48,7 @@ function GameInfo (props) {
 	      <h4>Game Info</h4>
 	      <ul>
 	        {selectedGames}
+	        {byGameTotals}
 	      </ul>
 	      {/*<Table celled striped>
 		    <Table.Header>
