@@ -127,25 +127,20 @@ class BoxscoreContainer extends Component {
 
 	// This function gives us the correct day's information due to the strange UTC time stuff
 	correctDayFilter = (game, filterDateString, expectEqual) => {
-		let dateString = new Date(game.startTimeUTC);
-		// console.log(dateString);
-		let fDSConverted = this.convertDateStr(filterDateString);
-		// console.log(fDSConverted);
-		//Adjust fDSConverted by 7 hours
-		let fDSConvertedPlus7 = fDSConverted + "T07:00:00.00Z";
-		// console.log(fDSConvertedPlus7);
-		// "YYYY-MM-DDT07:00:00.00Z" -->07:00:00.00Z helps get the input date the correct day.
-		// The 7 gets you to midnight Mountain Standard Time or 1am Mountain Daylight Time.  
-		let updatedFDSCP7 = new Date(fDSConvertedPlus7);
-		// console.log(fDSConvertedPlus7);
-		let startTimeDayCheck = dateString.getDay();
-		// console.log(startTimeDayCheck);
-		let inputDay = updatedFDSCP7.getDay();
-		// console.log(inputDay);
+		let dateStringStartTime = new Date(game.startTimeUTC);
+		console.log(dateStringStartTime);
+		let localeDateStringStartTime = dateStringStartTime.toLocaleDateString();
+		console.log(localeDateStringStartTime);
+
+		let dateStringSelectedDay = new Date(filterDateString);
+		console.log(dateStringSelectedDay);
+		let localeDateStringSelectedDay = dateStringSelectedDay.toLocaleDateString();
+		console.log(localeDateStringSelectedDay);		
+
 		if (expectEqual) {
-			return startTimeDayCheck === inputDay
+			return localeDateStringStartTime === localeDateStringSelectedDay
 		} else {
-			return startTimeDayCheck !== inputDay
+			return localeDateStringStartTime !== localeDateStringSelectedDay
 		}
 		
 	}
