@@ -128,14 +128,14 @@ class BoxscoreContainer extends Component {
 	// This function gives us the correct day's information due to the strange UTC time stuff
 	correctDayFilter = (game, filterDateString, expectEqual) => {
 		let dateStringStartTime = new Date(game.startTimeUTC);
-		console.log(dateStringStartTime);
+		// console.log(dateStringStartTime);
 		let localeDateStringStartTime = dateStringStartTime.toLocaleDateString();
-		console.log(localeDateStringStartTime);
+		// console.log(localeDateStringStartTime);
 
 		let dateStringSelectedDay = new Date(filterDateString);
-		console.log(dateStringSelectedDay);
+		// console.log(dateStringSelectedDay);
 		let localeDateStringSelectedDay = dateStringSelectedDay.toLocaleDateString();
-		console.log(localeDateStringSelectedDay);		
+		// console.log(localeDateStringSelectedDay);		
 
 		if (expectEqual) {
 			return localeDateStringStartTime === localeDateStringSelectedDay
@@ -149,6 +149,12 @@ class BoxscoreContainer extends Component {
 		// page defaults to today's date
 		// when another date is selected update API call
 		console.log('TOOOOOOOOODAY', day);
+		this.setState({
+	      	selectedGames: [],
+	      	gameTotalsByGame: [],
+	      	playerInfoByGame: [],
+	    })
+
 		let dateStringAPI;
 		if (today) {
 			dateStringAPI = new Date();//today
@@ -403,6 +409,9 @@ class BoxscoreContainer extends Component {
 
   	render() {
   		// console.log(this.state.selectedDate.api.games[0].statusGame);//Fix This
+	  	let today = new Date();
+	  	console.log(today);
+	  	console.log(this.state.selectedDay);
 	  	return(
 	  		<React.Fragment>
       			<DateInput selectedDay={this.state.selectedDay}
@@ -411,11 +420,33 @@ class BoxscoreContainer extends Component {
       			<GameListToday
       				todaysGames={this.state.todaysGames}
       			/>
-      			<GameListSelectedDate
-      				selectedGames={this.state.selectedGames}
-      			/>
+      			{/* if selected day is greater today, show selected day game list*/}
+      			{/* OR if selected day = today, show selected day game list*/}
+      			{this.state.selectedDay > today || this.state.selectedDay == today
+      				? 	<GameListSelectedDate
+      						selectedGames={this.state.selectedGames}
+      					/>
+      				: null
+      			}		
+      			{this.state.selectedDay < today && this.state.selectedGames.length
+      				?	
+      					<GameInfo
+		      				selectedGames={this.state.selectedGames}
+		      				byGameTotals={this.state.gameTotalsByGame}
+		      				byGamePlayerInfo={this.state.playerInfoByGame}
+		      			/>
+		      		: null
+		      			// <GameTotals
+      					// 	byGameTotals={this.state.gameTotalsByGame}
+      					// />
+      					// <PlayerInfo
+		      			// 	byGamePlayerInfo={this.state.playerInfoByGame}
+		      			// />	
+			    }
+
+      			
       			{/*//if this game is over, then do this...*/}
-      			{this.state.selectedGames.length 
+      			{/*{this.state.selectedGames.length 
       				? <React.Fragment>	
 	      					<GameInfo
 			      				selectedGames={this.state.selectedGames}
@@ -427,9 +458,10 @@ class BoxscoreContainer extends Component {
 	      					/>
 	      					<PlayerInfo
 			      				byGamePlayerInfo={this.state.playerInfoByGame}
-			      			/>*/}
+			      			/>
 			      			</React.Fragment>
-      				: null }
+      				: null }*/}
+
       			<FavoriteTeamsList
       				favoriteTeams={this.state.favoriteTeams}
       			/>
