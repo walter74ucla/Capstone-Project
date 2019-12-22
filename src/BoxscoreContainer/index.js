@@ -21,6 +21,7 @@ class BoxscoreContainer extends Component {
 	      	selectedGames: [], //added this to dry the code
 	      	gameTotalsByGame: [], //receiving fetched data from the Promise.all
 	      	playerInfoByGame: [], //receiving fetched data from the Promise.all
+	      	playerInfoByGameName: [],
 	      	favoriteTeams: [],//this comes from the flask server
 	      	selectedDay: null, //added this here to get the selectedDay from the calendar
 	      	today: {// need to define all key-value pairs (properties) if you want to lift state
@@ -60,25 +61,25 @@ class BoxscoreContainer extends Component {
 		      	}
 		    },
 		    // This property is used in the fetch
-	      	gameTotals: {// need to define all key-value pairs (properties) if you want to lift state
-				api: {
-		      		filters: [],
-		      		statistics: [],
-		      		message: "",
-		      		results: 0,
-		      		status: 0
-		      	}
-		   	},
+	   //    	gameTotals: {// need to define all key-value pairs (properties) if you want to lift state
+				// api: {
+		  //     		filters: [],
+		  //     		statistics: [],
+		  //     		message: "",
+		  //     		results: 0,
+		  //     		status: 0
+		  //     	}
+		  //  	},
 		   	// This property is used in the fetch
-		   	playerInfo: {// need to define all key-value pairs (properties) if you want to lift state
-				api: {
-		      		filters: [],
-		      		statistics: [],
-		      		message: "",
-		      		results: 0,
-		      		status: 0
-		      	}
-		   	},
+		  //  	playerInfo: {// need to define all key-value pairs (properties) if you want to lift state
+				// api: {
+		  //     		filters: [],
+		  //     		statistics: [],
+		  //     		message: "",
+		  //     		results: 0,
+		  //     		status: 0
+		  //     	}
+		  //  	},
 		  //  	playerStats: {// need to define all key-value pairs (properties) if you want to lift state
 				// api: {
 		  //     		filters: [],
@@ -222,7 +223,7 @@ class BoxscoreContainer extends Component {
 					this.setState({
 				      gameTotalsByGame: selectedGamesGameTotals,
 				    })
-					// console.log('selectedGamesGameTotals in promiseall:', selectedGamesGameTotals)
+					// console.log('selectedGamesGameTotals in promiseall:', selectedGamesGameTotals);
 					// console.log(selectedGamesGameTotals[0].api.statistics[0].assists);	
 				})
 			
@@ -237,11 +238,30 @@ class BoxscoreContainer extends Component {
 					this.setState({
 				      playerInfoByGame: selectedGamesPlayerInfo,
 				    })
-					// console.log('selectedGamesPlayerInfo in promiseall:', selectedGamesPlayerInfo)
-					// console.log(selectedGamesPlayerInfo[0].api.statistics[0].points);	
+					// console.log('selectedGamesPlayerInfo in promiseall:', selectedGamesPlayerInfo);
+					// console.log(selectedGamesPlayerInfo[0].api.statistics.length);
 				})
 
+			// Fill the playerInfoByGameName array here
+			console.log(this.state.playerInfoByGame);	
+			if (this.state.playerInfoByGame[0].api.statistics.length > 0) {
+				let playerInfoByGameName
+				await Promise.all(this.state.playerInfoByGame[0].api.statistics.map(player => {
+					console.log('Player is: ', player);
+					console.log('Fetching:', player.playerId)
+					let playerName = this.getPlayerName(player.playerId);
+					return playerName;
+					})).then(values => {
+						let playerInfoByGameName = values;
+						this.setState({
+					      playerInfoByGameName: playerInfoByGameName,
+					    })
+						console.log('playerInfoByGameName in promiseall:', playerInfoByGameName);
+						console.log(playerInfoByGameName[0].api.players[0].lastName);
+					})	
+			}
 			
+
 			if (today) {
 				this.setState({
 					todaysGames: selectedGames,
@@ -266,6 +286,8 @@ class BoxscoreContainer extends Component {
 		}
 		
 	}	
+
+
 
 	getGameTotalsDataForOneGame = async (gameId) => {
 		// console.log('GameID: ', gameId);
@@ -304,6 +326,28 @@ class BoxscoreContainer extends Component {
 		const parsedPlayersByGame = await playersByGame.json();
 		// console.log(parsedPlayersByGame);	
 		return parsedPlayersByGame;
+
+		} catch(err) {
+			console.log(err);
+		}
+
+	}
+
+	getPlayerName = async (playerId) => {
+		console.log('PlayerID: ', playerId);
+
+		try {														
+			const playerName = await fetch('https://api-nba-v1.p.rapidapi.com/players/playerId/' + playerId, {
+				"method": "GET",
+				"headers": {
+					"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+					"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
+				}
+			})
+
+		const parsedPlayerName = await playerName.json();
+		console.log(parsedPlayerName);
+		return parsedPlayerName;
 
 		} catch(err) {
 			console.log(err);
@@ -410,8 +454,8 @@ class BoxscoreContainer extends Component {
   	render() {
   		// console.log(this.state.selectedDate.api.games[0].statusGame);//Fix This
 	  	let today = new Date();
-	  	console.log(today);
-	  	console.log(this.state.selectedDay);
+	  	// console.log(today);
+	  	// console.log(this.state.selectedDay);
 	  	return(
 	  		<React.Fragment>
       			<DateInput selectedDay={this.state.selectedDay}
@@ -434,6 +478,7 @@ class BoxscoreContainer extends Component {
 		      				selectedGames={this.state.selectedGames}
 		      				byGameTotals={this.state.gameTotalsByGame}
 		      				byGamePlayerInfo={this.state.playerInfoByGame}
+		      				byGamePlayerInfoName={this.state.playerInfoByGameName}
 		      			/>
 		      		: null
 		      			// <GameTotals
