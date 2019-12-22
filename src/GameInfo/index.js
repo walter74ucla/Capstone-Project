@@ -13,12 +13,12 @@ function GameInfo (props) {
 		const byGameTotalsGame = props.byGameTotals.find(totalsGame => totalsGame.api.statistics[0].gameId === game.gameId);
 		const byGamePlayerInfoGame = props.byGamePlayerInfo.find(totalsPlayer => totalsPlayer.api.statistics[0].gameId === game.gameId);
 			// need to loop through statistics array to get each player's stats
-			// const playerRow = props.byGamePlayerInfo.map(player => (
-			// 	<Table.Row key={player.playerId}>
-			// 		<Table.Cell>{player.api.statistics[0].playerId}</Table.Cell>
-			// 	    <Table.Cell>{player.api.statistics[0].points}</Table.Cell>
-			//     </Table.Row>
-			// ));
+			const playerRow = byGamePlayerInfoGame.api.statistics.map(player => (
+				<Table.Row key={player.playerId}>
+					<Table.Cell>{player.playerId}</Table.Cell>
+				    <Table.Cell>{player.points}</Table.Cell>
+			    </Table.Row>
+			));
 
 		return (
 			<li key={game.gameId}>
@@ -29,9 +29,9 @@ function GameInfo (props) {
 					        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
 					      </Table.Row>
 					    </Table.Header>
-						{/*<Table.Header>
+						<Table.Header>
 					      {playerRow}
-					    </Table.Header>*/}
+					    </Table.Header>
 					    <Table.Header>
 					      <Table.Row>
 					        <Table.HeaderCell>Visitor's Totals:</Table.HeaderCell>
