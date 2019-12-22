@@ -10,15 +10,17 @@ function GameInfo (props) {
 		// add a return statement to this function block and define new variables
 		// so the sections will display next to each other
 		// shout out to John Cothran of edj sports
-		const byGameTotalsGame = props.byGameTotals.find(totalsGame => totalsGame.api.statistics[0].gameId === game.gameId);
-		const byGamePlayerInfoGame = props.byGamePlayerInfo.find(totalsPlayer => totalsPlayer.api.statistics[0].gameId === game.gameId);
+		const byGameTotalsGameV = props.byGameTotals.find(totalsGame => totalsGame.api.statistics[0].gameId === game.gameId);
+		const byGamePlayerInfoGameV = props.byGamePlayerInfo.find(totalsPlayer => totalsPlayer.api.statistics[0].gameId === game.gameId);
 			// need to loop through statistics array to get each player's stats
-			const playerRow = byGamePlayerInfoGame.api.statistics.map(player => (
-				<Table.Row key={player.playerId}>
-					<Table.Cell>{player.playerId}</Table.Cell>
-				    <Table.Cell>{player.points}</Table.Cell>
-			    </Table.Row>
-			));
+			const playerRowV = byGamePlayerInfoGameV.api.statistics
+				.filter(visitor => visitor.teamId === game.vTeam.teamId)
+				.map(player => (
+					<Table.Row key={player.playerId}>
+						<Table.Cell>{player.playerId}</Table.Cell>
+					    <Table.Cell>{player.points}</Table.Cell>
+				    </Table.Row>
+				));
 
 		return (
 			<li key={game.gameId}>
@@ -30,12 +32,12 @@ function GameInfo (props) {
 					      </Table.Row>
 					    </Table.Header>
 						<Table.Header>
-					      {playerRow}
+					      {playerRowV}
 					    </Table.Header>
 					    <Table.Header>
 					      <Table.Row>
 					        <Table.HeaderCell>Visitor's Totals:</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGame.api.statistics[0].points}</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
 					      </Table.Row>
 					    </Table.Header>
 				    </Table>
