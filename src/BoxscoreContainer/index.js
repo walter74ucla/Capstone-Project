@@ -21,7 +21,7 @@ class BoxscoreContainer extends Component {
 	      	selectedGames: [], //added this to dry the code
 	      	gameTotalsByGame: [], //receiving fetched data from the Promise.all
 	      	playerInfoByGame: [], //receiving fetched data from the Promise.all
-	      	playerInfoByGameName: [],
+	      	playerInfoByGameName: [], //receiving fetched data from the Promise.all
 	      	favoriteTeams: [],//this comes from the flask server
 	      	selectedDay: null, //added this here to get the selectedDay from the calendar
 	      	today: {// need to define all key-value pairs (properties) if you want to lift state
@@ -154,6 +154,7 @@ class BoxscoreContainer extends Component {
 	      	selectedGames: [],
 	      	gameTotalsByGame: [],
 	      	playerInfoByGame: [],
+	      	playerInfoByGameName: [],
 	    })
 
 		let dateStringAPI;
@@ -243,23 +244,36 @@ class BoxscoreContainer extends Component {
 				})
 
 			// Fill the playerInfoByGameName array here
-			console.log(this.state.playerInfoByGame);	
-			if (this.state.playerInfoByGame[0].api.statistics.length > 0) {
-				let playerInfoByGameName
-				await Promise.all(this.state.playerInfoByGame[0].api.statistics.map(player => {
-					console.log('Player is: ', player);
-					console.log('Fetching:', player.playerId)
-					let playerName = this.getPlayerName(player.playerId);
-					return playerName;
-					})).then(values => {
-						let playerInfoByGameName = values;
-						this.setState({
-					      playerInfoByGameName: playerInfoByGameName,
-					    })
-						console.log('playerInfoByGameName in promiseall:', playerInfoByGameName);
-						console.log(playerInfoByGameName[0].api.players[0].lastName);
-					})	
-			}
+			// console.log(this.state.playerInfoByGame);
+			// want the game to be finished before getting player name
+			let checkIfGameFinished = selectedGames.map(gameStatus => {
+				return gameStatus.statusGame;
+			})
+			console.log(checkIfGameFinished);
+
+			let check = checkIfGameFinished.map(gameStatus => {
+				return gameStatus === "Finished" ? 0 : 1;
+				}).reduce((sum, gameStatus) => {
+					return sum + gameStatus;
+				});
+				console.log(check);
+
+			// if (selectedGames.map(gameStatus => gameStatus.statusGame = "Finished")) {
+			// 	let playerInfoByGameName
+			// 	await Promise.all(this.state.playerInfoByGame[0].api.statistics.map(player => {
+			// 		// console.log('Player is: ', player);
+			// 		// console.log('Fetching:', player.playerId)
+			// 		let playerName = this.getPlayerName(player.playerId);
+			// 		return playerName;
+			// 		})).then(values => {
+			// 			let playerInfoByGameName = values;
+			// 			this.setState({
+			// 		      playerInfoByGameName: playerInfoByGameName,
+			// 		    })
+			// 			// console.log('playerInfoByGameName in promiseall:', playerInfoByGameName);
+			// 			console.log(playerInfoByGameName[0].api.players[0].lastName);
+			// 		})	
+			// }
 			
 
 			if (today) {
@@ -334,7 +348,7 @@ class BoxscoreContainer extends Component {
 	}
 
 	getPlayerName = async (playerId) => {
-		console.log('PlayerID: ', playerId);
+		// console.log('PlayerID: ', playerId);
 
 		try {														
 			const playerName = await fetch('https://api-nba-v1.p.rapidapi.com/players/playerId/' + playerId, {
@@ -346,7 +360,7 @@ class BoxscoreContainer extends Component {
 			})
 
 		const parsedPlayerName = await playerName.json();
-		console.log(parsedPlayerName);
+		// console.log(parsedPlayerName);
 		return parsedPlayerName;
 
 		} catch(err) {
