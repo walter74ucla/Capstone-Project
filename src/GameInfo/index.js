@@ -4,7 +4,8 @@ import { Table } from 'semantic-ui-react';
 
 // passing props from boxscore container
 function GameInfo (props) {
-	console.log(props)
+	console.log(props);
+	console.log(props.byGamePlayerInfoName[0][0].api.players[0].playerId);
 	//map needs to be passed an array, not an object.
 	const selectedGames = props.selectedGames.map(game => {
 		// add a return statement to this function block and define new variables
@@ -18,6 +19,7 @@ function GameInfo (props) {
 				.map(player => (
 					<Table.Row key={player.playerId}>
 						<Table.Cell>{player.playerId}</Table.Cell>
+						<Table.Cell>{props.byGamePlayerInfoName[0][0].api.players[0].lastName}</Table.Cell>
 					    <Table.Cell>{player.points}</Table.Cell>
 				    </Table.Row>
 				));

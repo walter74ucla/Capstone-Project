@@ -265,61 +265,29 @@ class BoxscoreContainer extends Component {
 					for (let i=0; i<this.state.playerInfoByGame.length; i++){
 						let playerNamesForOneGame
 							await Promise.all(this.state.playerInfoByGame[i].api.statistics.map(player => {
-							console.log('Player is: ', player);
-							console.log('Fetching:', player.playerId)
+							// console.log('Player is: ', player);
+							// console.log('Fetching:', player.playerId)
 							let playerName = this.getPlayerName(player.playerId);
 							return playerName;
 							})).then(values => {
 								let playerNamesForOneGame = values;
-								// let playerInfoByGameName = playerNamesForOneGame.push(playerNamesForOneGame);
 								this.setState({
 							      playerInfoByGameName: playerNamesForOneGame,
 							    })	
-								console.log('playerNamesForOneGame in promiseall:', playerNamesForOneGame);
+								// console.log('playerNamesForOneGame in promiseall:', playerNamesForOneGame);
 								console.log(playerNamesForOneGame[0].api.players[0].lastName);
-								// console.log(playerInfoByGameName);
-								// let oneGame = playerNamesForOneGame;
-								// console.log(oneGame);
-								// let multipleGames = oneGame.concat(oneGame);
-								// console.log(multipleGames);
-
 							})
-							// let oneGame = this.state.playerInfoByGameName[i];
 							
 							multipleGames[i] = this.state.playerInfoByGameName;
 							this.setState({
 							      playerInfoByGameName: multipleGames,
 							    })
-							// for (let j=0; j<this.state.playerInfoByGame.length; j++){
-							// 	let multipleGames
-							// 	multipleGames[j] = this.state.playerInfoByGameName;
-							// 	multipleGames = multipleGames.push(multipleGames[j])
-								console.log(multipleGames);
-							// }
-							// let oneGame = this.state.playerInfoByGameName;
-							// console.log(oneGame);
-							// let multipleGames = oneGame.concat(oneGame);
-							// console.log(multipleGames);
-							// playerInfoByGameName.push(playerInfoByGameName);
-					// await Promise.all(this.state.playerInfoByGame[i].api.statistics.map(player => {
-					// 	console.log('Player is: ', player);
-					// 	console.log('Fetching:', player.playerId)
-					// 	let playerName = this.getPlayerName(player.playerId);
-					// 	return playerName;
-					// 	})).then(values => {
-					// 		let playerInfoByGameName = values;
-					// 		this.setState({
-					// 	      playerInfoByGameName: playerInfoByGameName,
-					// 	    })
-					// 		console.log('playerInfoByGameName in promiseall:', playerInfoByGameName);
-					// 		console.log(playerInfoByGameName[0].api.players[0].lastName);
-					// 	})	
+							// console.log(multipleGames);	
 					}
 						
 				}
 			}
-			
-			
+					
 
 			if (today) {
 				this.setState({
