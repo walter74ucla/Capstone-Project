@@ -116,7 +116,7 @@ startNba: "2011"
 heightInMeters: "2.01"
 weightInKilograms: "102.1"
 leagues: // object
-standard:
+standard: // object
 jersey: "2"
 active: "1"
 pos: "F"
@@ -128,7 +128,45 @@ __proto__: Array(0)
 __proto__: Object
 __proto__: Object
 
-
-
+1: // object
+api: // object
+status: 200
+message: "GET players/playerId/217"
+results: 1
+filters: Array(6)
+0: "playerId"
+1: "teamId"
+2: "league"
+3: "country"
+4: "lastName"
+5: "firstName"
+length: 6
+__proto__: Array(0)
+players: Array(1)
+0: // object
+firstName: "Maurice"
+lastName: "Harkless"
+teamId: "16"
+yearsPro: "7"
+collegeName: "St. John's, N.Y."
+country: "USA"
+playerId: "217"
+dateOfBirth: "1993-05-11"
+affiliation: "St. John's (N.Y.)/USA"
+startNba: "2012"
+heightInMeters: "2.01"
+weightInKilograms: "99.8"
+leagues: // object
+standard: // object
+jersey: "8"
+active: "1"
+pos: "F-G"
+__proto__: Object
+__proto__: Object
+__proto__: Object
+length: 1
+__proto__: Array(0)
+__proto__: Object
+__proto__: Object
 
 

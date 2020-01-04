@@ -382,6 +382,19 @@ class BoxscoreContainer extends Component {
 
 	}
 
+	createName = (playerId, playerArray) => {
+	    let nameArray = playerArray;
+	    for(let i=0; i<nameArray.length; i++){
+	    	for(let j=0; j<nameArray[i][j].length; j++){
+	    		if(playerId === nameArray[i][j].api.players[j].playerId){
+	    			let firstName = nameArray[i][j].api.players[j].firstName;
+	    			let lastName = nameArray[i][j].api.players[j].lastName;
+	    			let fullName = `${lastName}, ${firstName}`;
+	    			return fullName;
+	    		}
+	    	}
+	    }
+    }
 	// getPlayerNamesForOneGame = async (player, i) => {
 	// 	let playerNamesForOneGame
 	// 		await Promise.all(this.state.playerInfoByGame[i].api.statistics.map(player => {
@@ -522,6 +535,7 @@ class BoxscoreContainer extends Component {
 		      				byGameTotals={this.state.gameTotalsByGame}
 		      				byGamePlayerInfo={this.state.playerInfoByGame}
 		      				byGamePlayerInfoName={this.state.playerInfoByGameName}
+		      				createFullName={this.createName}
 		      			/>
 		      		: null
 		      			// <GameTotals
