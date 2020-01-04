@@ -23,6 +23,8 @@ import { Table } from 'semantic-ui-react';
 function GameInfo (props) {
 	console.log(props);
 	console.log(props.byGamePlayerInfoName[0][0].api.players[0].playerId);
+
+	let counter = 0;
 	// create function to transform playerid to last name, first name
 	let createName = (playerId) => {
 	let nameArray = props.byGamePlayerInfoName;
@@ -51,18 +53,20 @@ function GameInfo (props) {
 					<Table.Row key={player.playerId}>
 						<Table.Cell>{player.playerId}</Table.Cell>
 						{/*<Table.Cell>{createName(player.playerId)}</Table.Cell>*/}
-						{/*<Table.Cell>{const lastName = props.byGamePlayerInfoName.find(j => props.byGamePlayerInfoName[0][i].api.players[0].playerId === player.playerId);
-										lastName[i].lastName}</Table.Cell>*/}
+						{/*<Table.Cell>{const lastNameObj = props.byGamePlayerInfoName.find(j => props.byGamePlayerInfoName[j][i].api.players[0].playerId === player.playerId);
+										lastNameObj[i].api.players[0].lastName}</Table.Cell>*/}
 						{/*<Table.Cell>{CreateName(player.playerId, props.byGamePlayerInfoName)}</Table.Cell>*/}
-						<Table.Cell>{/*for(let j=0; j<props.byGamePlayerInfo.length; j++)*/}
+						<Table.Cell>{/*for(let j=0; j<props.byGamePlayerInfo.length; j++)*/}{/*need to figure out how loop through multiple games*/}
 							{(player.playerId 
-							=== props.byGamePlayerInfoName[0][i].api.players[0].playerId) 
-							? props.byGamePlayerInfoName[0][i].api.players[0].lastName 
+							=== props.byGamePlayerInfoName[counter][i].api.players[0].playerId) 
+							? props.byGamePlayerInfoName[counter][i].api.players[0].lastName 
 							: null	
 							}</Table.Cell>
 					    <Table.Cell>{player.points}</Table.Cell>
 				    </Table.Row>
+
 				));
+				counter+=1
 
 		return (
 			<li key={game.gameId}>
