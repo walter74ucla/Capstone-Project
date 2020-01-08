@@ -383,12 +383,12 @@ class BoxscoreContainer extends Component {
 	}
 
 	createName = (playerId, playerArray) => {
-	    let nameArray = playerArray;
-	    for(let i=0; i<nameArray.length; i++){
-	    	for(let j=0; j<nameArray[i][j].length; j++){
-	    		if(playerId === nameArray[i][j].api.players[j].playerId){
-	    			let firstName = nameArray[i][j].api.players[j].firstName;
-	    			let lastName = nameArray[i][j].api.players[j].lastName;
+	    // let nameArray = playerArray;
+	    for(let i=0; i<playerArray.length; i++){
+	    	for(let j=0; j<playerArray[i][j].length; j++){
+	    		if(playerId === playerArray[i][j].api.players[0].playerId){
+	    			let firstName = playerArray[i][j].api.players[0].firstName;
+	    			let lastName = playerArray[i][j].api.players[0].lastName;
 	    			let fullName = `${lastName}, ${firstName}`;
 	    			return fullName;
 	    		}
