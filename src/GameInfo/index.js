@@ -58,8 +58,13 @@ function GameInfo (props) {
 				.map((player, i) => (
 					<Table.Row key={player.playerId}>
 						<Table.Cell>{player.playerId}</Table.Cell>
-						<Table.Cell>{/*for(let j=0; j<props.byGamePlayerInfo.length; j++)*/}{/*need to figure out how loop through multiple games*/}
-							{(player.playerId 
+						<Table.Cell>{props.byGamePlayerInfoName[counter]
+							.find(playerInfo => playerInfo.api.players[0].playerId === player.playerId)
+							.api.players[0].lastName
+						}</Table.Cell>
+
+						{/*<Table.Cell>{/*for(let j=0; j<props.byGamePlayerInfo.length; j++)*/}{/*need to figure out how loop through multiple games*/}
+							{/*{(player.playerId 
 							=== props.byGamePlayerInfoName[counter][i].api.players[0].playerId) 
 							? props.byGamePlayerInfoName[counter][i].api.players[0].lastName 
 							: null	
