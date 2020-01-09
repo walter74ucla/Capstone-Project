@@ -1,22 +1,5 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
-
-
-// function CreateName (playerId, playerArray) {
-// 	let nameArray = playerArray;
-// 	    for(let i=0; i<nameArray.length; i++){
-// 	    	for(let j=0; j<nameArray[i][j].length; j++){
-// 	    		if(playerId === nameArray[i][j].api.players[j].playerId){
-// 	    			let firstName = nameArray[i][j].api.players[j].firstName;
-// 	    			let lastName = nameArray[i][j].api.players[j].lastName;
-// 	    			let fullName = `${lastName}, ${firstName}`;
-// 	    			return fullName;
-// 	    		}
-// 	    	}
-// 	    }
-//     }
-
-
+import { Table, Header, Image } from 'semantic-ui-react';
 
 
 // passing props from boxscore container
@@ -26,19 +9,7 @@ function GameInfo (props) {
 
 	let counter = 0;// this counts the number of games in the props.byGamePlayerInfoName array
 	// create function to transform playerid to last name, first name
-	let createName = (playerId) => {
-	let nameArray = props.byGamePlayerInfoName;
-	    for(let i=0; i<nameArray.length; i++){
-	    	for(let j=0; j<nameArray[i][j].length; j++){
-	    		if(playerId === nameArray[i][j].api.players[0].playerId){
-	    			let firstName = nameArray[i][j].api.players[0].firstName;
-	    			let lastName = nameArray[i][j].api.players[0].lastName;
-	    			let fullName = `${lastName}, ${firstName}`;
-	    			return fullName;
-	    		}
-	    	}
-	    }
-    }
+	
 	//map needs to be passed an array, not an object.
 	const selectedGames = props.selectedGames.map(game => {
 		// add a return statement to this function block and define new variables
@@ -107,23 +78,11 @@ function GameInfo (props) {
 			// .filter(value => value[0][0].api.players[0].firstName === "Kawhi") //???TypeError: Cannot read property 'api' of undefined
 			// console.log(vPlayersInGame);
 
-					
-				// const visitorPlayersByGame = allPlayersInGame
-				// 	.filter(vPBG => vPBG.api.players[0].teamId === playerRowV.teamId);
-					// console.log(visitorPlayersByGame);
-					console.log(counter);
+	console.log(counter);
 
-
-				// .concat(props.byGamePlayerInfoName.filter(visTeam => visTeam[counter][i].api.players[0].teamId === game.vTeam.teamId)
-				
 				// .map((player, i) => (
 					{/*<Table.Row key={player.playerId}>
 						<Table.Cell>{player.playerId}</Table.Cell>
-						{/*<Table.Cell>{props.createFullName(player.playerId, props.byGamePlayerInfoName)}</Table.Cell>*/}
-						{/*<Table.Cell>{createName(player.playerId)}</Table.Cell>*/}{/*this gave a blank column*/}
-						{/*<Table.Cell>{const lastNameObj = props.byGamePlayerInfoName.find(j => props.byGamePlayerInfoName[j][i].api.players[0].playerId === player.playerId);
-										lastNameObj[i].api.players[0].lastName}</Table.Cell>*/}
-						{/*<Table.Cell>{CreateName(player.playerId, props.byGamePlayerInfoName)}</Table.Cell>*/}
 						{/*<Table.Cell>{/*for(let j=0; j<props.byGamePlayerInfo.length; j++)*/}{/*need to figure out how loop through multiple games*/}
 							{/*{(player.playerId 
 							=== props.byGamePlayerInfoName[counter][i].api.players[0].playerId) 
@@ -138,13 +97,26 @@ function GameInfo (props) {
 							}</Table.Cell>*/}{/*this did not work...gave a blank column*/}
 					    {/*<Table.Cell>{player.points}</Table.Cell>
 				    </Table.Row>*/}
-
 				// ));
-				counter+=1
+	counter+=1
+
 
 		return (
 			<li key={game.gameId}>
-			    {game.vTeam.shortName} versus {game.hTeam.shortName}
+			    <Table celled>
+			    	<Table.Body>
+				      	<Table.Row>
+				        	<Table.Cell>
+				        		<Header as='h4' image>
+				        			<Image src={game.vTeam.logo} size='mini' />
+				        			<Header.Content>
+				        				{game.vTeam.shortName} versus {game.hTeam.shortName}
+				        			</Header.Content>
+				        		</Header>
+				        	</Table.Cell>
+				      	</Table.Row>
+					</Table.Body>
+			    </Table>  
 				    <Table celled>
 					    <Table.Header>
 					      <Table.Row>
@@ -175,8 +147,8 @@ function GameInfo (props) {
 					      </Table.Row>
 					    </Table.Header>
 				    </Table>
+			<br/>
 			</li>
-	
 		)})
 
 

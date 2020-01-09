@@ -60,6 +60,7 @@ class BoxscoreContainer extends Component {
 		      		status: 0
 		      	}
 		    },
+		    
 		    // This property is used in the fetch
 	   //    	gameTotals: {// need to define all key-value pairs (properties) if you want to lift state
 				// api: {
@@ -382,19 +383,20 @@ class BoxscoreContainer extends Component {
 
 	}
 
-	createName = (playerId, playerArray) => {
-	    // let nameArray = playerArray;
-	    for(let i=0; i<playerArray.length; i++){
-	    	for(let j=0; j<playerArray[i][j].length; j++){
-	    		if(playerId === playerArray[i][j].api.players[0].playerId){
-	    			let firstName = playerArray[i][j].api.players[0].firstName;
-	    			let lastName = playerArray[i][j].api.players[0].lastName;
-	    			let fullName = `${lastName}, ${firstName}`;
-	    			return fullName;
-	    		}
-	    	}
-	    }
-    }
+	// createName = (playerId, playerArray) => {
+	//     // let nameArray = playerArray;
+	//     for(let i=0; i<playerArray.length; i++){
+	//     	for(let j=0; j<playerArray[i][j].length; j++){
+	//     		if(playerId === playerArray[i][j].api.players[0].playerId){
+	//     			let firstName = playerArray[i][j].api.players[0].firstName;
+	//     			let lastName = playerArray[i][j].api.players[0].lastName;
+	//     			let fullName = `${lastName}, ${firstName}`;
+	//     			return fullName;
+	//     		}
+	//     	}
+	//     }
+ //    }
+
 	// getPlayerNamesForOneGame = async (player, i) => {
 	// 	let playerNamesForOneGame
 	// 		await Promise.all(this.state.playerInfoByGame[i].api.statistics.map(player => {
@@ -535,7 +537,6 @@ class BoxscoreContainer extends Component {
 		      				byGameTotals={this.state.gameTotalsByGame}
 		      				byGamePlayerInfo={this.state.playerInfoByGame}
 		      				byGamePlayerInfoName={this.state.playerInfoByGameName}
-		      				createFullName={this.createName}
 		      			/>
 		      		: null
 		      			// <GameTotals
