@@ -51,25 +51,32 @@ function GameInfo (props) {
 			// console.log(byGamePlayerInfoGameV);//this is an object
 			
 			// need to loop through statistics array to get each player's stats
-			// Almost worked
 			const playerRowV = byGamePlayerInfoGameV.api.statistics
 				.filter(visitor => visitor.teamId === game.vTeam.teamId)
 				// console.log(playerRowV);
 				.map((player, i) => (
 					<Table.Row key={player.playerId}>
 						<Table.Cell>{player.playerId}</Table.Cell>
-						<Table.Cell>{props.byGamePlayerInfoName[counter]
+						<Table.Cell>
+						{/*find the player based on playerId, then get the first and last names*/}
+							{
+							props.byGamePlayerInfoName[counter]
 							.find(playerInfo => playerInfo.api.players[0].playerId === player.playerId)
 							.api.players[0].lastName
-						}</Table.Cell>
-
-						{/*<Table.Cell>{/*for(let j=0; j<props.byGamePlayerInfo.length; j++)*/}{/*need to figure out how loop through multiple games*/}
-							{/*{(player.playerId 
-							=== props.byGamePlayerInfoName[counter][i].api.players[0].playerId) 
-							? props.byGamePlayerInfoName[counter][i].api.players[0].lastName 
-							: null	
-							}</Table.Cell>{/*this almost worked...failed if arrays did not perfectly line up*/}
+							+ ", " + 
+							props.byGamePlayerInfoName[counter]
+							.find(playerInfo => playerInfo.api.players[0].playerId === player.playerId)
+							.api.players[0].firstName
+							}
+						</Table.Cell>
+					    <Table.Cell>{player.min}</Table.Cell>
 					    <Table.Cell>{player.points}</Table.Cell>
+					    <Table.Cell>{player.totReb}</Table.Cell>
+					    <Table.Cell>{player.assists}</Table.Cell>
+					    <Table.Cell>{player.pFouls}</Table.Cell>
+					    <Table.Cell>{player.steals}</Table.Cell>
+					    <Table.Cell>{player.turnovers}</Table.Cell>
+					    <Table.Cell>{player.blocks}</Table.Cell>
 				    </Table.Row>
 				));
 			
@@ -142,6 +149,20 @@ function GameInfo (props) {
 					    <Table.Header>
 					      <Table.Row>
 					        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
+					      </Table.Row>
+					    </Table.Header>
+					    <Table.Header>
+					      <Table.Row>
+					        <Table.HeaderCell>Player ID</Table.HeaderCell>
+					        <Table.HeaderCell>Player</Table.HeaderCell>
+					        <Table.HeaderCell>MIN</Table.HeaderCell>
+					        <Table.HeaderCell>PTS</Table.HeaderCell>
+					        <Table.HeaderCell>REB</Table.HeaderCell>
+					        <Table.HeaderCell>AST</Table.HeaderCell>
+					        <Table.HeaderCell>F</Table.HeaderCell>
+					        <Table.HeaderCell>STL</Table.HeaderCell>
+					        <Table.HeaderCell>TO</Table.HeaderCell>
+					        <Table.HeaderCell>BLK</Table.HeaderCell>
 					      </Table.Row>
 					    </Table.Header>
 						<Table.Header>
