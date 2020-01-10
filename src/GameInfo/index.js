@@ -7,6 +7,39 @@ function GameInfo (props) {
 	console.log(props);
 	console.log(props.byGamePlayerInfoName[0][0].api.players[0].playerId);
 
+	const teamLogos = [
+		    	{teamId: "1", logo: "https://i.imgur.com/Kq7BbKr.png", fullName: "Atlanta Hawks"},
+		    	{teamId: "2", logo: "https://i.imgur.com/ZllxvAh.png", fullName: "Boston Celtics"},
+		    	{teamId: "4", logo: "https://i.imgur.com/dYRpuUv.png", fullName: "Brooklyn Nets"},
+		    	{teamId: "5", logo: "https://i.imgur.com/PfpXC35.png", fullName: "Charlotte Hornets"},
+		    	{teamId: "6", logo: "https://i.imgur.com/uDPZD27.png", fullName: "Chicago Bulls"},
+		    	{teamId: "7", logo: "https://i.imgur.com/4pYMk58.png", fullName: "Cleveland Cavaliers"},
+		    	{teamId: "8", logo: "https://i.imgur.com/XXeM6G7.png", fullName: "Dallas Mavericks"},
+		    	{teamId: "9", logo: "https://i.imgur.com/0A7zhXs.png", fullName: "Denver Nuggets"},
+		    	{teamId: "10", logo: "https://i.imgur.com/LEN2Uzh.png", fullName: "Detroit Pistons"},
+		    	{teamId: "11", logo: "https://i.imgur.com/dsW68hf.png", fullName: "Golden State Warriors"},
+		    	{teamId: "14", logo: "https://i.imgur.com/DXzHlmE.png", fullName: "Houston Rockets"},
+		    	{teamId: "15", logo: "https://i.imgur.com/WFMfKNm.png", fullName: "Indiana Pacers"},
+		    	{teamId: "16", logo: "https://i.imgur.com/e9B9ivY.png", fullName: "LA Clippers"},
+		    	{teamId: "17", logo: "https://i.imgur.com/idShkvb.png", fullName: "Los Angeles Lakers"},
+		    	{teamId: "19", logo: "https://i.imgur.com/AepoT1u.png", fullName: "Memphis Grizzlies"},
+		    	{teamId: "20", logo: "https://i.imgur.com/tjwoBkp.gif", fullName: "Miami Heat"},
+		    	{teamId: "21", logo: "https://i.imgur.com/58aufKB.png", fullName: "Milwaukee Bucks"},
+		    	{teamId: "22", logo: "https://i.imgur.com/l2mjOHW.png", fullName: "Minnesota Timberwolves"},
+		    	{teamId: "23", logo: "https://i.imgur.com/Nck6QZe.png", fullName: "New Orleans Pelicans"},
+		    	{teamId: "24", logo: "https://i.imgur.com/9xJE809.gif", fullName: "New York Knicks"},
+		    	{teamId: "25", logo: "https://i.imgur.com/x9dp5Ms.png", fullName: "Oklahoma City Thunder"},
+		    	{teamId: "26", logo: "https://i.imgur.com/cpuQ0MH.gif", fullName: "Orlando Magic"},
+		    	{teamId: "27", logo: "https://i.imgur.com/XOkEq0U.png", fullName: "Philadelphia 76ers"},
+		    	{teamId: "28", logo: "https://i.imgur.com/Abf9NDQ.png", fullName: "Phoenix Suns"},
+		    	{teamId: "29", logo: "https://i.imgur.com/2hGMgQw.png", fullName: "Portland Trail Blazers"},
+		    	{teamId: "30", logo: "https://i.imgur.com/hfVnJcc.png", fullName: "Sacramento Kings"},
+		    	{teamId: "31", logo: "https://i.imgur.com/HJjSNa4.png", fullName: "San Antonio Spurs"},
+		    	{teamId: "38", logo: "https://i.imgur.com/HEVWO0q.png", fullName: "Toronto Raptors"},
+	    		{teamId: "40", logo: "https://i.imgur.com/BpzstID.png", fullName: "Utah Jazz"},
+	    		{teamId: "41", logo: "https://i.imgur.com/8LCV448.png", fullName: "Washington Wizards"},
+		    ]
+
 	let counter = 0;// this counts the number of games in the props.byGamePlayerInfoName array
 	// create function to transform playerid to last name, first name
 	
@@ -27,7 +60,7 @@ function GameInfo (props) {
 				// console.log(playerRowV);
 				.map((player, i) => (
 					<Table.Row key={player.playerId}>
-						<Table.Cell>{player.playerId}</Table.Cell>
+						{/*<Table.Cell>{player.playerId}</Table.Cell>*/}
 						<Table.Cell>
 						{/*find the player based on playerId, then get the first and last names*/}
 							{
@@ -103,21 +136,50 @@ function GameInfo (props) {
 
 		return (
 			<li key={game.gameId}>
-			    <Table celled>
+			    <Table collapsing>
 			    	<Table.Body>
 				      	<Table.Row>
+				        	<Table.Cell>	
+			        			<Header.Content>
+			        				{game.vTeam.nickName}
+			        			</Header.Content>
+				        	</Table.Cell>
 				        	<Table.Cell>
 				        		<Header as='h4' image>
-				        			<Image src={game.vTeam.logo} size='mini' />
-				        			<Header.Content>
-				        				{game.vTeam.shortName} versus {game.hTeam.shortName}
-				        			</Header.Content>
+				        			<Image src={teamLogos.find(teamLogo => 
+				        				teamLogo.teamId === game.vTeam.teamId).logo} size='mini' />
 				        		</Header>
+				        	</Table.Cell>
+				        	<Table.Cell>
+			        			<Header.Content>
+			        				{game.vTeam.score.points}
+			        			</Header.Content>
+				        	</Table.Cell>
+				        	<Table.Cell>
+			        			<Header.Content>
+			        				{game.currentPeriod === "4/4" ? "FINAL" : "FINAL/OT"}
+			        			</Header.Content>
+				        	</Table.Cell>
+				        	<Table.Cell>
+			        			<Header.Content>
+			        				{game.hTeam.score.points}
+			        			</Header.Content>
+				        	</Table.Cell>
+				        	<Table.Cell>
+				        		<Header as='h4' image>
+				        			<Image src={teamLogos.find(teamLogo => 
+				        				teamLogo.teamId === game.hTeam.teamId).logo} size='mini' />
+				        		</Header>
+				        	</Table.Cell>
+				        	<Table.Cell>
+			        			<Header.Content>
+			        				{game.hTeam.nickName}
+			        			</Header.Content>
 				        	</Table.Cell>
 				      	</Table.Row>
 					</Table.Body>
 			    </Table>  
-				    <Table celled>
+				    <Table celled striped>
 					    <Table.Header>
 					      <Table.Row>
 					        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
@@ -125,7 +187,7 @@ function GameInfo (props) {
 					    </Table.Header>
 					    <Table.Header>
 					      <Table.Row>
-					        <Table.HeaderCell>Player ID</Table.HeaderCell>
+					        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
 					        <Table.HeaderCell>Player</Table.HeaderCell>
 					        <Table.HeaderCell>MIN</Table.HeaderCell>
 					        <Table.HeaderCell>PTS</Table.HeaderCell>
@@ -143,7 +205,14 @@ function GameInfo (props) {
 					    <Table.Header>
 					      <Table.Row>
 					        <Table.HeaderCell>Visitor's Totals:</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
 					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
 					      </Table.Row>
 					    </Table.Header>
 				    </Table>
