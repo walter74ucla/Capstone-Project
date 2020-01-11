@@ -5,7 +5,7 @@ import { Table, Header, Image } from 'semantic-ui-react';
 // passing props from boxscore container
 function GameInfo (props) {
 	console.log(props);
-	console.log(props.byGamePlayerInfoName[0][0].api.players[0].playerId);
+	// console.log(props.byGamePlayerInfoName[0][0].api.players[0].playerId);
 
 	const teamLogos = [
 		    	{teamId: "1", logo: "https://i.imgur.com/Kq7BbKr.png", fullName: "Atlanta Hawks"},
@@ -84,53 +84,43 @@ function GameInfo (props) {
 				    </Table.Row>
 				));
 			
-
-			// Another try...
-			// want to add key value pairs to objects in the playerRowV array
-			// const playerRowV = byGamePlayerInfoGameV.api.statistics
-			// 	.filter(visitor => visitor.teamId === game.vTeam.teamId);
-			// 	console.log(playerRowV); //This gives me the array I want
-
-			// const vPlayersInGame = props.byGamePlayerInfoName
-			// .filter(vPlayersIG => {for(let i=0; i<vPlayersIG[counter].length; i++){
-			// 	if(vPlayersIG[counter][i].api.players[0].teamId === playerRowV[0].teamId){
-			// 		return vPlayersIG
-			// 	}
-			// }}); //This gives me a blank array
-			// // .filter(value => value[0][0].api.players[0].firstName === "Kawhi") //???TypeError: Cannot read property 'api' of undefined
-			// console.log(vPlayersInGame);
-		
-
-			// Another another try...trying to get the first element of the first props.byGamePlayerInfoName array
-			// want to add key value pairs to objects in the playerRowV array
-			// const playerRowV = byGamePlayerInfoGameV.api.statistics
-			// 	.filter(visitor => visitor.teamId === game.vTeam.teamId);
-			// 	console.log(playerRowV); //This gives me the same array, i.e., counter never +=1
-
-			// const vPlayersInGame = props.byGamePlayerInfoName
-			// .filter(value => value[0][0].api.players[0].firstName === "Kawhi") //???TypeError: Cannot read property 'api' of undefined
-			// console.log(vPlayersInGame);
+		const byGameTotalsGameH = props.byGameTotals
+			.find(totalsGame => totalsGame.api.statistics[1].gameId === game.gameId);
+		const byGamePlayerInfoGameH = props.byGamePlayerInfo
+			.find(totalsPlayer => totalsPlayer.api.statistics[1].gameId === game.gameId);
+			// console.log(byGamePlayerInfoGameH);//this is an object
+			
+			// need to loop through statistics array to get each player's stats
+			const playerRowH = byGamePlayerInfoGameH.api.statistics
+				.filter(home => home.teamId === game.hTeam.teamId)
+				// console.log(playerRowH);
+				.map((player, i) => (
+					<Table.Row key={player.playerId}>
+						{/*<Table.Cell>{player.playerId}</Table.Cell>*/}
+						<Table.Cell>
+						{/*find the player based on playerId, then get the first and last names*/}
+							{
+							props.byGamePlayerInfoName[counter]
+							.find(playerInfo => playerInfo.api.players[0].playerId === player.playerId)
+							.api.players[0].lastName
+							+ ", " + 
+							props.byGamePlayerInfoName[counter]
+							.find(playerInfo => playerInfo.api.players[0].playerId === player.playerId)
+							.api.players[0].firstName
+							}
+						</Table.Cell>
+					    <Table.Cell>{player.min}</Table.Cell>
+					    <Table.Cell>{player.points}</Table.Cell>
+					    <Table.Cell>{player.totReb}</Table.Cell>
+					    <Table.Cell>{player.assists}</Table.Cell>
+					    <Table.Cell>{player.pFouls}</Table.Cell>
+					    <Table.Cell>{player.steals}</Table.Cell>
+					    <Table.Cell>{player.turnovers}</Table.Cell>
+					    <Table.Cell>{player.blocks}</Table.Cell>
+				    </Table.Row>
+				));	
 
 	console.log(counter);
-
-				// .map((player, i) => (
-					{/*<Table.Row key={player.playerId}>
-						<Table.Cell>{player.playerId}</Table.Cell>
-						{/*<Table.Cell>{/*for(let j=0; j<props.byGamePlayerInfo.length; j++)*/}{/*need to figure out how loop through multiple games*/}
-							{/*{(player.playerId 
-							=== props.byGamePlayerInfoName[counter][i].api.players[0].playerId) 
-							? props.byGamePlayerInfoName[counter][i].api.players[0].lastName 
-							: null	
-							}</Table.Cell>*/}{/*this almost worked...failed if arrays did not perfectly line up*/}
-						{/*<Table.Cell>{/*for(let j=0; j<props.byGamePlayerInfo.length; j++)*/}{/*need to figure out how loop through multiple games*/}
-							{/*{(player.playerId 
-							=== props.byGamePlayerInfoName.find(id => player.playerId === props.byGamePlayerInfoName[counter][i].api.players[0].playerId))
-							? props.byGamePlayerInfoName[counter][i].api.players[0].lastName 
-							: null	
-							}</Table.Cell>*/}{/*this did not work...gave a blank column*/}
-					    {/*<Table.Cell>{player.points}</Table.Cell>
-				    </Table.Row>*/}
-				// ));
 	counter+=1
 
 
@@ -140,9 +130,9 @@ function GameInfo (props) {
 			    	<Table.Body>
 				      	<Table.Row>
 				        	<Table.Cell>	
-			        			<Header.Content>
-			        				{game.vTeam.nickName}
-			        			</Header.Content>
+			        			<Header as='h4'>
+            						{game.vTeam.nickName}
+						        </Header>
 				        	</Table.Cell>
 				        	<Table.Cell>
 				        		<Header as='h4' image>
@@ -151,19 +141,19 @@ function GameInfo (props) {
 				        		</Header>
 				        	</Table.Cell>
 				        	<Table.Cell>
-			        			<Header.Content>
-			        				{game.vTeam.score.points}
-			        			</Header.Content>
+			        			<Header as='h4'>
+            						{game.vTeam.score.points}
+						        </Header>
 				        	</Table.Cell>
 				        	<Table.Cell>
-			        			<Header.Content>
-			        				{game.currentPeriod === "4/4" ? "FINAL" : "FINAL/OT"}
-			        			</Header.Content>
+			        			<Header as='h4'>
+            						{game.currentPeriod === "4/4" ? "FINAL" : "FINAL/OT"}
+						        </Header>
 				        	</Table.Cell>
 				        	<Table.Cell>
-			        			<Header.Content>
-			        				{game.hTeam.score.points}
-			        			</Header.Content>
+			        			<Header as='h4'>
+            						{game.hTeam.score.points}
+						        </Header>
 				        	</Table.Cell>
 				        	<Table.Cell>
 				        		<Header as='h4' image>
@@ -172,9 +162,9 @@ function GameInfo (props) {
 				        		</Header>
 				        	</Table.Cell>
 				        	<Table.Cell>
-			        			<Header.Content>
-			        				{game.hTeam.nickName}
-			        			</Header.Content>
+			        			<Header as='h4'>
+            						{game.hTeam.nickName}
+						        </Header>
 				        	</Table.Cell>
 				      	</Table.Row>
 					</Table.Body>
@@ -216,6 +206,43 @@ function GameInfo (props) {
 					      </Table.Row>
 					    </Table.Header>
 				    </Table>
+				    <Table celled striped>
+					    <Table.Header>
+					      <Table.Row>
+					        <Table.HeaderCell>{game.hTeam.fullName}</Table.HeaderCell>
+					      </Table.Row>
+					    </Table.Header>
+					    <Table.Header>
+					      <Table.Row>
+					        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
+					        <Table.HeaderCell>Player</Table.HeaderCell>
+					        <Table.HeaderCell>MIN</Table.HeaderCell>
+					        <Table.HeaderCell>PTS</Table.HeaderCell>
+					        <Table.HeaderCell>REB</Table.HeaderCell>
+					        <Table.HeaderCell>AST</Table.HeaderCell>
+					        <Table.HeaderCell>F</Table.HeaderCell>
+					        <Table.HeaderCell>STL</Table.HeaderCell>
+					        <Table.HeaderCell>TO</Table.HeaderCell>
+					        <Table.HeaderCell>BLK</Table.HeaderCell>
+					      </Table.Row>
+					    </Table.Header>
+						<Table.Header>
+					    	{playerRowH}
+					    </Table.Header>
+					    <Table.Header>
+					      <Table.Row>
+					        <Table.HeaderCell>Home Totals:</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].min}</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].points}</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].totReb}</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].assists}</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].pFouls}</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].steals}</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].turnovers}</Table.HeaderCell>
+					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].blocks}</Table.HeaderCell>
+					      </Table.Row>
+					    </Table.Header>
+				    </Table>
 			<br/>
 			</li>
 		)})
@@ -227,33 +254,6 @@ function GameInfo (props) {
 	      <ul>
 	        {selectedGames}
 	      </ul>
-	      {/*<Table celled striped>
-		    <Table.Header>
-		      <Table.Row>
-		        <Table.HeaderCell>Header</Table.HeaderCell>
-		        <Table.HeaderCell>Header</Table.HeaderCell>
-		        <Table.HeaderCell>Header</Table.HeaderCell>
-		      </Table.Row>
-		    </Table.Header>
-
-		    <Table.Body>
-		      <Table.Row>
-		        <Table.Cell>Cell</Table.Cell>
-		        <Table.Cell>Cell</Table.Cell>
-		        <Table.Cell>Cell</Table.Cell>
-		      </Table.Row>
-		      <Table.Row>
-		        <Table.Cell>Cell</Table.Cell>
-		        <Table.Cell>Cell</Table.Cell>
-		        <Table.Cell>Cell</Table.Cell>
-		      </Table.Row>
-		      <Table.Row>
-		        <Table.Cell>Cell</Table.Cell>
-		        <Table.Cell>Cell</Table.Cell>
-		        <Table.Cell>Cell</Table.Cell>
-		      </Table.Row>
-		    </Table.Body>
-		  </Table>*/}
 	    </React.Fragment>
     )		
 
@@ -263,28 +263,3 @@ function GameInfo (props) {
 export default GameInfo;
 // export default {GameInfo, CreateName};
 
-
-// Old way
-// const byGameTotals = props.byGameTotals.map(game => (
-// 		<li key={game.api.statistics[0].gameId}>
-
-// 			<Table celled>
-// 			    <Table.Header>
-// 			      <Table.Row>
-// 			        <Table.HeaderCell>Visitor's Totals:</Table.HeaderCell>
-// 			        <Table.HeaderCell>{game.api.statistics[0].points}</Table.HeaderCell>
-// 			      </Table.Row>
-// 			    </Table.Header>
-// 			</Table>
-// 	    </li>
-// 	))
-
-
-// return(
-// 	    <React.Fragment>
-// 	      <h4>Game Info</h4>
-// 	      <ul>
-// 	        {byGameTotals}
-// 	      </ul>
-// 	    </React.Fragment>
-//     )
