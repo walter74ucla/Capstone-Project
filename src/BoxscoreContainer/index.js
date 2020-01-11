@@ -9,7 +9,7 @@ import FavoriteTeamsList from '../FavoriteTeamsList';
 import Login from '../Login';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
-import { Header, Container, Menu, Button, Grid, Segment } from 'semantic-ui-react'
+import { Header, Container, Menu, Button, Grid, Segment, Dimmer, Loader } from 'semantic-ui-react'
 
 
 class BoxscoreContainer extends Component {
@@ -25,6 +25,7 @@ class BoxscoreContainer extends Component {
 	      	playerInfoByGameName: [], //receiving fetched data from the Promise.all
 	      	favoriteTeams: [],//this comes from the flask server
 	      	selectedDay: null, //added this here to get the selectedDay from the calendar
+	      	isLoading: false, //need this to display loading alert
 	      	today: {// need to define all key-value pairs (properties) if you want to lift state
 		      	api: {
 		      		filters: [],
@@ -157,6 +158,7 @@ class BoxscoreContainer extends Component {
 	      	gameTotalsByGame: [],
 	      	playerInfoByGame: [],
 	      	playerInfoByGameName: [],
+	      	isLoading: true,
 	    })
 
 		let dateStringAPI;
@@ -306,6 +308,7 @@ class BoxscoreContainer extends Component {
 				    selectedDatePlusOne: parsedSelectedDatePlusOne,
 				    sInputDate: dateStringAPI,
 				    sInputDatePlusOne: dateStringAPIPlusOne,
+				    isLoading: false,
 			 	})
 			}
 			
@@ -552,9 +555,14 @@ class BoxscoreContainer extends Component {
 				    </Grid.Row>
 				</Grid>
       					
-      			{this.state.selectedDay < today && this.state.selectedGames.length
-      				?	
-      					<GameInfo
+      			{this.state.selectedDay && this.state.isLoading === true
+      				?	<Segment>
+      						<Dimmer active inverted>
+	        					<Loader inverted content='Loading' />
+	      					</Dimmer>
+	      				</Segment>
+	      			: 	this.state.selectedDay < today && this.state.selectedGames.length
+      				?	<GameInfo
 		      				selectedGames={this.state.selectedGames}
 		      				byGameTotals={this.state.gameTotalsByGame}
 		      				byGamePlayerInfo={this.state.playerInfoByGame}
