@@ -41,7 +41,6 @@ function GameInfo (props) {
 		    ]
 
 	let counter = 0;// this counts the number of games in the props.byGamePlayerInfoName array
-	// create function to transform playerid to last name, first name
 	
 	//map needs to be passed an array, not an object.
 	const selectedGames = props.selectedGames.map(game => {
@@ -124,7 +123,7 @@ function GameInfo (props) {
 	counter+=1
 
 
-		return (
+		return(
 			<li key={game.gameId}>
 			    <Table collapsing>
 			    	<Table.Body>

@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import GameListToday from '../GameListToday';
 import GameListSelectedDate from '../GameListSelectedDate';
 import GameInfo from '../GameInfo';
+import SelectedDateSummary from '../SelectedDateSummary';
 import GameTotals from '../GameTotals';
 import PlayerInfo from '../PlayerInfo';
 import FavoriteTeamsList from '../FavoriteTeamsList';
 import Login from '../Login';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
-import { Header, Container, Menu, Button } from 'semantic-ui-react'
+import { Header, Container, Menu, Button, Grid, Segment } from 'semantic-ui-react'
 
 
 class BoxscoreContainer extends Component {
@@ -516,20 +517,41 @@ class BoxscoreContainer extends Component {
 	  	// console.log(this.state.selectedDay);
 	  	return(
 	  		<React.Fragment>
-      			<DateInput selectedDay={this.state.selectedDay}
-      				inputDate={this.getInputDate}
-      			/>
-      			<GameListToday
-      				todaysGames={this.state.todaysGames}
-      			/>
-      			{/* if selected day is greater today, show selected day game list*/}
-      			{/* OR if selected day = today, show selected day game list*/}
-      			{this.state.selectedDay > today || this.state.selectedDay == today
-      				? 	<GameListSelectedDate
-      						selectedGames={this.state.selectedGames}
-      					/>
-      				: null
-      			}		
+      			<Grid columns={3}>
+				    <Grid.Row stretched>
+				      	<Grid.Column>
+				        	<Segment>
+				        		<GameListToday todaysGames={this.state.todaysGames}/>
+      						</Segment>
+				      	</Grid.Column>
+					   	<Grid.Column>
+					        <Segment>
+					        	<DateInput 
+					        		selectedDay={this.state.selectedDay}
+      								inputDate={this.getInputDate}
+      							/>
+					        </Segment>
+					  	</Grid.Column>
+				      	<Grid.Column>
+				        	<Segment>
+				        		{this.state.selectedDay < today && this.state.selectedGames.length
+      								?	<SelectedDateSummary
+						        			selectedDay={this.state.selectedDay}
+						        			selectedGames={this.state.selectedGames}
+						        			byGameTotals={this.state.gameTotalsByGame}
+						        		/>
+						        	: 	this.state.selectedDay > today || this.state.selectedDay === today
+      								? 	<GameListSelectedDate
+				      						selectedDay={this.state.selectedDay}
+				      						selectedGames={this.state.selectedGames}
+				      					/>
+      								: null
+      							}		
+				        	</Segment>
+				      	</Grid.Column>
+				    </Grid.Row>
+				</Grid>
+      					
       			{this.state.selectedDay < today && this.state.selectedGames.length
       				?	
       					<GameInfo
