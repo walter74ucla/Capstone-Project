@@ -152,7 +152,7 @@ class BoxscoreContainer extends Component {
 	getSelectedDateGameData = async (day, today=false) => {
 		// page defaults to today's date
 		// when another date is selected update API call
-		console.log('TOOOOOOOOODAY', day);
+		console.log('SELECTEDDDDDDDAY', day);
 		this.setState({
 	      	selectedGames: [],
 	      	gameTotalsByGame: [],
@@ -319,7 +319,22 @@ class BoxscoreContainer extends Component {
 		
 	}	
 
+	checkIfSelectedGamesByDayFinished = (gamesArray) => {
+		let checkIfGameFinished = gamesArray.map(gameStatus => {
+					return gameStatus.statusGame;
+				})
+				console.log(checkIfGameFinished);
 
+				if(checkIfGameFinished.length > 0){
+					let check = checkIfGameFinished.map(gameStatus => {
+					return gameStatus === "Finished" ? 0 : 1;
+					}).reduce((sum, gameStatus) => {
+						return sum + gameStatus;
+					});
+					console.log(check);	
+				}
+				
+	}
 
 	getGameTotalsDataForOneGame = async (gameId) => {
 		// console.log('GameID: ', gameId);
@@ -386,6 +401,7 @@ class BoxscoreContainer extends Component {
 		}
 
 	}
+
 
 	// createName = (playerId, playerArray) => {
 	//     // let nameArray = playerArray;
@@ -516,8 +532,8 @@ class BoxscoreContainer extends Component {
   	render() {
   		// console.log(this.state.selectedDate.api.games[0].statusGame);//Fix This
 	  	let today = new Date();
-	  	// console.log(today);
-	  	// console.log(this.state.selectedDay);
+	  	console.log(today);
+	  	console.log(this.state.selectedDay);
 	  	return(
 	  		<React.Fragment>
       			<Grid columns={3}>
@@ -537,17 +553,24 @@ class BoxscoreContainer extends Component {
 					  	</Grid.Column>
 				      	<Grid.Column>
 				        	<Segment>
-				        		{this.state.selectedDay < today && this.state.selectedGames.length
-      								?	<SelectedDateSummary
+				        		{(this.state.selectedDay && 
+				        			this.state.selectedDay.toLocaleDateString() === 
+				        			today.toLocaleDateString() || 
+				        			this.state.selectedDay > today)
+				        			? 	<GameListSelectedDate
+				      						selectedDay={this.state.selectedDay}
+				      						selectedGames={this.state.selectedGames}
+				      					/>
+				      				: 	(this.state.selectedDay &&
+				      						this.state.selectedDay.toLocaleDateString() !== 
+				        					today.toLocaleDateString() &&  
+				      						this.state.selectedGames.length &&
+				      						this.state.selectedDay < today)
+				      				? 	<SelectedDateSummary
 						        			selectedDay={this.state.selectedDay}
 						        			selectedGames={this.state.selectedGames}
 						        			byGameTotals={this.state.gameTotalsByGame}
 						        		/>
-						        	: 	this.state.selectedDay > today || this.state.selectedDay === today
-      								? 	<GameListSelectedDate
-				      						selectedDay={this.state.selectedDay}
-				      						selectedGames={this.state.selectedGames}
-				      					/>
       								: null
       							}		
 				        	</Segment>
@@ -561,7 +584,11 @@ class BoxscoreContainer extends Component {
 	        					<Loader inverted content='Loading' />
 	      					</Dimmer>
 	      				</Segment>
-	      			: 	this.state.selectedDay < today && this.state.selectedGames.length
+	      			: 	(this.state.selectedDay &&
+	      					this.state.selectedDay.toLocaleDateString() !== 
+				        	today.toLocaleDateString() &&
+      						this.state.selectedGames.length &&
+      						this.state.selectedDay < today)
       				?	<GameInfo
 		      				selectedGames={this.state.selectedGames}
 		      				byGameTotals={this.state.gameTotalsByGame}
