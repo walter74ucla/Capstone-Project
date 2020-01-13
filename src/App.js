@@ -7,7 +7,7 @@ import BoxscoreContainer from './BoxscoreContainer';
 import SelectFavoriteTeams from './SelectFavoriteTeamsForm';
 import HeaderComponent from './HeaderComponent';
 import { Route, Switch } from 'react-router-dom';
-import { Header } from 'semantic-ui-react';
+
 
 // add login/logout here???
 const My404 = () => {

@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import GameListToday from '../GameListToday';
 import GameListSelectedDate from '../GameListSelectedDate';
 import GameInfo from '../GameInfo';
-import GameTotals from '../GameTotals';
-import PlayerInfo from '../PlayerInfo';
+import SelectedDateSummary from '../SelectedDateSummary';
 import FavoriteTeamsList from '../FavoriteTeamsList';
-import Login from '../Login';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
-import { Header, Container, Menu, Button } from 'semantic-ui-react'
+import { Grid, Segment, Dimmer, Loader } from 'semantic-ui-react'
 
 
 class BoxscoreContainer extends Component {
@@ -21,8 +19,10 @@ class BoxscoreContainer extends Component {
 	      	selectedGames: [], //added this to dry the code
 	      	gameTotalsByGame: [], //receiving fetched data from the Promise.all
 	      	playerInfoByGame: [], //receiving fetched data from the Promise.all
+	      	playerInfoByGameName: [], //receiving fetched data from the Promise.all
 	      	favoriteTeams: [],//this comes from the flask server
 	      	selectedDay: null, //added this here to get the selectedDay from the calendar
+	      	isLoading: false, //need this to display loading alert
 	      	today: {// need to define all key-value pairs (properties) if you want to lift state
 		      	api: {
 		      		filters: [],
@@ -59,26 +59,27 @@ class BoxscoreContainer extends Component {
 		      		status: 0
 		      	}
 		    },
+		    
 		    // This property is used in the fetch
-	      	gameTotals: {// need to define all key-value pairs (properties) if you want to lift state
-				api: {
-		      		filters: [],
-		      		statistics: [],
-		      		message: "",
-		      		results: 0,
-		      		status: 0
-		      	}
-		   	},
+	   //    	gameTotals: {// need to define all key-value pairs (properties) if you want to lift state
+				// api: {
+		  //     		filters: [],
+		  //     		statistics: [],
+		  //     		message: "",
+		  //     		results: 0,
+		  //     		status: 0
+		  //     	}
+		  //  	},
 		   	// This property is used in the fetch
-		   	playerInfo: {// need to define all key-value pairs (properties) if you want to lift state
-				api: {
-		      		filters: [],
-		      		statistics: [],
-		      		message: "",
-		      		results: 0,
-		      		status: 0
-		      	}
-		   	},
+		  //  	playerInfo: {// need to define all key-value pairs (properties) if you want to lift state
+				// api: {
+		  //     		filters: [],
+		  //     		statistics: [],
+		  //     		message: "",
+		  //     		results: 0,
+		  //     		status: 0
+		  //     	}
+		  //  	},
 		  //  	playerStats: {// need to define all key-value pairs (properties) if you want to lift state
 				// api: {
 		  //     		filters: [],
@@ -127,25 +128,20 @@ class BoxscoreContainer extends Component {
 
 	// This function gives us the correct day's information due to the strange UTC time stuff
 	correctDayFilter = (game, filterDateString, expectEqual) => {
-		let dateString = new Date(game.startTimeUTC);
-		// console.log(dateString);
-		let fDSConverted = this.convertDateStr(filterDateString);
-		// console.log(fDSConverted);
-		//Adjust fDSConverted by 7 hours
-		let fDSConvertedPlus7 = fDSConverted + "T07:00:00.00Z";
-		// console.log(fDSConvertedPlus7);
-		// "YYYY-MM-DDT07:00:00.00Z" -->07:00:00.00Z helps get the input date the correct day.
-		// The 7 gets you to midnight Mountain Standard Time or 1am Mountain Daylight Time.  
-		let updatedFDSCP7 = new Date(fDSConvertedPlus7);
-		// console.log(fDSConvertedPlus7);
-		let startTimeDayCheck = dateString.getDay();
-		// console.log(startTimeDayCheck);
-		let inputDay = updatedFDSCP7.getDay();
-		// console.log(inputDay);
+		let dateStringStartTime = new Date(game.startTimeUTC);
+		// console.log(dateStringStartTime);
+		let localeDateStringStartTime = dateStringStartTime.toLocaleDateString();
+		// console.log(localeDateStringStartTime);
+
+		let dateStringSelectedDay = new Date(filterDateString);
+		// console.log(dateStringSelectedDay);
+		let localeDateStringSelectedDay = dateStringSelectedDay.toLocaleDateString();
+		// console.log(localeDateStringSelectedDay);		
+
 		if (expectEqual) {
-			return startTimeDayCheck === inputDay
+			return localeDateStringStartTime === localeDateStringSelectedDay
 		} else {
-			return startTimeDayCheck !== inputDay
+			return localeDateStringStartTime !== localeDateStringSelectedDay
 		}
 		
 	}
@@ -153,7 +149,15 @@ class BoxscoreContainer extends Component {
 	getSelectedDateGameData = async (day, today=false) => {
 		// page defaults to today's date
 		// when another date is selected update API call
-		console.log('TOOOOOOOOODAY', day);
+		console.log('SELECTEDDDDDDDAY', day);
+		this.setState({
+	      	selectedGames: [],
+	      	gameTotalsByGame: [],
+	      	playerInfoByGame: [],
+	      	playerInfoByGameName: [],
+	      	isLoading: true,
+	    })
+
 		let dateStringAPI;
 		if (today) {
 			dateStringAPI = new Date();//today
@@ -221,7 +225,7 @@ class BoxscoreContainer extends Component {
 					this.setState({
 				      gameTotalsByGame: selectedGamesGameTotals,
 				    })
-					// console.log('selectedGamesGameTotals in promiseall:', selectedGamesGameTotals)
+					// console.log('selectedGamesGameTotals in promiseall:', selectedGamesGameTotals);
 					// console.log(selectedGamesGameTotals[0].api.statistics[0].assists);	
 				})
 			
@@ -236,11 +240,56 @@ class BoxscoreContainer extends Component {
 					this.setState({
 				      playerInfoByGame: selectedGamesPlayerInfo,
 				    })
-					// console.log('selectedGamesPlayerInfo in promiseall:', selectedGamesPlayerInfo)
-					// console.log(selectedGamesPlayerInfo[0].api.statistics[0].points);	
+					// console.log('selectedGamesPlayerInfo in promiseall:', selectedGamesPlayerInfo);
+					// console.log(selectedGamesPlayerInfo[0].api.statistics.length);
 				})
 
+			// Fill the playerInfoByGameName array here
+			// console.log(this.state.playerInfoByGame);
+			// want the game to be finished before getting player name
 			
+			if (selectedGames.length > 0) {
+				let checkIfGameFinished = selectedGames.map(gameStatus => {
+					return gameStatus.statusGame;
+				})
+				console.log(checkIfGameFinished);
+
+				let check = checkIfGameFinished.map(gameStatus => {
+					return gameStatus === "Finished" ? 0 : 1;
+					}).reduce((sum, gameStatus) => {
+						return sum + gameStatus;
+					});
+					console.log(check);
+
+				if (check === 0) {
+					let multipleGames = [];
+					for (let i=0; i<this.state.playerInfoByGame.length; i++){
+						let playerNamesForOneGame
+							await Promise.all(this.state.playerInfoByGame[i].api.statistics.map(player => {
+							// console.log('Player is: ', player);
+							// console.log('Fetching:', player.playerId)
+							let playerName = this.getPlayerName(player.playerId);
+							return playerName;
+							})).then(values => {
+								let playerNamesForOneGame = values;
+								this.setState({
+							      playerInfoByGameName: playerNamesForOneGame,
+							    })	
+								// console.log('playerNamesForOneGame in promiseall:', playerNamesForOneGame);
+								console.log(playerNamesForOneGame[0].api.players[0].lastName);
+							})
+							
+							multipleGames[i] = this.state.playerInfoByGameName;
+							this.setState({
+							      playerInfoByGameName: multipleGames,
+							    })
+							// console.log(multipleGames);	
+					}
+						
+				}
+			}
+					
+
 			if (today) {
 				this.setState({
 					todaysGames: selectedGames,
@@ -256,6 +305,7 @@ class BoxscoreContainer extends Component {
 				    selectedDatePlusOne: parsedSelectedDatePlusOne,
 				    sInputDate: dateStringAPI,
 				    sInputDatePlusOne: dateStringAPIPlusOne,
+				    isLoading: false,
 			 	})
 			}
 			
@@ -265,6 +315,23 @@ class BoxscoreContainer extends Component {
 		}
 		
 	}	
+
+	checkIfSelectedGamesByDayFinished = (gamesArray) => {
+		let checkIfGameFinished = gamesArray.map(gameStatus => {
+					return gameStatus.statusGame;
+				})
+				console.log(checkIfGameFinished);
+
+				if(checkIfGameFinished.length > 0){
+					let check = checkIfGameFinished.map(gameStatus => {
+					return gameStatus === "Finished" ? 0 : 1;
+					}).reduce((sum, gameStatus) => {
+						return sum + gameStatus;
+					});
+					console.log(check);	
+				}
+				
+	}
 
 	getGameTotalsDataForOneGame = async (gameId) => {
 		// console.log('GameID: ', gameId);
@@ -309,6 +376,59 @@ class BoxscoreContainer extends Component {
 		}
 
 	}
+
+	getPlayerName = async (playerId) => {
+		// console.log('PlayerID: ', playerId);
+
+		try {														
+			const playerName = await fetch('https://api-nba-v1.p.rapidapi.com/players/playerId/' + playerId, {
+				"method": "GET",
+				"headers": {
+					"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+					"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
+				}
+			})
+
+		const parsedPlayerName = await playerName.json();
+		// console.log(parsedPlayerName);
+		return parsedPlayerName;
+
+		} catch(err) {
+			console.log(err);
+		}
+
+	}
+
+
+	// createName = (playerId, playerArray) => {
+	//     // let nameArray = playerArray;
+	//     for(let i=0; i<playerArray.length; i++){
+	//     	for(let j=0; j<playerArray[i][j].length; j++){
+	//     		if(playerId === playerArray[i][j].api.players[0].playerId){
+	//     			let firstName = playerArray[i][j].api.players[0].firstName;
+	//     			let lastName = playerArray[i][j].api.players[0].lastName;
+	//     			let fullName = `${lastName}, ${firstName}`;
+	//     			return fullName;
+	//     		}
+	//     	}
+	//     }
+ //    }
+
+	// getPlayerNamesForOneGame = async (player, i) => {
+	// 	let playerNamesForOneGame
+	// 		await Promise.all(this.state.playerInfoByGame[i].api.statistics.map(player => {
+	// 			console.log('Player is: ', player);
+	// 			console.log('Fetching:', player.playerId)
+	// 			let playerName = this.getPlayerName(player.playerId);
+	// 			return playerName;
+	// 			})).then(values => {
+	// 				let playerNamesForOneGame = values;
+	// 				console.log('playerNamesForOneGame in promiseall:', playerNamesForOneGame);
+	// 				console.log(playerNamesForOneGame[0].api.players[0].lastName);
+	// 			})
+	// }
+
+
 
 	componentDidMount(){
     // get called once, after the initial render
@@ -408,33 +528,73 @@ class BoxscoreContainer extends Component {
 
   	render() {
   		// console.log(this.state.selectedDate.api.games[0].statusGame);//Fix This
+	  	let today = new Date();
+	  	// console.log(today);
+	  	// console.log(this.state.selectedDay);
 	  	return(
 	  		<React.Fragment>
-      			<DateInput selectedDay={this.state.selectedDay}
-      				inputDate={this.getInputDate}
-      			/>
-      			<GameListToday
-      				todaysGames={this.state.todaysGames}
-      			/>
-      			<GameListSelectedDate
-      				selectedGames={this.state.selectedGames}
-      			/>
-      			{/*//if this game is over, then do this...*/}
-      			{this.state.selectedGames.length 
-      				? <React.Fragment>	
-	      					<GameInfo
-			      				selectedGames={this.state.selectedGames}
-			      				byGameTotals={this.state.gameTotalsByGame}
-			      				byGamePlayerInfo={this.state.playerInfoByGame}
-			      			/>
-			      			{/*<GameTotals
-	      						byGameTotals={this.state.gameTotalsByGame}
-	      					/>
-	      					<PlayerInfo
-			      				byGamePlayerInfo={this.state.playerInfoByGame}
-			      			/>*/}
-			      			</React.Fragment>
-      				: null }
+      			<Grid columns={3}>
+				    <Grid.Row stretched>
+				      	<Grid.Column>
+				        	<Segment>
+				        		<GameListToday todaysGames={this.state.todaysGames}/>
+      						</Segment>
+				      	</Grid.Column>
+					   	<Grid.Column>
+					        <Segment>
+					        	<DateInput 
+					        		selectedDay={this.state.selectedDay}
+      								inputDate={this.getInputDate}
+      							/>
+					        </Segment>
+					  	</Grid.Column>
+				      	<Grid.Column>
+				        	<Segment>
+				        		{(this.state.selectedDay && 
+				        			this.state.selectedDay.toLocaleDateString() === 
+				        			today.toLocaleDateString() || 
+				        			this.state.selectedDay > today)
+				        			? 	<GameListSelectedDate
+				      						selectedDay={this.state.selectedDay}
+				      						selectedGames={this.state.selectedGames}
+				      					/>
+				      				: 	(this.state.selectedDay &&
+				      						this.state.selectedDay.toLocaleDateString() !== 
+				        					today.toLocaleDateString() &&  
+				      						this.state.selectedGames.length &&
+				      						this.state.selectedDay < today)
+				      				? 	<SelectedDateSummary
+						        			selectedDay={this.state.selectedDay}
+						        			selectedGames={this.state.selectedGames}
+						        			byGameTotals={this.state.gameTotalsByGame}
+						        		/>
+      								: null
+      							}		
+				        	</Segment>
+				      	</Grid.Column>
+				    </Grid.Row>
+				</Grid>
+      					
+      			{this.state.selectedDay && this.state.isLoading === true
+      				?	<Segment>
+      						<Dimmer active inverted>
+	        					<Loader inverted content='Loading' />
+	      					</Dimmer>
+	      				</Segment>
+	      			: 	(this.state.selectedDay &&
+	      					this.state.selectedDay.toLocaleDateString() !== 
+				        	today.toLocaleDateString() &&
+      						this.state.selectedGames.length &&
+      						this.state.selectedDay < today)
+      				?	<GameInfo
+		      				selectedGames={this.state.selectedGames}
+		      				byGameTotals={this.state.gameTotalsByGame}
+		      				byGamePlayerInfo={this.state.playerInfoByGame}
+		      				byGamePlayerInfoName={this.state.playerInfoByGameName}
+		      			/>
+		      		: null	
+			    }
+
       			<FavoriteTeamsList
       				favoriteTeams={this.state.favoriteTeams}
       			/>

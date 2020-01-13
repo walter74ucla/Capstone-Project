@@ -3,6 +3,7 @@ import React from 'react';
 
 // passing props from boxscore container
 function GameListSelectedDate (props) {
+	// console.log(props);
 	
 	//map needs to be passed an array, not an object.
 	const selectedGames = props.selectedGames.map(game => (
@@ -14,7 +15,7 @@ function GameListSelectedDate (props) {
 
 	return(
 	    <React.Fragment>
-	      <h4>Selected Day's Games</h4>
+	      <h4>{props.selectedDay.toLocaleDateString()} Games</h4>
 	      <ul>
 	        {selectedGames}
 	      </ul>
