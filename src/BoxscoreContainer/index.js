@@ -3,13 +3,10 @@ import GameListToday from '../GameListToday';
 import GameListSelectedDate from '../GameListSelectedDate';
 import GameInfo from '../GameInfo';
 import SelectedDateSummary from '../SelectedDateSummary';
-import GameTotals from '../GameTotals';
-import PlayerInfo from '../PlayerInfo';
 import FavoriteTeamsList from '../FavoriteTeamsList';
-import Login from '../Login';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
-import { Header, Container, Menu, Button, Grid, Segment, Dimmer, Loader } from 'semantic-ui-react'
+import { Grid, Segment, Dimmer, Loader } from 'semantic-ui-react'
 
 
 class BoxscoreContainer extends Component {
@@ -595,32 +592,8 @@ class BoxscoreContainer extends Component {
 		      				byGamePlayerInfo={this.state.playerInfoByGame}
 		      				byGamePlayerInfoName={this.state.playerInfoByGameName}
 		      			/>
-		      		: null
-		      			// <GameTotals
-      					// 	byGameTotals={this.state.gameTotalsByGame}
-      					// />
-      					// <PlayerInfo
-		      			// 	byGamePlayerInfo={this.state.playerInfoByGame}
-		      			// />	
+		      		: null	
 			    }
-
-      			
-      			{/*//if this game is over, then do this...*/}
-      			{/*{this.state.selectedGames.length 
-      				? <React.Fragment>	
-	      					<GameInfo
-			      				selectedGames={this.state.selectedGames}
-			      				byGameTotals={this.state.gameTotalsByGame}
-			      				byGamePlayerInfo={this.state.playerInfoByGame}
-			      			/>
-			      			{/*<GameTotals
-	      						byGameTotals={this.state.gameTotalsByGame}
-	      					/>
-	      					<PlayerInfo
-			      				byGamePlayerInfo={this.state.playerInfoByGame}
-			      			/>
-			      			</React.Fragment>
-      				: null }*/}
 
       			<FavoriteTeamsList
       				favoriteTeams={this.state.favoriteTeams}

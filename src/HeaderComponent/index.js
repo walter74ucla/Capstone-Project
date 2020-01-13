@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Header, List, Container, Menu, Button } from 'semantic-ui-react';
+import { Header, Container, Menu, Button } from 'semantic-ui-react';
 import EditScreenNameModal from '../EditScreenNameModal';
 
 // if user is logged in show Update Favorites Menu
