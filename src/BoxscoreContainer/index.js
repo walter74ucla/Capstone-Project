@@ -532,8 +532,8 @@ class BoxscoreContainer extends Component {
   	render() {
   		// console.log(this.state.selectedDate.api.games[0].statusGame);//Fix This
 	  	let today = new Date();
-	  	console.log(today);
-	  	console.log(this.state.selectedDay);
+	  	// console.log(today);
+	  	// console.log(this.state.selectedDay);
 	  	return(
 	  		<React.Fragment>
       			<Grid columns={3}>
