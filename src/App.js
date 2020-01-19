@@ -23,17 +23,21 @@ class App extends Component {
     super(props);
     this.state = {
       screen_name: '',
+      email: '',
+      id: '',
       logged: false
     }
   }
 
-  login = (screen_name) => {
-      console.log(screen_name);
+  login = (screen_name, email, id) => {
+      // console.log(screen_name, email, id);
       this.setState({
         screen_name: screen_name,
+        email: email,
+        id: id,
         logged: true  
       })
-      console.log(this.state);//REMOVE THIS Console.log so the password does not show
+      console.log(this.state);
   }
 
   logout = () => {
@@ -48,7 +52,9 @@ class App extends Component {
       <main>
         <HeaderComponent 
           logged={this.state.logged} 
-          screen_name={this.state.screen_name} 
+          screen_name={this.state.screen_name}
+          email={this.state.email}
+          id={this.state.id}
           logout={this.logout}
         />
           <Switch>

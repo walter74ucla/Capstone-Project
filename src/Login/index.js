@@ -9,6 +9,7 @@ class Login extends Component {
 		this.state = {
 			screen_name: '',
 			email: '',
+			id: '',
 			password_hash: ''
 		}
 	}  
@@ -27,8 +28,8 @@ class Login extends Component {
 	// Submission of login in form
 	handleSubmit = async (e) => {
 		e.preventDefault();
-        this.props.login(this.state.screen_name);//added this to receive props from a component rendered by react router
-		console.log('Email & Password:', this.state);//REMOVE THIS Console.log so the password does not show
+        // this.props.login(this.state.screen_name);//added this to receive props from a component rendered by react router
+		// console.log('Email & Password:', this.state);//REMOVE THIS Console.log so the password does not show
 		const loginUrl = `${process.env.REACT_APP_API_URL}/api/v1/users/login`; //localhost:8000/api/v1/users/login
 		// this is users.  this matches flask app.py: app.register_blueprint(user, url_prefix='/api/v1/users')
 		const loginResponse = await fetch(loginUrl, {
@@ -41,17 +42,21 @@ class Login extends Component {
 		});
 
 		const parsedResponse = await loginResponse.json();
-        // console.log(parsedResponse);// this is an object
+        console.log(parsedResponse);// this is an object
 		if (parsedResponse.status.code === 200) {
 			console.log('Login successful');
             // Do something to make React know a user logged in
             let loginScreenName = parsedResponse.data.screen_name;
-            console.log(loginScreenName);
+            let loginEmail = parsedResponse.data.email;
+            let loginId = parsedResponse.data.id;
+            // console.log(loginScreenName+", "+loginEmail+", "+loginId);
 
             this.setState({
-                screen_name: loginScreenName
+                screen_name: loginScreenName,
+                email: loginEmail,
+                id: loginId
             });
-            this.props.login(this.state.screen_name)// lift this up to the parent container App.js
+            this.props.login(this.state.screen_name, this.state.email, this.state.id)// lift this up to the parent container App.js
 			this.props.history.push('/'); // Change url to / programmatically with react-router
 		} else {
 			// Else display error message to the user
