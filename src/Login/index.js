@@ -28,7 +28,7 @@ class Login extends Component {
 	// Submission of login in form
 	handleSubmit = async (e) => {
 		e.preventDefault();
-        // this.props.login(this.state.screen_name);//added this to receive props from a component rendered by react router
+        // this.props.login(this.state.screen_name);
 		// console.log('Email & Password:', this.state);//REMOVE THIS Console.log so the password does not show
 		const loginUrl = `${process.env.REACT_APP_API_URL}/api/v1/users/login`; //localhost:8000/api/v1/users/login
 		// this is users.  this matches flask app.py: app.register_blueprint(user, url_prefix='/api/v1/users')
@@ -56,7 +56,7 @@ class Login extends Component {
                 email: loginEmail,
                 id: loginId
             });
-            this.props.login(this.state.screen_name, this.state.email, this.state.id)// lift this up to the parent container App.js
+            this.props.login(this.state.screen_name, this.state.email, this.state.id)// lift this up to the parent container App.js (receiving props from a component rendered by react router)
 			this.props.history.push('/'); // Change url to / programmatically with react-router
 		} else {
 			// Else display error message to the user

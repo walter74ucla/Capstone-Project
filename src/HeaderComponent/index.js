@@ -10,22 +10,39 @@ class HeaderComponent extends Component {
 		super();
 
 		this.state = {
-			screen_name: '',
-			screenNameToEdit: {
+			// screen_name: '',
+			userToEdit: {
+				logged: '',
 				screen_name: '',
-				created_at: '',
-				id: ''
-			},
+			   	email: '',
+			    id: '',
+			    logout: ''	
+			},			
+			// screenNameToEdit: {
+			// 	screen_name: '',
+			// 	created_at: '',
+			// 	id: ''
+			// },
 			showEditModal: false
 		}
 	}
 
+	// componentDidMount(){
+	// 	console.log('test line 31');		
+	// }
+
+	// defineUserToEdit = () => {
+	// 	this.setState({
+	// 		userToEdit: {
+	// 			logged: false
+	// 		},
+	// 	})
+	// 	console.log(this.state.userToEdit);
+	// }
+
 	openEditModal = async (userToEdit) => {
-		console.log(userToEdit, ' userToEdit ');//want to update screen name by user
+		console.log(userToEdit, ' userToEdit ');//user this object to get the id
 		console.log(userToEdit.id);
-		
-		// if the user that is logged in created the screen name then show modal
-		// else alert "You cannot edit a screen name that you did not create"
 		
 		// want to do the validations on the server, not the client
 		const user = await fetch(process.env.REACT_APP_API_URL + '/api/v1/users/' + userToEdit.id + '/',
@@ -35,8 +52,6 @@ class HeaderComponent extends Component {
 				});
 		const parsedUser = await user.json();
 		console.log(parsedUser, ' parsedUser');
-		console.log(userToEdit.created_by.id);
-		console.log(parsedUser.data.created_by.id);
       	if (parsedUser.status.code === 401) {
 	      	alert ("You cannot edit a screen name that you did not create")
 	    } else {
@@ -46,15 +61,14 @@ class HeaderComponent extends Component {
 					...userToEdit
 				}
 			})
-	    }		
+	    } 
+	    console.log(this.state);		
 	}
       	
 	handleEditChange = (e) => {
     	this.setState({
-      		screenNameToEdit: {
-        		...this.state.screenNameToEdit,
-        [e.currentTarget.name]: e.currentTarget.value
-      		}
+      		...this.state.userToEdit,
+        	[e.currentTarget.name]: e.currentTarget.value
     	})
   	}
 
@@ -76,15 +90,15 @@ class HeaderComponent extends Component {
 		   	console.log('editResponseParsed: ', editResponseParsed);
 
 		   	// I think this should be one screen name 
-		  	const newUserArrayWithEdit = this.state.users.map((user)=> {
-	        if(user.id === editResponseParsed.data.id) {
-	            user = editResponseParsed.data
-	        }
-	        return user;
-	        })
+		  	// const newUserArrayWithEdit = this.state.users.map((user)=> {
+	    //     if(user.id === editResponseParsed.data.id) {
+	    //         user = editResponseParsed.data
+	    //     }
+	    //     return user;
+	    //     })
 	      
 		  	this.setState({
-	        	screen_name: newUserArrayWithEdit,
+	        	screen_name: editResponseParsed.screen_name,
 	        	showEditModal: false
 	      	})
 
@@ -104,11 +118,11 @@ class HeaderComponent extends Component {
 					      <Menu stackable>
 					        <Menu.Item>Update Favorites</Menu.Item>
 					        <Menu.Item>Hi {this.props.screen_name}!</Menu.Item>
-					        <Button onClick={() => this.openEditModal()}>Edit Screen Name</Button>
+					        <Button onClick={() => this.openEditModal(this.props)}>Edit Screen Name</Button>
 					        <Button onClick={() => this.props.logout()}>Log Out</Button>
 					      </Menu>
 					    </Container>
-					    <EditScreenNameModal handleEditChange={this.handleEditChange} open={this.state.showEditModal} screenNameToEdit={this.state.screenNameToEdit} closeAndEdit={this.closeAndEdit}/>
+					    <EditScreenNameModal handleEditChange={this.handleEditChange} open={this.state.showEditModal} userToEdit={this.state.userToEdit} closeAndEdit={this.closeAndEdit}/>
 					</Header> 
 				    :
 				    <Header>

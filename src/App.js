@@ -42,6 +42,9 @@ class App extends Component {
 
   logout = () => {
       this.setState({
+        screen_name: '',
+        email: '',
+        id: '',
         logged: false
       })
       console.log(this.state);
