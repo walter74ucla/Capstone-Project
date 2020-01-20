@@ -10,7 +10,7 @@ class HeaderComponent extends Component {
 		super();
 
 		this.state = {
-			// screen_name: '',
+			users: [],
 			userToEdit: {
 				logged: '',
 				screen_name: '',
@@ -25,27 +25,39 @@ class HeaderComponent extends Component {
 			// },
 			showEditModal: false
 		}
+		console.log(this.state);
 	}
 
-	// componentDidMount(){
-	// 	console.log('test line 31');		
-	// }
+	componentDidMount(){
+		this.getUsers();
+	}
 
-	// defineUserToEdit = () => {
-	// 	this.setState({
-	// 		userToEdit: {
-	// 			logged: false
-	// 		},
-	// 	})
-	// 	console.log(this.state.userToEdit);
-	// }
+	getUsers = async () => {
 
-	openEditModal = async (userToEdit) => {
-		console.log(userToEdit, ' userToEdit ');//user this object to get the id
-		console.log(userToEdit.id);
+		try {
+			const users = await fetch(process.env.REACT_APP_API_URL + '/api/v1/users/',
+				{ // added this callback to send over the session cookie
+					credentials: 'include',
+					method: "GET"
+				});
+			const parsedUsers = await users.json();
+			console.log(parsedUsers);
+
+			this.setState({
+				users: parsedUsers.data
+			})
+		
+	} catch(err){
+		console.log(err);
+		}
+	}
+
+	openEditModal = async (userFromGetUsers) => {
+		console.log(userFromGetUsers, ' userToEdit ');//use this object to get the id
+		console.log(userFromGetUsers.id);
 		
 		// want to do the validations on the server, not the client
-		const user = await fetch(process.env.REACT_APP_API_URL + '/api/v1/users/' + userToEdit.id + '/',
+		const user = await fetch(process.env.REACT_APP_API_URL + '/api/v1/users/' + userFromGetUsers.id + '/',
 				{ // added this callback to send over the session cookie
 					credentials: 'include',
 					method: "GET"
@@ -58,7 +70,7 @@ class HeaderComponent extends Component {
 	      	this.setState({
 				showEditModal: true,
 				userToEdit: {
-					...userToEdit
+					...userFromGetUsers
 				}
 			})
 	    } 
@@ -67,8 +79,10 @@ class HeaderComponent extends Component {
       	
 	handleEditChange = (e) => {
     	this.setState({
-      		...this.state.userToEdit,
-        	[e.currentTarget.name]: e.currentTarget.value
+      		userToEdit: {
+        		...this.state.userToEdit,
+        		[e.currentTarget.name]: e.currentTarget.value
+      		}
     	})
   	}
 
@@ -110,6 +124,10 @@ class HeaderComponent extends Component {
 
 	render(){
 		console.log(this.props);
+
+		const user = this.state.users.find(user => user.id === this.props.id);
+		console.log(user);
+
 	    return (
 	    	<React.Fragment>
 	    		{this.props.logged ?
@@ -117,8 +135,8 @@ class HeaderComponent extends Component {
 						<Container>
 					      <Menu stackable>
 					        <Menu.Item>Update Favorites</Menu.Item>
-					        <Menu.Item>Hi {this.props.screen_name}!</Menu.Item>
-					        <Button onClick={() => this.openEditModal(this.props)}>Edit Screen Name</Button>
+					        <Menu.Item>Hi {user.screen_name}!</Menu.Item>
+					        <Button onClick={() => this.openEditModal(user)}>Edit Screen Name</Button>
 					        <Button onClick={() => this.props.logout()}>Log Out</Button>
 					      </Menu>
 					    </Container>
