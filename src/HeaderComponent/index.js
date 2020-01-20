@@ -100,33 +100,33 @@ class HeaderComponent extends Component {
         		}
       		});
 
-		   	const editResponseParsed = await editResponse.json();
-		   	console.log('editResponseParsed: ', editResponseParsed);
+      const editResponseParsed = await editResponse.json();
+      console.log('editResponseParsed: ', editResponseParsed);
 
-		   	// I think this should be one screen name 
-		  	// const newUserArrayWithEdit = this.state.users.map((user)=> {
-	    //     if(user.id === editResponseParsed.data.id) {
-	    //         user = editResponseParsed.data
-	    //     }
-	    //     return user;
-	    //     })
-	      
-		  	this.setState({
-	        	screen_name: editResponseParsed.screen_name,
-	        	showEditModal: false
-	      	})
+      const newUserArrayWithEdit = this.state.users.map((user)=> {
+        if(user.id === editResponseParsed.data.id) {
+            user = editResponseParsed.data
+        }
+        return user;
+        })
+      
+      this.setState({
+        users: newUserArrayWithEdit,
+        showEditModal: false
+      })
 
-	    } catch(err) {
-	      console.log(err);
-	    }
+    } catch(err) {
+      console.log(err);
+    }
 
-  	}
+  }
+
 
 	render(){
-		console.log(this.props);
+		console.log('props...', this.props);
 
 		const user = this.state.users.find(user => user.id === this.props.id);
-		console.log(user);
+		console.log('user...', user);
 
 	    return (
 	    	<React.Fragment>
