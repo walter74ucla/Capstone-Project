@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Header, Container, Menu, Button } from 'semantic-ui-react';
 import EditScreenNameModal from '../EditScreenNameModal';
 
@@ -10,19 +10,14 @@ class HeaderComponent extends Component {
 		super();
 
 		this.state = {
-			users: [],
-			userToEdit: {
+			users: [],//get all the users
+			userToEdit: {//find a user to edit
 				logged: '',
 				screen_name: '',
 			   	email: '',
 			    id: '',
 			    logout: ''	
 			},			
-			// screenNameToEdit: {
-			// 	screen_name: '',
-			// 	created_at: '',
-			// 	id: ''
-			// },
 			showEditModal: false
 		}
 		console.log(this.state);
@@ -100,33 +95,47 @@ class HeaderComponent extends Component {
         		}
       		});
 
-      const editResponseParsed = await editResponse.json();
-      console.log('editResponseParsed: ', editResponseParsed);
+		   	const editResponseParsed = await editResponse.json();
+		   	console.log('editResponseParsed: ', editResponseParsed);
 
-      const newUserArrayWithEdit = this.state.users.map((user)=> {
-        if(user.id === editResponseParsed.data.id) {
-            user = editResponseParsed.data
-        }
-        return user;
-        })
-      
-      this.setState({
-        users: newUserArrayWithEdit,
-        showEditModal: false
-      })
+		  	const newUserArrayWithEdit = this.state.users.map((user)=> {
+		        if(user.id === editResponseParsed.data.id) {
+		            user = editResponseParsed.data
+		        }
+		        return user;
+		        })
+		      
+		   	this.setState({
+		        users: newUserArrayWithEdit,
+		        showEditModal: false
+		   	})
 
-    } catch(err) {
-      console.log(err);
-    }
+		} catch(err) {
+		   	console.log(err);
+		}
+	}
 
-  }
-
+	logoutMethod = () => {
+		this.props.logout();
+		this.props.history.push('/');
+	}
 
 	render(){
 		console.log('props...', this.props);
+		// this.getUsers();//this gives me an unlimited loop in the console
 
-		const user = this.state.users.find(user => user.id === this.props.id);
+		let user = this.state.users.find(user => user.id === this.props.id);
 		console.log('user...', user);
+		if(typeof user === "undefined" && this.state.users.length < this.props.id){
+			this.getUsers();
+			user = this.state.users.find(user => user.id === this.props.id);			
+		} else {
+			user = user;
+		}
+
+
+		const fullURL = window.location.href;
+		console.log(fullURL);
 
 	    return (
 	    	<React.Fragment>
@@ -134,10 +143,12 @@ class HeaderComponent extends Component {
 	    			<Header>
 						<Container>
 					      <Menu stackable>
-					        <Menu.Item>Update Favorites</Menu.Item>
-					        <Menu.Item>Hi {user.screen_name}!</Menu.Item>
+					        <Menu.Item><Link to = '/favorite_teams'>Update Favorites</Link></Menu.Item>
+					        <Menu.Item><Link to = '/'>Homepage</Link></Menu.Item>
+					    	{/*<Menu.Item>Update Favorites</Menu.Item>*/}
+					        <Menu.Item>Hi {user ? user.screen_name : this.props.screen_name}!</Menu.Item>
 					        <Button onClick={() => this.openEditModal(user)}>Edit Screen Name</Button>
-					        <Button onClick={() => this.props.logout()}>Log Out</Button>
+					        <Button onClick={() => this.logoutMethod()}>Log Out</Button>
 					      </Menu>
 					    </Container>
 					    <EditScreenNameModal handleEditChange={this.handleEditChange} open={this.state.showEditModal} userToEdit={this.state.userToEdit} closeAndEdit={this.closeAndEdit}/>
@@ -159,7 +170,7 @@ class HeaderComponent extends Component {
 }
 
 
-export default HeaderComponent;
+export default withRouter(HeaderComponent);
 
 
 

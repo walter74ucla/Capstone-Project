@@ -26,14 +26,14 @@ class SelectFavoriteTeams extends Component {
 					method: "GET"
 				});
 			const parsedfavoriteTeams = await favoriteTeams.json();
-			console.log(parsedfavoriteTeams);
+			// console.log(parsedfavoriteTeams);
 
 			//https://stackoverflow.com/questions/15125920/how-to-get-distinct-values-from-an-array-of-objects-in-javascript
 			let getFTArray = parsedfavoriteTeams.data.map(item => item.name)
   							.filter((value, index, self) => self
   							.indexOf(value) === index)
 
-  			console.log(getFTArray);
+  			// console.log(getFTArray);
 
 			this.setState({
 				favoriteTeams: getFTArray
@@ -64,7 +64,7 @@ class SelectFavoriteTeams extends Component {
 
 	deleteFavoriteTeam = async (name) => {
 
-		console.log(name)
+		// console.log(name)
 		const deleteFavoriteTeamResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/' + name + '/', {// strange + '/' CORS error again
 													method: 'DELETE',
 													credentials: 'include' // Send a session cookie along with our request
@@ -79,7 +79,7 @@ class SelectFavoriteTeams extends Component {
 			alert ("You cannot delete a Favorite Team that you did not create")
 		}
 
-		console.log(deleteFavoriteTeamParsed, ' response from Flask server')
+		// console.log(deleteFavoriteTeamParsed, ' response from Flask server')
 			// then make the delete request, then remove the favorite team from the state array using filter
 			// what about handling multiple delete requests at once?
 
@@ -87,7 +87,7 @@ class SelectFavoriteTeams extends Component {
 
 	addFavoriteTeam = async (favoriteTeam) => {
 		// e.preventDefault();
-		console.log(favoriteTeam);
+		// console.log(favoriteTeam);
 
 		try {
 
@@ -104,7 +104,7 @@ class SelectFavoriteTeams extends Component {
 			
 			// turn the response from Flask into an object we can use
 			const parsedResponse = await createdFavoriteTeamResponse.json();
-			console.log(parsedResponse, ' this is response');
+			// console.log(parsedResponse, ' this is response');
 			const team =  parsedResponse.data.name;
 
 			// empty all issues in state to new array then
@@ -184,7 +184,7 @@ class SelectFavoriteTeams extends Component {
 }
 
 
-export default SelectFavoriteTeams
+export default SelectFavoriteTeams;
 
 
 

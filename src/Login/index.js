@@ -57,7 +57,7 @@ class Login extends Component {
                 id: loginId
             });
             this.props.login(this.state.screen_name, this.state.email, this.state.id)// lift this up to the parent container App.js (receiving props from a component rendered by react router)
-			this.props.history.push('/'); // Change url to / programmatically with react-router
+			this.props.history.push('/'); // Change url to / programmatically with react-router (could go to another route)
 		} else {
 			// Else display error message to the user
 			this.setState({

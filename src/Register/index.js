@@ -22,7 +22,7 @@ class Register extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        this.props.login(this.state.screen_name);//added this to receive props from a component rendered by react router
+        // this.props.login(this.state.screen_name);
         console.log('hello');
         const registerResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/users/register', {
             method: 'POST',
@@ -37,14 +37,18 @@ class Register extends Component {
 
         if (parsedResponse.status.code === 201) {
             console.log('Registration successful');
-            
+            // Do something to make React know a user registered/logged in
             let loginScreenName = parsedResponse.data.screen_name;
-            console.log(loginScreenName);
+            let loginEmail = parsedResponse.data.email;
+            let loginId = parsedResponse.data.id;
+            // console.log(loginScreenName+", "+loginEmail+", "+loginId);
 
             this.setState({
-                screen_name: loginScreenName
+                screen_name: loginScreenName,
+                email: loginEmail,
+                id: loginId
             });
-            this.props.login(this.state.screen_name)// lift this up to the parent container App.js
+            this.props.login(this.state.screen_name, this.state.email, this.state.id)// lift this up to the parent container App.js (receiving props from a component rendered by react router)
             this.props.history.push('/'); // Change url to / programmatically with react-router
         } else {
             // Else display error message to the user
@@ -62,7 +66,7 @@ class Register extends Component {
                     <Label> Screen Name (10 character limit)</Label>
                     <Form.Input type='text' name="screen_name" maxLength="10" onChange={this.handleChange} />
                     <Label> Email</Label>
-                    <Form.Input type='text' name="email" onChange={this.handleChange} />
+                    <Form.Input type='email' name="email" onChange={this.handleChange} />
                     <Label> Password</Label>
                     <Form.Input type='password' name="password_hash" onChange={this.handleChange} />
                     <Button type="Submit" color="green">Register</Button>
