@@ -20,7 +20,7 @@ class BoxscoreContainer extends Component {
 	      	gameTotalsByGame: [], //receiving fetched data from the Promise.all
 	      	playerInfoByGame: [], //receiving fetched data from the Promise.all
 	      	playerInfoByGameName: [], //receiving fetched data from the Promise.all
-	      	favoriteTeams: [],//this comes from the flask server
+	      	favoriteTeams: [],//populated by the SelectFavoriteTeams component. this comes from the flask server
 	      	selectedDay: null, //added this here to get the selectedDay from the calendar
 	      	isLoading: false, //need this to display loading alert
 	      	today: {// need to define all key-value pairs (properties) if you want to lift state
@@ -414,21 +414,6 @@ class BoxscoreContainer extends Component {
 	//     }
  //    }
 
-	// getPlayerNamesForOneGame = async (player, i) => {
-	// 	let playerNamesForOneGame
-	// 		await Promise.all(this.state.playerInfoByGame[i].api.statistics.map(player => {
-	// 			console.log('Player is: ', player);
-	// 			console.log('Fetching:', player.playerId)
-	// 			let playerName = this.getPlayerName(player.playerId);
-	// 			return playerName;
-	// 			})).then(values => {
-	// 				let playerNamesForOneGame = values;
-	// 				console.log('playerNamesForOneGame in promiseall:', playerNamesForOneGame);
-	// 				console.log(playerNamesForOneGame[0].api.players[0].lastName);
-	// 			})
-	// }
-
-
 
 	componentDidMount(){
     // get called once, after the initial render
@@ -594,14 +579,10 @@ class BoxscoreContainer extends Component {
 		      			/>
 		      		: null	
 			    }
-
-      			<FavoriteTeamsList
-      				favoriteTeams={this.state.favoriteTeams}
-      			/>
     		</React.Fragment>
   		)
   	}
 
 }
 
-export default BoxscoreContainer
+export default BoxscoreContainer;
