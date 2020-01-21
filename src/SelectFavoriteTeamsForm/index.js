@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
-import { Form, Header, Image} from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Form, Header, Image} from 'semantic-ui-react';
 
 class SelectFavoriteTeams extends Component {
-  	constructor(){//How do I link this to the flask db???
+  	constructor(){
 		super();
 
-		this.state = {//does this need props???
-			name: '', //this should add favortite teams to the flask db 
-			// favoriteTeams: [props.favoriteTeams], // insert user props in the [] to get existing Favorite Teams	 
+		this.state = {
+			name: '',//matches the FavoriteTeam model in flask (not needed here, but helpful in the body: of the addFavoriteTeam method)
 			favoriteTeams: [],
 		}
 	}
@@ -65,24 +64,22 @@ class SelectFavoriteTeams extends Component {
 	deleteFavoriteTeam = async (name) => {
 
 		// console.log(name)
-		const deleteFavoriteTeamResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/' + name + '/', {// strange + '/' CORS error again
-													method: 'DELETE',
-													credentials: 'include' // Send a session cookie along with our request
-												});
+		const deleteFavoriteTeamResponse = 
+			await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/' + name + '/', {// strange + '/' CORS error again
+						method: 'DELETE',
+						credentials: 'include' // Send a session cookie along with our request
+					});
 		const deleteFavoriteTeamParsed = await deleteFavoriteTeamResponse.json();
-		// console.log(deleteFavoriteTeamResponse)
+		// console.log(deleteFavoriteTeamResponse);
 		if (deleteFavoriteTeamParsed.status.code === 200) {
 			// now that the db has deleted our item, we need to remove it from state
-			this.setState({favoriteTeams: this.state.favoriteTeams.filter((favoriteTeam) => favoriteTeam !== name )})
+			this.setState({
+				favoriteTeams: this.state.favoriteTeams.filter((favoriteTeam) => favoriteTeam !== name )
+			})
 
 		} else {
 			alert ("You cannot delete a Favorite Team that you did not create")
 		}
-
-		// console.log(deleteFavoriteTeamParsed, ' response from Flask server')
-			// then make the delete request, then remove the favorite team from the state array using filter
-			// what about handling multiple delete requests at once?
-
 	}
 
 	addFavoriteTeam = async (favoriteTeam) => {
@@ -92,25 +89,24 @@ class SelectFavoriteTeams extends Component {
 		try {
 
 			// Send JSON
-			// createdIssue variable storing response from Flask API
-			const createdFavoriteTeamResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/', {
-				method: 'POST',
-				credentials: 'include', // added this to send over the session cookie
-				body: JSON.stringify({name: favoriteTeam}),//passing an object here
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
+			// createdFavoriteTeamResponse variable storing response from Flask API
+			const createdFavoriteTeamResponse = 
+				await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/', {
+					method: 'POST',
+					credentials: 'include', // added this to send over the session cookie
+					body: JSON.stringify({name: favoriteTeam}),//passing an object here. (see name: in the constructor)
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				});
 			
 			// turn the response from Flask into an object we can use
 			const parsedResponse = await createdFavoriteTeamResponse.json();
 			// console.log(parsedResponse, ' this is response');
 			const team =  parsedResponse.data.name;
 
-			// empty all issues in state to new array then
-			// adding issue we created to the end of it (created shows up first until refresh then at the bottom)
-			// what about handling multiple add requests at once?
-
+			// empty all teams in state to new array then
+			// adding team we created to the beginning of it
 			this.setState({favoriteTeams: [team, ...this.state.favoriteTeams]})
 		
 		} catch(err){
@@ -121,7 +117,7 @@ class SelectFavoriteTeams extends Component {
 
 
   	render() {//Select Multiple Teams
-  		// const teams = ['Atlanta Hawks', 'Boston Celtics', 'Brooklyn Nets', 'Charlotte Hornets', 'Chicago Bulls', 'Cleveland Cavaliers', 'Dallas Mavericks', 'Denver Nuggets', 'Detroit Pistons', 'Golden State Warriors', 'Houston Rockets', 'Indiana Pacers', 'Los Angeles Clippers', 'Los Angeles Lakers', 'Memphis Grizzlies', 'Miami Heat', 'Milwaukee Bucks', 'Minnesota Timberwolves', 'New Orleans Hornets', 'New York Knicks', 'Oklahoma City Thunder', 'Orlando Magic', 'Philadelphia 76ers', 'Phoenix Suns', 'Portland Trail Blazers', 'Sacramento Kings', 'San Antonio Spurs', 'Toronto Raptors', 'Utah Jazz', 'Washington Wizards']
+  		
 	    const teams = [
 		    	{teamId: "1", logo: "https://i.imgur.com/Kq7BbKr.png", fullName: "Atlanta Hawks"},
 		    	{teamId: "2", logo: "https://i.imgur.com/ZllxvAh.png", fullName: "Boston Celtics"},
@@ -154,6 +150,7 @@ class SelectFavoriteTeams extends Component {
 	    		{teamId: "40", logo: "https://i.imgur.com/BpzstID.png", fullName: "Utah Jazz"},
 	    		{teamId: "41", logo: "https://i.imgur.com/8LCV448.png", fullName: "Washington Wizards"},
 		    ]
+
 	    const teamCheckbox = teams.map((team) => (
 	    	<Form.Field key={team.teamId}
 	            label=
@@ -170,6 +167,7 @@ class SelectFavoriteTeams extends Component {
 	            onChange={this.handleFavoriteTeamsChange}
 	          />
 	    ))
+	    
 	    return (
 	    	<React.Fragment>
 		      	<Form>

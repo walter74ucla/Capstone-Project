@@ -49,7 +49,7 @@ class Register extends Component {
                 id: loginId
             });
             this.props.login(this.state.screen_name, this.state.email, this.state.id)// lift this up to the parent container App.js (receiving props from a component rendered by react router)
-            this.props.history.push('/'); // Change url to / programmatically with react-router
+            this.props.history.push('/'); // Change url to / programmatically with react-router (could go to another route)
         } else {
             // Else display error message to the user
             this.setState({
@@ -64,9 +64,9 @@ class Register extends Component {
             <React.Fragment>
                 <Form onSubmit={this.handleSubmit}>
                     <Label> Screen Name (10 character limit)</Label>
-                    <Form.Input type='text' name="screen_name" maxLength="10" onChange={this.handleChange} />
+                    <Form.Input type="text" name="screen_name" maxLength="10" onChange={this.handleChange} />
                     <Label> Email</Label>
-                    <Form.Input type='email' name="email" onChange={this.handleChange} />
+                    <Form.Input type="email" name="email" onChange={this.handleChange} />
                     <Label> Password</Label>
                     <Form.Input type='password' name="password_hash" onChange={this.handleChange} />
                     <Button type="Submit" color="green">Register</Button>

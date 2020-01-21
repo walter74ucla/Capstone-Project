@@ -16,7 +16,6 @@ class Login extends Component {
 
 	// Handling of form value change
 	handleChange = (e) => {
-		// e.preventDefault();//don't think I need this
 		this.setState({
 			[e.currentTarget.name]: e.currentTarget.value
 			// We are using one function in the above to update our 

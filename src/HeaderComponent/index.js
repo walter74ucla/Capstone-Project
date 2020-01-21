@@ -10,7 +10,7 @@ class HeaderComponent extends Component {
 		super();
 
 		this.state = {
-			users: [],//get all the users
+			users: [],//get all the users from the flask db
 			userToEdit: {//find a user to edit
 				logged: '',
 				screen_name: '',

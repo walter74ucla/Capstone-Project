@@ -9,7 +9,6 @@ import HeaderComponent from './HeaderComponent';
 import { Route, Switch } from 'react-router-dom';
 
 
-// add login/logout here???
 const My404 = () => {
   return (
     <div>

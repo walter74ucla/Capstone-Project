@@ -19,7 +19,6 @@ class BoxscoreContainer extends Component {
 	      	gameTotalsByGame: [], //receiving fetched data from the Promise.all
 	      	playerInfoByGame: [], //receiving fetched data from the Promise.all
 	      	playerInfoByGameName: [], //receiving fetched data from the Promise.all
-	      	favoriteTeams: [],//populated by the SelectFavoriteTeams component. this comes from the flask server
 	      	selectedDay: null, //added this here to get the selectedDay from the calendar
 	      	isLoading: false, //need this to display loading alert
 	      	today: {// need to define all key-value pairs (properties) if you want to lift state
