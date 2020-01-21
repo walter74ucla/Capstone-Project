@@ -3,7 +3,6 @@ import GameListToday from '../GameListToday';
 import GameListSelectedDate from '../GameListSelectedDate';
 import GameInfo from '../GameInfo';
 import SelectedDateSummary from '../SelectedDateSummary';
-import FavoriteTeamsList from '../FavoriteTeamsList';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
 import { Grid, Segment, Dimmer, Loader } from 'semantic-ui-react'
@@ -59,36 +58,6 @@ class BoxscoreContainer extends Component {
 		      		status: 0
 		      	}
 		    },
-		    
-		    // This property is used in the fetch
-	   //    	gameTotals: {// need to define all key-value pairs (properties) if you want to lift state
-				// api: {
-		  //     		filters: [],
-		  //     		statistics: [],
-		  //     		message: "",
-		  //     		results: 0,
-		  //     		status: 0
-		  //     	}
-		  //  	},
-		   	// This property is used in the fetch
-		  //  	playerInfo: {// need to define all key-value pairs (properties) if you want to lift state
-				// api: {
-		  //     		filters: [],
-		  //     		statistics: [],
-		  //     		message: "",
-		  //     		results: 0,
-		  //     		status: 0
-		  //     	}
-		  //  	},
-		  //  	playerStats: {// need to define all key-value pairs (properties) if you want to lift state
-				// api: {
-		  //     		filters: [],
-		  //     		statistics: [],
-		  //     		message: "",
-		  //     		results: 0,
-		  //     		status: 0
-		  //     	}
-		  //  	},
 		}
 	}
 	
@@ -182,21 +151,23 @@ class BoxscoreContainer extends Component {
 		
 
 		try {
-	      	const selectedDate = await fetch(`https://api-nba-v1.p.rapidapi.com/games/date/${dSAPIConverted}`, {
-				"method": "GET",
-				"headers": {
-					"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-					"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
-				}
-			})
+	      	const selectedDate = await 
+	      		fetch(`https://api-nba-v1.p.rapidapi.com/games/date/${dSAPIConverted}`, {
+					"method": "GET",
+					"headers": {
+						"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+						"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
+					}
+				})
 
-			const selectedDatePlusOne = await fetch(`https://api-nba-v1.p.rapidapi.com/games/date/${dSAPIPOConverted}`, {
-				"method": "GET",
-				"headers": {
-					"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-					"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
-				}
-			})
+			const selectedDatePlusOne = await 
+				fetch(`https://api-nba-v1.p.rapidapi.com/games/date/${dSAPIPOConverted}`, {
+					"method": "GET",
+					"headers": {
+						"x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+						"x-rapidapi-key": "d6b3a2676dmsh79d3be25f7311bfp17de4ejsn779b55e60866"
+					}
+				})
 
 	      	const parsedSelectedDate = await selectedDate.json();
 	      	const parsedSelectedDatePlusOne = await selectedDatePlusOne.json();
@@ -212,7 +183,7 @@ class BoxscoreContainer extends Component {
 				return this.correctDayFilter(game, dateStringAPIPlusOne, false);
 			}));
 
-			console.log('Selected Day Games: ', selectedGames)
+			console.log('Selected Day Games: ', selectedGames);
 
 			//Fill the gameTotalsByGame array here
 			let selectedGamesGameTotals
@@ -316,23 +287,6 @@ class BoxscoreContainer extends Component {
 		
 	}	
 
-	checkIfSelectedGamesByDayFinished = (gamesArray) => {
-		let checkIfGameFinished = gamesArray.map(gameStatus => {
-					return gameStatus.statusGame;
-				})
-				console.log(checkIfGameFinished);
-
-				if(checkIfGameFinished.length > 0){
-					let check = checkIfGameFinished.map(gameStatus => {
-					return gameStatus === "Finished" ? 0 : 1;
-					}).reduce((sum, gameStatus) => {
-						return sum + gameStatus;
-					});
-					console.log(check);	
-				}
-				
-	}
-
 	getGameTotalsDataForOneGame = async (gameId) => {
 		// console.log('GameID: ', gameId);
 
@@ -399,22 +353,6 @@ class BoxscoreContainer extends Component {
 
 	}
 
-
-	// createName = (playerId, playerArray) => {
-	//     // let nameArray = playerArray;
-	//     for(let i=0; i<playerArray.length; i++){
-	//     	for(let j=0; j<playerArray[i][j].length; j++){
-	//     		if(playerId === playerArray[i][j].api.players[0].playerId){
-	//     			let firstName = playerArray[i][j].api.players[0].firstName;
-	//     			let lastName = playerArray[i][j].api.players[0].lastName;
-	//     			let fullName = `${lastName}, ${firstName}`;
-	//     			return fullName;
-	//     		}
-	//     	}
-	//     }
- //    }
-
-
 	componentDidMount(){
     // get called once, after the initial render
     // is the component on the dom? ComponentDidMount
@@ -433,86 +371,8 @@ class BoxscoreContainer extends Component {
     	this.getSelectedDateGameData(day, false)
     }
 
-    // Getting logged in user favorite teams from the flask server
-    getFavoriteTeams = async () => {
-
-		try {
-			const favoriteTeams = await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/',
-				{ // added this callback to send over the session cookie
-					credentials: 'include',
-					method: "GET"
-				});
-			const parsedfavoriteTeams = await favoriteTeams.json();
-			console.log(parsedfavoriteTeams);
-
-			this.setState({
-				favoriteTeams: parsedfavoriteTeams.data
-			})
-		
-	} catch(err){
-		console.log(err);
-		}
-	}
-
-	deleteFavoriteTeam = async (id) => {
-
-		console.log(id)
-		const deleteFavoriteTeamResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/' + id + '/', {// strange + '/' CORS error again
-													method: 'DELETE',
-													credentials: 'include' // Send a session cookie along with our request
-												});
-		const deleteFavoriteTeamParsed = await deleteFavoriteTeamResponse.json();
-		console.log(deleteFavoriteTeamResponse)
-		if (deleteFavoriteTeamParsed.status.code === 200) {
-			// now that the db has deleted our item, we need to remove it from state
-			this.setState({favoriteTeams: this.state.favoriteTeams.filter((favoriteTeam) => favoriteTeam.id !== id )})
-
-		} else {
-			alert ("You cannot delete a Favorite Team that you did not create")
-		}
-
-		console.log(deleteFavoriteTeamParsed, ' response from Flask server')
-			// then make the delete request, then remove the favorite team from the state array using filter
-			// what about handling multiple delete requests at once?
-
-	}
-
-	addFavoriteTeam = async (e, favoriteTeam) => {
-		e.preventDefault();
-		console.log(favoriteTeam);
-
-		try {
-
-			// Send JSON
-			// createdIssue variable storing response from Flask API
-			const createdFavoriteTeamResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/favorite_teams/', {
-				method: 'POST',
-				credentials: 'include', // added this to send over the session cookie
-				body: JSON.stringify(favoriteTeam),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
-			
-			// turn the response from Flask into an object we can use
-			const parsedResponse = await createdFavoriteTeamResponse.json();
-			console.log(parsedResponse, ' this is response');
-
-			// empty all issues in state to new array then
-			// adding issue we created to the end of it (created shows up first until refresh then at the bottom)
-			// what about handling multiple add requests at once?
-
-			this.setState({favoriteTeams: [parsedResponse.data, ...this.state.favoriteTeams]})
-		
-		} catch(err){
-			console.log('error')
-			console.log(err)
-		}
-	}
-
 
   	render() {
-  		// console.log(this.state.selectedDate.api.games[0].statusGame);//Fix This
 	  	let today = new Date();
 	  	// console.log(today);
 	  	// console.log(this.state.selectedDay);

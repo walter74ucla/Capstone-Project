@@ -86,14 +86,15 @@ class HeaderComponent extends Component {
 
     	try {
 
-      		const editResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/users/' + this.state.userToEdit.id + '/', {
-        		method : "PUT",
-        		credentials: 'include', // Send a session cookie along with our request
-        		body: JSON.stringify(this.state.userToEdit),
-        		headers: {
-          			'Content-Type' : 'application/json'
-        		}
-      		});
+      		const editResponse = await 
+	      		fetch(process.env.REACT_APP_API_URL + '/api/v1/users/' + this.state.userToEdit.id + '/', {
+	        		method : "PUT",
+	        		credentials: 'include', // Send a session cookie along with our request
+	        		body: JSON.stringify(this.state.userToEdit),
+	        		headers: {
+	          			'Content-Type' : 'application/json'
+	        		}
+	      		});
 
 		   	const editResponseParsed = await editResponse.json();
 		   	console.log('editResponseParsed: ', editResponseParsed);
@@ -118,11 +119,12 @@ class HeaderComponent extends Component {
 	logoutMethod = () => {
 		this.props.logout();
 		this.props.history.push('/');
+		window.location.reload();
 	}
 
 	render(){
 		console.log('props...', this.props);
-		// this.getUsers();//this gives me an unlimited loop in the console
+		// this.getUsers();//this gives me an infinite loop in the console
 
 		let user = this.state.users.find(user => user.id === this.props.id);
 		console.log('user...', user);
@@ -133,9 +135,10 @@ class HeaderComponent extends Component {
 			user = user;
 		}
 
-
 		const fullURL = window.location.href;
 		console.log(fullURL);
+		const homepage = "http://localhost:3000/";
+		const favoritespage = "http://localhost:3000/favorite_teams";
 
 	    return (
 	    	<React.Fragment>
@@ -143,15 +146,25 @@ class HeaderComponent extends Component {
 	    			<Header>
 						<Container>
 					      <Menu stackable>
-					        <Menu.Item><Link to = '/favorite_teams'>Update Favorites</Link></Menu.Item>
-					        <Menu.Item><Link to = '/'>Homepage</Link></Menu.Item>
-					    	{/*<Menu.Item>Update Favorites</Menu.Item>*/}
+					        {fullURL === homepage 
+					        	?	<Menu.Item>
+					        			<Link to = '/favorite_teams'>Update Favorites</Link>
+					        		</Menu.Item>
+					        	: fullURL === favoritespage
+					        	?	<Menu.Item><Link to = '/'>Homepage</Link></Menu.Item>
+					        	: null
+					        }
 					        <Menu.Item>Hi {user ? user.screen_name : this.props.screen_name}!</Menu.Item>
 					        <Button onClick={() => this.openEditModal(user)}>Edit Screen Name</Button>
 					        <Button onClick={() => this.logoutMethod()}>Log Out</Button>
 					      </Menu>
 					    </Container>
-					    <EditScreenNameModal handleEditChange={this.handleEditChange} open={this.state.showEditModal} userToEdit={this.state.userToEdit} closeAndEdit={this.closeAndEdit}/>
+					    <EditScreenNameModal 
+					    	handleEditChange={this.handleEditChange} 
+					    	open={this.state.showEditModal} 
+					    	userToEdit={this.state.userToEdit} 
+					    	closeAndEdit={this.closeAndEdit}
+					    />
 					</Header> 
 				    :
 				    <Header>

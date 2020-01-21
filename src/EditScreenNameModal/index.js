@@ -12,7 +12,13 @@ const EditScreenNameModal = (props) => {
 					<Label>
 						Screen Name (10 character limit):
 					</Label>
-					<Form.Input type='text' name='screen_name' maxLength='10' value={props.userToEdit.screen_name} onChange={props.handleEditChange}/>
+					<Form.Input 
+						type='text' 
+						name='screen_name' 
+						maxLength='10' 
+						value={props.userToEdit.screen_name} 
+						onChange={props.handleEditChange}
+					/>
 					<Modal.Actions>
 						<Button color='green' type='submit'>Edit Screen Name</Button>
 					</Modal.Actions>
@@ -21,15 +27,6 @@ const EditScreenNameModal = (props) => {
 		</Modal>
 		)
 }
-
-
-
-
-
-
-
-
-
 
 
 export default EditScreenNameModal;
