@@ -137,8 +137,10 @@ class HeaderComponent extends Component {
 
 		const fullURL = window.location.href;
 		console.log(fullURL);
-		const homepage = "http://localhost:3000/";
-		const favoritespage = "http://localhost:3000/favorite_teams";
+		const homepageDev = "http://localhost:3000/";
+		const favoritespageDev = "http://localhost:3000/favorite_teams";
+		const homepageProd = "https://react-boxscore-app.herokuapp.com/";
+		const favoritespageProd = "https://react-boxscore-app.herokuapp.com/favorite_teams";
 
 	    return (
 	    	<React.Fragment>
@@ -146,11 +148,11 @@ class HeaderComponent extends Component {
 	    			<Header>
 						<Container>
 					      <Menu stackable>
-					        {fullURL === homepage 
+					        {fullURL === (homepageDev || homepageProd)
 					        	?	<Menu.Item>
 					        			<Link to = '/favorite_teams'>Update Favorites</Link>
 					        		</Menu.Item>
-					        	: fullURL === favoritespage
+					        	: fullURL === (favoritespageDev || favoritespageProd)
 					        	?	<Menu.Item><Link to = '/'>Homepage</Link></Menu.Item>
 					        	: null
 					        }
