@@ -148,11 +148,17 @@ class HeaderComponent extends Component {
 	    			<Header>
 						<Container>
 					      <Menu stackable>
-					        {fullURL === homepageDev || homepageProd
+					        {fullURL === homepageDev
 					        	?	<Menu.Item>
 					        			<Link to = '/favorite_teams'>Update Favorites</Link>
 					        		</Menu.Item>
-					        	: fullURL === favoritespageDev || favoritespageProd
+					        	: fullURL === favoritespageDev
+					        	?	<Menu.Item><Link to = '/'>Homepage</Link></Menu.Item>
+					        	: fullURL === homepageProd
+					        	?	<Menu.Item>
+					        			<Link to = '/favorite_teams'>Update Favorites</Link>
+					        		</Menu.Item>
+					        	: fullURL === favoritespageProd
 					        	?	<Menu.Item><Link to = '/'>Homepage</Link></Menu.Item>
 					        	: null
 					        }
