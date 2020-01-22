@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Header, Container, Menu, Button } from 'semantic-ui-react';
 import EditScreenNameModal from '../EditScreenNameModal';
 
@@ -10,50 +10,73 @@ class HeaderComponent extends Component {
 		super();
 
 		this.state = {
-			screen_name: '',
-			screenNameToEdit: {
+			users: [],//get all the users from the flask db
+			userToEdit: {//find a user to edit
+				logged: '',
 				screen_name: '',
-				created_at: '',
-				id: ''
-			},
+			   	email: '',
+			    id: '',
+			    logout: ''	
+			},			
 			showEditModal: false
+		}
+		console.log(this.state);
+	}
+
+	componentDidMount(){
+		this.getUsers();
+	}
+
+	getUsers = async () => {
+
+		try {
+			const users = await fetch(process.env.REACT_APP_API_URL + '/api/v1/users/',
+				{ // added this callback to send over the session cookie
+					credentials: 'include',
+					method: "GET"
+				});
+			const parsedUsers = await users.json();
+			console.log(parsedUsers);
+
+			this.setState({
+				users: parsedUsers.data
+			})
+		
+	} catch(err){
+		console.log(err);
 		}
 	}
 
-	openEditModal = async (userToEdit) => {
-		console.log(userToEdit, ' userToEdit ');//want to update screen name by user
-		console.log(userToEdit.id);
-		
-		// if the user that is logged in created the screen name then show modal
-		// else alert "You cannot edit a screen name that you did not create"
+	openEditModal = async (userFromGetUsers) => {
+		console.log(userFromGetUsers, ' userToEdit ');//use this object to get the id
+		console.log(userFromGetUsers.id);
 		
 		// want to do the validations on the server, not the client
-		const user = await fetch(process.env.REACT_APP_API_URL + '/api/v1/users/' + userToEdit.id + '/',
+		const user = await fetch(process.env.REACT_APP_API_URL + '/api/v1/users/' + userFromGetUsers.id + '/',
 				{ // added this callback to send over the session cookie
 					credentials: 'include',
 					method: "GET"
 				});
 		const parsedUser = await user.json();
 		console.log(parsedUser, ' parsedUser');
-		console.log(userToEdit.created_by.id);
-		console.log(parsedUser.data.created_by.id);
       	if (parsedUser.status.code === 401) {
 	      	alert ("You cannot edit a screen name that you did not create")
 	    } else {
 	      	this.setState({
 				showEditModal: true,
 				userToEdit: {
-					...userToEdit
+					...userFromGetUsers
 				}
 			})
-	    }		
+	    } 
+	    console.log(this.state);		
 	}
       	
 	handleEditChange = (e) => {
     	this.setState({
-      		screenNameToEdit: {
-        		...this.state.screenNameToEdit,
-        [e.currentTarget.name]: e.currentTarget.value
+      		userToEdit: {
+        		...this.state.userToEdit,
+        		[e.currentTarget.name]: e.currentTarget.value
       		}
     	})
   	}
@@ -63,52 +86,85 @@ class HeaderComponent extends Component {
 
     	try {
 
-      		const editResponse = await fetch(process.env.REACT_APP_API_URL + '/api/v1/users/' + this.state.userToEdit.id + '/', {
-        		method : "PUT",
-        		credentials: 'include', // Send a session cookie along with our request
-        		body: JSON.stringify(this.state.userToEdit),
-        		headers: {
-          			'Content-Type' : 'application/json'
-        		}
-      		});
+      		const editResponse = await 
+	      		fetch(process.env.REACT_APP_API_URL + '/api/v1/users/' + this.state.userToEdit.id + '/', {
+	        		method : "PUT",
+	        		credentials: 'include', // Send a session cookie along with our request
+	        		body: JSON.stringify(this.state.userToEdit),
+	        		headers: {
+	          			'Content-Type' : 'application/json'
+	        		}
+	      		});
 
 		   	const editResponseParsed = await editResponse.json();
 		   	console.log('editResponseParsed: ', editResponseParsed);
 
-		   	// I think this should be one screen name 
 		  	const newUserArrayWithEdit = this.state.users.map((user)=> {
-	        if(user.id === editResponseParsed.data.id) {
-	            user = editResponseParsed.data
-	        }
-	        return user;
-	        })
-	      
-		  	this.setState({
-	        	screen_name: newUserArrayWithEdit,
-	        	showEditModal: false
-	      	})
+		        if(user.id === editResponseParsed.data.id) {
+		            user = editResponseParsed.data
+		        }
+		        return user;
+		        })
+		      
+		   	this.setState({
+		        users: newUserArrayWithEdit,
+		        showEditModal: false
+		   	})
 
-	    } catch(err) {
-	      console.log(err);
-	    }
+		} catch(err) {
+		   	console.log(err);
+		}
+	}
 
-  	}
+	logoutMethod = () => {
+		this.props.logout();
+		this.props.history.push('/');
+		window.location.reload();
+	}
 
 	render(){
-		console.log(this.props);
+		console.log('props...', this.props);
+		// this.getUsers();//this gives me an infinite loop in the console
+
+		let user = this.state.users.find(user => user.id === this.props.id);
+		console.log('user...', user);
+		if(typeof user === "undefined" && this.state.users.length < this.props.id){
+			this.getUsers();
+			user = this.state.users.find(user => user.id === this.props.id);			
+		} else {
+			user = user;
+		}
+
+		const fullURL = window.location.href;
+		console.log(fullURL);
+		const homepage = "http://localhost:3000/";
+		const favoritespage = "http://localhost:3000/favorite_teams";
+
 	    return (
 	    	<React.Fragment>
 	    		{this.props.logged ?
 	    			<Header>
 						<Container>
 					      <Menu stackable>
-					        <Menu.Item>Update Favorites</Menu.Item>
-					        <Menu.Item>Hi {this.props.screen_name}!</Menu.Item>
-					        <Button onClick={() => this.openEditModal()}>Edit Screen Name</Button>
-					        <Button onClick={() => this.props.logout()}>Log Out</Button>
+					        {fullURL === homepage 
+					        	?	<Menu.Item>
+					        			<Link to = '/favorite_teams'>Update Favorites</Link>
+					        		</Menu.Item>
+					        	: fullURL === favoritespage
+					        	?	<Menu.Item><Link to = '/'>Homepage</Link></Menu.Item>
+					        	: null
+					        }
+					        <Menu.Item>Hi {user ? user.screen_name : this.props.screen_name}!</Menu.Item>
+					        <Button onClick={() => this.openEditModal(user)}>Edit Screen Name</Button>
+					        <Button onClick={() => this.logoutMethod()}>Log Out</Button>
 					      </Menu>
 					    </Container>
-					    <EditScreenNameModal handleEditChange={this.handleEditChange} open={this.state.showEditModal} screenNameToEdit={this.state.screenNameToEdit} closeAndEdit={this.closeAndEdit}/>
+					    <EditScreenNameModal 
+					    	handleEditChange={this.handleEditChange} 
+					    	open={this.state.showEditModal} 
+					    	userToEdit={this.state.userToEdit} 
+					    	closeAndEdit={this.closeAndEdit}
+					    />
 					</Header> 
 				    :
 				    <Header>
@@ -127,7 +183,7 @@ class HeaderComponent extends Component {
 }
 
 
-export default HeaderComponent;
+export default withRouter(HeaderComponent);
 
 
 
