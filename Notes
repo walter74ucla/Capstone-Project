@@ -556,10 +556,10 @@ Then wrap our whole app in the browserRouter from the react-router-dom module.
 ===============================================================================
 Steps for react deployment on heroku
 1. create a file called .env.development (on same level as package.json)
-    o inside of that file insert REACT_APP_BACKEND_URL=http://localhost:8000
+    o inside of that file insert REACT_APP_API_URL=http://localhost:8000 (old way in this link: https://git.generalassemb.ly/WebDev-Connected-Classroom/react-deployment -->  REACT_APP_BACKEND_URL=http://localhost:8000)
     o that is the local host for the back end
 2. create a file called .env.production (on same level as package.json)
-    o inside of that file insert REACT_APP_BACKEND_URL=https://flask-boxscore-api.herokuapp.com
+    o inside of that file insert REACT_APP_API_URL=https://flask-boxscore-api.herokuapp.com (old way in this link: https://git.generalassemb.ly/WebDev-Connected-Classroom/react-deployment -->  REACT_APP_BACKEND_URL=https://flask-boxscore-api.herokuapp.com)
     o that is the production host for the back end
 $ heroku git:remote -a react-boxscore-app
 $ heroku buildpacks:set mars/create-react-app -a react-boxscore-app
