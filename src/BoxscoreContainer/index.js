@@ -1,11 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import GameListToday from '../GameListToday';
 import GameListSelectedDate from '../GameListSelectedDate';
 import GameInfo from '../GameInfo';
 import SelectedDateSummary from '../SelectedDateSummary';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
-import { Grid, Segment, Dimmer, Loader } from 'semantic-ui-react'
+import { 
+	Grid, 
+	Segment, 
+	Dimmer, 
+	Loader, 
+	Button, 
+	Rail, 
+	Ref, 
+	Sticky 
+} from 'semantic-ui-react';
 
 
 class BoxscoreContainer extends Component {
@@ -438,6 +447,7 @@ class BoxscoreContainer extends Component {
 		      			/>
 		      		: null	
 			    }
+			    <Button content='Back to Top' color='blue' floated='right' />
     		</React.Fragment>
   		)
   	}
