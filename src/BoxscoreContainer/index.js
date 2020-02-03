@@ -379,6 +379,7 @@ class BoxscoreContainer extends Component {
     	this.getSelectedDateGameData(day, false)
     }
 
+    contextRef = createRef();
 
   	render() {
 	  	let today = new Date();
@@ -427,6 +428,25 @@ class BoxscoreContainer extends Component {
 				      	</Grid.Column>
 				    </Grid.Row>
 				</Grid>
+      			
+      			<Ref innerRef={this.contextRef}>	
+	      			{/*<Rail position='right'>*/}
+		                <Sticky
+		                  // bottomOffset={50}
+		                  context={this.contextRef}
+		                  // offset={50}
+		                  // pushing
+		                >
+			               	<Button 
+			                	content='Back to Top' 
+			                  	color='blue' 
+			                  	floated='right'
+			                  	// attached='bottom' 
+			                />
+		                </Sticky>
+	              	{/*</Rail>*/}
+              	</Ref>
+      			
       					
       			{this.state.selectedDay && this.state.isLoading === true
       				?	<Segment>
@@ -447,7 +467,7 @@ class BoxscoreContainer extends Component {
 		      			/>
 		      		: null	
 			    }
-			    <Button content='Back to Top' color='blue' floated='right' />
+			    
     		</React.Fragment>
   		)
   	}
