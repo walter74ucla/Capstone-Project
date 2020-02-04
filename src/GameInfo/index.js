@@ -119,7 +119,7 @@ function GameInfo (props) {
 				    </Table.Row>
 				));	
 
-	console.log(counter);
+	// console.log(counter);
 	counter+=1
 
 
