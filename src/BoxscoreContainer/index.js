@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 import GameListToday from '../GameListToday';
 import GameListSelectedDate from '../GameListSelectedDate';
 import GameInfo from '../GameInfo';
@@ -11,9 +11,6 @@ import {
 	Dimmer, 
 	Loader, 
 	Button, 
-	Rail, 
-	Ref, 
-	Sticky,
 	Visibility 
 } from 'semantic-ui-react';
 
@@ -416,15 +413,20 @@ class BoxscoreContainer extends Component {
     	this.getSelectedDateGameData(day, false)
     }
 
-    // contextRef = createRef();
     stickOverlay = () => this.setState({ overlayFixed: true });
+    
     unStickOverlay = () => this.setState({ overlayFixed: false });
+
+    scrollToTop = () => {
+    	document.documentElement.scrollTop = 0;
+    }
+
 
   	render() {
 	  	let today = new Date();
 	  	// console.log(today);
 	  	// console.log(this.state.selectedDay);
-	  	const { overlayFixed, overlayRect } = this.state;
+	  	const { overlayFixed } = this.state;
 	  	return(
 	  		<React.Fragment>
       			<Grid columns={3}>
@@ -474,7 +476,7 @@ class BoxscoreContainer extends Component {
 		            once={false}
 		            onTopPassed={this.stickOverlay}
 		            onTopVisible={this.unStickOverlay}
-		            style={overlayFixed ? { ...overlayStyle, ...overlayRect } : {}}
+		            style={overlayFixed ? { ...overlayStyle } : {}}
 		          />
 
 		       	<div 
@@ -485,6 +487,7 @@ class BoxscoreContainer extends Component {
 	                	content='Back to Top'
 	                  	color='blue'
 	                  	style={overlayFixed ? fixedOverlayButtonStyle : overlayButtonStyle}
+	                  	onClick={() => this.scrollToTop()}
 	                />
 		        </div>
       			

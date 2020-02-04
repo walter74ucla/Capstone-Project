@@ -132,7 +132,7 @@ class HeaderComponent extends Component {
 			this.getUsers();
 			user = this.state.users.find(user => user.id === this.props.id);			
 		} else {
-			user = user;
+			return null;
 		}
 
 		const fullURL = window.location.href;
