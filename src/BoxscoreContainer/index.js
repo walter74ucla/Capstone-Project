@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 import GameListToday from '../GameListToday';
 import GameListSelectedDate from '../GameListSelectedDate';
 import GameInfo from '../GameInfo';
@@ -11,10 +11,43 @@ import {
 	Dimmer, 
 	Loader, 
 	Button, 
-	Rail, 
-	Ref, 
-	Sticky 
+	Visibility 
 } from 'semantic-ui-react';
+
+
+// https://semantic-ui.com/examples/sticky.html
+// https://github.com/Semantic-Org/Semantic-UI-React/blob/master/docs/src/layouts/StickyLayout.js
+// https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
+const overlayStyle = {
+  // float: 'left',
+  // margin: '0em 3em 1em 0em',
+  float: 'right',
+  margin: '1em 1em 1em 1em',
+}
+
+const fixedOverlayStyle = {
+  ...overlayStyle,
+  position: 'fixed', // Fixed/sticky position
+  // top: '80px',
+  zIndex: 10,
+  bottom: '0px', // Place the button 0px from the bottom of the page 
+  right: '0px', // Place the button 0px from the right
+}
+
+const overlayButtonStyle = {
+  position: 'relative',
+  // left: 0,
+  transition: 'left 0.5s ease',
+  padding: '1em 3em', // Controls the size of the button
+  margin: '0em',
+  display: 'none', // Hidden by default
+}
+
+const fixedOverlayButtonStyle = {
+  ...overlayButtonStyle,
+  // left: '800px',
+  display: 'block', // Show it
+}
 
 
 class BoxscoreContainer extends Component {
@@ -66,6 +99,7 @@ class BoxscoreContainer extends Component {
 		      		status: 0
 		      	}
 		    },
+		    overlayFixed: false,
 		}
 	}
 	
@@ -379,12 +413,20 @@ class BoxscoreContainer extends Component {
     	this.getSelectedDateGameData(day, false)
     }
 
-    contextRef = createRef();
+    stickOverlay = () => this.setState({ overlayFixed: true });
+    
+    unStickOverlay = () => this.setState({ overlayFixed: false });
+
+    scrollToTop = () => {
+    	document.documentElement.scrollTop = 0;
+    }
+
 
   	render() {
 	  	let today = new Date();
 	  	// console.log(today);
 	  	// console.log(this.state.selectedDay);
+	  	const { overlayFixed } = this.state;
 	  	return(
 	  		<React.Fragment>
       			<Grid columns={3}>
@@ -429,23 +471,25 @@ class BoxscoreContainer extends Component {
 				    </Grid.Row>
 				</Grid>
       			
-      			<Ref innerRef={this.contextRef}>	
-	      			{/*<Rail position='right'>*/}
-		                <Sticky
-		                  // bottomOffset={50}
-		                  context={this.contextRef}
-		                  // offset={50}
-		                  // pushing
-		                >
-			               	<Button 
-			                	content='Back to Top' 
-			                  	color='blue' 
-			                  	floated='right'
-			                  	// attached='bottom' 
-			                />
-		                </Sticky>
-	              	{/*</Rail>*/}
-              	</Ref>
+      			<Visibility
+		            offset={80}
+		            once={false}
+		            onTopPassed={this.stickOverlay}
+		            onTopVisible={this.unStickOverlay}
+		            style={overlayFixed ? { ...overlayStyle } : {}}
+		          />
+
+		       	<div 
+		       		// ref={this.handleOverlayRef}
+		       		style={overlayFixed ? fixedOverlayStyle : overlayStyle}
+		       	>
+	               	<Button 
+	                	content='Back to Top'
+	                  	color='blue'
+	                  	style={overlayFixed ? fixedOverlayButtonStyle : overlayButtonStyle}
+	                  	onClick={() => this.scrollToTop()}
+	                />
+		        </div>
       			
       					
       			{this.state.selectedDay && this.state.isLoading === true
