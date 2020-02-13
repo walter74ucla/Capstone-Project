@@ -119,7 +119,7 @@ function GameInfo (props) {
 				    </Table.Row>
 				));	
 
-	console.log(counter);
+	// console.log(counter);
 	counter+=1
 
 
@@ -168,7 +168,7 @@ function GameInfo (props) {
 				      	</Table.Row>
 					</Table.Body>
 			    </Table>  
-				    <Table celled striped>
+				    <Table celled striped stackable>
 					    <Table.Header>
 					      <Table.Row>
 					        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
@@ -205,7 +205,7 @@ function GameInfo (props) {
 					      </Table.Row>
 					    </Table.Header>
 				    </Table>
-				    <Table celled striped>
+				    <Table celled striped stackable>
 					    <Table.Header>
 					      <Table.Row>
 					        <Table.HeaderCell>{game.hTeam.fullName}</Table.HeaderCell>

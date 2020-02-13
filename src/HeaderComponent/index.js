@@ -124,16 +124,23 @@ class HeaderComponent extends Component {
 
 	render(){
 		console.log('props...', this.props);
+		console.log('this state...', this.state);
 		// this.getUsers();//this gives me an infinite loop in the console
-
-		let user = this.state.users.find(user => user.id === this.props.id);
-		console.log('user...', user);
-		if(typeof user === "undefined" && this.state.users.length < this.props.id){
-			this.getUsers();
-			user = this.state.users.find(user => user.id === this.props.id);			
-		} else {
-			user = user;
+		let user = "";
+		if(this.props.logged){
+			user = this.state.users.find(user => user.id === this.props.id);
+			console.log('user...', user);
 		}
+
+		// let user = this.state.users.find(user => user.id === this.props.id);
+		// console.log('user...', user);
+		// if(typeof user === "undefined" && this.state.users.length < this.props.id){
+		// 	this.getUsers();
+		// 	user = this.state.users.find(user => user.id === this.props.id);			
+		// } else {
+		// 	user = user;
+		// 	// return null;//the header component disappears when I do this
+		// }
 
 		const fullURL = window.location.href;
 		console.log(fullURL);
@@ -162,7 +169,7 @@ class HeaderComponent extends Component {
 					        	?	<Menu.Item><Link to = '/'>Homepage</Link></Menu.Item>
 					        	: null
 					        }
-					        <Menu.Item>Hi {user ? user.screen_name : this.props.screen_name}!</Menu.Item>
+					        <Menu.Item>Hi {user.screen_name}!</Menu.Item>
 					        <Button onClick={() => this.openEditModal(user)}>Edit Screen Name</Button>
 					        <Button onClick={() => this.logoutMethod()}>Log Out</Button>
 					      </Menu>
