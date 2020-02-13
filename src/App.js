@@ -58,6 +58,8 @@ class App extends Component {
           email={this.state.email}
           id={this.state.id}
           logout={this.logout}
+          // fixed='top'
+          // style={{ marginTop: '7em' }}
         />
           <Switch>
             <Route exact path="/login" render={(props) => <Login {...props} login={this.login} />} />

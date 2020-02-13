@@ -5,10 +5,10 @@ import GameInfo from '../GameInfo';
 import SelectedDateSummary from '../SelectedDateSummary';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
-import { Grid, Segment, Dimmer, Loader, Button, Visibility } from 'semantic-ui-react'
+import { Grid, Segment, Dimmer, Loader, Button, Visibility } from 'semantic-ui-react';
 
 
-// https://semantic-ui.com/examples/sticky.html
+// https://react.semantic-ui.com/layouts/sticky/
 // https://github.com/Semantic-Org/Semantic-UI-React/blob/master/docs/src/layouts/StickyLayout.js
 // https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
 const overlayStyle = {
@@ -410,7 +410,7 @@ class BoxscoreContainer extends Component {
     
     unStickOverlay = () => this.setState({ overlayFixed: false });
 
-  	scrollToTop = () => {
+    scrollToTop = () => {
     	document.documentElement.scrollTop = 0;
     }
 
@@ -503,6 +503,7 @@ class BoxscoreContainer extends Component {
 		      			/>
 		      		: null	
 			    }
+			    
     		</React.Fragment>
   		)
   	}
