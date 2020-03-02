@@ -422,7 +422,7 @@ class BoxscoreContainer extends Component {
 	  	const { overlayFixed } = this.state;
 	  	return(
 	  		<React.Fragment>
-      			<Grid columns={3}>
+      			<Grid columns={3} stackable>
 				    <Grid.Row stretched>
 				      	<Grid.Column>
 				        	<Segment>
