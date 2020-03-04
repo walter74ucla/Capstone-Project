@@ -38,6 +38,8 @@ function GameInfo (props) {
 		    	{teamId: "38", logo: "https://i.imgur.com/HEVWO0q.png", fullName: "Toronto Raptors"},
 	    		{teamId: "40", logo: "https://i.imgur.com/BpzstID.png", fullName: "Utah Jazz"},
 	    		{teamId: "41", logo: "https://i.imgur.com/8LCV448.png", fullName: "Washington Wizards"},
+	    		{teamId: "42", logo: "https://i.imgur.com/KpeyZaK.jpg", fullName: "Team World"},
+	    		{teamId: "39", logo: "https://i.imgur.com/qqEMMzE.jpg", fullName: "Team USA"},
 		    ]
 
 	let counter = 0;// this counts the number of games in the props.byGamePlayerInfoName array
