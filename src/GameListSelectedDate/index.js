@@ -3,7 +3,7 @@ import { Loader } from 'semantic-ui-react';
 
 // passing props from boxscore container
 function GameListSelectedDate (props) {
-	// console.log(props);
+	console.log(props);
 	
 	if (props.isLoading) {
 		return(

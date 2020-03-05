@@ -423,6 +423,7 @@ class BoxscoreContainer extends Component {
 	  	let today = new Date();
 	  	// console.log(today);
 	  	// console.log(this.state.selectedDay);
+	  	console.log(this.state.selectedGames.length);
 	  	const { overlayFixed } = this.state;
 	  	return(
 	  		<React.Fragment>
@@ -464,10 +465,12 @@ class BoxscoreContainer extends Component {
 						        			selectedDay={this.state.selectedDay}
 						        			selectedGames={this.state.selectedGames}
 						        			byGameTotals={this.state.gameTotalsByGame}
+						        			isLoading={this.state.isLoading}
 						        		/>
-      								: 	(this.state.selectedGames.length === 0)	
+      								: 	(this.state.selectedGames.length === 0)
       								?	<NoGamesScheduled
       										selectedDay={this.state.selectedDay}
+      										isLoading={this.state.isLoading}
       									/>
       								: null
       							}		

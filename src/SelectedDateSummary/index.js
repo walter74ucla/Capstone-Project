@@ -3,14 +3,22 @@ import React from 'react';
 
 // passing props from boxscore container
 function SelectedDateSummary (props) {
-	console.log(props);
-	console.log(props.selectedGames[0].vTeam.score.points);
-	console.log(props.byGameTotals[0].api.statistics.length);
+	// console.log(props);
+	// console.log(props.selectedGames[0].vTeam.score.points);
+	// console.log(props.byGameTotals[0].api.statistics.length);
 
-	// if (props.selectedGames[0].vTeam.score.points > 0 &&
-	// 	props.byGameTotals[0].api.statistics.length > 0) {
-		// return(
-			console.log('FFFFFFFFFYEAHYEAHYEAH...DUH!');
+	if (props.byGameTotals[0].api.statistics.length === 0) {
+		return(
+			<React.Fragment>
+		      <h4>{props.selectedDay.toLocaleDateString()} Games</h4>
+		      <div>
+		        No Games Scheduled
+		      </div>
+		    </React.Fragment>
+		)	
+	} 
+
+	// console.log('FFFFFFFFFYEAHYEAHYEAH...DUH!');
 			//map needs to be passed an array, not an object.
 			const selectedGames = props.selectedGames.map(game => {
 				const byGameTotalsGameV = props.byGameTotals
@@ -28,9 +36,6 @@ function SelectedDateSummary (props) {
 					    {game.hTeam.shortName}
 					</li>
 			)})
-		// )
-	// } 
-
 	// else {
 	// 	console.log('FFFFFFFFFYEAHYEAHYEAH...DUH!');
 	// 	const selectedGames = props.selectedGames.map(game => {
