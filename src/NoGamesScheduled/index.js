@@ -4,7 +4,7 @@ import { Loader } from 'semantic-ui-react';
 
 // passing props from boxscore container
 function NoGamesScheduled (props) {
-	console.log(props);
+	// console.log(props);
   	
   	if (props.selectedDay === null) {
   			return null;

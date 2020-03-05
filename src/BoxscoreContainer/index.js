@@ -423,7 +423,7 @@ class BoxscoreContainer extends Component {
 	  	let today = new Date();
 	  	// console.log(today);
 	  	// console.log(this.state.selectedDay);
-	  	console.log(this.state.selectedGames.length);
+	  	// console.log(this.state.selectedGames.length);
 	  	const { overlayFixed } = this.state;
 	  	return(
 	  		<React.Fragment>
