@@ -3,6 +3,7 @@ import GameListToday from '../GameListToday';
 import GameListSelectedDate from '../GameListSelectedDate';
 import GameInfo from '../GameInfo';
 import SelectedDateSummary from '../SelectedDateSummary';
+import NoGamesScheduled from '../NoGamesScheduled';
 // import DropdownExampleControlled from '../DateInputFormV1';
 import DateInput from '../DatePicker';
 import { Grid, Segment, Dimmer, Loader, Button, Visibility } from 'semantic-ui-react';
@@ -253,8 +254,11 @@ class BoxscoreContainer extends Component {
 			// Fill the playerInfoByGameName array here
 			// console.log(this.state.playerInfoByGame);
 			// want the game to be finished before getting player name
+			// console.log(selectedGames[0].vTeam.score.points);
 			
-			if (selectedGames.length > 0) {
+			if (selectedGames.length > 0 
+				&& selectedGames[0].vTeam.score.points > 0
+				) {
 				let checkIfGameFinished = selectedGames.map(gameStatus => {
 					return gameStatus.statusGame;
 				})
@@ -419,14 +423,18 @@ class BoxscoreContainer extends Component {
 	  	let today = new Date();
 	  	// console.log(today);
 	  	// console.log(this.state.selectedDay);
+	  	// console.log(this.state.selectedGames.length);
 	  	const { overlayFixed } = this.state;
 	  	return(
 	  		<React.Fragment>
-      			<Grid columns={3}>
+      			<Grid columns={3} stackable>
 				    <Grid.Row stretched>
 				      	<Grid.Column>
 				        	<Segment>
-				        		<GameListToday todaysGames={this.state.todaysGames}/>
+				        		<GameListToday 
+				        			todaysGames={this.state.todaysGames}
+				        			isLoading={this.state.isLoading}
+				        		/>
       						</Segment>
 				      	</Grid.Column>
 					   	<Grid.Column>
@@ -439,13 +447,14 @@ class BoxscoreContainer extends Component {
 					  	</Grid.Column>
 				      	<Grid.Column>
 				        	<Segment>
-				        		{(this.state.selectedDay && 
+				        		{(this.state.selectedDay &&
 				        			this.state.selectedDay.toLocaleDateString() === 
 				        			today.toLocaleDateString() || 
 				        			this.state.selectedDay > today)
 				        			? 	<GameListSelectedDate
 				      						selectedDay={this.state.selectedDay}
 				      						selectedGames={this.state.selectedGames}
+				      						isLoading={this.state.isLoading}
 				      					/>
 				      				: 	(this.state.selectedDay &&
 				      						this.state.selectedDay.toLocaleDateString() !== 
@@ -456,7 +465,13 @@ class BoxscoreContainer extends Component {
 						        			selectedDay={this.state.selectedDay}
 						        			selectedGames={this.state.selectedGames}
 						        			byGameTotals={this.state.gameTotalsByGame}
+						        			isLoading={this.state.isLoading}
 						        		/>
+      								: 	(this.state.selectedGames.length === 0)
+      								?	<NoGamesScheduled
+      										selectedDay={this.state.selectedDay}
+      										isLoading={this.state.isLoading}
+      									/>
       								: null
       							}		
 				        	</Segment>
