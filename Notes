@@ -579,12 +579,14 @@ Table striped does not on the {playerRowV} in the GameInfo component.
 Bug:  January 19, 2020 on the calendar --> contacted API-NBA on 1/20/20 and they
 fixed it, apifootball.contact@gmail.com
 
-Bug:  January 27, 2020 on the calendar --> contacted API-NBA on 1/20/20 and they
+Bug:  January 27, 2020 on the calendar --> contacted API-NBA on 1/28/20 and they
 fixed it, apifootball.contact@gmail.com
 
 Bug: January 28, 2020 there was a postponement, so logic needs to be updated to handle that.  The postponed game remained "Scheduled"
 
 Bug: February 14, 2020 no logos for Team World and Team USA
+
+Bug: March 7, 2020 on the calendar --> contacted API-NBA on 3/7/20, and they fixed it, apifootball.contact@gmail.com
 
 ===============================================================================
 Warning when using logo provided by API-NBA:
