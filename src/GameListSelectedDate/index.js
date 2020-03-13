@@ -22,9 +22,15 @@ function GameListSelectedDate (props) {
 
 	//map needs to be passed an array, not an object.
 	const selectedGames = props.selectedGames.map(game => (
-		<li key={game.gameId}>
-		    {game.vTeam.shortName} versus {game.hTeam.shortName}
-		</li>
+		game.startTimeUTC.length === 10
+			?
+			<li key={game.gameId}>
+		    	{game.vTeam.shortName} versus {game.hTeam.shortName}, Postponed
+			</li>
+			:
+			<li key={game.gameId}>
+		    	{game.vTeam.shortName} versus {game.hTeam.shortName}
+			</li>
 
 	))
 	console.log(selectedGames);

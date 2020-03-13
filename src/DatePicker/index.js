@@ -24,6 +24,11 @@ export default class DateInput extends React.Component {
         <DayPicker
           selectedDays={this.props.selectedDay}
           onDayClick={this.handleDayClick}
+          todayButton="Go to Today"
+          modifiers={{
+            foo: new Date(),
+          }}
+          onTodayButtonClick={(day, modifiers) => console.log(day, modifiers)}
         />
         <p>
           {this.props.selectedDay

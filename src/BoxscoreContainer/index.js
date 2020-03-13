@@ -52,6 +52,7 @@ class BoxscoreContainer extends Component {
 	    this.state = {
 	    	todaysGames: [], //added this to dry the code
 	      	selectedGames: [], //added this to dry the code
+	      	gamesFinished: [], //want to have an array of finished games
 	      	gameTotalsByGame: [], //receiving fetched data from the Promise.all
 	      	playerInfoByGame: [], //receiving fetched data from the Promise.all
 	      	playerInfoByGameName: [], //receiving fetched data from the Promise.all
@@ -132,24 +133,24 @@ class BoxscoreContainer extends Component {
 	};
 
 	// This function gives us the correct day's information due to the strange UTC time stuff
-	correctDayFilter = (game, filterDateString, expectEqual) => {
-		let dateStringStartTime = new Date(game.startTimeUTC);
-		// console.log(dateStringStartTime);
-		let localeDateStringStartTime = dateStringStartTime.toLocaleDateString();
-		// console.log(localeDateStringStartTime);
+	// correctDayFilter = (game, filterDateString, expectEqual) => {
+	// 	let dateStringStartTime = new Date(game.startTimeUTC);
+	// 	// console.log(dateStringStartTime);
+	// 	let localeDateStringStartTime = dateStringStartTime.toLocaleDateString();
+	// 	// console.log(localeDateStringStartTime);
 
-		let dateStringSelectedDay = new Date(filterDateString);
-		// console.log(dateStringSelectedDay);
-		let localeDateStringSelectedDay = dateStringSelectedDay.toLocaleDateString();
-		// console.log(localeDateStringSelectedDay);		
+	// 	let dateStringSelectedDay = new Date(filterDateString);
+	// 	// console.log(dateStringSelectedDay);
+	// 	let localeDateStringSelectedDay = dateStringSelectedDay.toLocaleDateString();
+	// 	// console.log(localeDateStringSelectedDay);		
 
-		if (expectEqual) {
-			return localeDateStringStartTime === localeDateStringSelectedDay
-		} else {
-			return localeDateStringStartTime !== localeDateStringSelectedDay
-		}
+	// 	if (expectEqual) {
+	// 		return localeDateStringStartTime === localeDateStringSelectedDay
+	// 	} else {
+	// 		return localeDateStringStartTime !== localeDateStringSelectedDay
+	// 	}
 		
-	}
+	// }
 
 	getSelectedDateGameData = async (day, today=false) => {
 		// page defaults to today's date
@@ -210,20 +211,69 @@ class BoxscoreContainer extends Component {
 	      	// console.log(parsedSelectedDate);
 			// console.log(parsedSelectedDatePlusOne);
 	      	
-			// This creates a selected games array
-	      	const selectedGames = parsedSelectedDate.api.games.filter((game) => {
-	      		// Filter for select dates games return games corrected for timezone 
-				return this.correctDayFilter(game, dateStringAPI, true);
-			}).concat(parsedSelectedDatePlusOne.api.games.filter((game) => {
-				// Filter for selected date by correcting timezone of day plus one
-				return this.correctDayFilter(game, dateStringAPIPlusOne, false);
-			}));
+			// // This creates a selected games array
+	  //     	const selectedGames = parsedSelectedDate.api.games.filter((game) => {
+	  //     		// Filter for select dates games return games corrected for timezone 
+			// 	return this.correctDayFilter(game, dateStringAPI, true);
+			// }).concat(parsedSelectedDatePlusOne.api.games.filter((game) => {
+			// 	// Filter for selected date by correcting timezone of day plus one
+			// 	return this.correctDayFilter(game, dateStringAPIPlusOne, false);
+			// }));
 
-			console.log('Selected Day Games: ', selectedGames);
+			// console.log('Selected Day Games: ', selectedGames);
+
+			// Update after March 11, 2020 Postponements due to coronavirus
+			// This creates an updated selected games array
+			const sDPlusSDPOArr = parsedSelectedDate.api.games
+				.concat(parsedSelectedDatePlusOne.api.games);
+			// console.log(sDPlusSDPOArr);
+
+			const updatedSelectedGames = sDPlusSDPOArr.filter((game) => {
+				// console.log(dateStringAPI);
+				const date = new Date(dateStringAPI); // comparison date
+				// console.log(date);
+				// console.log(date.toLocaleDateString()); // M/D/YYYY
+				const startTimeUTC = game.startTimeUTC;
+				// console.log(startTimeUTC);
+				// console.log(startTimeUTC.length);
+				const startTimeUTCTLDS = new Date(startTimeUTC).toLocaleDateString();
+				// console.log(startTimeUTCTLDS); // M/D/YYYY
+				const timeSTUTC = new Date(startTimeUTC).getTime();
+				// console.log(timeSTUTC);
+				const timeSTUTCPlusOne = timeSTUTC + oneDay;
+				// console.log(timeSTUTCPlusOne);
+				const timeSTUTCPlusOneTLDS = new Date(timeSTUTCPlusOne).toLocaleDateString();
+				// console.log(timeSTUTCPlusOneTLDS);
+			
+				return (startTimeUTC.length === 10
+						?	timeSTUTCPlusOneTLDS === date.toLocaleDateString()
+						: 	startTimeUTCTLDS === date.toLocaleDateString()
+				)
+			});
+			console.log('Updated Selected Games: ', updatedSelectedGames);
+
+			// Check to see if the updatedSelectedGames array is valid here
+			// seasonYear cannot be 0 and league must equal standard
+			// this fixes an occasional bug in the API provided data, see Notes.txt
+			let selectedGamesAdj = updatedSelectedGames.filter((game) => {
+				return (
+					game.seasonYear !== 0 &&
+					game.league === "standard")
+			})
+
+			console.log('Selected Games Adjusted: ', selectedGamesAdj);
+
+			let gamesFinished = selectedGamesAdj.filter((game) => {
+				return game.statusGame === "Finished";
+			})		
+			console.log('Games Finished: ', gamesFinished);
+			this.setState({
+				gamesFinished: gamesFinished,
+			})
 
 			//Fill the gameTotalsByGame array here
 			let selectedGamesGameTotals
-			await Promise.all(selectedGames.map(game => {
+			await Promise.all(selectedGamesAdj.map(game => {
 				// console.log('Fetching:', game.gameId)
 				let gameTotals = this.getGameTotalsDataForOneGame(game.gameId);
 				return gameTotals;
@@ -238,7 +288,7 @@ class BoxscoreContainer extends Component {
 			
 			//Fill the playerInfoByGame array here
 			let selectedGamesPlayerInfo
-			await Promise.all(selectedGames.map(game => {
+			await Promise.all(selectedGamesAdj.map(game => {
 				// console.log('Fetching:', game.gameId)
 				let playerInfo = this.getPlayerInfoForOneGame(game.gameId);
 				return playerInfo;
@@ -256,23 +306,9 @@ class BoxscoreContainer extends Component {
 			// want the game to be finished before getting player name
 			// console.log(selectedGames[0].vTeam.score.points);
 			
-			if (selectedGames.length > 0 
-				&& selectedGames[0].vTeam.score.points > 0
-				) {
-				let checkIfGameFinished = selectedGames.map(gameStatus => {
-					return gameStatus.statusGame;
-				})
-				console.log(checkIfGameFinished);
-
-				let check = checkIfGameFinished.map(gameStatus => {
-					return gameStatus === "Finished" ? 0 : 1;
-					}).reduce((sum, gameStatus) => {
-						return sum + gameStatus;
-					});
-					console.log(check);
-
-				if (check === 0) {
-					let multipleGames = [];
+			if (gamesFinished.length > 0 
+				&& gamesFinished[0].vTeam.score.points > 0){
+				let multipleGames = [];
 					for (let i=0; i<this.state.playerInfoByGame.length; i++){
 						let playerNamesForOneGame
 							await Promise.all(this.state.playerInfoByGame[i].api.statistics.map(player => {
@@ -295,14 +331,12 @@ class BoxscoreContainer extends Component {
 							    })
 							// console.log(multipleGames);	
 					}
-						
-				}
 			}
-					
+		
 
 			if (today) {
 				this.setState({
-					todaysGames: selectedGames,
+					todaysGames: selectedGamesAdj,
 					today: parsedSelectedDate,
 					todayPlusOne: parsedSelectedDatePlusOne,
 					tInputDate: dateStringAPI,
@@ -310,7 +344,7 @@ class BoxscoreContainer extends Component {
 				})
 			} else {
                 this.setState({
-                	selectedGames: selectedGames,
+                	selectedGames: selectedGamesAdj, // maybe selectedGamesAdj OR gamesFinished
 				    selectedDate: parsedSelectedDate,
 				    selectedDatePlusOne: parsedSelectedDatePlusOne,
 				    sInputDate: dateStringAPI,
@@ -465,6 +499,7 @@ class BoxscoreContainer extends Component {
 						        			selectedDay={this.state.selectedDay}
 						        			selectedGames={this.state.selectedGames}
 						        			byGameTotals={this.state.gameTotalsByGame}
+						        			gamesFinished={this.state.gamesFinished}
 						        			isLoading={this.state.isLoading}
 						        		/>
       								: 	(this.state.selectedGames.length === 0)
