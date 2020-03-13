@@ -8,14 +8,14 @@ function SelectedDateSummary (props) {
 	// console.log(props.byGameTotals[0].api.statistics.length);
 
 	// if (props.byGameTotals[0].api.statistics.length === 0) {
-	// 	return(
-	// 		<React.Fragment>
-	// 	      <h4>{props.selectedDay.toLocaleDateString()} Games</h4>
-	// 	      <div>
-	// 	        No Games Scheduled
-	// 	      </div>
-	// 	    </React.Fragment>
-	// 	)	
+		// return(
+		// 	<React.Fragment>
+		//       <h4>{props.selectedDay.toLocaleDateString()} Games</h4>
+		//       <div>
+		//         No Games Scheduled
+		//       </div>
+		//     </React.Fragment>
+		// )	
 	// } 
 
 	if (props.gamesFinished.length === 0) {
@@ -35,6 +35,19 @@ function SelectedDateSummary (props) {
 		      </ul>
 		    </React.Fragment>
 	    )
+	}
+
+	// On Feb 15, 2020, the Skills Challenge, 3-Point Contest, and Slam Dunk
+	// are considered a game in this API-NBA
+	if (props.selectedGames[0].vTeam.teamId === null) {
+		return(
+			<React.Fragment>
+		      <h4>{props.selectedDay.toLocaleDateString()} Games</h4>
+		      <div>
+		        No Games Scheduled
+		      </div>
+		    </React.Fragment>
+		)
 	}
 
 			//map needs to be passed an array, not an object.
