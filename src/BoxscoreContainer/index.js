@@ -52,6 +52,7 @@ class BoxscoreContainer extends Component {
 	    this.state = {
 	    	todaysGames: [], //added this to dry the code
 	      	selectedGames: [], //added this to dry the code
+	      	gamesFinished: [], //want to have an array of finished games
 	      	gameTotalsByGame: [], //receiving fetched data from the Promise.all
 	      	playerInfoByGame: [], //receiving fetched data from the Promise.all
 	      	playerInfoByGameName: [], //receiving fetched data from the Promise.all
@@ -132,24 +133,24 @@ class BoxscoreContainer extends Component {
 	};
 
 	// This function gives us the correct day's information due to the strange UTC time stuff
-	correctDayFilter = (game, filterDateString, expectEqual) => {
-		let dateStringStartTime = new Date(game.startTimeUTC);
-		// console.log(dateStringStartTime);
-		let localeDateStringStartTime = dateStringStartTime.toLocaleDateString();
-		// console.log(localeDateStringStartTime);
+	// correctDayFilter = (game, filterDateString, expectEqual) => {
+	// 	let dateStringStartTime = new Date(game.startTimeUTC);
+	// 	// console.log(dateStringStartTime);
+	// 	let localeDateStringStartTime = dateStringStartTime.toLocaleDateString();
+	// 	// console.log(localeDateStringStartTime);
 
-		let dateStringSelectedDay = new Date(filterDateString);
-		// console.log(dateStringSelectedDay);
-		let localeDateStringSelectedDay = dateStringSelectedDay.toLocaleDateString();
-		// console.log(localeDateStringSelectedDay);		
+	// 	let dateStringSelectedDay = new Date(filterDateString);
+	// 	// console.log(dateStringSelectedDay);
+	// 	let localeDateStringSelectedDay = dateStringSelectedDay.toLocaleDateString();
+	// 	// console.log(localeDateStringSelectedDay);		
 
-		if (expectEqual) {
-			return localeDateStringStartTime === localeDateStringSelectedDay
-		} else {
-			return localeDateStringStartTime !== localeDateStringSelectedDay
-		}
+	// 	if (expectEqual) {
+	// 		return localeDateStringStartTime === localeDateStringSelectedDay
+	// 	} else {
+	// 		return localeDateStringStartTime !== localeDateStringSelectedDay
+	// 	}
 		
-	}
+	// }
 
 	getSelectedDateGameData = async (day, today=false) => {
 		// page defaults to today's date
@@ -171,7 +172,7 @@ class BoxscoreContainer extends Component {
 		}
 
 		let dSAPIConverted = this.convertDateStr(dateStringAPI);
-		console.log(dSAPIConverted);
+		// console.log(dSAPIConverted);
 
 		// Add 1 day to dateStringAPI
 		let time = dateStringAPI.getTime(); //Get the time (milliseconds since January 1, 1970)
@@ -183,7 +184,7 @@ class BoxscoreContainer extends Component {
 		let dateStringAPIPlusOne = new Date(timePlusOne);
 		// console.log(dateStringAPIPlusOne);
 		let dSAPIPOConverted = this.convertDateStr(dateStringAPIPlusOne);
-		console.log(dSAPIPOConverted);
+		// console.log(dSAPIPOConverted);
 		
 
 		try {
@@ -207,8 +208,8 @@ class BoxscoreContainer extends Component {
 
 	      	const parsedSelectedDate = await selectedDate.json();
 	      	const parsedSelectedDatePlusOne = await selectedDatePlusOne.json();
-	      	console.log(parsedSelectedDate);
-			console.log(parsedSelectedDatePlusOne);
+	      	// console.log(parsedSelectedDate);
+			// console.log(parsedSelectedDatePlusOne);
 	      	
 			// // This creates a selected games array
 	  //     	const selectedGames = parsedSelectedDate.api.games.filter((game) => {
@@ -225,7 +226,7 @@ class BoxscoreContainer extends Component {
 			// This creates an updated selected games array
 			const sDPlusSDPOArr = parsedSelectedDate.api.games
 				.concat(parsedSelectedDatePlusOne.api.games);
-			console.log(sDPlusSDPOArr);
+			// console.log(sDPlusSDPOArr);
 
 			const updatedSelectedGames = sDPlusSDPOArr.filter((game) => {
 				// console.log(dateStringAPI);
@@ -264,9 +265,11 @@ class BoxscoreContainer extends Component {
 
 			let gamesFinished = selectedGamesAdj.filter((game) => {
 				return game.statusGame === "Finished";
-			})
-
+			})		
 			console.log('Games Finished: ', gamesFinished);
+			this.setState({
+				gamesFinished: gamesFinished,
+			})
 
 			//Fill the gameTotalsByGame array here
 			let selectedGamesGameTotals
@@ -279,7 +282,7 @@ class BoxscoreContainer extends Component {
 					this.setState({
 				      gameTotalsByGame: selectedGamesGameTotals,
 				    })
-					console.log('selectedGamesGameTotals in promiseall:', selectedGamesGameTotals);
+					// console.log('selectedGamesGameTotals in promiseall:', selectedGamesGameTotals);
 					// console.log(selectedGamesGameTotals[0].api.statistics[0].assists);	
 				})
 			
@@ -496,6 +499,7 @@ class BoxscoreContainer extends Component {
 						        			selectedDay={this.state.selectedDay}
 						        			selectedGames={this.state.selectedGames}
 						        			byGameTotals={this.state.gameTotalsByGame}
+						        			gamesFinished={this.state.gamesFinished}
 						        			isLoading={this.state.isLoading}
 						        		/>
       								: 	(this.state.selectedGames.length === 0)
