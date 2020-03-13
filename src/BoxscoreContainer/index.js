@@ -171,7 +171,7 @@ class BoxscoreContainer extends Component {
 		}
 
 		let dSAPIConverted = this.convertDateStr(dateStringAPI);
-		// console.log(dSAPIConverted);
+		console.log(dSAPIConverted);
 
 		// Add 1 day to dateStringAPI
 		let time = dateStringAPI.getTime(); //Get the time (milliseconds since January 1, 1970)
@@ -183,7 +183,7 @@ class BoxscoreContainer extends Component {
 		let dateStringAPIPlusOne = new Date(timePlusOne);
 		// console.log(dateStringAPIPlusOne);
 		let dSAPIPOConverted = this.convertDateStr(dateStringAPIPlusOne);
-		// console.log(dSAPIPOConverted);
+		console.log(dSAPIPOConverted);
 		
 
 		try {
@@ -207,8 +207,8 @@ class BoxscoreContainer extends Component {
 
 	      	const parsedSelectedDate = await selectedDate.json();
 	      	const parsedSelectedDatePlusOne = await selectedDatePlusOne.json();
-	      	// console.log(parsedSelectedDate);
-			// console.log(parsedSelectedDatePlusOne);
+	      	console.log(parsedSelectedDate);
+			console.log(parsedSelectedDatePlusOne);
 	      	
 			// This creates a selected games array
 	      	const selectedGames = parsedSelectedDate.api.games.filter((game) => {
@@ -221,9 +221,62 @@ class BoxscoreContainer extends Component {
 
 			console.log('Selected Day Games: ', selectedGames);
 
+			// Update after March 11, 2020 Postponements due to coronavirus
+			const sDPlusSDPOArr = parsedSelectedDate.api.games
+				.concat(parsedSelectedDatePlusOne.api.games);
+			console.log(sDPlusSDPOArr);
+
+			const updatedSelectedGames = sDPlusSDPOArr.filter((game) => {
+				console.log(dateStringAPI);
+				const date = new Date(dateStringAPI); // comparison date
+				console.log(date);
+				console.log(date.toLocaleDateString()); // M/D/YYYY
+				const startTimeUTC = game.startTimeUTC;
+				console.log(startTimeUTC);
+				console.log(startTimeUTC.length);
+				const startTimeUTCTLDS = new Date(startTimeUTC).toLocaleDateString();
+				console.log(startTimeUTCTLDS); // M/D/YYYY
+				const timeSTUTC = new Date(startTimeUTC).getTime();
+				console.log(timeSTUTC);
+				const timeSTUTCPlusOne = timeSTUTC + oneDay;
+				console.log(timeSTUTCPlusOne);
+				const timeSTUTCPlusOneTLDS = new Date(timeSTUTCPlusOne).toLocaleDateString();
+				console.log(timeSTUTCPlusOneTLDS);
+
+
+				console.log(new Date(game.startTimeUTC).toUTCString());
+			
+				
+
+				return (startTimeUTC.length === 10
+						?	timeSTUTCPlusOneTLDS === date.toLocaleDateString()
+						: 	startTimeUTCTLDS === date.toLocaleDateString()
+
+					// new Date(game.startTimeUTC.substr(0,10)).toLocaleDateString() === now.toLocaleDateString()
+				)
+			});
+			console.log('Updated Selected Games: ', updatedSelectedGames);
+
+			// Check to see if the selectedGames array is valid here
+			// seasonYear cannot be 0 and league must equal standard
+			// this fixes an occasional bug in the API provided data, see Notes.txt
+			let selectedGamesAdj = selectedGames.filter((game) => {
+				return (
+					game.seasonYear !== 0 &&
+					game.league === "standard")
+			})
+
+			console.log('Selected Games Adjusted: ', selectedGamesAdj);
+
+			let gamesFinished = selectedGamesAdj.filter((game) => {
+				return game.statusGame === "Finished";
+			})
+
+			console.log('Games Finished: ', gamesFinished);
+
 			//Fill the gameTotalsByGame array here
 			let selectedGamesGameTotals
-			await Promise.all(selectedGames.map(game => {
+			await Promise.all(gamesFinished.map(game => {
 				// console.log('Fetching:', game.gameId)
 				let gameTotals = this.getGameTotalsDataForOneGame(game.gameId);
 				return gameTotals;
@@ -232,13 +285,13 @@ class BoxscoreContainer extends Component {
 					this.setState({
 				      gameTotalsByGame: selectedGamesGameTotals,
 				    })
-					// console.log('selectedGamesGameTotals in promiseall:', selectedGamesGameTotals);
+					console.log('selectedGamesGameTotals in promiseall:', selectedGamesGameTotals);
 					// console.log(selectedGamesGameTotals[0].api.statistics[0].assists);	
 				})
 			
 			//Fill the playerInfoByGame array here
 			let selectedGamesPlayerInfo
-			await Promise.all(selectedGames.map(game => {
+			await Promise.all(gamesFinished.map(game => {
 				// console.log('Fetching:', game.gameId)
 				let playerInfo = this.getPlayerInfoForOneGame(game.gameId);
 				return playerInfo;
@@ -256,23 +309,9 @@ class BoxscoreContainer extends Component {
 			// want the game to be finished before getting player name
 			// console.log(selectedGames[0].vTeam.score.points);
 			
-			if (selectedGames.length > 0 
-				&& selectedGames[0].vTeam.score.points > 0
-				) {
-				let checkIfGameFinished = selectedGames.map(gameStatus => {
-					return gameStatus.statusGame;
-				})
-				console.log(checkIfGameFinished);
-
-				let check = checkIfGameFinished.map(gameStatus => {
-					return gameStatus === "Finished" ? 0 : 1;
-					}).reduce((sum, gameStatus) => {
-						return sum + gameStatus;
-					});
-					console.log(check);
-
-				if (check === 0) {
-					let multipleGames = [];
+			if (gamesFinished.length > 0 
+				&& gamesFinished[0].vTeam.score.points > 0){
+				let multipleGames = [];
 					for (let i=0; i<this.state.playerInfoByGame.length; i++){
 						let playerNamesForOneGame
 							await Promise.all(this.state.playerInfoByGame[i].api.statistics.map(player => {
@@ -295,14 +334,12 @@ class BoxscoreContainer extends Component {
 							    })
 							// console.log(multipleGames);	
 					}
-						
-				}
 			}
-					
+		
 
 			if (today) {
 				this.setState({
-					todaysGames: selectedGames,
+					todaysGames: selectedGamesAdj,
 					today: parsedSelectedDate,
 					todayPlusOne: parsedSelectedDatePlusOne,
 					tInputDate: dateStringAPI,
@@ -310,7 +347,7 @@ class BoxscoreContainer extends Component {
 				})
 			} else {
                 this.setState({
-                	selectedGames: selectedGames,
+                	selectedGames: gamesFinished,
 				    selectedDate: parsedSelectedDate,
 				    selectedDatePlusOne: parsedSelectedDatePlusOne,
 				    sInputDate: dateStringAPI,

@@ -133,7 +133,7 @@ function GameInfo (props) {
 
 		return(
 			<li key={game.gameId}>
-			    <Table collapsing>
+			    <Table collapsing stackable>
 			    	<Table.Body>
 				      	<Table.Row>
 				        	<Table.Cell>	
