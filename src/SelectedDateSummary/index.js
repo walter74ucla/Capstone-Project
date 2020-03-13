@@ -28,6 +28,12 @@ function SelectedDateSummary (props) {
 					.find(totalsGame => totalsGame.api.statistics[1].gameId === game.gameId);
 					
 			return(
+					game.startTimeUTC.length === 10
+					?
+					<li key={game.gameId}>
+						{game.vTeam.shortName} versus {game.hTeam.shortName}, Postponed
+					</li>
+					:
 					<li key={game.gameId}>
 					    {game.vTeam.shortName + " "}
 					    {game.vTeam.score.points + " "}

@@ -132,6 +132,9 @@ function GameInfo (props) {
 
 
 		return(
+			game.startTimeUTC.length === 10
+				?	null
+				:
 			<li key={game.gameId}>
 			    <Table collapsing stackable>
 			    	<Table.Body>

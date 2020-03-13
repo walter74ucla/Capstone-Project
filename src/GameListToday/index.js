@@ -23,11 +23,17 @@ function GameListToday (props) {
 
 	//map needs to be passed an array, not an object.
 	const todaysGames = props.todaysGames.map(game => (
-		<li key={game.gameId}>
-		    {game.vTeam.shortName} versus {game.hTeam.shortName}
-		</li>
-
-	))
+			game.startTimeUTC.length === 10
+			?
+			<li key={game.gameId}>
+		    	{game.vTeam.shortName} versus {game.hTeam.shortName}, Postponed
+			</li>
+			:
+			<li key={game.gameId}>
+		    	{game.vTeam.shortName} versus {game.hTeam.shortName}
+			</li>	
+		)	
+	)
 
 	return(
 	    <React.Fragment>

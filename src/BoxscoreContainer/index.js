@@ -210,57 +210,51 @@ class BoxscoreContainer extends Component {
 	      	console.log(parsedSelectedDate);
 			console.log(parsedSelectedDatePlusOne);
 	      	
-			// This creates a selected games array
-	      	const selectedGames = parsedSelectedDate.api.games.filter((game) => {
-	      		// Filter for select dates games return games corrected for timezone 
-				return this.correctDayFilter(game, dateStringAPI, true);
-			}).concat(parsedSelectedDatePlusOne.api.games.filter((game) => {
-				// Filter for selected date by correcting timezone of day plus one
-				return this.correctDayFilter(game, dateStringAPIPlusOne, false);
-			}));
+			// // This creates a selected games array
+	  //     	const selectedGames = parsedSelectedDate.api.games.filter((game) => {
+	  //     		// Filter for select dates games return games corrected for timezone 
+			// 	return this.correctDayFilter(game, dateStringAPI, true);
+			// }).concat(parsedSelectedDatePlusOne.api.games.filter((game) => {
+			// 	// Filter for selected date by correcting timezone of day plus one
+			// 	return this.correctDayFilter(game, dateStringAPIPlusOne, false);
+			// }));
 
-			console.log('Selected Day Games: ', selectedGames);
+			// console.log('Selected Day Games: ', selectedGames);
 
 			// Update after March 11, 2020 Postponements due to coronavirus
+			// This creates an updated selected games array
 			const sDPlusSDPOArr = parsedSelectedDate.api.games
 				.concat(parsedSelectedDatePlusOne.api.games);
 			console.log(sDPlusSDPOArr);
 
 			const updatedSelectedGames = sDPlusSDPOArr.filter((game) => {
-				console.log(dateStringAPI);
+				// console.log(dateStringAPI);
 				const date = new Date(dateStringAPI); // comparison date
-				console.log(date);
-				console.log(date.toLocaleDateString()); // M/D/YYYY
+				// console.log(date);
+				// console.log(date.toLocaleDateString()); // M/D/YYYY
 				const startTimeUTC = game.startTimeUTC;
-				console.log(startTimeUTC);
-				console.log(startTimeUTC.length);
+				// console.log(startTimeUTC);
+				// console.log(startTimeUTC.length);
 				const startTimeUTCTLDS = new Date(startTimeUTC).toLocaleDateString();
-				console.log(startTimeUTCTLDS); // M/D/YYYY
+				// console.log(startTimeUTCTLDS); // M/D/YYYY
 				const timeSTUTC = new Date(startTimeUTC).getTime();
-				console.log(timeSTUTC);
+				// console.log(timeSTUTC);
 				const timeSTUTCPlusOne = timeSTUTC + oneDay;
-				console.log(timeSTUTCPlusOne);
+				// console.log(timeSTUTCPlusOne);
 				const timeSTUTCPlusOneTLDS = new Date(timeSTUTCPlusOne).toLocaleDateString();
-				console.log(timeSTUTCPlusOneTLDS);
-
-
-				console.log(new Date(game.startTimeUTC).toUTCString());
+				// console.log(timeSTUTCPlusOneTLDS);
 			
-				
-
 				return (startTimeUTC.length === 10
 						?	timeSTUTCPlusOneTLDS === date.toLocaleDateString()
 						: 	startTimeUTCTLDS === date.toLocaleDateString()
-
-					// new Date(game.startTimeUTC.substr(0,10)).toLocaleDateString() === now.toLocaleDateString()
 				)
 			});
 			console.log('Updated Selected Games: ', updatedSelectedGames);
 
-			// Check to see if the selectedGames array is valid here
+			// Check to see if the updatedSelectedGames array is valid here
 			// seasonYear cannot be 0 and league must equal standard
 			// this fixes an occasional bug in the API provided data, see Notes.txt
-			let selectedGamesAdj = selectedGames.filter((game) => {
+			let selectedGamesAdj = updatedSelectedGames.filter((game) => {
 				return (
 					game.seasonYear !== 0 &&
 					game.league === "standard")
@@ -276,7 +270,7 @@ class BoxscoreContainer extends Component {
 
 			//Fill the gameTotalsByGame array here
 			let selectedGamesGameTotals
-			await Promise.all(gamesFinished.map(game => {
+			await Promise.all(selectedGamesAdj.map(game => {
 				// console.log('Fetching:', game.gameId)
 				let gameTotals = this.getGameTotalsDataForOneGame(game.gameId);
 				return gameTotals;
@@ -291,7 +285,7 @@ class BoxscoreContainer extends Component {
 			
 			//Fill the playerInfoByGame array here
 			let selectedGamesPlayerInfo
-			await Promise.all(gamesFinished.map(game => {
+			await Promise.all(selectedGamesAdj.map(game => {
 				// console.log('Fetching:', game.gameId)
 				let playerInfo = this.getPlayerInfoForOneGame(game.gameId);
 				return playerInfo;
@@ -347,7 +341,7 @@ class BoxscoreContainer extends Component {
 				})
 			} else {
                 this.setState({
-                	selectedGames: gamesFinished,
+                	selectedGames: selectedGamesAdj, // maybe selectedGamesAdj OR gamesFinished
 				    selectedDate: parsedSelectedDate,
 				    selectedDatePlusOne: parsedSelectedDatePlusOne,
 				    sInputDate: dateStringAPI,
