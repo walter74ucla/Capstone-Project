@@ -199,9 +199,9 @@ function GameInfo (props) {
 					        <Table.HeaderCell>BLK</Table.HeaderCell>
 					      </Table.Row>
 					    </Table.Header>
-						<Table.Header>
+						<Table.Body>
 					    	{playerRowV}
-					    </Table.Header>
+					    </Table.Body>
 					    <Table.Header>
 					      <Table.Row>
 					        <Table.HeaderCell>Visitor's Totals:</Table.HeaderCell>
