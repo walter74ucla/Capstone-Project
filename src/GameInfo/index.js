@@ -2,6 +2,14 @@ import React from 'react';
 import { Table, Header, Image } from 'semantic-ui-react';
 
 
+const headerStyleVHTot = {
+  // backgroundColor: 'purple',
+  // color: 'white',
+  borderTopColor: 'black',
+  borderTopStyle: 'solid',
+  borderTopWidth: 1,
+}
+
 // passing props from boxscore container
 function GameInfo (props) {
 	console.log(props);
@@ -204,15 +212,15 @@ function GameInfo (props) {
 					    </Table.Body>
 					    <Table.Header>
 					      <Table.Row>
-					        <Table.HeaderCell>Visitor's Totals:</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
 					      </Table.Row>
 					    </Table.Header>
 				    </Table>
@@ -241,15 +249,15 @@ function GameInfo (props) {
 					    </Table.Header>
 					    <Table.Header>
 					      <Table.Row>
-					        <Table.HeaderCell>Home Totals:</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].min}</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].points}</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].totReb}</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].assists}</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].pFouls}</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].steals}</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].turnovers}</Table.HeaderCell>
-					        <Table.HeaderCell>{byGameTotalsGameH.api.statistics[1].blocks}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>Home Totals:</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].min}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].points}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].totReb}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].assists}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].pFouls}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].steals}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].turnovers}</Table.HeaderCell>
+					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].blocks}</Table.HeaderCell>
 					      </Table.Row>
 					    </Table.Header>
 				    </Table>
