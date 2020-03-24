@@ -144,7 +144,7 @@ function GameInfo (props) {
 				?	null
 				:
 			<li key={game.gameId}>
-			    <Table collapsing stackable>
+			    <Table collapsing unstackable>
 			    	<Table.Body>
 				      	<Table.Row>
 				        	<Table.Cell>	
