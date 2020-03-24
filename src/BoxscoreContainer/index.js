@@ -212,8 +212,8 @@ class BoxscoreContainer extends Component {
 			// console.log(parsedSelectedDatePlusOne);
 	      	
 			// // This creates a selected games array
-	  //     	const selectedGames = parsedSelectedDate.api.games.filter((game) => {
-	  //     		// Filter for select dates games return games corrected for timezone 
+	      	// const selectedGames = parsedSelectedDate.api.games.filter((game) => {
+	      	//	// Filter for select dates games return games corrected for timezone 
 			// 	return this.correctDayFilter(game, dateStringAPI, true);
 			// }).concat(parsedSelectedDatePlusOne.api.games.filter((game) => {
 			// 	// Filter for selected date by correcting timezone of day plus one

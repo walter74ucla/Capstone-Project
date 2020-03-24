@@ -74,7 +74,6 @@ function SelectedDateSummary (props) {
 					</li>
 			)})
 	// else {
-	// 	console.log('FFFFFFFFFYEAHYEAHYEAH...DUH!');
 	// 	const selectedGames = props.selectedGames.map(game => {
 
 	// 	return(
