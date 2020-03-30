@@ -187,7 +187,7 @@ function GameInfo (props) {
 				      	</Table.Row>
 					</Table.Body>
 			    </Table>  
-				    <Table celled striped stackable>
+				    <Table celled striped unstackable>
 					    <Table.Header>
 					      <Table.Row>
 					        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
@@ -224,7 +224,7 @@ function GameInfo (props) {
 					      </Table.Row>
 					    </Table.Header>
 				    </Table>
-				    <Table celled striped stackable>
+				    <Table celled striped unstackable>
 					    <Table.Header>
 					      <Table.Row>
 					        <Table.HeaderCell>{game.hTeam.fullName}</Table.HeaderCell>
