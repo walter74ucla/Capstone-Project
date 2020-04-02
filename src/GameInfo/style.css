@@ -1,0 +1,75 @@
+body {
+	overflow: visible;  /*It seems like the default is overflow-x: hidden;*/
+}
+
+.game-score {
+	/*max-width: 360px;*/
+	border: 2px solid purple;
+	height: 46px;
+	width: auto;
+}
+
+.test {
+	overflow: auto;
+}
+
+/*Fix the header to the top*/
+.freeze-head-and-col tr:first-of-type th{
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0px;
+	/*background-color: cyan;*/
+}
+
+/*Fix the first column  to the left*/
+.freeze-head-and-col td:first-of-type{
+	position: -webkit-sticky;
+	position: sticky;
+	/*background-color: white;*/
+	left: 0px;
+	font-weight: bold;
+}
+
+/* Edit: corner fixed always */
+.freeze-head-and-col tr:first-of-type th:first-of-type{
+	z-index:100;
+	left: 0;
+	/*background-color: black;*/
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Zebra Stripe the first cell of the table rows*/
+.freeze-head-and-col tr:nth-child(even) td:first-of-type{
+	background-color: #F9FAFB;
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Zebra Stripe the first cell of the table rows*/
+.freeze-head-and-col tr:nth-child(odd) td:first-of-type{
+	background-color: #FFFFFF;
+	border-right: 2px outset #F9FAFB;
+}
+
+
+/*Delete Below...*/
+/*Show outset border on Edit: corner fixed always*/
+.freeze-head-and-col-show tr:first-of-type th:first-of-type{
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Show outset border on Zebra Stripe the first cell of the table rows*/
+.freeze-head-and-col-show tr:nth-child(even) td:first-of-type{
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Show outset border on Zebra Stripe the first cell of the table rows*/
+.freeze-head-and-col-show tr:nth-child(odd) td:first-of-type{
+	border-right: 2px outset #F9FAFB;
+}
+
+
+
+
+
+
+

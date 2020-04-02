@@ -1,8 +1,9 @@
 import React from 'react';
 import { Table, Header, Image } from 'semantic-ui-react';
+import './style.css';
 
 
-const headerStyleVHTot = {
+const headerStyleVHTot = { // puts the top border on the visitors and home totals
   // backgroundColor: 'purple',
   // color: 'white',
   borderTopColor: 'black',
@@ -144,6 +145,7 @@ function GameInfo (props) {
 				?	null
 				:
 			<li key={game.gameId}>
+			  	<div className='game-score'>
 			    <Table collapsing unstackable>
 			    	<Table.Body>
 				      	<Table.Row>
@@ -186,81 +188,100 @@ function GameInfo (props) {
 				        	</Table.Cell>
 				      	</Table.Row>
 					</Table.Body>
-			    </Table>  
-				    <Table celled striped unstackable>
-					    <Table.Header>
-					      <Table.Row>
-					        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
-					      </Table.Row>
-					    </Table.Header>
-					    <Table.Header>
-					      <Table.Row>
-					        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
-					        <Table.HeaderCell>Player</Table.HeaderCell>
-					        <Table.HeaderCell>MIN</Table.HeaderCell>
-					        <Table.HeaderCell>PTS</Table.HeaderCell>
-					        <Table.HeaderCell>REB</Table.HeaderCell>
-					        <Table.HeaderCell>AST</Table.HeaderCell>
-					        <Table.HeaderCell>F</Table.HeaderCell>
-					        <Table.HeaderCell>STL</Table.HeaderCell>
-					        <Table.HeaderCell>TO</Table.HeaderCell>
-					        <Table.HeaderCell>BLK</Table.HeaderCell>
-					      </Table.Row>
-					    </Table.Header>
-						<Table.Body>
-					    	{playerRowV}
-					    </Table.Body>
-					    <Table.Header>
-					      <Table.Row>
-					        <Table.HeaderCell style={headerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
-					      </Table.Row>
-					    </Table.Header>
-				    </Table>
-				    <Table celled striped unstackable>
-					    <Table.Header>
-					      <Table.Row>
-					        <Table.HeaderCell>{game.hTeam.fullName}</Table.HeaderCell>
-					      </Table.Row>
-					    </Table.Header>
-					    <Table.Header>
-					      <Table.Row>
-					        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
-					        <Table.HeaderCell>Player</Table.HeaderCell>
-					        <Table.HeaderCell>MIN</Table.HeaderCell>
-					        <Table.HeaderCell>PTS</Table.HeaderCell>
-					        <Table.HeaderCell>REB</Table.HeaderCell>
-					        <Table.HeaderCell>AST</Table.HeaderCell>
-					        <Table.HeaderCell>F</Table.HeaderCell>
-					        <Table.HeaderCell>STL</Table.HeaderCell>
-					        <Table.HeaderCell>TO</Table.HeaderCell>
-					        <Table.HeaderCell>BLK</Table.HeaderCell>
-					      </Table.Row>
-					    </Table.Header>
-						<Table.Body>
-					    	{playerRowH}
-					    </Table.Body>
-					    <Table.Header>
-					      <Table.Row>
-					        <Table.HeaderCell style={headerStyleVHTot}>Home Totals:</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].min}</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].points}</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].totReb}</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].assists}</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].pFouls}</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].steals}</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].turnovers}</Table.HeaderCell>
-					        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].blocks}</Table.HeaderCell>
-					      </Table.Row>
-					    </Table.Header>
-				    </Table>
+			    </Table>
+			   	</div>
+			   	<br/>
+				    <div className='test' onScroll={(ev) => props.handleScroll(ev)}>
+					    <Table celled striped unstackable attached='top'>
+						    <Table.Header>
+						      <Table.Row>
+						        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
+						      </Table.Row>
+						    </Table.Header>
+						</Table>
+						{console.log(window.pageXOffset)}
+						<Table 
+							celled 
+							striped 
+							unstackable 
+							attached='bottom'
+							
+							className={false ? 'freeze-head-and-col' : ''}
+						>
+						    <Table.Header>
+						      <Table.Row>
+						        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
+						        <Table.HeaderCell>Player</Table.HeaderCell>
+						        <Table.HeaderCell>MIN</Table.HeaderCell>
+						        <Table.HeaderCell>PTS</Table.HeaderCell>
+						        <Table.HeaderCell>REB</Table.HeaderCell>
+						        <Table.HeaderCell>AST</Table.HeaderCell>
+						        <Table.HeaderCell>F</Table.HeaderCell>
+						        <Table.HeaderCell>STL</Table.HeaderCell>
+						        <Table.HeaderCell>TO</Table.HeaderCell>
+						        <Table.HeaderCell>BLK</Table.HeaderCell>
+						      </Table.Row>
+						    </Table.Header>
+							<Table.Body>
+						    	{playerRowV}
+						    </Table.Body>
+						    <Table.Header>
+						      <Table.Row>
+						        <Table.HeaderCell style={headerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
+						      </Table.Row>
+						    </Table.Header>
+					    </Table>
+				    </div>
+				    <br/>
+				    <div>
+					    <Table celled striped unstackable attached='top'>
+						    <Table.Header>
+						      <Table.Row>
+						        <Table.HeaderCell>{game.hTeam.fullName}</Table.HeaderCell>
+						      </Table.Row>
+						    </Table.Header>
+						</Table>
+						<Table celled striped unstackable attached='bottom' onScroll={props.handleScroll} className='freeze-head-and-col'>
+						    <Table.Header>
+						      <Table.Row>
+						        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
+						        <Table.HeaderCell>Player</Table.HeaderCell>
+						        <Table.HeaderCell>MIN</Table.HeaderCell>
+						        <Table.HeaderCell>PTS</Table.HeaderCell>
+						        <Table.HeaderCell>REB</Table.HeaderCell>
+						        <Table.HeaderCell>AST</Table.HeaderCell>
+						        <Table.HeaderCell>F</Table.HeaderCell>
+						        <Table.HeaderCell>STL</Table.HeaderCell>
+						        <Table.HeaderCell>TO</Table.HeaderCell>
+						        <Table.HeaderCell>BLK</Table.HeaderCell>
+						      </Table.Row>
+						    </Table.Header>
+							<Table.Body>
+						    	{playerRowH}
+						    </Table.Body>
+						    <Table.Header>
+						      <Table.Row>
+						        <Table.HeaderCell style={headerStyleVHTot}>Home Totals:</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].min}</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].points}</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].totReb}</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].assists}</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].pFouls}</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].steals}</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].turnovers}</Table.HeaderCell>
+						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].blocks}</Table.HeaderCell>
+						      </Table.Row>
+						    </Table.Header>
+					    </Table>
+				    </div>
 			<br/>
 			</li>
 		)})
