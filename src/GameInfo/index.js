@@ -207,7 +207,7 @@ function GameInfo (props) {
 							unstackable 
 							attached='bottom'
 							
-							className={props.isHorScroll ? 'freeze-head-and-col' : ''}
+							className={true ? 'freeze-head-and-col' : ''}
 						>
 						    <Table.Header>
 						      <Table.Row>
@@ -290,14 +290,14 @@ function GameInfo (props) {
 
 	return(
 	    <React.Fragment>
-			<div className='game-info' onScroll={(e) => props.handleScroll(e)}>
-			  	<div className='game-info-scroll'>
+			{/*<div className='game-info' onScroll={(e) => props.handleScrollE(e)}>*/}
+			  	{/*<div className='game-info-scroll'>*/}
 				  	<h4>Game Info</h4>
 					<ul>
 					{selectedGames}
 					</ul>
-				</div>
-		  	</div>
+				{/*</div>*/}
+		  	{/*</div>*/}
 	    </React.Fragment>
     )		
 

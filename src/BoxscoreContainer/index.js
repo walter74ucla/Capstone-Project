@@ -453,20 +453,22 @@ class BoxscoreContainer extends Component {
     	document.documentElement.scrollTop = 0;
     }
 
-    handleScroll = (e) => {
-    	let element = e.target;
-    	const leftScrollPos = element.scrollLeft;
-    	const topScrollPos = element.scrollTop;
-    	const tagName = element.tagName;
-    	console.log('e: ', e);
-    	console.log('element: ', element);
-    	console.log('leftScrollPos: ', leftScrollPos);
-    	console.log('topScrollPos: ', topScrollPos);
-    	console.log('tagName: ', tagName);	
-    	this.setState({
-    		isHorScroll: leftScrollPos !== 0 ? true : false
-    	})	
-    }
+    // handleScrollE = (e) => { // this works on an element
+    // 	let element = e.target;
+    // 	const leftScrollPos = element.scrollLeft;
+    // 	const topScrollPos = element.scrollTop;
+    // 	const tagName = element.tagName;
+    // 	console.log('e: ', e);
+    // 	console.log('element: ', element);
+    // 	console.log('leftScrollPos: ', leftScrollPos);
+    // 	console.log('topScrollPos: ', topScrollPos);
+    // 	console.log('tagName: ', tagName);	
+    // 	this.setState({
+    // 		isHorScroll: leftScrollPos !== 0 ? true : false
+    // 	})	
+    // }
+
+    handleScrollW
 
   	render() {
 	  	let today = new Date();
@@ -565,7 +567,7 @@ class BoxscoreContainer extends Component {
 		      				byGameTotals={this.state.gameTotalsByGame}
 		      				byGamePlayerInfo={this.state.playerInfoByGame}
 		      				byGamePlayerInfoName={this.state.playerInfoByGameName}
-		      				handleScroll={this.handleScroll}
+		      				handleScrollE={this.handleScrollE}
 		      				isHorScroll={this.state.isHorScroll}
 		      			/>
 		      		: null	
