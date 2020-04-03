@@ -9,16 +9,23 @@ body {
 	width: auto;
 }
 
-.test {
+.game-info { /*seems like I need overflow to get the onScroll to work. I hope to hide the scroll bar, one day*/
 	overflow: auto;
+	/*overflow-x: hidden;*/
+}
+
+.game-info-scroll {
+  height: 500px;
+  width: auto;
+  background-color: coral;
 }
 
 /*Fix the header to the top*/
-.freeze-head-and-col tr:first-of-type th{
+.freeze-head-and-col tr:first-of-type th {
 	position: -webkit-sticky;
 	position: sticky;
 	top: 0px;
-	/*background-color: cyan;*/
+	background-color: cyan;
 }
 
 /*Fix the first column  to the left*/
@@ -34,7 +41,7 @@ body {
 .freeze-head-and-col tr:first-of-type th:first-of-type{
 	z-index:100;
 	left: 0;
-	/*background-color: black;*/
+	background-color: black;
 	border-right: 2px outset #F9FAFB;
 }
 

@@ -95,6 +95,7 @@ class BoxscoreContainer extends Component {
 		      	}
 		    },
 		    overlayFixed: false,
+		    isHorScroll: false, // checks if element is scrolled horizontally
 		}
 	}
 	
@@ -455,17 +456,16 @@ class BoxscoreContainer extends Component {
     handleScroll = (e) => {
     	let element = e.target;
     	const leftScrollPos = element.scrollLeft;
+    	const topScrollPos = element.scrollTop;
     	const tagName = element.tagName;
     	console.log('e: ', e);
     	console.log('element: ', element);
     	console.log('leftScrollPos: ', leftScrollPos);
+    	console.log('topScrollPos: ', topScrollPos);
     	console.log('tagName: ', tagName);	
-    	// if (leftScrollPos !== 0 ) {
-    		
-    	// }
-
-    	
-
+    	this.setState({
+    		isHorScroll: leftScrollPos !== 0 ? true : false
+    	})	
     }
 
   	render() {
@@ -566,7 +566,7 @@ class BoxscoreContainer extends Component {
 		      				byGamePlayerInfo={this.state.playerInfoByGame}
 		      				byGamePlayerInfoName={this.state.playerInfoByGameName}
 		      				handleScroll={this.handleScroll}
-		      				// onScroll={this.handleScroll}
+		      				isHorScroll={this.state.isHorScroll}
 		      			/>
 		      		: null	
 			    }

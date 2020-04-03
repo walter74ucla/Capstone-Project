@@ -1,3 +1,4 @@
+// https://www.w3schools.com/react/react_events.asp
 import React from 'react';
 import { Table, Header, Image } from 'semantic-ui-react';
 import './style.css';
@@ -191,8 +192,8 @@ function GameInfo (props) {
 			    </Table>
 			   	</div>
 			   	<br/>
-				    <div className='test' onScroll={(ev) => props.handleScroll(ev)}>
-					    <Table celled striped unstackable attached='top'>
+				    <div>
+					    <Table celled striped unstackable attached='top'>{/*insert padding right 2000px to force a "push"*/}
 						    <Table.Header>
 						      <Table.Row>
 						        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
@@ -206,7 +207,7 @@ function GameInfo (props) {
 							unstackable 
 							attached='bottom'
 							
-							className={false ? 'freeze-head-and-col' : ''}
+							className={props.isHorScroll ? 'freeze-head-and-col' : ''}
 						>
 						    <Table.Header>
 						      <Table.Row>
@@ -289,10 +290,14 @@ function GameInfo (props) {
 
 	return(
 	    <React.Fragment>
-	      <h4>Game Info</h4>
-	      <ul>
-	        {selectedGames}
-	      </ul>
+			<div className='game-info' onScroll={(e) => props.handleScroll(e)}>
+			  	<div className='game-info-scroll'>
+				  	<h4>Game Info</h4>
+					<ul>
+					{selectedGames}
+					</ul>
+				</div>
+		  	</div>
 	    </React.Fragment>
     )		
 
