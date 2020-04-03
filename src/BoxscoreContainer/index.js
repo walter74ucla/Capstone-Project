@@ -95,6 +95,7 @@ class BoxscoreContainer extends Component {
 		      	}
 		    },
 		    overlayFixed: false,
+		    isHorScroll: false, // checks if element is scrolled horizontally
 		}
 	}
 	
@@ -452,6 +453,19 @@ class BoxscoreContainer extends Component {
     	document.documentElement.scrollTop = 0;
     }
 
+    handleScroll = (e) => {
+    	let element = e.target;
+    	const leftScrollPos = element.scrollLeft;
+    	const tagName = element.tagName;
+    	console.log('e: ', e);
+    	console.log('element: ', element);
+    	console.log('leftScrollPos: ', leftScrollPos);
+    	console.log('tagName: ', tagName);	
+    	
+    	this.setState({
+    		isHorScroll: leftScrollPos !== 0 ? true : false
+    	})
+    }
 
   	render() {
 	  	let today = new Date();
@@ -550,6 +564,8 @@ class BoxscoreContainer extends Component {
 		      				byGameTotals={this.state.gameTotalsByGame}
 		      				byGamePlayerInfo={this.state.playerInfoByGame}
 		      				byGamePlayerInfoName={this.state.playerInfoByGameName}
+		      				handleScroll={this.handleScroll}
+		      				isHorScroll={this.state.isHorScroll}
 		      			/>
 		      		: null	
 			    }

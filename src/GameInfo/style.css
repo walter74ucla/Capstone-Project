@@ -1,0 +1,73 @@
+body {
+	overflow: visible;  /*It seems like the default is overflow-x: hidden;*/
+}
+
+.game-score {
+	/*max-width: 360px;*/
+	border: 2px solid purple;
+	height: 46px;
+	width: auto;
+}
+
+.game-info { /*seems like I need overflow to get the onScroll to work. I hope to hide the scroll bar, one day*/
+	overflow: auto;
+	/*overflow-x: hidden;*/
+}
+
+.boxscore-table-vis {
+	/*position: relative;*/
+}
+
+/*Fix the header to the top*/
+.freeze-head-and-col tr:first-of-type th {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	/*background-color: cyan;*/
+}
+
+/*Fix the first column  to the left*/
+.freeze-head-and-col td:first-of-type {
+	position: -webkit-sticky;
+	position: sticky;
+	left: 0;
+	/*background-color: white;*/
+	font-weight: bold;
+}
+
+/* Edit: corner fixed always */
+.freeze-head-and-col tr:first-of-type th:first-of-type {
+	z-index:100;
+	left: 0;
+	/*background-color: black;*/
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Zebra Stripe the first cell of the table rows*/
+.freeze-head-and-col tr:nth-child(even) td:first-of-type {
+	background-color: #F9FAFB;
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Zebra Stripe the first cell of the table rows*/
+.freeze-head-and-col tr:nth-child(odd) td:first-of-type {
+	background-color: #FFFFFF;
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Fix the Team Name Row to the left*/
+.freeze-header {
+	position: -webkit-sticky;
+	position: sticky;
+	left: 0;
+	z-index: 10;
+	background-color: red;
+	border: 2px solid green;
+}
+
+
+
+
+
+
+
