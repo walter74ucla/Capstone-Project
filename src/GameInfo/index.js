@@ -1,5 +1,6 @@
+// https://www.w3schools.com/react/react_events.asp
 import React from 'react';
-import { Table, Header, Image } from 'semantic-ui-react';
+import { Table, Header, Image, Container } from 'semantic-ui-react';
 import './style.css';
 
 
@@ -191,23 +192,38 @@ function GameInfo (props) {
 			    </Table>
 			   	</div>
 			   	<br/>
-				    <div className='test' onScroll={(ev) => props.handleScroll(ev)}>
-					    <Table celled striped unstackable attached='top'>
+				    <div className='boxscore-table-vis'>
+					    <Table 
+					    	celled 
+					    	striped 
+					    	unstackable 
+					    	attached='top'
+					    	className={props.isHorScroll ? 'freeze-header' : ''}
+					    >
 						    <Table.Header>
 						      <Table.Row>
 						        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
 						      </Table.Row>
 						    </Table.Header>
 						</Table>
+						{/*<Container className={props.isHorScroll ? 'freeze-header' : ''}>
+							
+							{game.vTeam.fullName}
+							
+						</Container>*/}
 						{console.log(window.pageXOffset)}
 						<Table 
 							celled 
 							striped 
 							unstackable 
 							attached='bottom'
-							
-							className={false ? 'freeze-head-and-col' : ''}
+							className={props.isHorScroll ? 'freeze-head-and-col' : ''}
 						>
+						    {/*<Table.Header>
+						      <Table.Row>
+						        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
+						      </Table.Row>
+						    </Table.Header>*/}
 						    <Table.Header>
 						      <Table.Row>
 						        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
@@ -289,10 +305,12 @@ function GameInfo (props) {
 
 	return(
 	    <React.Fragment>
-	      <h4>Game Info</h4>
-	      <ul>
-	        {selectedGames}
-	      </ul>
+	      	<div className='game-info' onScroll={(e) => props.handleScroll(e)}>
+		      	<h4>Game Info</h4>
+				<ul>
+				{selectedGames}
+				</ul>
+		    </div>
 	    </React.Fragment>
     )		
 
