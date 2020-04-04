@@ -453,20 +453,20 @@ class BoxscoreContainer extends Component {
     	document.documentElement.scrollTop = 0;
     }
 
-    // handleScrollE = (e) => { // this works on an element
-    // 	let element = e.target;
-    // 	const leftScrollPos = element.scrollLeft;
-    // 	const topScrollPos = element.scrollTop;
-    // 	const tagName = element.tagName;
-    // 	console.log('e: ', e);
-    // 	console.log('element: ', element);
-    // 	console.log('leftScrollPos: ', leftScrollPos);
-    // 	console.log('topScrollPos: ', topScrollPos);
-    // 	console.log('tagName: ', tagName);	
-    // 	this.setState({
-    // 		isHorScroll: leftScrollPos !== 0 ? true : false
-    // 	})	
-    // }
+    handleScrollE = (e) => { // this works on an element
+    	let element = e.target;
+    	const leftScrollPos = element.scrollLeft;
+    	const topScrollPos = element.scrollTop;
+    	const tagName = element.tagName;
+    	console.log('e: ', e);
+    	console.log('element: ', element);
+    	console.log('leftScrollPos: ', leftScrollPos);
+    	console.log('topScrollPos: ', topScrollPos);
+    	console.log('tagName: ', tagName);	
+    	this.setState({
+    		isHorScroll: leftScrollPos !== 0 ? true : false
+    	})	
+    }
 
     handleScrollW
 
@@ -478,6 +478,8 @@ class BoxscoreContainer extends Component {
 	  	const { overlayFixed } = this.state;
 	  	return(
 	  		<React.Fragment>
+      		{/*<div className='boxscore-container' onScroll={(e) => this.handleScrollE(e)}>*/}
+      		{/*<div className='boxscore-container-scroll'>*/}
       			<Grid columns={3} stackable>
 				    <Grid.Row stretched>
 				      	<Grid.Column>
@@ -572,7 +574,8 @@ class BoxscoreContainer extends Component {
 		      			/>
 		      		: null	
 			    }
-			    
+			{/*</div>*/}
+			{/*</div>*/}    
     		</React.Fragment>
   		)
   	}

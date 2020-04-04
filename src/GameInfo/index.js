@@ -193,12 +193,46 @@ function GameInfo (props) {
 			   	</div>
 			   	<br/>
 				    <div>
-					    <Table celled striped unstackable attached='top'>{/*insert padding right 2000px to force a "push"*/}
+					    <Table 
+					    	celled
+							striped
+							unstackable
+							// collapsing
+							// attached='top'
+							className='visitor-name'
+							
+						>
+						    {/*In order to fix the header to the top, I needed to add a Table Row 
+						    to "push" the header row up. In order to fix the header column first 
+							cell to the left, I needed to add columns 2-9 to "push" the cell to
+							the left and then slide underneath it.  While scrolling up the header
+							row become unstuck right after the row disappears underneath it. */}
 						    <Table.Header>
 						      <Table.Row>
 						        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
+						        <Table.HeaderCell>MIN</Table.HeaderCell>
+						        <Table.HeaderCell>PTS</Table.HeaderCell>
+						        <Table.HeaderCell>REB</Table.HeaderCell>
+						        <Table.HeaderCell>AST</Table.HeaderCell>
+						        <Table.HeaderCell>F</Table.HeaderCell>
+						        <Table.HeaderCell>STL</Table.HeaderCell>
+						        <Table.HeaderCell>TO</Table.HeaderCell>
+						        <Table.HeaderCell>BLK</Table.HeaderCell>
 						      </Table.Row>
 						    </Table.Header>
+						    <Table.Body>
+						      <Table.Row>
+						        <Table.Cell>{game.vTeam.fullName}</Table.Cell>
+						        <Table.Cell>MIN</Table.Cell>
+						        <Table.Cell>PTS</Table.Cell>
+						        <Table.Cell>REB</Table.Cell>
+						        <Table.Cell>AST</Table.Cell>
+						        <Table.Cell>F</Table.Cell>
+						        <Table.Cell>STL</Table.Cell>
+						        <Table.Cell>TO</Table.Cell>
+						        <Table.Cell>BLK</Table.Cell>
+						      </Table.Row>
+						    </Table.Body>
 						</Table>
 						{console.log(window.pageXOffset)}
 						<Table 
@@ -206,10 +240,20 @@ function GameInfo (props) {
 							striped 
 							unstackable 
 							attached='bottom'
-							
 							className={true ? 'freeze-head-and-col' : ''}
 						>
 						    <Table.Header>
+						      <Table.Row>
+						        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
+						        <Table.HeaderCell>MIN</Table.HeaderCell>
+						        <Table.HeaderCell>PTS</Table.HeaderCell>
+						        <Table.HeaderCell>REB</Table.HeaderCell>
+						        <Table.HeaderCell>AST</Table.HeaderCell>
+						        <Table.HeaderCell>F</Table.HeaderCell>
+						        <Table.HeaderCell>STL</Table.HeaderCell>
+						        <Table.HeaderCell>TO</Table.HeaderCell>
+						        <Table.HeaderCell>BLK</Table.HeaderCell>
+						      </Table.Row>
 						      <Table.Row>
 						        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
 						        <Table.HeaderCell>Player</Table.HeaderCell>
@@ -306,4 +350,11 @@ function GameInfo (props) {
 
 export default GameInfo;
 // export default {GameInfo, CreateName};
+
+// https://www.w3schools.com/jsref/prop_element_scrollleft.asp
+// This works with an outer div and an inner div.
+// It helps to include overflow-x: scroll and overflow-y: scroll or overflow: auto in the  outer div css.
+// The GameInfo component did not push the components above it off the screen. The components above the
+// flow of GameInfo had to be manually scrolled to get off the viewport.
+
 

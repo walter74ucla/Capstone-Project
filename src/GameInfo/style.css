@@ -2,6 +2,17 @@ body {
 	overflow: visible;  /*It seems like the default is overflow-x: hidden;*/
 }
 
+.boxscore-container {
+	overflow-x: scroll;
+	overflow-y: scroll;
+}
+
+.boxscore-container-scroll {
+  height: 804px;
+  /*width: auto;*/
+  background-color: pink;
+}
+
 .game-score {
 	/*max-width: 360px;*/
 	border: 2px solid purple;
@@ -20,12 +31,48 @@ body {
   background-color: coral;
 }
 
-/*Fix the header to the top*/
+.visitor-name {
+	/*padding-right: 200px;*/
+}
+
+/*Fix visitor name to the top*/
+.visitor-name tr:first-of-type th {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0px;
+	background-color: red;
+}
+
+/*Fix visitor name to the left*/
+.visitor-name th:first-of-type{
+	position: -webkit-sticky;
+	position: sticky;
+	left: 0px;
+	/*font-weight: bold;*/
+}
+
+/* Edit: corner fixed always */
+.visitor-name tr:first-of-type th:first-of-type{
+	z-index:100;
+	left: 0;
+	/*background-color: black;*/
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Fix the header to the top...1st row*/
 .freeze-head-and-col tr:first-of-type th {
 	position: -webkit-sticky;
 	position: sticky;
 	top: 0px;
-	/*background-color: cyan;*/
+	background-color: cyan;
+}
+
+/*Fix the header to the top...2nd row*/
+.freeze-head-and-col tr:nth-child(2) th {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 65px; /*gotta figure out how to make this variable*/
+	background-color: cyan;
 }
 
 /*Fix the first column  to the left*/
@@ -37,8 +84,16 @@ body {
 	font-weight: bold;
 }
 
-/* Edit: corner fixed always */
+/* Edit: corner fixed always...1st row */
 .freeze-head-and-col tr:first-of-type th:first-of-type{
+	z-index:100;
+	left: 0;
+	/*background-color: black;*/
+	border-right: 2px outset #F9FAFB;
+}
+
+/* Edit: first cell fixed always...2nd row */
+.freeze-head-and-col tr:nth-child(2) th:first-of-type{
 	z-index:100;
 	left: 0;
 	/*background-color: black;*/
