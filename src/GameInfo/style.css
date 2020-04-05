@@ -13,11 +13,16 @@ body {
   background-color: pink;
 }
 
-.game-score {
-	/*max-width: 360px;*/
+.game-score { /*this works as expected...don't use a table for layout here*/
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0px;
+	background-color: red;
 	border: 2px solid purple;
-	height: 46px;
-	width: auto;
+}
+
+.game-score .container .column { /*possible delete*/
+	font-weight: bold;
 }
 
 .game-info { /*seems like I need overflow to get the onScroll to work. I hope to hide the scroll bar, one day*/
@@ -129,7 +134,9 @@ body {
 	border-right: 2px outset #F9FAFB;
 }
 
-
+@media only screen and (max-width: 768px) {
+	
+}
 
 
 

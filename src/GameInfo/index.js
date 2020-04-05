@@ -1,6 +1,6 @@
 // https://www.w3schools.com/react/react_events.asp
 import React from 'react';
-import { Table, Header, Image } from 'semantic-ui-react';
+import { Table, Header, Image, Grid } from 'semantic-ui-react';
 import './style.css';
 
 
@@ -147,12 +147,132 @@ function GameInfo (props) {
 				:
 			<li key={game.gameId}>
 			  	<div className='game-score'>
-			    <Table collapsing unstackable>
+			  		{/*<Grid container columns={7}>
+			  			<Grid.Column>
+			  				<h4>{game.vTeam.nickName}</h4>
+			  			</Grid.Column>
+			  			<Grid.Column>
+			  				<h4>
+			  					<Image src={teamLogos.find(teamLogo => 
+				        		 		teamLogo.teamId === game.vTeam.teamId).logo} size='mini' />
+			  				</h4>
+			  			</Grid.Column>
+			  			<Grid.Column>
+			  				<h4>{game.vTeam.score.points}</h4>
+			  			</Grid.Column>
+			  			<Grid.Column>
+			  				<h4>{game.currentPeriod === "4/4" ? "FINAL" : "FINAL/OT"}</h4>
+			  			</Grid.Column>
+			  			<Grid.Column>
+			  				<h4>{game.hTeam.score.points}</h4>
+			  			</Grid.Column>
+			  			<Grid.Column>
+			  				<h4>
+			  					<Image src={teamLogos.find(teamLogo => 
+				        		 		teamLogo.teamId === game.hTeam.teamId).logo} size='mini' />
+			  				</h4>
+			  			</Grid.Column>
+			  			<Grid.Column>
+			  				<h4>{game.hTeam.nickName}</h4>
+			  			</Grid.Column>
+			  		</Grid>*/}
+			  		{/*<Grid container columns={7}>
+			  			<Grid.Column>
+			  				<p>{game.vTeam.nickName}</p>
+			  			</Grid.Column>
+			  			<Grid.Column>
+			  				<p>
+			  					<Image src={teamLogos.find(teamLogo => 
+				        		 		teamLogo.teamId === game.vTeam.teamId).logo} size='mini' />
+			  				</p>
+			  			</Grid.Column>
+			  			<Grid.Column>
+			  				<p>{game.vTeam.score.points}</p>
+			  			</Grid.Column>
+			  			<Grid.Column>
+			  				<p>{game.currentPeriod === "4/4" ? "FINAL" : "FINAL/OT"}</p>
+			  			</Grid.Column>
+			  			<Grid.Column>
+			  				<p>{game.hTeam.score.points}</p>
+			  			</Grid.Column>
+			  			<Grid.Column>
+			  				<p>
+			  					<Image src={teamLogos.find(teamLogo => 
+				        		 		teamLogo.teamId === game.hTeam.teamId).logo} size='mini' />
+			  				</p>
+			  			</Grid.Column>
+			  			<Grid.Column>
+			  				<p>{game.hTeam.nickName}</p>
+			  			</Grid.Column>
+			  		</Grid>*/}
+			    <Table collapsing unstackable>{/*this is the mobile table...2 rows*/}
 			    	<Table.Body>
 				      	<Table.Row>
 				        	<Table.Cell>	
 			        			<Header as='h4'>
-            						{game.vTeam.nickName}
+            						{game.vTeam.shortName}
+						        </Header>
+				        	</Table.Cell>
+				        	<Table.Cell>
+				        		<Header as='h4'>
+            						{game.vTeam.score.points}
+						        </Header>
+				        	</Table.Cell>
+				        	<Table.Cell>
+			        			<Header as='h4'>
+            						{game.currentPeriod !== "" ? "FINAL" : null}
+						        </Header>
+				        	</Table.Cell>
+				        	<Table.Cell>
+			       				<Header as='h4'>
+            						{game.hTeam.score.points}
+						        </Header>
+				        	</Table.Cell>
+				        	<Table.Cell>
+			        			<Header as='h4'>
+            						{game.hTeam.shortName}
+						        </Header>
+				        	</Table.Cell>
+				      	</Table.Row>
+				      	<Table.Row>
+				      		<Table.Cell>
+				        		<Header as='h4' image>
+				        			<Image src={teamLogos.find(teamLogo => 
+				        				teamLogo.teamId === game.vTeam.teamId).logo} size='mini' />
+				        		</Header>
+				        	</Table.Cell>
+				        	<Table.Cell>
+			        			
+				        	</Table.Cell>
+				        	<Table.Cell>
+			        			<Header as='h4'>
+            						{game.currentPeriod === "5/4" ? "OT" 
+            							: game.currentPeriod === "6/4" ? "2OT"
+            							: game.currentPeriod === "7/4" ? "3OT"
+            							: game.currentPeriod === "8/4" ? "4OT"
+            							: game.currentPeriod === "9/4" ? "5OT"
+            							: null
+            						}
+						        </Header>
+				        	</Table.Cell>
+				        	<Table.Cell>
+			        			
+				        	</Table.Cell>
+				        	<Table.Cell>
+				        		<Header as='h4' image>
+				        			<Image src={teamLogos.find(teamLogo => 
+				        				teamLogo.teamId === game.hTeam.teamId).logo} size='mini' />
+				        		</Header>
+				        	</Table.Cell>
+				      	</Table.Row>
+					</Table.Body>
+			    </Table>
+			    {/*<Table collapsing unstackable> this is the desktop table...1 row
+			    	<Table.Body>
+				      	<Table.Row>
+				        	<Table.Cell>	
+			        			<Header as='h4'>
+            						{game.vTeam.shortName}
 						        </Header>
 				        	</Table.Cell>
 				        	<Table.Cell>
@@ -168,7 +288,14 @@ function GameInfo (props) {
 				        	</Table.Cell>
 				        	<Table.Cell>
 			        			<Header as='h4'>
-            						{game.currentPeriod === "4/4" ? "FINAL" : "FINAL/OT"}
+            						{game.currentPeriod === "4/4" ? "FINAL" 
+            							: game.currentPeriod === "5/4" ? "FINAL/OT"
+            							: game.currentPeriod === "6/4" ? "FINAL/2OT"
+            							: game.currentPeriod === "7/4" ? "FINAL/3OT"
+            							: game.currentPeriod === "8/4" ? "FINAL/4OT"
+            							: game.currentPeriod === "9/4" ? "FINAL/5OT"
+            							: null
+            						}
 						        </Header>
 				        	</Table.Cell>
 				        	<Table.Cell>
@@ -184,12 +311,12 @@ function GameInfo (props) {
 				        	</Table.Cell>
 				        	<Table.Cell>
 			        			<Header as='h4'>
-            						{game.hTeam.nickName}
+            						{game.hTeam.shortName}
 						        </Header>
 				        	</Table.Cell>
 				      	</Table.Row>
 					</Table.Body>
-			    </Table>
+			    </Table>*/}
 			   	</div>
 			   	<br/>
 				    <div>
