@@ -147,128 +147,70 @@ function GameInfo (props) {
 				:
 			<li key={game.gameId}>
 			  	<div className='game-score-container'>
-			  	<div className='game-score'>
-			  		{/*<Grid container columns={7}>
-			  			<Grid.Column>
-			  				<h4>{game.vTeam.nickName}</h4>
-			  			</Grid.Column>
-			  			<Grid.Column>
-			  				<h4>
-			  					<Image src={teamLogos.find(teamLogo => 
-				        		 		teamLogo.teamId === game.vTeam.teamId).logo} size='mini' />
-			  				</h4>
-			  			</Grid.Column>
-			  			<Grid.Column>
-			  				<h4>{game.vTeam.score.points}</h4>
-			  			</Grid.Column>
-			  			<Grid.Column>
-			  				<h4>{game.currentPeriod === "4/4" ? "FINAL" : "FINAL/OT"}</h4>
-			  			</Grid.Column>
-			  			<Grid.Column>
-			  				<h4>{game.hTeam.score.points}</h4>
-			  			</Grid.Column>
-			  			<Grid.Column>
-			  				<h4>
-			  					<Image src={teamLogos.find(teamLogo => 
-				        		 		teamLogo.teamId === game.hTeam.teamId).logo} size='mini' />
-			  				</h4>
-			  			</Grid.Column>
-			  			<Grid.Column>
-			  				<h4>{game.hTeam.nickName}</h4>
-			  			</Grid.Column>
-			  		</Grid>*/}
-			  		{/*<Grid container columns={7}>
-			  			<Grid.Column>
-			  				<p>{game.vTeam.nickName}</p>
-			  			</Grid.Column>
-			  			<Grid.Column>
-			  				<p>
-			  					<Image src={teamLogos.find(teamLogo => 
-				        		 		teamLogo.teamId === game.vTeam.teamId).logo} size='mini' />
-			  				</p>
-			  			</Grid.Column>
-			  			<Grid.Column>
-			  				<p>{game.vTeam.score.points}</p>
-			  			</Grid.Column>
-			  			<Grid.Column>
-			  				<p>{game.currentPeriod === "4/4" ? "FINAL" : "FINAL/OT"}</p>
-			  			</Grid.Column>
-			  			<Grid.Column>
-			  				<p>{game.hTeam.score.points}</p>
-			  			</Grid.Column>
-			  			<Grid.Column>
-			  				<p>
-			  					<Image src={teamLogos.find(teamLogo => 
-				        		 		teamLogo.teamId === game.hTeam.teamId).logo} size='mini' />
-			  				</p>
-			  			</Grid.Column>
-			  			<Grid.Column>
-			  				<p>{game.hTeam.nickName}</p>
-			  			</Grid.Column>
-			  		</Grid>*/}
-			    <Table unstackable textAlign='center'>{/*this is the mobile table...2 rows*/}
-			    	<Table.Header>
-				      	<Table.Row>
-				        	<Table.HeaderCell>	
-			        			<Header as='h4'>
-            						{game.vTeam.shortName}
-						        </Header>
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-				        		<Header as='h4'>
-            						{game.vTeam.score.points}
-						        </Header>
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-			        			<Header as='h4'>
-            						{game.currentPeriod !== "" ? "FINAL" : null}
-						        </Header>
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-			       				<Header as='h4'>
-            						{game.hTeam.score.points}
-						        </Header>
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-			        			<Header as='h4'>
-            						{game.hTeam.shortName}
-						        </Header>
-				        	</Table.HeaderCell>
-				      	</Table.Row>
-				      	<Table.Row>
-				      		<Table.HeaderCell>
-				        		<Header as='h4' image>
-				        			<Image src={teamLogos.find(teamLogo => 
-				        				teamLogo.teamId === game.vTeam.teamId).logo} size='mini' />
-				        		</Header>
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-			        			
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-			        			<Header as='h4'>
-            						{game.currentPeriod === "5/4" ? "OT" 
-            							: game.currentPeriod === "6/4" ? "2OT"
-            							: game.currentPeriod === "7/4" ? "3OT"
-            							: game.currentPeriod === "8/4" ? "4OT"
-            							: game.currentPeriod === "9/4" ? "5OT"
-            							: null
-            						}
-						        </Header>
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-			        			
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-				        		<Header as='h4' image>
-				        			<Image src={teamLogos.find(teamLogo => 
-				        				teamLogo.teamId === game.hTeam.teamId).logo} size='mini' />
-				        		</Header>
-				        	</Table.HeaderCell>
-				      	</Table.Row>
-					</Table.Header>
-			    </Table>
-			    {/*<Table collapsing unstackable> this is the desktop table...1 row
+			  		<div className='game-score'>
+					    <Table unstackable textAlign='center'>{/*this is the mobile table???...2 rows*/}
+					    	<Table.Header>
+						      	<Table.Row>
+						        	<Table.HeaderCell>	
+					        			<Header as='h4'>
+		            						{game.vTeam.shortName}
+								        </Header>
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+						        		<Header as='h4'>
+		            						{game.vTeam.score.points}
+								        </Header>
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+					        			<Header as='h4'>
+		            						{game.currentPeriod !== "" ? "FINAL" : null}
+								        </Header>
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+					       				<Header as='h4'>
+		            						{game.hTeam.score.points}
+								        </Header>
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+					        			<Header as='h4'>
+		            						{game.hTeam.shortName}
+								        </Header>
+						        	</Table.HeaderCell>
+						      	</Table.Row>
+						      	<Table.Row>
+						      		<Table.HeaderCell>
+						        		<Header as='h4' image>
+						        			<Image src={teamLogos.find(teamLogo => 
+						        				teamLogo.teamId === game.vTeam.teamId).logo} size='mini' />
+						        		</Header>
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+					        			
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+					        			<Header as='h4'>
+		            						{game.currentPeriod === "5/4" ? "OT" 
+		            							: game.currentPeriod === "6/4" ? "2OT"
+		            							: game.currentPeriod === "7/4" ? "3OT"
+		            							: game.currentPeriod === "8/4" ? "4OT"
+		            							: game.currentPeriod === "9/4" ? "5OT"
+		            							: null
+		            						}
+								        </Header>
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+					        			
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+						        		<Header as='h4' image>
+						        			<Image src={teamLogos.find(teamLogo => 
+						        				teamLogo.teamId === game.hTeam.teamId).logo} size='mini' />
+						        		</Header>
+						        	</Table.HeaderCell>
+						      	</Table.Row>
+							</Table.Header>
+					    </Table>
+			    {/*<Table collapsing unstackable> this is the desktop table???...1 row
 			    	<Table.Body>
 				      	<Table.Row>
 				        	<Table.Cell>	
@@ -318,71 +260,31 @@ function GameInfo (props) {
 				      	</Table.Row>
 					</Table.Body>
 			    </Table>*/}
-			   	</div>
+			   		</div>
 			   	</div>
 			   	<br/>
-				    <div>
-					    <Table 
-					    	celled
-							striped
-							unstackable
-							// collapsing
-							// attached='top'
-							className='visitor-name'
-							
-						>
-						    {/*In order to fix the header to the top, I needed to add a Table Row 
-						    to "push" the header row up. In order to fix the header column first 
-							cell to the left, I needed to add columns 2-9 to "push" the cell to
-							the left and then slide underneath it.  While scrolling up the header
-							row become unstuck right after the row disappears underneath it. */}
+				<div className='visitor-name-container'>
+				    <div className='visitor-name'>
+					    <Table unstackable>
 						    <Table.Header>
 						      <Table.Row>
 						        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
-						        <Table.HeaderCell>MIN</Table.HeaderCell>
-						        <Table.HeaderCell>PTS</Table.HeaderCell>
-						        <Table.HeaderCell>REB</Table.HeaderCell>
-						        <Table.HeaderCell>AST</Table.HeaderCell>
-						        <Table.HeaderCell>F</Table.HeaderCell>
-						        <Table.HeaderCell>STL</Table.HeaderCell>
-						        <Table.HeaderCell>TO</Table.HeaderCell>
-						        <Table.HeaderCell>BLK</Table.HeaderCell>
 						      </Table.Row>
 						    </Table.Header>
-						    <Table.Body>
-						      <Table.Row>
-						        <Table.Cell>{game.vTeam.fullName}</Table.Cell>
-						        <Table.Cell>MIN</Table.Cell>
-						        <Table.Cell>PTS</Table.Cell>
-						        <Table.Cell>REB</Table.Cell>
-						        <Table.Cell>AST</Table.Cell>
-						        <Table.Cell>F</Table.Cell>
-						        <Table.Cell>STL</Table.Cell>
-						        <Table.Cell>TO</Table.Cell>
-						        <Table.Cell>BLK</Table.Cell>
-						      </Table.Row>
-						    </Table.Body>
 						</Table>
-						{console.log(window.pageXOffset)}
+					</div>
+				</div>
+				<br/>
+				{console.log(window.pageXOffset)}
+				<div className='visitor-stats-container'>
+					<div className='visitor-stats'>
 						<Table 
 							celled 
 							striped 
-							unstackable 
-							attached='bottom'
+							unstackable
 							className={true ? 'freeze-head-and-col' : ''}
 						>
 						    <Table.Header>
-						      <Table.Row>
-						        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
-						        <Table.HeaderCell>MIN</Table.HeaderCell>
-						        <Table.HeaderCell>PTS</Table.HeaderCell>
-						        <Table.HeaderCell>REB</Table.HeaderCell>
-						        <Table.HeaderCell>AST</Table.HeaderCell>
-						        <Table.HeaderCell>F</Table.HeaderCell>
-						        <Table.HeaderCell>STL</Table.HeaderCell>
-						        <Table.HeaderCell>TO</Table.HeaderCell>
-						        <Table.HeaderCell>BLK</Table.HeaderCell>
-						      </Table.Row>
 						      <Table.Row>
 						        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
 						        <Table.HeaderCell>Player</Table.HeaderCell>
@@ -399,7 +301,7 @@ function GameInfo (props) {
 							<Table.Body>
 						    	{playerRowV}
 						    </Table.Body>
-						    <Table.Header>
+						    <Table.Footer>
 						      <Table.Row>
 						        <Table.HeaderCell style={headerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
 						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
@@ -411,10 +313,11 @@ function GameInfo (props) {
 						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
 						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
 						      </Table.Row>
-						    </Table.Header>
+						    </Table.Footer>
 					    </Table>
 				    </div>
-				    <br/>
+				</div>
+				<br/>
 				    <div>
 					    <Table celled striped unstackable attached='top'>
 						    <Table.Header>

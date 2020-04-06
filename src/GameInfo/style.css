@@ -2,11 +2,13 @@ body {
 	overflow: visible;  /*It seems like the default is overflow-x: hidden;*/
 }
 
+/*Experimental*/
 .boxscore-container {
 	overflow-x: scroll;
 	overflow-y: scroll;
 }
 
+/*Experimental*/
 .boxscore-container-scroll {
   height: 804px;
   /*width: auto;*/
@@ -28,73 +30,44 @@ body {
 	margin: 0 auto; /*this centers the element*/
 }
 
-
-.game-score-left { /*this DOES NOT work as expected*/
+.visitor-name-container {
+	border: 2px solid green;
+	background-color: gold;
 	position: -webkit-sticky;
 	position: sticky;
-	left: 0px;
+	top: 0px;
 }
 
-.game-score .container .column { /*possible delete*/
-	font-weight: bold;
+.visitor-name {
+	border: 2px solid blue;
+	background-color: grey;
+	margin: 0 auto; /*this centers the element*/
 }
 
+/*Experimental*/
 .game-info { /*seems like I need overflow to get the onScroll to work. I hope to hide the scroll bar, one day*/
 	overflow: auto;
 	/*overflow-x: hidden;*/
 }
 
+/*Experimental*/
 .game-info-scroll {
   height: 500px;
   width: auto;
   background-color: coral;
 }
 
-.visitor-name {
-	/*padding-right: 200px;*/
-}
 
-/*Fix visitor name to the top*/
-.visitor-name tr:first-of-type th {
-	position: -webkit-sticky;
-	position: sticky;
-	top: 0px;
-	background-color: red;
-}
 
-/*Fix visitor name to the left*/
-.visitor-name th:first-of-type{
-	position: -webkit-sticky;
-	position: sticky;
-	left: 0px;
-	/*font-weight: bold;*/
-}
-
-/* Edit: corner fixed always */
-.visitor-name tr:first-of-type th:first-of-type{
-	z-index:100;
-	left: 0;
-	/*background-color: black;*/
-	border-right: 2px outset #F9FAFB;
-}
-
-/*Fix the header to the top...1st row*/
-.freeze-head-and-col tr:first-of-type th {
+/*Fix the header to the top...thead...1st row*/
+.freeze-head-and-col thead tr:first-of-type th {
 	position: -webkit-sticky;
 	position: sticky;
 	top: 0px;
 	background-color: cyan;
 }
 
-/*Fix the header to the top...2nd row*/
-.freeze-head-and-col tr:nth-child(2) th {
-	position: -webkit-sticky;
-	position: sticky;
-	top: 65px; /*gotta figure out how to make this variable*/
-	background-color: cyan;
-}
-
-/*Fix the first column  to the left*/
+/*Fix the first column  to the left...tbody*/
 .freeze-head-and-col td:first-of-type{
 	position: -webkit-sticky;
 	position: sticky;
@@ -103,20 +76,27 @@ body {
 	font-weight: bold;
 }
 
-/* Edit: corner fixed always...1st row */
-.freeze-head-and-col tr:first-of-type th:first-of-type{
+/* Edit: corner fixed always...thead...1st row */
+.freeze-head-and-col thead tr:first-of-type th:first-of-type{
 	z-index:100;
 	left: 0;
 	/*background-color: black;*/
 	border-right: 2px outset #F9FAFB;
 }
 
-/* Edit: first cell fixed always...2nd row */
-.freeze-head-and-col tr:nth-child(2) th:first-of-type{
-	z-index:100;
+/*Bold the Footer*/
+.freeze-head-and-col tfoot tr:first-of-type th {
+	font-weight: bold;
+}
+
+/* Edit: 1st cell fixed always...tfoot...1st row */
+.freeze-head-and-col tfoot tr:first-of-type th:first-of-type{
+	z-index:90;
 	left: 0;
 	/*background-color: black;*/
 	border-right: 2px outset #F9FAFB;
+	position: -webkit-sticky;
+	position: sticky;
 }
 
 /*Zebra Stripe the first cell of the table rows*/
@@ -128,23 +108,6 @@ body {
 /*Zebra Stripe the first cell of the table rows*/
 .freeze-head-and-col tr:nth-child(odd) td:first-of-type{
 	background-color: #FFFFFF;
-	border-right: 2px outset #F9FAFB;
-}
-
-
-/*Delete Below...*/
-/*Show outset border on Edit: corner fixed always*/
-.freeze-head-and-col-show tr:first-of-type th:first-of-type{
-	border-right: 2px outset #F9FAFB;
-}
-
-/*Show outset border on Zebra Stripe the first cell of the table rows*/
-.freeze-head-and-col-show tr:nth-child(even) td:first-of-type{
-	border-right: 2px outset #F9FAFB;
-}
-
-/*Show outset border on Zebra Stripe the first cell of the table rows*/
-.freeze-head-and-col-show tr:nth-child(odd) td:first-of-type{
 	border-right: 2px outset #F9FAFB;
 }
 
