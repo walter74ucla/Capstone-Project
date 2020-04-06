@@ -13,12 +13,26 @@ body {
   background-color: pink;
 }
 
-.game-score { /*this works as expected...don't use a table for layout here*/
+
+.game-score-container {
+	border: 2px solid black;
+	background-color: red;
 	position: -webkit-sticky;
 	position: sticky;
 	top: 0px;
-	background-color: red;
-	border: 2px solid purple;
+}
+
+.game-score { /*this works as expected on top (left and right did not work)*/
+	border: 2px solid gold;
+	background-color: lightblue;
+	margin: 0 auto; /*this centers the element*/
+}
+
+
+.game-score-left { /*this DOES NOT work as expected*/
+	position: -webkit-sticky;
+	position: sticky;
+	left: 0px;
 }
 
 .game-score .container .column { /*possible delete*/
@@ -134,8 +148,9 @@ body {
 	border-right: 2px outset #F9FAFB;
 }
 
+
 @media only screen and (max-width: 768px) {
-	
+
 }
 
 
