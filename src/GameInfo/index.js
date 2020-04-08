@@ -4,7 +4,43 @@ import { Table, Header, Image, Grid } from 'semantic-ui-react';
 import './style.css';
 
 
-const headerStyleVHTot = { // puts the top border on the visitors and home totals
+const gameInfoListStyle = {
+	listStyleType: 'none', 
+	margin: 0,
+	padding: 0,
+}
+
+// initial position - mobile
+const absoluteGameScore = { // this container's height is 104px
+	border: '2 solid purple',
+	backgroundColor: 'silver',
+	position: 'absolute',
+	left: 0,
+	right: 0,
+}
+
+// initial position - mobile
+const absoluteVisitorName = {
+	border: '2 solid orange',
+	backgroundColor: 'teal',
+	position: 'absolute',
+	top: 1065,
+	left: 0,
+	right: 0,
+}
+
+// initial position - mobile
+const absoluteVisitorStats = {
+	border: '2 solid blue',
+	backgroundColor: 'white',
+	position: 'absolute',
+	top: 1120,
+	left: 0,
+	right: 0,
+}
+
+
+const footerStyleVHTot = { // puts the top border on the visitors and home totals
   // backgroundColor: 'purple',
   // color: 'white',
   borderTopColor: 'black',
@@ -140,13 +176,16 @@ function GameInfo (props) {
 	// console.log(counter);
 	counter+=1
 
+	// let elem = document.querySelector(".game-score-container");
+	// let rect = elem.getBoundingClientRect();
+	// console.log(rect);
 
 		return(
 			game.startTimeUTC.length === 10
 				?	null
 				:
 			<li key={game.gameId}>
-			  	<div className='game-score-container'>
+			  	<div className={true ? 'game-score-container' : 'game-score-container-fixed'}>
 			  		<div className='game-score'>
 					    <Table unstackable textAlign='center'>{/*this is the mobile table???...2 rows*/}
 					    	<Table.Header>
@@ -263,7 +302,8 @@ function GameInfo (props) {
 			   		</div>
 			   	</div>
 			   	<br/>
-				<div className='visitor-name-container'>
+			   	
+				<div className={ true ? 'visitor-name-container' : 'visitor-name-container-fixed'}>
 				    <div className='visitor-name'>
 					    <Table unstackable>
 						    <Table.Header>
@@ -276,13 +316,13 @@ function GameInfo (props) {
 				</div>
 				<br/>
 				{console.log(window.pageXOffset)}
-				<div className='visitor-stats-container'>
+				<div className={ true ? 'visitor-stats-container' : 'visitor-stats-container-fixed'}>
 					<div className='visitor-stats'>
 						<Table 
 							celled 
 							striped 
 							unstackable
-							className={true ? 'freeze-head-and-col' : ''}
+							className={true ? 'freeze-head-and-col' : 'freeze-head-and-col-fixed'}
 						>
 						    <Table.Header>
 						      <Table.Row>
@@ -303,15 +343,15 @@ function GameInfo (props) {
 						    </Table.Body>
 						    <Table.Footer>
 						      <Table.Row>
-						        <Table.HeaderCell style={headerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
 						      </Table.Row>
 						    </Table.Footer>
 					    </Table>
@@ -346,15 +386,15 @@ function GameInfo (props) {
 						    </Table.Body>
 						    <Table.Header>
 						      <Table.Row>
-						        <Table.HeaderCell style={headerStyleVHTot}>Home Totals:</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].min}</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].points}</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].totReb}</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].assists}</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].pFouls}</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].steals}</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].turnovers}</Table.HeaderCell>
-						        <Table.HeaderCell style={headerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].blocks}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>Home Totals:</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].min}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].points}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].totReb}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].assists}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].pFouls}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].steals}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].turnovers}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].blocks}</Table.HeaderCell>
 						      </Table.Row>
 						    </Table.Header>
 					    </Table>
@@ -362,14 +402,14 @@ function GameInfo (props) {
 			<br/>
 			</li>
 		)})
-
+			   
 
 	return(
 	    <React.Fragment>
 			{/*<div className='game-info' onScroll={(e) => props.handleScrollE(e)}>*/}
 			  	{/*<div className='game-info-scroll'>*/}
 				  	<h4>Game Info</h4>
-					<ul>
+					<ul style={gameInfoListStyle}>
 					{selectedGames}
 					</ul>
 				{/*</div>*/}

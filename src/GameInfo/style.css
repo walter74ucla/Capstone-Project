@@ -15,30 +15,93 @@ body {
   background-color: pink;
 }
 
-
 .game-score-container {
-	border: 2px solid black;
-	background-color: red;
-	position: -webkit-sticky;
-	position: sticky;
-	top: 0px;
+	/*position: relative;*/
+}
+
+/*This is fixed when onTopPassed is true or leftScrollPos does not equal zero*/
+.game-score-container-fixed {
+	border: 2px solid purple;
+	background-color: silver;
+	position: fixed;
+	top: 0px; 
+	left: 0px; 
+	right: 0px;
+	z-index: 10;
 }
 
 .game-score { /*this works as expected on top (left and right did not work)*/
 	border: 2px solid gold;
 	background-color: lightblue;
 	margin: 0 auto; /*this centers the element*/
+	/*position: absolute;*/
 }
 
 .visitor-name-container {
+	/*position: relative;*/
+	/*clear: left;*/
+}
+
+.visitor-name-container-fixed {
 	border: 2px solid green;
 	background-color: gold;
-	position: -webkit-sticky;
-	position: sticky;
-	top: 0px;
+	position: fixed;
+	top: 108px; /*height of the container above it*/ 
+	left: 0px; 
+	right: 0px;
+	z-index: 10;
 }
 
 .visitor-name {
+	border: 2px solid blue;
+	background-color: grey;
+	margin: 0 auto; /*this centers the element*/
+	/*position: absolute;*/
+}
+
+.visitor-stats-container {
+	/*position: relative;*/
+	/*clear: left;*/
+}
+
+.visitor-stats-container-fixed { /*Don't need this to be fixed*/
+	/*border: 2px solid orange;*/
+	/*background-color: teal;*/
+	/*position: relative;*/
+	/*top: 164px; 108 + 56 = 164, height of the two containers above this one*/
+	/*left: 0px; */
+	/*right: 0px;*/
+	/*z-index: 10;*/
+}
+
+.visitor-stats {
+	border: 2px solid brown;
+	background-color: yellow;
+	margin: 0 auto; /*this centers the element*/
+	/*position: absolute;*/
+}
+
+.game-score-container-OLD{
+	/*border: 2px solid black;*/
+	/*background-color: red;*/
+	/*position: -webkit-sticky;*/
+	/*position: sticky;*/
+	/*top: 0px;*/
+	/*position: fixed; This does not show up on mobile unless top or bottom: 0px; is added*/
+	/*left: 0px; This does not show up on mobile unless top or bottom: 0px; is added*/
+	/*right: 0px; This does not show up on mobile unless top or bottom: 0px; is added*/
+}
+
+
+.visitor-name-container-OLD{
+	/*border: 2px solid green;*/
+	/*background-color: gold;*/
+	/*position: -webkit-sticky;*/
+	/*position: sticky;*/
+	/*top: 0px;*/
+}
+
+.visitor-name-OLD {
 	border: 2px solid blue;
 	background-color: grey;
 	margin: 0 auto; /*this centers the element*/
@@ -58,12 +121,19 @@ body {
 }
 
 
-
 /*Fix the header to the top...thead...1st row*/
 .freeze-head-and-col thead tr:first-of-type th {
 	position: -webkit-sticky;
 	position: sticky;
-	top: 0px;
+	top: 0px; 
+	background-color: cyan;
+}
+
+/*Fix the header under team name...thead...1st row*/
+.freeze-head-and-col-fixed thead tr:first-of-type th {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 164px; /*108 + 56 = 164, height of the two containers above this one*/
 	background-color: cyan;
 }
 
@@ -76,9 +146,25 @@ body {
 	font-weight: bold;
 }
 
+/*Fix the first column  to the left...tbody*/
+.freeze-head-and-col-fixed td:first-of-type{
+	position: -webkit-sticky;
+	position: sticky;
+	/*background-color: white;*/
+	left: 0px;
+	font-weight: bold;
+}
+
 /* Edit: corner fixed always...thead...1st row */
 .freeze-head-and-col thead tr:first-of-type th:first-of-type{
-	z-index:100;
+	z-index:9;
+	left: 0;
+	/*background-color: black;*/
+}
+
+/* Edit: corner fixed always...thead...1st row */
+.freeze-head-and-col-fixed thead tr:first-of-type th:first-of-type{
+	z-index:9;
 	left: 0;
 	/*background-color: black;*/
 	border-right: 2px outset #F9FAFB;
@@ -89,9 +175,23 @@ body {
 	font-weight: bold;
 }
 
+/*Bold the Footer*/
+.freeze-head-and-col-fixed tfoot tr:first-of-type th {
+	font-weight: bold;
+}
+
 /* Edit: 1st cell fixed always...tfoot...1st row */
 .freeze-head-and-col tfoot tr:first-of-type th:first-of-type{
-	z-index:90;
+	z-index:8;
+	left: 0;
+	/*background-color: black;*/
+	position: -webkit-sticky;
+	position: sticky;
+}
+
+/* Edit: 1st cell fixed always...tfoot...1st row */
+.freeze-head-and-col-fixed tfoot tr:first-of-type th:first-of-type{
+	z-index:8;
 	left: 0;
 	/*background-color: black;*/
 	border-right: 2px outset #F9FAFB;
@@ -102,11 +202,21 @@ body {
 /*Zebra Stripe the first cell of the table rows*/
 .freeze-head-and-col tr:nth-child(even) td:first-of-type{
 	background-color: #F9FAFB;
+}
+
+/*Zebra Stripe the first cell of the table rows*/
+.freeze-head-and-col-fixed tr:nth-child(even) td:first-of-type{
+	background-color: #F9FAFB;
 	border-right: 2px outset #F9FAFB;
 }
 
 /*Zebra Stripe the first cell of the table rows*/
 .freeze-head-and-col tr:nth-child(odd) td:first-of-type{
+	background-color: #FFFFFF;
+}
+
+/*Zebra Stripe the first cell of the table rows*/
+.freeze-head-and-col-fixed tr:nth-child(odd) td:first-of-type{
 	background-color: #FFFFFF;
 	border-right: 2px outset #F9FAFB;
 }

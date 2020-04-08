@@ -432,9 +432,17 @@ class BoxscoreContainer extends Component {
     // is the component on the dom? ComponentDidMount
     // any calls to an external data source that we want connected
     // as soon as our app is loaded we call it in componentDidMount
-    	this.getSelectedDateGameData(null, true)
-    
+    	this.getSelectedDateGameData(null, true);
+    	window.addEventListener("scroll", this.handleScrollW);// Adds an event listener when the component is mount.
+    	// window.addEventListener("scroll", this.getElementPosition);
+
   	}
+
+  	// Remove the event listener when the component is unmount.
+	componentWillUnmount() {
+		window.removeEventListener("scroll", this.handleScrollW);
+		// window.removeEventListener("scroll", this.getElementPosition);
+	}
 
   	getInputDate = (day, selected) => {
 	    // e.preventDefault();
@@ -453,7 +461,8 @@ class BoxscoreContainer extends Component {
     	document.documentElement.scrollTop = 0;
     }
 
-    handleScrollE = (e) => { // this works on an element
+    //See if this works with the ref
+    handleScrollE = (e) => { // this works on an element inside a container with scrollbars
     	let element = e.target;
     	const leftScrollPos = element.scrollLeft;
     	const topScrollPos = element.scrollTop;
@@ -468,7 +477,24 @@ class BoxscoreContainer extends Component {
     	})	
     }
 
-    handleScrollW
+    handleScrollW = () => { // this works on the window
+    	const leftScrollPos = window.pageXOffset;
+    	const topScrollPos = window.pageYOffset;
+    	console.log('leftScrollPos: ', leftScrollPos);
+    	console.log('topScrollPos: ', topScrollPos);
+
+    }
+
+    // https://plainjs.com/javascript/styles/get-the-position-of-an-element-relative-to-the-document-24/
+    // https://www.w3adda.com/react-js-tutorial/reactjs-refs
+    getElementPosition = (e) => {// works with a ref, but get TypeError: e.getBoundingClientRect is not a function when added to the componentdidmount/willunmount eventlisteners
+    	let rect = e.getBoundingClientRect(),
+    	scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    	scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    	console.log('e: ', e);
+    	console.log('rect: ', rect);
+    	return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+    }
 
   	render() {
 	  	let today = new Date();
@@ -476,6 +502,9 @@ class BoxscoreContainer extends Component {
 	  	// console.log(this.state.selectedDay);
 	  	// console.log(this.state.selectedGames.length);
 	  	const { overlayFixed } = this.state;
+
+	  	
+
 	  	return(
 	  		<React.Fragment>
       		{/*<div className='boxscore-container' onScroll={(e) => this.handleScrollE(e)}>*/}
@@ -571,13 +600,21 @@ class BoxscoreContainer extends Component {
 		      				byGamePlayerInfoName={this.state.playerInfoByGameName}
 		      				handleScrollE={this.handleScrollE}
 		      				isHorScroll={this.state.isHorScroll}
+		      				handleScrollW={this.handleScrollW}
+		      				getElementPosition={this.getElementPosition}
 		      			/>
 		      		: null	
 			    }
 			{/*</div>*/}
-			{/*</div>*/}    
+			{/*</div>*/}   
+		
     		</React.Fragment>
+    			
   		)
+// let element = document.querySelector(".game-score-container");
+// console.log(element);
+// let elementPosition = this.getElementPosition(element);
+// console.log(elementPosition.left, elementPosition.top);
   	}
 
 }
