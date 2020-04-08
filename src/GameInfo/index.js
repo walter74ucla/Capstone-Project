@@ -1,6 +1,6 @@
 // https://www.w3schools.com/react/react_events.asp
 import React from 'react';
-import { Table, Header, Image, Grid } from 'semantic-ui-react';
+import { Table, Header, Image, Grid, Visibility } from 'semantic-ui-react';
 import './style.css';
 
 
@@ -52,6 +52,7 @@ const footerStyleVHTot = { // puts the top border on the visitors and home total
 function GameInfo (props) {
 	console.log(props);
 	// console.log(props.byGamePlayerInfoName[0][0].api.players[0].playerId);
+	console.log(props.gameScoreFixed);
 
 	const teamLogos = [
 		    	{teamId: "1", logo: "https://i.imgur.com/Kq7BbKr.png", fullName: "Atlanta Hawks"},
@@ -185,7 +186,13 @@ function GameInfo (props) {
 				?	null
 				:
 			<li key={game.gameId}>
-			  	<div className={true ? 'game-score-container' : 'game-score-container-fixed'}>
+			  	<Visibility
+		            offset={0}
+		            once={false}
+		            // onTopPassed={props.stickGameScore}
+		            // onTopVisible={this.unStickOverlay}
+		        />
+			  	<div ref={props.handleScrollW} className={!props.gameScoreFixed ? 'game-score-container' : 'game-score-container-fixed'}>
 			  		<div className='game-score'>
 					    <Table unstackable textAlign='center'>{/*this is the mobile table???...2 rows*/}
 					    	<Table.Header>

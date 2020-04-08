@@ -96,6 +96,7 @@ class BoxscoreContainer extends Component {
 		    },
 		    overlayFixed: false,
 		    isHorScroll: false, // checks if element is scrolled horizontally
+		    gameScoreFixed: false,
 		}
 	}
 	
@@ -454,12 +455,14 @@ class BoxscoreContainer extends Component {
     }
 
     stickOverlay = () => this.setState({ overlayFixed: true });
-    
     unStickOverlay = () => this.setState({ overlayFixed: false });
 
     scrollToTop = () => {
     	document.documentElement.scrollTop = 0;
     }
+
+    // stickGameScore = () => this.setState({ gameScoreFixed: true });
+    // unstickGameScore = () => this.setState({ gameScoreFixed: false });
 
     //See if this works with the ref
     handleScrollE = (e) => { // this works on an element inside a container with scrollbars
@@ -477,11 +480,21 @@ class BoxscoreContainer extends Component {
     	})	
     }
 
-    handleScrollW = () => { // this works on the window
+    handleScrollW = (e) => { // this works on the window
+    	let element = e.target;
+    	console.log('e: ', e);
+    	console.log('element: ', element);
     	const leftScrollPos = window.pageXOffset;
     	const topScrollPos = window.pageYOffset;
     	console.log('leftScrollPos: ', leftScrollPos);
     	console.log('topScrollPos: ', topScrollPos);
+    	const viewportHeight = window.innerHeight;
+    	const gameScoreHeight = 108;
+    	console.log('viewportHeight: ', viewportHeight);
+    	console.log('gameScoreHeight: ', gameScoreHeight);
+    	this.setState({
+    		gameScoreFixed: (topScrollPos + gameScoreHeight >= viewportHeight - gameScoreHeight) ? true : false,
+    	})
 
     }
 
@@ -598,6 +611,10 @@ class BoxscoreContainer extends Component {
 		      				byGameTotals={this.state.gameTotalsByGame}
 		      				byGamePlayerInfo={this.state.playerInfoByGame}
 		      				byGamePlayerInfoName={this.state.playerInfoByGameName}
+		      				stickGameScore={this.stickGameScore}
+		      				unstickGameScore={this.unstickGameScore}
+		      				gameScoreFixed={this.state.gameScoreFixed}
+
 		      				handleScrollE={this.handleScrollE}
 		      				isHorScroll={this.state.isHorScroll}
 		      				handleScrollW={this.handleScrollW}
