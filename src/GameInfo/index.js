@@ -1,5 +1,5 @@
 // https://www.w3schools.com/react/react_events.asp
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { Table, Header, Image, Grid, Visibility } from 'semantic-ui-react';
 import './style.css';
 
@@ -94,9 +94,74 @@ class GameInfo extends Component {
 		}
 	}
 
+	contextRef = createRef();
 
+	componentDidMount(){
+    	window.addEventListener("scroll", this.handleScroll);// Adds an event listener when the component is mount.
+    	// window.addEventListener("scroll", this.getElementPosition);
+    	// this.getElementToBeTracked();
+  	}
+
+  	// Remove the event listener when the component is unmount.
+	componentWillUnmount() {
+		window.removeEventListener("scroll", this.handleScroll);
+		// window.removeEventListener("scroll", this.getElementPosition);
+	}
 	
+	handleScroll = (e) => { // this works on the window
+    	const leftScrollPos = window.pageXOffset;
+    	const topScrollPos = window.pageYOffset;
+    	console.log('leftScrollPos: ', leftScrollPos);
+    	console.log('topScrollPos: ', topScrollPos);
+    	const viewportHeight = window.innerHeight;
+    	const gameScoreHeight = 108;
+    	console.log('viewportHeight: ', viewportHeight);
+    	console.log('gameScoreHeight: ', gameScoreHeight);
 
+    	const element = e.target;
+    	console.log('e: ', e);
+    	console.log('element: ', element);
+
+    	const gameScoreContainerDiv = document.getElementsByClassName("game-score-container")[0];
+    	console.log('gameScoreContainerDiv: ', gameScoreContainerDiv);
+    	const gSCDObjPos = this.getElementPosition(gameScoreContainerDiv); // game score container div object position
+    	console.log('gSCDObjPos: ', gSCDObjPos);
+    	const leftSPGSCD = gSCDObjPos.left; // left scroll position game score container div
+    	const topSPGSCD = gSCDObjPos.top; // top scroll position game score container div
+    	console.log('leftSPGSCD: ', leftSPGSCD);
+    	console.log('topSPGSCD: ', topSPGSCD);
+
+    	// this.setState({
+    	// 	gameScoreFixed: (topScrollPos + gameScoreHeight >= viewportHeight - gameScoreHeight) ? true : false,
+    	// })
+
+    }
+
+    getElementToBeTracked = () => {
+    	const gameScoreContainerDiv = document.getElementsByClassName("game-score-container")[0];
+    	console.log('gameScoreContainerDiv: ', gameScoreContainerDiv);
+    	// this.getElementPosition(gameScoreContainerDiv);
+    }
+    // https://plainjs.com/javascript/styles/get-the-position-of-an-element-relative-to-the-document-24/
+    // https://www.w3adda.com/react-js-tutorial/reactjs-refs
+    // https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+    getElementPosition = (element) => {// works with a ref, but get TypeError: e.getBoundingClientRect 
+    							// is not a function when added to the componentdidmount/willunmount
+    							// eventlisteners.  Because as soon as I scroll the e becomes the 
+    							// document
+		console.log('element: ', element);
+    	let rect = element.getBoundingClientRect(),
+    	scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    	scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    	
+    	console.log('rect: ', rect);
+    	// return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+    	return rect;
+    }
+
+// Move this to a onScroll or create a function
+// let elementToBeTracked = document.getElementsByClassName("game-score-container")[0];	
+// console.log('elementToBeTracked: ', elementToBeTracked);
 
 
 	render() {
@@ -201,7 +266,14 @@ class GameInfo extends Component {
 		            // onTopPassed={props.stickGameScore}
 		            // onTopVisible={this.unStickOverlay}
 		        />
-			  	<div ref={this.props.handleScrollW} className={!this.props.gameScoreFixed ? 'game-score-container' : 'game-score-container-fixed'}>
+			  	<div
+			  		// ref={this.getElementPosition}
+			  		// index.js:1375 Warning: React does not recognize the `getElementPosition` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `getelementposition` instead.
+			  		// Warning: Invalid value for prop `getelementposition` on <div> tag. Either remove it from the element, or pass a string or number value to keep it in the DOM. For details, see https://fb.me/react-attribute-behavior
+			  		// getelementposition={(e) => this.getElementPosition(e)}
+			  		className={!this.props.gameScoreFixed ? 'game-score-container' : 'game-score-container-fixed'}
+
+			  	>
 			  		<div className='game-score'>
 					    <Table unstackable textAlign='center'>{/*this is the mobile table???...2 rows*/}
 					    	<Table.Header>
@@ -382,7 +454,7 @@ class GameInfo extends Component {
 						      </Table.Row>
 						    </Table.Header>
 						</Table>
-						<Table celled striped unstackable attached='bottom' onScroll={this.props.handleScroll} className='freeze-head-and-col'>
+						<Table celled striped unstackable attached='bottom' className='freeze-head-and-col'>
 						    <Table.Header>
 						      <Table.Row>
 						        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}

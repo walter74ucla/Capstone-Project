@@ -434,14 +434,12 @@ class BoxscoreContainer extends Component {
     // any calls to an external data source that we want connected
     // as soon as our app is loaded we call it in componentDidMount
     	this.getSelectedDateGameData(null, true);
-    	window.addEventListener("scroll", this.handleScrollW);// Adds an event listener when the component is mount.
     	// window.addEventListener("scroll", this.getElementPosition);
 
   	}
 
   	// Remove the event listener when the component is unmount.
 	componentWillUnmount() {
-		window.removeEventListener("scroll", this.handleScrollW);
 		// window.removeEventListener("scroll", this.getElementPosition);
 	}
 
@@ -480,23 +478,6 @@ class BoxscoreContainer extends Component {
     	})	
     }
 
-    handleScrollW = (e) => { // this works on the window
-    	let element = e.target;
-    	console.log('e: ', e);
-    	console.log('element: ', element);
-    	const leftScrollPos = window.pageXOffset;
-    	const topScrollPos = window.pageYOffset;
-    	console.log('leftScrollPos: ', leftScrollPos);
-    	console.log('topScrollPos: ', topScrollPos);
-    	const viewportHeight = window.innerHeight;
-    	const gameScoreHeight = 108;
-    	console.log('viewportHeight: ', viewportHeight);
-    	console.log('gameScoreHeight: ', gameScoreHeight);
-    	this.setState({
-    		gameScoreFixed: (topScrollPos + gameScoreHeight >= viewportHeight - gameScoreHeight) ? true : false,
-    	})
-
-    }
 
     // https://plainjs.com/javascript/styles/get-the-position-of-an-element-relative-to-the-document-24/
     // https://www.w3adda.com/react-js-tutorial/reactjs-refs
@@ -617,7 +598,6 @@ class BoxscoreContainer extends Component {
 
 		      				handleScrollE={this.handleScrollE}
 		      				isHorScroll={this.state.isHorScroll}
-		      				handleScrollW={this.handleScrollW}
 		      				getElementPosition={this.getElementPosition}
 		      			/>
 		      		: null	
