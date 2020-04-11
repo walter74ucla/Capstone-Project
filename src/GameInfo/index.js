@@ -47,33 +47,88 @@ const gameInfoListStyle = {
 	padding: 0,
 }
 
-// initial position - mobile
-const absoluteGameScore = { // this container's height is 104px
-	border: '2 solid purple',
+const gameScoreContainerStyle = {
+	border: '2px solid gold',
+	backgroundColor: 'lightblue',
+	// margin: '0px auto', // this centers the element (not necessary here)
+	height: 114,
+}
+
+const gameScoreContainerStyleFixedTop = {
+	...gameScoreContainerStyle,
+	border: '2px solid purple',
 	backgroundColor: 'silver',
-	position: 'absolute',
-	left: 0,
+	position: 'fixed',
+	top: 0,
+	left: 0, 
 	right: 0,
+	zIndex: 10,
 }
 
-// initial position - mobile
-const absoluteVisitorName = {
-	border: '2 solid orange',
+const gameScoreContainerStyleFixedLeft = {//when horizontal scroll position is negative, go back to 0
+	...gameScoreContainerStyle,
+	position: 'relative',//fixed, absolute, sticky did not work as expected
+	left: 0, //I want this to be the value of the leftScrollPos or always left: 0
+	// right: 0,
+}
+
+const visitorNameContainerStyle = {
+	border: '2px solid blue',
+	backgroundColor: 'grey',
+	margin: '0px auto', // this centers the element (not necessary here)
+	height: 52,
+	// border: '2px solid green',
+	// backgroundColor: 'gold',
+	// position: 'fixed',
+	// top: 114, // height of game score container div
+	// left: 0, 
+	// right: 0,
+	// zIndex: 10,
+}
+
+const visitorNameContainerStyleFixedTop = {
+	...visitorNameContainerStyle,
+	border: '2px solid green',
+	backgroundColor: 'gold',
+	position: 'fixed',
+	top: 114, // height of game score container div
+	left: 0, 
+	right: 0,
+	zIndex: 10,
+}
+
+const visitorNameContainerStyleFixedLeft = {//when horizontal scroll position is negative, go back to 0
+	...visitorNameContainerStyle,
+	position: 'relative',//fixed, absolute, sticky did not work as expected
+	left: 0, //I want this to be the value of the leftScrollPos or always left: 0
+	// right: 0,
+}
+
+const visitorStatsContainerStyle = {
+	border: '2px solid brown',
+	backgroundColor: 'yellow',
+	// margin: '0px auto', // this centers the element (not necessary here)
+	// height: 551,
+	zIndex: 100,
+}
+
+const visitorStatsContainerStyleFixedTop = { // this container does not need to be fixed
+	...visitorStatsContainerStyle,
+	border: '2px solid orange',
 	backgroundColor: 'teal',
-	position: 'absolute',
-	top: 1065,
-	left: 0,
+	// position: '-webkit-sticky',
+	// position: 'sticky',
+	top: 166, // height of game score container div plus the visitor name div
+	left: 0, 
 	right: 0,
+	zIndex: 100,
 }
 
-// initial position - mobile
-const absoluteVisitorStats = {
-	border: '2 solid blue',
-	backgroundColor: 'white',
-	position: 'absolute',
-	top: 1120,
-	left: 0,
-	right: 0,
+const visitorStatsContainerStyleFixedLeft = {//when horizontal scroll position is negative, go back to 0
+	...visitorStatsContainerStyle,
+	position: 'relative',//fixed, absolute, sticky did not work as expected
+	left: 0, //I want this to be the value of the leftScrollPos or always left: 0
+	// right: 0,
 }
 
 
@@ -90,22 +145,22 @@ class GameInfo extends Component {
 	constructor() {
 		super();
 		this.state = {
-
+			gameScoreFixedTop: false,
+			visitorNameFixedTop: false,
+			visitorStatsFixedTop: false,
 		}
 	}
 
 	contextRef = createRef();
 
+	// Adds an event listener when the component is mount.
 	componentDidMount(){
-    	window.addEventListener("scroll", this.handleScroll);// Adds an event listener when the component is mount.
-    	// window.addEventListener("scroll", this.getElementPosition);
-    	// this.getElementToBeTracked();
+    	window.addEventListener("scroll", this.handleScroll);
   	}
 
   	// Remove the event listener when the component is unmount.
 	componentWillUnmount() {
 		window.removeEventListener("scroll", this.handleScroll);
-		// window.removeEventListener("scroll", this.getElementPosition);
 	}
 	
 	handleScroll = (e) => { // this works on the window
@@ -114,15 +169,13 @@ class GameInfo extends Component {
     	console.log('leftScrollPos: ', leftScrollPos);
     	console.log('topScrollPos: ', topScrollPos);
     	const viewportHeight = window.innerHeight;
-    	const gameScoreHeight = 108;
     	console.log('viewportHeight: ', viewportHeight);
-    	console.log('gameScoreHeight: ', gameScoreHeight);
 
     	const element = e.target;
     	console.log('e: ', e);
     	console.log('element: ', element);
 
-    	const gameScoreContainerDiv = document.getElementsByClassName("game-score-container")[0];
+    	const gameScoreContainerDiv = document.getElementById("game-score-container");
     	console.log('gameScoreContainerDiv: ', gameScoreContainerDiv);
     	const gSCDObjPos = this.getElementPosition(gameScoreContainerDiv); // game score container div object position
     	console.log('gSCDObjPos: ', gSCDObjPos);
@@ -130,11 +183,53 @@ class GameInfo extends Component {
     	const topSPGSCD = gSCDObjPos.top; // top scroll position game score container div
     	console.log('leftSPGSCD: ', leftSPGSCD);
     	console.log('topSPGSCD: ', topSPGSCD);
+    	const gameScoreHeight = gSCDObjPos.height; // height of game score container div
+    	console.log('gameScoreHeight: ', gameScoreHeight);
 
-    	// this.setState({
-    	// 	gameScoreFixed: (topScrollPos + gameScoreHeight >= viewportHeight - gameScoreHeight) ? true : false,
-    	// })
+    	const visitorNameContainerDiv = document.getElementById("visitor-name-container");
+    	console.log('visitorNameContainerDiv: ', visitorNameContainerDiv);
+    	const vNCDObjPos = this.getElementPosition(visitorNameContainerDiv); // visitor name container div object position
+    	console.log('vNCDObjPos: ', vNCDObjPos);
+    	const leftSPVNCD = vNCDObjPos.left; // left scroll position visitor name container div
+    	const topSPVNCD = vNCDObjPos.top; // top scroll position visitor name container div
+    	console.log('leftSPVNCD: ', leftSPVNCD);
+    	console.log('topSPVNCD: ', topSPVNCD);
+    	const visitorNameHeight = vNCDObjPos.height; // height of visitor name container div
+    	console.log('visitorNameHeight: ', visitorNameHeight);
 
+    	const visitorStatsContainerDiv = document.getElementById("visitor-stats-container");
+    	console.log('visitorStatsContainerDiv: ', visitorStatsContainerDiv);
+    	const vSCDObjPos = this.getElementPosition(visitorStatsContainerDiv); // visitor stats container div object position
+    	console.log('vSCDObjPos: ', vSCDObjPos);
+    	const leftSPVSCD = vSCDObjPos.left; // left scroll position visitor stats container div
+    	const topSPVSCD = vSCDObjPos.top; // top scroll position visitor stats container div
+    	console.log('leftSPVSCD: ', leftSPVSCD);
+    	console.log('topSPVSCD: ', topSPVSCD);
+    	const visitorStatsHeight = vSCDObjPos.height; // height of visitor stats container div
+    	console.log('visitorStatsHeight: ', visitorStatsHeight);
+
+    	const homeNameContainerDiv = document.getElementById("home-name-container");
+    	console.log('homeNameContainerDiv: ', homeNameContainerDiv);
+    	const hNCDObjPos = this.getElementPosition(homeNameContainerDiv); // home name container div object position
+    	console.log('hNCDObjPos: ', hNCDObjPos);
+    	const leftSPHNCD = hNCDObjPos.left; // left scroll position home name container div
+    	const topSPHNCD = hNCDObjPos.top; // top scroll position home name container div
+    	console.log('leftSPHNCD: ', leftSPHNCD);
+    	console.log('topSPHNCD: ', topSPHNCD);
+    	const homeNameHeight = hNCDObjPos.height; // height of home name container div
+    	console.log('homeNameHeight: ', homeNameHeight);
+
+    	const height1 = gameScoreHeight;
+    	const height2 = gameScoreHeight + visitorNameHeight;
+    	const height3 = gameScoreHeight + visitorNameHeight + visitorStatsHeight;
+    	const height4 = gameScoreHeight + visitorNameHeight + visitorStatsHeight + homeNameHeight;// may need to account for the break height
+
+    	this.setState({
+    		gameScoreFixedTop: (topSPGSCD <= 0 && topSPVNCD <= height1) ? true : false,
+    		visitorNameFixedTop: (topSPVNCD <= height1) && (topSPVSCD <= height2) ? true : false,    								
+			visitorStatsFixedTop: (topSPVSCD <= height2) && (topSPHNCD <= height3) ? true : false,
+    								
+    	})
     }
 
     getElementToBeTracked = () => {
@@ -167,6 +262,9 @@ class GameInfo extends Component {
 	render() {
 		console.log(this.props);
 		// console.log(this.props.byGamePlayerInfoName[0][0].api.players[0].playerId);
+		console.log('gameScoreFixedTop: ', this.state.gameScoreFixedTop);
+		console.log('visitorNameFixedTop: ', this.state.visitorNameFixedTop);
+		console.log('visitorStatsFixedTop: ', this.state.visitorStatsFixedTop);
 
 		if (this.props.byGameTotals[0].api.statistics.length === 0) {
 			return null
@@ -267,6 +365,8 @@ class GameInfo extends Component {
 		            // onTopVisible={this.unStickOverlay}
 		        />
 			  	<div
+			  		id='game-score-container'
+			  		style={this.state.gameScoreFixedTop ? gameScoreContainerStyleFixedTop : gameScoreContainerStyle}
 			  		// ref={this.getElementPosition}
 			  		// index.js:1375 Warning: React does not recognize the `getElementPosition` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `getelementposition` instead.
 			  		// Warning: Invalid value for prop `getelementposition` on <div> tag. Either remove it from the element, or pass a string or number value to keep it in the DOM. For details, see https://fb.me/react-attribute-behavior
@@ -274,7 +374,7 @@ class GameInfo extends Component {
 			  		className={!this.props.gameScoreFixed ? 'game-score-container' : 'game-score-container-fixed'}
 
 			  	>
-			  		<div className='game-score'>
+			  		{/*<div className='game-score'>*/}
 					    <Table unstackable textAlign='center'>{/*this is the mobile table???...2 rows*/}
 					    	<Table.Header>
 						      	<Table.Row>
@@ -387,12 +487,15 @@ class GameInfo extends Component {
 				      	</Table.Row>
 					</Table.Body>
 			    </Table>*/}
-			   		</div>
+			   		{/*</div>*/}
 			   	</div>
-			   	<br/>
 			   	
-				<div className={ true ? 'visitor-name-container' : 'visitor-name-container-fixed'}>
-				    <div className='visitor-name'>
+				<div 
+					id='visitor-name-container' 
+					style={this.state.visitorNameFixedTop ? 
+							visitorNameContainerStyleFixedTop : visitorNameContainerStyle}
+				>
+				    {/*<div className='visitor-name'>*/}
 					    <Table unstackable>
 						    <Table.Header>
 						      <Table.Row>
@@ -400,17 +503,21 @@ class GameInfo extends Component {
 						      </Table.Row>
 						    </Table.Header>
 						</Table>
-					</div>
+					{/*</div>*/}
 				</div>
-				<br/>
-				{console.log(window.pageXOffset)}
-				<div className={ true ? 'visitor-stats-container' : 'visitor-stats-container-fixed'}>
-					<div className='visitor-stats'>
+				{/*<br/>*/}
+				<div 
+					id='visitor-stats-container'
+					// style={this.state.visitorStatsFixedTop ? 
+							// visitorStatsContainerStyleFixedTop : visitorStatsContainerStyle}
+					// className={ true ? 'visitor-stats-container' : 'visitor-stats-container-fixed'}
+				>
+					{/*<div className='visitor-stats'>*/}
 						<Table 
 							celled 
 							striped 
 							unstackable
-							className={true ? 'freeze-head-and-col' : 'freeze-head-and-col-fixed'}
+							className={false ? 'freeze-head-and-col' : 'freeze-head-and-col-fixed'}
 						>
 						    <Table.Header>
 						      <Table.Row>
@@ -443,17 +550,25 @@ class GameInfo extends Component {
 						      </Table.Row>
 						    </Table.Footer>
 					    </Table>
-				    </div>
+				    {/*</div>*/}
 				</div>
 				<br/>
 				    <div>
-					    <Table celled striped unstackable attached='top'>
-						    <Table.Header>
-						      <Table.Row>
-						        <Table.HeaderCell>{game.hTeam.fullName}</Table.HeaderCell>
-						      </Table.Row>
-						    </Table.Header>
-						</Table>
+				    <div 
+						id='home-name-container' 
+						// style={this.state.homeNameFixedTop ? 
+								// homeNameContainerStyleFixedTop : homeNameContainerStyle}
+					>
+					    {/*<div className='home-name'>*/}
+						    <Table unstackable>
+							    <Table.Header>
+							      <Table.Row>
+							        <Table.HeaderCell>{game.hTeam.fullName}</Table.HeaderCell>
+							      </Table.Row>
+							    </Table.Header>
+							</Table>
+						{/*</div>*/}
+					</div>
 						<Table celled striped unstackable attached='bottom' className='freeze-head-and-col'>
 						    <Table.Header>
 						      <Table.Row>

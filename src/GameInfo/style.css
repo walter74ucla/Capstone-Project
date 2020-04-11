@@ -15,49 +15,7 @@ body {
   background-color: pink;
 }
 
-.game-score-container {
-	/*position: relative;*/
-}
 
-/*This is fixed when onTopPassed is true or leftScrollPos does not equal zero*/
-.game-score-container-fixed {
-	border: 2px solid purple;
-	background-color: silver;
-	position: fixed;
-	top: 0px; 
-	left: 0px; 
-	right: 0px;
-	z-index: 10;
-}
-
-.game-score { /*this works as expected on top (left and right did not work)*/
-	border: 2px solid gold;
-	background-color: lightblue;
-	margin: 0 auto; /*this centers the element*/
-	/*position: absolute;*/
-}
-
-.visitor-name-container {
-	/*position: relative;*/
-	/*clear: left;*/
-}
-
-.visitor-name-container-fixed {
-	border: 2px solid green;
-	background-color: gold;
-	position: fixed;
-	top: 108px; /*height of the container above it*/ 
-	left: 0px; 
-	right: 0px;
-	z-index: 10;
-}
-
-.visitor-name {
-	border: 2px solid blue;
-	background-color: grey;
-	margin: 0 auto; /*this centers the element*/
-	/*position: absolute;*/
-}
 
 .visitor-stats-container {
 	/*position: relative;*/
@@ -129,11 +87,13 @@ body {
 	background-color: cyan;
 }
 
+/*166, // height of game score container div plus the visitor name div*/
+
 /*Fix the header under team name...thead...1st row*/
 .freeze-head-and-col-fixed thead tr:first-of-type th {
 	position: -webkit-sticky;
 	position: sticky;
-	top: 164px; /*108 + 56 = 164, height of the two containers above this one*/
+	top: 166px; /*114 + 52 = 164, height of the two containers above this one*/
 	background-color: cyan;
 }
 
