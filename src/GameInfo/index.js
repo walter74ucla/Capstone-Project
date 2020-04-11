@@ -175,61 +175,61 @@ class GameInfo extends Component {
     	console.log('e: ', e);
     	console.log('element: ', element);
 
-    	const gameScoreContainerDiv = document.getElementById("game-score-container");
-    	console.log('gameScoreContainerDiv: ', gameScoreContainerDiv);
-    	const gSCDObjPos = this.getElementPosition(gameScoreContainerDiv); // game score container div object position
-    	console.log('gSCDObjPos: ', gSCDObjPos);
-    	const leftSPGSCD = gSCDObjPos.left; // left scroll position game score container div
-    	const topSPGSCD = gSCDObjPos.top; // top scroll position game score container div
-    	console.log('leftSPGSCD: ', leftSPGSCD);
-    	console.log('topSPGSCD: ', topSPGSCD);
-    	const gameScoreHeight = gSCDObjPos.height; // height of game score container div
-    	console.log('gameScoreHeight: ', gameScoreHeight);
+   //  	const gameScoreContainerDiv = document.getElementById("game-score-container");
+   //  	console.log('gameScoreContainerDiv: ', gameScoreContainerDiv);
+   //  	const gSCDObjPos = this.getElementPosition(gameScoreContainerDiv); // game score container div object position
+   //  	console.log('gSCDObjPos: ', gSCDObjPos);
+   //  	const leftSPGSCD = gSCDObjPos.left; // left scroll position game score container div
+   //  	const topSPGSCD = gSCDObjPos.top; // top scroll position game score container div
+   //  	console.log('leftSPGSCD: ', leftSPGSCD);
+   //  	console.log('topSPGSCD: ', topSPGSCD);
+   //  	const gameScoreHeight = gSCDObjPos.height; // height of game score container div
+   //  	console.log('gameScoreHeight: ', gameScoreHeight);
 
-    	const visitorNameContainerDiv = document.getElementById("visitor-name-container");
-    	console.log('visitorNameContainerDiv: ', visitorNameContainerDiv);
-    	const vNCDObjPos = this.getElementPosition(visitorNameContainerDiv); // visitor name container div object position
-    	console.log('vNCDObjPos: ', vNCDObjPos);
-    	const leftSPVNCD = vNCDObjPos.left; // left scroll position visitor name container div
-    	const topSPVNCD = vNCDObjPos.top; // top scroll position visitor name container div
-    	console.log('leftSPVNCD: ', leftSPVNCD);
-    	console.log('topSPVNCD: ', topSPVNCD);
-    	const visitorNameHeight = vNCDObjPos.height; // height of visitor name container div
-    	console.log('visitorNameHeight: ', visitorNameHeight);
+   //  	const visitorNameContainerDiv = document.getElementById("visitor-name-container");
+   //  	console.log('visitorNameContainerDiv: ', visitorNameContainerDiv);
+   //  	const vNCDObjPos = this.getElementPosition(visitorNameContainerDiv); // visitor name container div object position
+   //  	console.log('vNCDObjPos: ', vNCDObjPos);
+   //  	const leftSPVNCD = vNCDObjPos.left; // left scroll position visitor name container div
+   //  	const topSPVNCD = vNCDObjPos.top; // top scroll position visitor name container div
+   //  	console.log('leftSPVNCD: ', leftSPVNCD);
+   //  	console.log('topSPVNCD: ', topSPVNCD);
+   //  	const visitorNameHeight = vNCDObjPos.height; // height of visitor name container div
+   //  	console.log('visitorNameHeight: ', visitorNameHeight);
 
-    	const visitorStatsContainerDiv = document.getElementById("visitor-stats-container");
-    	console.log('visitorStatsContainerDiv: ', visitorStatsContainerDiv);
-    	const vSCDObjPos = this.getElementPosition(visitorStatsContainerDiv); // visitor stats container div object position
-    	console.log('vSCDObjPos: ', vSCDObjPos);
-    	const leftSPVSCD = vSCDObjPos.left; // left scroll position visitor stats container div
-    	const topSPVSCD = vSCDObjPos.top; // top scroll position visitor stats container div
-    	console.log('leftSPVSCD: ', leftSPVSCD);
-    	console.log('topSPVSCD: ', topSPVSCD);
-    	const visitorStatsHeight = vSCDObjPos.height; // height of visitor stats container div
-    	console.log('visitorStatsHeight: ', visitorStatsHeight);
+   //  	const visitorStatsContainerDiv = document.getElementById("visitor-stats-container");
+   //  	console.log('visitorStatsContainerDiv: ', visitorStatsContainerDiv);
+   //  	const vSCDObjPos = this.getElementPosition(visitorStatsContainerDiv); // visitor stats container div object position
+   //  	console.log('vSCDObjPos: ', vSCDObjPos);
+   //  	const leftSPVSCD = vSCDObjPos.left; // left scroll position visitor stats container div
+   //  	const topSPVSCD = vSCDObjPos.top; // top scroll position visitor stats container div
+   //  	console.log('leftSPVSCD: ', leftSPVSCD);
+   //  	console.log('topSPVSCD: ', topSPVSCD);
+   //  	const visitorStatsHeight = vSCDObjPos.height; // height of visitor stats container div
+   //  	console.log('visitorStatsHeight: ', visitorStatsHeight);
 
-    	const homeNameContainerDiv = document.getElementById("home-name-container");
-    	console.log('homeNameContainerDiv: ', homeNameContainerDiv);
-    	const hNCDObjPos = this.getElementPosition(homeNameContainerDiv); // home name container div object position
-    	console.log('hNCDObjPos: ', hNCDObjPos);
-    	const leftSPHNCD = hNCDObjPos.left; // left scroll position home name container div
-    	const topSPHNCD = hNCDObjPos.top; // top scroll position home name container div
-    	console.log('leftSPHNCD: ', leftSPHNCD);
-    	console.log('topSPHNCD: ', topSPHNCD);
-    	const homeNameHeight = hNCDObjPos.height; // height of home name container div
-    	console.log('homeNameHeight: ', homeNameHeight);
+   //  	const homeNameContainerDiv = document.getElementById("home-name-container");
+   //  	console.log('homeNameContainerDiv: ', homeNameContainerDiv);
+   //  	const hNCDObjPos = this.getElementPosition(homeNameContainerDiv); // home name container div object position
+   //  	console.log('hNCDObjPos: ', hNCDObjPos);
+   //  	const leftSPHNCD = hNCDObjPos.left; // left scroll position home name container div
+   //  	const topSPHNCD = hNCDObjPos.top; // top scroll position home name container div
+   //  	console.log('leftSPHNCD: ', leftSPHNCD);
+   //  	console.log('topSPHNCD: ', topSPHNCD);
+   //  	const homeNameHeight = hNCDObjPos.height; // height of home name container div
+   //  	console.log('homeNameHeight: ', homeNameHeight);
 
-    	const height1 = gameScoreHeight;
-    	const height2 = gameScoreHeight + visitorNameHeight;
-    	const height3 = gameScoreHeight + visitorNameHeight + visitorStatsHeight;
-    	const height4 = gameScoreHeight + visitorNameHeight + visitorStatsHeight + homeNameHeight;// may need to account for the break height
+   //  	const height1 = gameScoreHeight;
+   //  	const height2 = gameScoreHeight + visitorNameHeight;
+   //  	const height3 = gameScoreHeight + visitorNameHeight + visitorStatsHeight;
+   //  	const height4 = gameScoreHeight + visitorNameHeight + visitorStatsHeight + homeNameHeight;// may need to account for the break height
 
-    	this.setState({
-    		gameScoreFixedTop: (topSPGSCD <= 0 && topSPVNCD <= height1) ? true : false,
-    		visitorNameFixedTop: (topSPVNCD <= height1) && (topSPVSCD <= height2) ? true : false,    								
-			visitorStatsFixedTop: (topSPVSCD <= height2) && (topSPHNCD <= height3) ? true : false,
+   //  	this.setState({
+   //  		gameScoreFixedTop: (topSPGSCD <= 0 && topSPVNCD <= height1) ? true : false,
+   //  		visitorNameFixedTop: (topSPVNCD <= height1) && (topSPVSCD <= height2) ? true : false,    								
+			// visitorStatsFixedTop: (topSPVSCD <= height2) && (topSPHNCD <= height3) ? true : false,
     								
-    	})
+   //  	})
     }
 
     getElementToBeTracked = () => {
@@ -358,13 +358,8 @@ class GameInfo extends Component {
 				?	null
 				:
 			<li key={game.gameId}>
-			  	<Visibility
-		            offset={0}
-		            once={false}
-		            // onTopPassed={props.stickGameScore}
-		            // onTopVisible={this.unStickOverlay}
-		        />
-			  	<div
+			  	
+			  	{/*<div
 			  		id='game-score-container'
 			  		style={this.state.gameScoreFixedTop ? gameScoreContainerStyleFixedTop : gameScoreContainerStyle}
 			  		// ref={this.getElementPosition}
@@ -373,235 +368,190 @@ class GameInfo extends Component {
 			  		// getelementposition={(e) => this.getElementPosition(e)}
 			  		className={!this.props.gameScoreFixed ? 'game-score-container' : 'game-score-container-fixed'}
 
-			  	>
-			  		{/*<div className='game-score'>*/}
-					    <Table unstackable textAlign='center'>{/*this is the mobile table???...2 rows*/}
-					    	<Table.Header>
-						      	<Table.Row>
-						        	<Table.HeaderCell>	
-					        			<Header as='h4'>
-		            						{game.vTeam.shortName}
-								        </Header>
-						        	</Table.HeaderCell>
-						        	<Table.HeaderCell>
-						        		<Header as='h4'>
-		            						{game.vTeam.score.points}
-								        </Header>
-						        	</Table.HeaderCell>
-						        	<Table.HeaderCell>
-					        			<Header as='h4'>
-		            						{game.currentPeriod !== "" ? "FINAL" : null}
-								        </Header>
-						        	</Table.HeaderCell>
-						        	<Table.HeaderCell>
-					       				<Header as='h4'>
-		            						{game.hTeam.score.points}
-								        </Header>
-						        	</Table.HeaderCell>
-						        	<Table.HeaderCell>
-					        			<Header as='h4'>
-		            						{game.hTeam.shortName}
-								        </Header>
-						        	</Table.HeaderCell>
-						      	</Table.Row>
-						      	<Table.Row>
-						      		<Table.HeaderCell>
-						        		<Header as='h4' image>
-						        			<Image src={teamLogos.find(teamLogo => 
-						        				teamLogo.teamId === game.vTeam.teamId).logo} size='mini' />
-						        		</Header>
-						        	</Table.HeaderCell>
-						        	<Table.HeaderCell>
-					        			
-						        	</Table.HeaderCell>
-						        	<Table.HeaderCell>
-					        			<Header as='h4'>
-		            						{game.currentPeriod === "5/4" ? "OT" 
-		            							: game.currentPeriod === "6/4" ? "2OT"
-		            							: game.currentPeriod === "7/4" ? "3OT"
-		            							: game.currentPeriod === "8/4" ? "4OT"
-		            							: game.currentPeriod === "9/4" ? "5OT"
-		            							: null
-		            						}
-								        </Header>
-						        	</Table.HeaderCell>
-						        	<Table.HeaderCell>
-					        			
-						        	</Table.HeaderCell>
-						        	<Table.HeaderCell>
-						        		<Header as='h4' image>
-						        			<Image src={teamLogos.find(teamLogo => 
-						        				teamLogo.teamId === game.hTeam.teamId).logo} size='mini' />
-						        		</Header>
-						        	</Table.HeaderCell>
-						      	</Table.Row>
-							</Table.Header>
-					    </Table>
-			    {/*<Table collapsing unstackable> this is the desktop table???...1 row
-			    	<Table.Body>
+			  	>*/}
+			    <Table id='game-score' unstackable attached='top' textAlign='center'>
+			    	<Table.Header>
 				      	<Table.Row>
-				        	<Table.Cell>	
+				        	<Table.HeaderCell>	
 			        			<Header as='h4'>
             						{game.vTeam.shortName}
 						        </Header>
-				        	</Table.Cell>
-				        	<Table.Cell>
+				        	</Table.HeaderCell>
+				        	<Table.HeaderCell>
+				        		<Header as='h4'>
+            						{game.vTeam.score.points}
+						        </Header>
+				        	</Table.HeaderCell>
+				        	<Table.HeaderCell>
+			        			<Header as='h4'>
+            						{game.currentPeriod !== "" ? "FINAL" : null}
+						        </Header>
+				        	</Table.HeaderCell>
+				        	<Table.HeaderCell>
+			       				<Header as='h4'>
+            						{game.hTeam.score.points}
+						        </Header>
+				        	</Table.HeaderCell>
+				        	<Table.HeaderCell>
+			        			<Header as='h4'>
+            						{game.hTeam.shortName}
+						        </Header>
+				        	</Table.HeaderCell>
+				      	</Table.Row>
+				      	<Table.Row>
+				      		<Table.HeaderCell>
 				        		<Header as='h4' image>
 				        			<Image src={teamLogos.find(teamLogo => 
 				        				teamLogo.teamId === game.vTeam.teamId).logo} size='mini' />
 				        		</Header>
-				        	</Table.Cell>
-				        	<Table.Cell>
+				        	</Table.HeaderCell>
+				        	<Table.HeaderCell>
+			        			
+				        	</Table.HeaderCell>
+				        	<Table.HeaderCell>
 			        			<Header as='h4'>
-            						{game.vTeam.score.points}
-						        </Header>
-				        	</Table.Cell>
-				        	<Table.Cell>
-			        			<Header as='h4'>
-            						{game.currentPeriod === "4/4" ? "FINAL" 
-            							: game.currentPeriod === "5/4" ? "FINAL/OT"
-            							: game.currentPeriod === "6/4" ? "FINAL/2OT"
-            							: game.currentPeriod === "7/4" ? "FINAL/3OT"
-            							: game.currentPeriod === "8/4" ? "FINAL/4OT"
-            							: game.currentPeriod === "9/4" ? "FINAL/5OT"
+            						{game.currentPeriod === "5/4" ? "OT" 
+            							: game.currentPeriod === "6/4" ? "2OT"
+            							: game.currentPeriod === "7/4" ? "3OT"
+            							: game.currentPeriod === "8/4" ? "4OT"
+            							: game.currentPeriod === "9/4" ? "5OT"
             							: null
             						}
 						        </Header>
-				        	</Table.Cell>
-				        	<Table.Cell>
-			        			<Header as='h4'>
-            						{game.hTeam.score.points}
-						        </Header>
-				        	</Table.Cell>
-				        	<Table.Cell>
+				        	</Table.HeaderCell>
+				        	<Table.HeaderCell>
+			        			
+				        	</Table.HeaderCell>
+				        	<Table.HeaderCell>
 				        		<Header as='h4' image>
 				        			<Image src={teamLogos.find(teamLogo => 
 				        				teamLogo.teamId === game.hTeam.teamId).logo} size='mini' />
 				        		</Header>
-				        	</Table.Cell>
-				        	<Table.Cell>
-			        			<Header as='h4'>
-            						{game.hTeam.shortName}
-						        </Header>
-				        	</Table.Cell>
+				        	</Table.HeaderCell>
 				      	</Table.Row>
-					</Table.Body>
-			    </Table>*/}
-			   		{/*</div>*/}
-			   	</div>
-			   	
-				<div 
+					</Table.Header>
+			    </Table>
+			   	{/*</div>*/}
+			   	{/*<br/>*/}
+				{/*<div 
 					id='visitor-name-container' 
 					style={this.state.visitorNameFixedTop ? 
 							visitorNameContainerStyleFixedTop : visitorNameContainerStyle}
-				>
-				    {/*<div className='visitor-name'>*/}
-					    <Table unstackable>
-						    <Table.Header>
-						      <Table.Row>
-						        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
-						      </Table.Row>
-						    </Table.Header>
-						</Table>
-					{/*</div>*/}
-				</div>
+				>*/}
+			    <Table id='visitor-name' unstackable attached>
+				    <Table.Header>
+				      <Table.Row>
+				        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
+				      </Table.Row>
+				    </Table.Header>
+				</Table>
+				{/*</div>*/}
 				{/*<br/>*/}
-				<div 
+				{/*<div 
 					id='visitor-stats-container'
 					// style={this.state.visitorStatsFixedTop ? 
 							// visitorStatsContainerStyleFixedTop : visitorStatsContainerStyle}
 					// className={ true ? 'visitor-stats-container' : 'visitor-stats-container-fixed'}
+				>*/}
+				<Table 
+					id='visitor-stats'
+					celled 
+					striped 
+					unstackable
+					attached
+					className={false ? 'freeze-head-and-col' : 'freeze-head-and-col-fixed'}
 				>
-					{/*<div className='visitor-stats'>*/}
-						<Table 
-							celled 
-							striped 
-							unstackable
-							className={false ? 'freeze-head-and-col' : 'freeze-head-and-col-fixed'}
-						>
-						    <Table.Header>
-						      <Table.Row>
-						        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
-						        <Table.HeaderCell>Player</Table.HeaderCell>
-						        <Table.HeaderCell>MIN</Table.HeaderCell>
-						        <Table.HeaderCell>PTS</Table.HeaderCell>
-						        <Table.HeaderCell>REB</Table.HeaderCell>
-						        <Table.HeaderCell>AST</Table.HeaderCell>
-						        <Table.HeaderCell>F</Table.HeaderCell>
-						        <Table.HeaderCell>STL</Table.HeaderCell>
-						        <Table.HeaderCell>TO</Table.HeaderCell>
-						        <Table.HeaderCell>BLK</Table.HeaderCell>
-						      </Table.Row>
-						    </Table.Header>
-							<Table.Body>
-						    	{playerRowV}
-						    </Table.Body>
-						    <Table.Footer>
-						      <Table.Row>
-						        <Table.HeaderCell style={footerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
-						      </Table.Row>
-						    </Table.Footer>
-					    </Table>
-				    {/*</div>*/}
-				</div>
-				<br/>
-				    <div>
-				    <div 
+				    <Table.Header>
+				      <Table.Row>
+				        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
+				        <Table.HeaderCell>Player</Table.HeaderCell>
+				        <Table.HeaderCell>MIN</Table.HeaderCell>
+				        <Table.HeaderCell>PTS</Table.HeaderCell>
+				        <Table.HeaderCell>REB</Table.HeaderCell>
+				        <Table.HeaderCell>AST</Table.HeaderCell>
+				        <Table.HeaderCell>F</Table.HeaderCell>
+				        <Table.HeaderCell>STL</Table.HeaderCell>
+				        <Table.HeaderCell>TO</Table.HeaderCell>
+				        <Table.HeaderCell>BLK</Table.HeaderCell>
+				      </Table.Row>
+				    </Table.Header>
+					<Table.Body>
+				    	{playerRowV}
+				    </Table.Body>
+				    <Table.Footer>
+				      <Table.Row>
+				        <Table.HeaderCell style={footerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
+				      </Table.Row>
+				    </Table.Footer>
+			    </Table>
+				{/*</div>*/}
+			
+				    {/*<div 
 						id='home-name-container' 
 						// style={this.state.homeNameFixedTop ? 
 								// homeNameContainerStyleFixedTop : homeNameContainerStyle}
-					>
-					    {/*<div className='home-name'>*/}
-						    <Table unstackable>
-							    <Table.Header>
-							      <Table.Row>
-							        <Table.HeaderCell>{game.hTeam.fullName}</Table.HeaderCell>
-							      </Table.Row>
-							    </Table.Header>
-							</Table>
-						{/*</div>*/}
-					</div>
-						<Table celled striped unstackable attached='bottom' className='freeze-head-and-col'>
-						    <Table.Header>
-						      <Table.Row>
-						        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
-						        <Table.HeaderCell>Player</Table.HeaderCell>
-						        <Table.HeaderCell>MIN</Table.HeaderCell>
-						        <Table.HeaderCell>PTS</Table.HeaderCell>
-						        <Table.HeaderCell>REB</Table.HeaderCell>
-						        <Table.HeaderCell>AST</Table.HeaderCell>
-						        <Table.HeaderCell>F</Table.HeaderCell>
-						        <Table.HeaderCell>STL</Table.HeaderCell>
-						        <Table.HeaderCell>TO</Table.HeaderCell>
-						        <Table.HeaderCell>BLK</Table.HeaderCell>
-						      </Table.Row>
-						    </Table.Header>
-							<Table.Body>
-						    	{playerRowH}
-						    </Table.Body>
-						    <Table.Header>
-						      <Table.Row>
-						        <Table.HeaderCell style={footerStyleVHTot}>Home Totals:</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].min}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].points}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].totReb}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].assists}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].pFouls}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].steals}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].turnovers}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].blocks}</Table.HeaderCell>
-						      </Table.Row>
-						    </Table.Header>
-					    </Table>
-				    </div>
+					>*/}
+				<Table id='blank-row' unstackable attached>
+				    <Table.Body>
+				      <Table.Row>
+				        <Table.Cell></Table.Cell>
+				      </Table.Row>
+				    </Table.Body>
+				</Table>	  
+			    <Table id='home-name'unstackable attached>
+				    <Table.Header>
+				      <Table.Row>
+				        <Table.HeaderCell>{game.hTeam.fullName}</Table.HeaderCell>
+				      </Table.Row>
+				    </Table.Header>
+				</Table>	
+				<Table 
+					id='home-stats' 
+					celled 
+					striped 
+					unstackable 
+					attached='bottom' 
+					className='freeze-head-and-col'
+				>
+				    <Table.Header>
+				      <Table.Row>
+				        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
+				        <Table.HeaderCell>Player</Table.HeaderCell>
+				        <Table.HeaderCell>MIN</Table.HeaderCell>
+				        <Table.HeaderCell>PTS</Table.HeaderCell>
+				        <Table.HeaderCell>REB</Table.HeaderCell>
+				        <Table.HeaderCell>AST</Table.HeaderCell>
+				        <Table.HeaderCell>F</Table.HeaderCell>
+				        <Table.HeaderCell>STL</Table.HeaderCell>
+				        <Table.HeaderCell>TO</Table.HeaderCell>
+				        <Table.HeaderCell>BLK</Table.HeaderCell>
+				      </Table.Row>
+				    </Table.Header>
+					<Table.Body>
+				    	{playerRowH}
+				    </Table.Body>
+				    <Table.Footer>
+				      <Table.Row>
+				        <Table.HeaderCell style={footerStyleVHTot}>Home Totals:</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].min}</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].points}</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].totReb}</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].assists}</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].pFouls}</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].steals}</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].turnovers}</Table.HeaderCell>
+				        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].blocks}</Table.HeaderCell>
+				      </Table.Row>
+				    </Table.Footer>
+			    </Table>
 			<br/>
 			</li>
 		)})
