@@ -67,6 +67,10 @@ const blankRowTableStyle = {
 	backgroundColor: 'red',
 }
 
+const homeNameTableStyleOverlay = { // for the home name table
+  display: 'none', // Hidden by default
+}
+
 const homeNameTableStyle = {
 	border: '2px solid red',
 	backgroundColor: 'white',
@@ -91,11 +95,12 @@ class GameInfo extends Component {
 	constructor() {
 		super();
 		this.state = {
+			gameListIndex: [],
 			gameScoreFixed: false,
 			visitorNameFixed: false,
 			visitorStatsFixed: false,
 			// blankRowRel: false,
-			homeNameFixed: false,
+			homeNameOverlay: false,
 			homeStatsFixed: false,
 			gameScoreTableStyleFixed: {// works for vertical scroll, not horizonal scroll, yet
 				...gameScoreTableStyle,
@@ -129,18 +134,18 @@ class GameInfo extends Component {
 				// right: 0,
 				zIndex: 0,
 			},
-			blankRowTableStyleRel: {// works for vertical scroll, not horizonal scroll, yet
-				...blankRowTableStyle,
-				border: '',
-				backgroundColor: '',
-				position: '',
-				position: '',
-				top: 0, 
-				// left: 0, 
-				// right: 0,
-				zIndex: 0,
-			},
-			homeNameTableStyleFixed: {// works for vertical scroll, not horizonal scroll, yet
+			// blankRowTableStyleRel: {// works for vertical scroll, not horizonal scroll, yet
+			// 	...blankRowTableStyle,
+			// 	border: '',
+			// 	backgroundColor: '',
+			// 	position: '',
+			// 	position: '',
+			// 	top: 0, 
+			// 	// left: 0, 
+			// 	// right: 0,
+			// 	zIndex: 0,
+			// },
+			homeNameTableStyleOverlay: {// works for vertical scroll, not horizonal scroll, yet
 				...homeNameTableStyle,
 				border: '',
 				backgroundColor: '',
@@ -239,8 +244,10 @@ class GameInfo extends Component {
     	console.log('hNTObjPos: ', hNTObjPos);
     	const leftSPHNT = hNTObjPos.left; // left scroll position home name table element
     	const topSPHNT = hNTObjPos.top; // top scroll position home name table element
+    	const bottomSPHNT = hNTObjPos.bottom; // bottom scroll position home name table element
     	console.log('leftSPHNT: ', leftSPHNT);
     	console.log('topSPHNT: ', topSPHNT);
+    	console.log('bottomSPHNT: ', bottomSPHNT);
     	const homeNameHeight = hNTObjPos.height; // height of home name table element
     	console.log('homeNameHeight: ', homeNameHeight);
 
@@ -263,12 +270,19 @@ class GameInfo extends Component {
     	const height6 = height5 + homeStatsHeight;
     	const height7 = gameScoreHeight + homeNameHeight;
 
+    	const gameListIndexArray = this.getListObjectIndex(); // need list array index(s) for overlay
+    	console.log('gameListIndexArray: ', gameListIndexArray);
+
+    	this.setState({
+    		gameListIndex: gameListIndexArray,
+    	})
+
     	this.setState({ // perhaps no && here???
-    		gameScoreFixed: (topSPGST <= 0 && topSPVNT <= height1) ? true : false,
-    		visitorNameFixed: (topSPVNT <= height1) && (topSPVST <= height2) ? true : false,
-			visitorStatsFixed: (topSPVST <= height2) && (topSPBRT <= height3) ? true : false,
-			blankRowFixed: (topSPBRT <= height3) && (topSPHNT <= height2) ? true : false,
-			homeNameFixed: (topSPHNT <= height1) && (topSPHST <= height5) ? true : false,
+    		gameScoreFixed: (topSPGST <= 0) ? true : false,
+    		visitorNameFixed: (topSPVNT <= height1) && (bottomSPHNT > height1) ? true : false,
+			visitorStatsFixed: (topSPVST <= height2) ? true : false,
+			// blankRowFixed: (topSPBRT <= height3) ? true : false,
+			homeNameOverlay: (topSPHNT <= height1) ? true : false,
     		homeStatsFixed: (topSPHST <= height6) ? true : false,
     	})
 
@@ -309,19 +323,19 @@ class GameInfo extends Component {
 				position: '-webkit-sticky',
 				position: 'sticky',
 			},
-			blankRowTableStyleRel: {
-				...blankRowTableStyle,
-				border: '2px solid silver',
-				backgroundColor: 'teal',
-				// position: 'fixed',
-				top: height3, // height of game score, visitor name, and visitor stats table elements
-				// left: 0, 
-				// right: 0,
-				zIndex: 1,
-				position: '-webkit-sticky',
-				position: 'sticky',
-			},
-			homeNameTableStyleFixed: {
+			// blankRowTableStyleRel: {
+			// 	...blankRowTableStyle,
+			// 	border: '2px solid silver',
+			// 	backgroundColor: 'teal',
+			// 	// position: 'fixed',
+			// 	top: height3, // height of game score, visitor name, and visitor stats table elements
+			// 	// left: 0, 
+			// 	// right: 0,
+			// 	zIndex: 1,
+			// 	position: '-webkit-sticky',
+			// 	position: 'sticky',
+			// },
+			homeNameTableStyleOverlay: {
 				...homeNameTableStyle,
 				border: '2px solid fuchsia',
 				backgroundColor: 'lime',
@@ -329,7 +343,7 @@ class GameInfo extends Component {
 				top: height1, // height of game score table element
 				// left: 0, 
 				// right: 0,
-				zIndex: 1, // this may need to be variable
+				zIndex: 2,
 				position: '-webkit-sticky',
 				position: 'sticky',
 			},
@@ -370,9 +384,17 @@ class GameInfo extends Component {
     	return rect;
     }
 
-// Move this to a onScroll or create a function
-// let elementToBeTracked = document.getElementsByClassName("game-score-container")[0];	
-// console.log('elementToBeTracked: ', elementToBeTracked);
+    getListObjectIndex = () => { // HTMLCollection Object
+    	const listObj = document.getElementById("game-info").getElementsByTagName("LI");
+    	// console.log(listObj);
+    	let listObjArrayIndex = [];
+    	for(let i=0; i<listObj.length; i++){
+    		// console.log('i: ', i);
+    		listObjArrayIndex.push(i);
+    	}
+    	// console.log('listObjArrayIndex: ', listObjArrayIndex);
+    	return listObjArrayIndex;
+    }
 
 
 	render() {
@@ -382,7 +404,9 @@ class GameInfo extends Component {
 		console.log('visitorNameFixed: ', this.state.visitorNameFixed);
 		console.log('visitorStatsFixed: ', this.state.visitorStatsFixed);
 		console.log('blankRowFixed: ', this.state.blankRowFixed);
-		console.log('homeNameFixed: ', this.state.homeNameFixed);
+		console.log('homeNameOverlay: ', this.state.homeNameOverlay);
+		console.log('gameListIndex: ', this.state.gameListIndex);
+		console.log('gameListIndex: ', this.state.gameListIndex[0]);
 
 		if (this.props.byGameTotals[0].api.statistics.length === 0) {
 			return null
@@ -391,10 +415,11 @@ class GameInfo extends Component {
 		let counter = 0;// this counts the number of games in the this.props.byGamePlayerInfoName array
 	
 		//map needs to be passed an array, not an object.
-		const selectedGames = this.props.selectedGames.map(game => {
+		const selectedGames = this.props.selectedGames.map((game, gameIndex) => {
 			// add a return statement to this function block and define new variables
 			// so the sections will display next to each other
 			// shout out to John Cothran of edj sports
+			console.log('gameIndex: ', gameIndex);
 			const byGameTotalsGameV = this.props.byGameTotals
 				.find(totalsGame => totalsGame.api.statistics[0].gameId === game.gameId);
 			const byGamePlayerInfoGameV = this.props.byGamePlayerInfo
@@ -411,11 +436,11 @@ class GameInfo extends Component {
 							<Table.Cell>
 							{/*find the player based on playerId, then get the first and last names*/}
 								{
-								this.props.byGamePlayerInfoName[counter]
+								this.props.byGamePlayerInfoName[gameIndex]
 								.find(playerInfo => playerInfo.api.players[0].playerId === player.playerId)
 								.api.players[0].lastName
 								+ ", " + 
-								this.props.byGamePlayerInfoName[counter]
+								this.props.byGamePlayerInfoName[gameIndex]
 								.find(playerInfo => playerInfo.api.players[0].playerId === player.playerId)
 								.api.players[0].firstName
 								}
@@ -447,11 +472,11 @@ class GameInfo extends Component {
 							<Table.Cell>
 							{/*find the player based on playerId, then get the first and last names*/}
 								{
-								this.props.byGamePlayerInfoName[counter]
+								this.props.byGamePlayerInfoName[gameIndex]
 								.find(playerInfo => playerInfo.api.players[0].playerId === player.playerId)
 								.api.players[0].lastName
 								+ ", " + 
-								this.props.byGamePlayerInfoName[counter]
+								this.props.byGamePlayerInfoName[gameIndex]
 								.find(playerInfo => playerInfo.api.players[0].playerId === player.playerId)
 								.api.players[0].firstName
 								}
@@ -476,7 +501,6 @@ class GameInfo extends Component {
 				?	null
 				:
 			<li key={game.gameId}>
-			  	
 			  	{/*<div
 			  		id='game-score-container'
 			  		style={this.state.gameScoreFixedTop ? gameScoreContainerStyleFixedTop : gameScoreContainerStyle}
@@ -487,6 +511,29 @@ class GameInfo extends Component {
 			  		className={!this.props.gameScoreFixed ? 'game-score-container' : 'game-score-container-fixed'}
 
 			  	>*/}
+			    <div 
+	              style={(this.state.homeNameOverlay && this.state.gameListIndex[counter] === counter ) ? this.state.homeNameTableStyleOverlay : homeNameTableStyleOverlay}
+	            >
+			    <Table 
+			    	id='home-name-overlay' 
+			    	unstackable 
+			    	attached
+			    	// style={this.state.homeNameFixed ? 
+			    			// this.state.homeNameTableStyleFixed : homeNameTableStyle}
+			    	
+			    >
+				    <Table.Header>
+				      <Table.Row>
+				        <Table.HeaderCell>{game.hTeam.fullName}</Table.HeaderCell>
+				      </Table.Row>
+				    </Table.Header>
+				</Table>	
+				</div>
+
+
+
+
+
 			    <Table
 			    	// https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity
 			    	id='game-score'
@@ -636,8 +683,8 @@ class GameInfo extends Component {
 					id='blank-row' 
 					unstackable 
 					attached
-					style={this.state.blankRowFixed ? 
-			    			this.state.blankRowTableStyleFixed : blankRowTableStyle}
+					// style={this.state.blankRowFixed ? 
+			    			// this.state.blankRowTableStyleFixed : blankRowTableStyle}
 				>
 				    <Table.Body>
 				      <Table.Row>
@@ -650,8 +697,8 @@ class GameInfo extends Component {
 			    	id='home-name' 
 			    	unstackable 
 			    	attached
-			    	style={this.state.homeNameFixed ? 
-			    			this.state.homeNameTableStyleFixed : homeNameTableStyle}
+			    	// style={this.state.homeNameFixed ? 
+			    			// this.state.homeNameTableStyleFixed : homeNameTableStyle}
 			    	
 			    >
 				    <Table.Header>
@@ -708,17 +755,19 @@ class GameInfo extends Component {
 			<br/>
 			</li>
 		)})
-		
+		// this.getListObjectIndex() // breaks the app
+		// {console.log('listObjArrayIndex: ', listObjArrayIndex)} // yields an empty array
+
 		return(
 		    <React.Fragment>
-				{/*<div className='game-info' onScroll={(e) => props.handleScrollE(e)}>*/}
+				<div id='game-info'>
 				  	{/*<div className='game-info-scroll'>*/}
 					  	<h4>Game Info</h4>
 						<ul style={gameInfoListStyle}>
 						{selectedGames}
 						</ul>
 					{/*</div>*/}
-			  	{/*</div>*/}
+			  	</div>
 		    </React.Fragment>
 	    )
 	}
