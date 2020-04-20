@@ -96,6 +96,8 @@ class GameInfo extends Component {
 		super();
 		this.state = {
 			gameListIndex: [],
+			gSTablesObj: [], // game score tables HTML Collection object
+			gSTArray: [], // game score table array
 			gameScoreFixed: false,
 			visitorNameFixed: false,
 			visitorStatsFixed: false,
@@ -198,9 +200,35 @@ class GameInfo extends Component {
     	const gameListIndexObject = this.getListObjectIndex(); 
     	console.log('gameListIndexObject: ', gameListIndexObject);
 
+    	const gameScoreTables = document.getElementsByClassName("game-score");
+    	console.log('gameScoreTables: ', gameScoreTables);
+    	// console.log('gameScoreTables.item(0): ', gameScoreTables.item(0);//Failed to compile
+    	// console.log('gameScoreTables.item(0): ', gameScoreTables.item(0).style.border = "2px solid brown";//Failed to compile
+
+    	const gameScoreTableArray = [];
+    	const gameScorePosTop = [];
+    	const gameScorePosHeight = [];
+    	
+    	const visitorNameTableArray = [];
+    	const visitorNamePosTop = [];
+    	const visitorNamePosHeight = [];
+    	
+    	const visitorStatsTableArray = [];
+    	const visitorStatsPosTop = [];
+    	const visitorStatsPosHeight = [];
+
+    	const homeNameTableArray = [];
+    	const homeNamePosTop = [];
+    	const homeNamePosHeight = [];
+
+    	const height1Array = [];
+    	const height2Array = [];
+
+
     	for(let i=0; i<gameListIndexObject.object.length; i++){
-    		console.log('I love Christy');
+    		console.log('I love Christy: ', i);
     		
+
     		const gameScoreTable = document.getElementsByClassName("game-score")[i];
 	    	console.log('gameScoreTable: ', gameScoreTable);
 	    	const gSTObjPos = this.getElementPosition(gameScoreTable); // game score table element object position
@@ -211,6 +239,15 @@ class GameInfo extends Component {
 	    	console.log('topSPGST: ', topSPGST);
 	    	const gameScoreHeight = gSTObjPos.height; // height of game score table element
 	    	console.log('gameScoreHeight: ', gameScoreHeight);
+	    	gameScoreTableArray.push(gameScoreTable);
+	    	gameScorePosTop.push(topSPGST);
+	    	gameScorePosHeight.push(gameScoreHeight);
+
+	    	if(gameScoreTables.item(0) === gameScoreTable){
+	    		console.log('Heck Yes! gameScoreTables.item(0) === gameScoreTable');
+	    	} else if(gameScoreTables.item(0) !== gameScoreTable){
+	    		console.log('Heck No! gameScoreTables.item(0) !== gameScoreTable');
+	    	}
 
 	    	const visitorNameTable = document.getElementsByClassName("visitor-name")[i];
 	    	console.log('visitorNameTable: ', visitorNameTable);
@@ -222,6 +259,9 @@ class GameInfo extends Component {
 	    	console.log('topSPVNT: ', topSPVNT);
 	    	const visitorNameHeight = vNTObjPos.height; // height of visitor name table element
 	    	console.log('visitorNameHeight: ', visitorNameHeight);
+	    	visitorNameTableArray.push(visitorNameTable);
+	    	visitorNamePosTop.push(topSPVNT);
+	    	visitorNamePosHeight.push(visitorNameHeight);
 
 	    	const visitorStatsTable = document.getElementsByClassName("visitor-stats")[i];
 	    	console.log('visitorStatsTable: ', visitorStatsTable);
@@ -233,6 +273,9 @@ class GameInfo extends Component {
 	    	console.log('topSPVST: ', topSPVST);
 	    	const visitorStatsHeight = vSTObjPos.height; // height of visitor stats table element
 	    	console.log('visitorStatsHeight: ', visitorStatsHeight);
+	    	visitorStatsTableArray.push(visitorStatsTable);
+	    	visitorStatsPosTop.push(topSPVST);
+	    	visitorStatsPosHeight.push(visitorStatsHeight);
 
 	    	const blankRowTable = document.getElementsByClassName("blank-row")[i];
 	    	console.log('blankRowTable: ', blankRowTable);
@@ -255,6 +298,9 @@ class GameInfo extends Component {
 	    	console.log('topSPHNT: ', topSPHNT);
 	    	const homeNameHeight = hNTObjPos.height; // height of home name table element
 	    	console.log('homeNameHeight: ', homeNameHeight);
+	    	homeNameTableArray.push(homeNameTable);
+	    	homeNamePosTop.push(topSPHNT);
+	    	homeNamePosHeight.push(homeNameHeight);
 
 	    	const homeStatsTable = document.getElementsByClassName("home-stats")[i];
 	    	console.log('homeStatsTable: ', homeStatsTable);
@@ -268,64 +314,76 @@ class GameInfo extends Component {
 	    	console.log('homeStatsHeight: ', homeStatsHeight);
 
 	    	const height1 = gameScoreHeight;
+	    	height1Array.push(height1);
 	    	const height2 = height1 + visitorNameHeight;
+	    	height2Array.push(height2);
 	    	const height3 = height2 + visitorStatsHeight;
 	    	const height4 = height3 + blankRowHeight;
 	    	const height5 = height4 + homeNameHeight;
 	    	const height6 = height5 + homeStatsHeight;
 	    	const height7 = gameScoreHeight + homeNameHeight;
 
-	    	for(let j=0; j<gameListIndexObject.object.length; j++){
-	    		this.setState({
-	    		// gameListIndex: gameListIndexArray,
-	    		})
+
+	    	console.log('gameScorePosTop: ', gameScorePosTop);
+	    	console.log('gameScorePosTop[i]: ', gameScorePosTop[i]);
+
+	    	console.log('gameListIndexObject.array[i]: ', gameListIndexObject.array[i]); 
+
+	    	this.setState({
+    			gSTablesObj: gameScoreTables, //HTMLCollection Object
+    			gSTArray: gameScoreTableArray,
+    		})
+	    
+	    	this.setState({
+	    		gameScoreFixed: (gameScorePosTop[0] <= 0) ? true : false,
+	    		visitorNameFixed: (visitorNamePosTop[0] <= height1Array[0]) ? true : false,
+				// visitorStatsFixed: (visitorStatsPosTop[0] <= height2Array[0]) ? true : false,
+				// blankRowFixed: (topSPBRT <= height3) ? true : false,
+				homeNameFixed: (homeNamePosTop[0] <= height1Array[0]) ? true : false,
+	    		// homeStatsFixed: (topSPHST <= height6) ? true : false,
+	    	})
 
 		    	this.setState({
-		    		gameScoreFixed: (topSPGST <= 0) ? true : false,
-		    		visitorNameFixed: (topSPVNT <= height1) ? true : false,
-					visitorStatsFixed: (topSPVST <= height2) ? true : false,
-					// blankRowFixed: (topSPBRT <= height3) ? true : false,
-					homeNameFixed: (topSPHNT <= height1) ? true : false,
-		    		homeStatsFixed: (topSPHST <= height6) ? true : false,
-		    	})
-
-		    	this.setState({
-		   			gameScoreTableStyleFixed: {
-						...gameScoreTableStyle,
+		   			gameScoreTableStyleFixed: 
+						// (gameScorePosTop[0] <= 0) && (gameScoreTables.item(0) === gameScoreTableArray[0])
+						// ?
+						{...gameScoreTableStyle,
 						border: '2px solid purple',
 						backgroundColor: 'silver',
 						// position: 'fixed',
 						top: 0,
 						// left: 0, 
 						// right: 0,
-						zIndex: 1,
+						zIndex: 50,
 						position: '-webkit-sticky',
-						position: 'sticky',
-					},
+						position: 'sticky'}
+						// :
+						// {...gameScoreTableStyle}
+					,
 					visitorNameTableStyleFixed: {
 						...visitorNameTableStyle,
 						border: '2px solid green',
 						backgroundColor: 'gold',
 						// position: 'fixed',
-						top: height1, // height of game score table element
+						top: height1Array[i], // height of game score table element
 						// left: 0, 
 						// right: 0,
-						zIndex: 1,
+						zIndex: 40,
 						position: '-webkit-sticky',
 						position: 'sticky',
 					},
-					visitorStatsTableStyleFixed: {
-						...visitorStatsTableStyle,
-						border: '2px solid orange',
-						// backgroundColor: 'teal',
-						// position: 'relative',
-						top: height2, // height of game score and visitor name table elements
-						// left: 0, 
-						// right: 0,
-						zIndex: 0,
-						position: '-webkit-sticky',
-						position: 'sticky',
-					},
+					// visitorStatsTableStyleFixed: {
+					// 	...visitorStatsTableStyle,
+					// 	border: '2px solid orange',
+					// 	// backgroundColor: 'teal',
+					// 	// position: 'relative',
+					// 	top: height2Array[i], // height of game score and visitor name table elements
+					// 	// left: 0, 
+					// 	// right: 0,
+					// 	zIndex: 0,
+					// 	position: '-webkit-sticky',
+					// 	position: 'sticky',
+					// },
 					// blankRowTableStyleRel: {
 					// 	...blankRowTableStyle,
 					// 	border: '2px solid silver',
@@ -343,10 +401,11 @@ class GameInfo extends Component {
 						border: '2px solid fuchsia',
 						backgroundColor: 'lime',
 						// position: 'fixed',
-						top: height1, // height of game score table element
+						top: height1Array[i], // height of game score table element
 						// left: 0, 
 						// right: 0,
-						zIndex: 2,
+						zIndex: 45,
+						// (i > 0 && viewportHeight - homeNamePosTop[i] > 0) ? -10 : 45,
 						position: '-webkit-sticky',
 						position: 'sticky',
 					},
@@ -355,7 +414,7 @@ class GameInfo extends Component {
 						border: '2px solid maroon',
 						// backgroundColor: 'navy',
 						// position: 'relative',
-						top: height7, // height of game score and home name table elements
+						//*** top: height7, // height of game score and home name table elements
 						// left: 0, 
 						// right: 0,
 						zIndex: 0,
@@ -363,10 +422,14 @@ class GameInfo extends Component {
 						position: 'sticky',
 					},
 		    	})
-	    	}
 
+	    }	
+  
 	    	
-    	}
+		
+
+    		
+    	
     }
 
     getElementToBeTracked = () => {
@@ -407,6 +470,8 @@ class GameInfo extends Component {
 	render() {
 		console.log(this.props);
 		// console.log(this.props.byGamePlayerInfoName[0][0].api.players[0].playerId);
+		console.log('gSTablesObj: ', this.state.gSTablesObj);
+		console.log('gSTArray: ', this.state.gSTArray);
 		console.log('gameScoreFixed: ', this.state.gameScoreFixed);
 		console.log('visitorNameFixed: ', this.state.visitorNameFixed);
 		console.log('visitorStatsFixed: ', this.state.visitorStatsFixed);
@@ -503,12 +568,17 @@ class GameInfo extends Component {
 		console.log('counter: ', counter);
 		counter+=1
 
+		// put the if..., then... statement here
+		if(this.state.gSTablesObj.length > 0 && this.state.gSTablesObj.item(0) === this.state.gameSTArray[0]){
+			console.log('this worked!!!!!!!!!!!!!!!!!!!!!!!!');
+		}
 
 		return(
 			game.startTimeUTC.length === 10
 				?	null
-				:
-			<li key={game.gameId}>
+				: 	
+			<li key={game.gameId}> {/*make this a List Item*/}
+			  	
 			  	{/*<div
 			  		id='game-score-container'
 			  		style={this.state.gameScoreFixedTop ? gameScoreContainerStyleFixedTop : gameScoreContainerStyle}
@@ -549,7 +619,7 @@ class GameInfo extends Component {
 			    	unstackable 
 			    	attached='top' // attached will not let me set the top position
 			    	textAlign='center'
-			    	style={this.state.gameScoreFixed 
+			    	style={(this.state.gameScoreFixed) 
 			    			? this.state.gameScoreTableStyleFixed : gameScoreTableStyle}
 			    >
 			    	<Table.Header>
