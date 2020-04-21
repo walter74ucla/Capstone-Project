@@ -6,11 +6,7 @@ import { Loader } from 'semantic-ui-react';
 function GameListToday (props) {
 	// console.log(props);
 
-	if (props.isLoading && props.todaysGames.length === 0) {
-		return(
-			<Loader active inline='centered' size='medium' content='loading' />
-		)		
-	} else if (!props.isLoading && props.todaysGames.length === 0) {
+	if (props.todaysGames.length === 0) {
 		return(
 		    <React.Fragment>
 		      <h4>Today's Games</h4>
@@ -19,6 +15,10 @@ function GameListToday (props) {
 		      </div>
 		    </React.Fragment>
 	    )
+	} else if (props.isLoading) {
+		return(
+			<Loader active inline='centered' size='medium' content='loading' />
+		)
 	}
 
 	//map needs to be passed an array, not an object.

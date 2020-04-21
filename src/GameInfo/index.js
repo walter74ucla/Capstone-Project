@@ -57,7 +57,7 @@ const visitorNameTableStyle = {
 	backgroundColor: 'grey',
 }
 
-const visitorStatsTableStyle = {
+const visitorStatsTableStyle = { // on the wrapper div container
 	border: '2px solid brown',
 	// backgroundColor: 'yellow',
 }
@@ -67,14 +67,9 @@ const blankRowTableStyle = {
 	backgroundColor: 'red',
 }
 
-const homeNameTableStyleOverlay = { // for the home name table
-  display: 'none', // Hidden by default
-}
-
 const homeNameTableStyle = {
 	border: '2px solid red',
 	backgroundColor: 'white',
-	zIndex: 10, // gotta figure out how to make this scroll over visitor name
 }
 
 const homeStatsTableStyle = {
@@ -327,7 +322,13 @@ class GameInfo extends Component {
 	    	console.log('gameScorePosTop: ', gameScorePosTop);
 	    	console.log('gameScorePosTop[i]: ', gameScorePosTop[i]);
 
-	    	console.log('gameListIndexObject.array[i]: ', gameListIndexObject.array[i]); 
+	    	console.log('gameListIndexObject.array[i]: ', gameListIndexObject.array[i]);
+
+	    	console.log('height1Array: ', height1Array);
+	    	console.log('height1Array[i]: ', height1Array[i]);	    	
+
+			console.log('height2Array: ', height2Array);
+	    	console.log('height2Array[i]: ', height2Array[i]);	    	
 
 	    	this.setState({
     			gSTablesObj: gameScoreTables, //HTMLCollection Object
@@ -337,7 +338,7 @@ class GameInfo extends Component {
 	    	this.setState({
 	    		gameScoreFixed: (gameScorePosTop[0] <= 0) ? true : false,
 	    		visitorNameFixed: (visitorNamePosTop[0] <= height1Array[0]) ? true : false,
-				// visitorStatsFixed: (visitorStatsPosTop[0] <= height2Array[0]) ? true : false,
+				visitorStatsFixed: (visitorStatsPosTop[0] <= height2Array[0]) ? true : false,
 				// blankRowFixed: (topSPBRT <= height3) ? true : false,
 				homeNameFixed: (homeNamePosTop[0] <= height1Array[0]) ? true : false,
 	    		// homeStatsFixed: (topSPHST <= height6) ? true : false,
@@ -365,25 +366,25 @@ class GameInfo extends Component {
 						border: '2px solid green',
 						backgroundColor: 'gold',
 						// position: 'fixed',
-						top: height1Array[i], // height of game score table element
+						top: height1Array[0], // height of game score table element
 						// left: 0, 
 						// right: 0,
 						zIndex: 40,
 						position: '-webkit-sticky',
 						position: 'sticky',
 					},
-					// visitorStatsTableStyleFixed: {
-					// 	...visitorStatsTableStyle,
-					// 	border: '2px solid orange',
-					// 	// backgroundColor: 'teal',
-					// 	// position: 'relative',
-					// 	top: height2Array[i], // height of game score and visitor name table elements
-					// 	// left: 0, 
-					// 	// right: 0,
-					// 	zIndex: 0,
-					// 	position: '-webkit-sticky',
-					// 	position: 'sticky',
-					// },
+					visitorStatsTableStyleFixed: {
+						...visitorStatsTableStyle,
+						border: '2px solid orange',
+						// backgroundColor: 'teal',
+						// position: 'relative',
+						top: height2Array[0], // height of game score and visitor name table elements
+						// left: 0, 
+						// right: 0,
+						zIndex: 100,
+						position: '-webkit-sticky',
+						position: 'sticky',
+					},
 					// blankRowTableStyleRel: {
 					// 	...blankRowTableStyle,
 					// 	border: '2px solid silver',
@@ -568,11 +569,6 @@ class GameInfo extends Component {
 		console.log('counter: ', counter);
 		counter+=1
 
-		// put the if..., then... statement here
-		if(this.state.gSTablesObj.length > 0 && this.state.gSTablesObj.item(0) === this.state.gameSTArray[0]){
-			console.log('this worked!!!!!!!!!!!!!!!!!!!!!!!!');
-		}
-
 		return(
 			game.startTimeUTC.length === 10
 				?	null
@@ -589,35 +585,12 @@ class GameInfo extends Component {
 			  		className={!this.props.gameScoreFixed ? 'game-score-container' : 'game-score-container-fixed'}
 
 			  	>*/}
-			    {/*<div 
-	              style={(this.state.homeNameOverlay && this.state.gameListIndex[counter] === counter ) ? this.state.homeNameTableStyleOverlay : homeNameTableStyleOverlay}
-	            >
-			    <Table 
-			    	id='home-name-overlay' 
-			    	unstackable 
-			    	attached
-			    	// style={this.state.homeNameFixed ? 
-			    			// this.state.homeNameTableStyleFixed : homeNameTableStyle}
-			    	
-			    >
-				    <Table.Header>
-				      <Table.Row>
-				        <Table.HeaderCell>{game.hTeam.fullName}</Table.HeaderCell>
-				      </Table.Row>
-				    </Table.Header>
-				</Table>	
-				</div>*/}
-
-
-
-
 
 			    <Table
 			    	// https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity
-			    	// && this.state.gameListIndex[counter] === counter
 			    	className='game-score'
 			    	unstackable 
-			    	attached='top' // attached will not let me set the top position
+			    	attached='top'
 			    	textAlign='center'
 			    	style={(this.state.gameScoreFixed) 
 			    			? this.state.gameScoreTableStyleFixed : gameScoreTableStyle}
@@ -700,8 +673,6 @@ class GameInfo extends Component {
 			    	// style={this.state.visitorNameTableStyleFixedLeft}
 
 			    >
-			    {console.log('this.state.gameListIndex[counter-1]: ', this.state.gameListIndex[counter-1])}
-			    {console.log('counter: ', counter)}
 				    <Table.Header>
 				      <Table.Row>
 				        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
@@ -710,7 +681,11 @@ class GameInfo extends Component {
 				</Table>
 				{/*</div>*/}
 				{/*<br/>*/}
-				<div id='visitor-stats-container'>
+				<div 
+					id='visitor-stats-container'
+					// style={this.state.visitorStatsFixed
+					// 			? this.state.visitorStatsTableStyleFixed : visitorStatsTableStyle}
+				>
 				{/*<div id='visitor-stats-scroll'>*/}
 					<Table 
 						className='visitor-stats freeze-head-and-col-fixed'
@@ -795,7 +770,7 @@ class GameInfo extends Component {
 						celled 
 						striped 
 						unstackable 
-						attached='bottom' 
+						attached 
 						style={this.state.homeStatsFixed
 								? this.state.homeStatsTableStyleFixed : homeStatsTableStyle}
 						// className={false ? 'freeze-head-and-col' : 'freeze-head-and-col-fixed'}
@@ -829,8 +804,22 @@ class GameInfo extends Component {
 					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].turnovers}</Table.HeaderCell>
 					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].blocks}</Table.HeaderCell>
 					      </Table.Row>
+					      {/*<Table.Row>
+					      	<Table.HeaderCell></Table.HeaderCell>
+					      </Table.Row>*/}
 					    </Table.Footer>
 				    </Table>
+				    <Table 
+				    	className='home-stats-bottom' // this table is necessary to get the last footer row data to show above the Footer Component
+				  		unstackable
+				  		attached='bottom'
+					>
+					    <Table.Header>
+					      <Table.Row>
+					        <Table.HeaderCell></Table.HeaderCell>
+					      </Table.Row>
+					    </Table.Header>
+					</Table>
 			    </div>
 			<br/>
 			</li>

@@ -23,7 +23,7 @@ const fixedOverlayStyle = {
   ...overlayStyle,
   position: 'fixed', // Fixed/sticky position
   // top: '80px',
-  zIndex: 10,
+  zIndex: 60,
   bottom: '0px', // Place the button 0px from the bottom of the page 
   right: '0px', // Place the button 0px from the right
 }
@@ -604,7 +604,6 @@ class BoxscoreContainer extends Component {
 			    }
 			{/*</div>*/}
 			{/*</div>*/}   
-		
     		</React.Fragment>
     			
   		)
