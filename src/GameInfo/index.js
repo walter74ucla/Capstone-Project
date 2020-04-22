@@ -402,7 +402,7 @@ class GameInfo extends Component {
 						border: '2px solid fuchsia',
 						backgroundColor: 'lime',
 						// position: 'fixed',
-						top: height1Array[i], // height of game score table element
+						top: height1Array[0], // height of game score table element
 						// left: 0, 
 						// right: 0,
 						zIndex: 45,
@@ -660,8 +660,8 @@ class GameInfo extends Component {
 			   	{/*<br/>*/}
 				{/*<div 
 					id='visitor-name-container' 
-					style={this.state.visitorNameFixedTop ? 
-							visitorNameContainerStyleFixedTop : visitorNameContainerStyle}
+					// style={this.state.visitorNameFixedTop ? 
+							// visitorNameContainerStyleFixedTop : visitorNameContainerStyle}
 				>*/}
 			    <Table 
 			    	className='visitor-name' 
@@ -682,19 +682,23 @@ class GameInfo extends Component {
 				{/*</div>*/}
 				{/*<br/>*/}
 				<div 
+					// this div is necessary to prevent the game score and vistior name tables from horizontal scrolling
 					id='visitor-stats-container'
 					// style={this.state.visitorStatsFixed
-					// 			? this.state.visitorStatsTableStyleFixed : visitorStatsTableStyle}
+								// ? this.state.visitorStatsTableStyleFixed : visitorStatsTableStyle}
 				>
-				{/*<div id='visitor-stats-scroll'>*/}
+				{/*<div id='visitor-stats-inside-container'>*/}
+					{/*<div>Dummy Div to push its Table element sibling to make sticky work</div>
+				    <div>Dummy Div to push its Table element sibling to make sticky work</div>*/}
 					<Table 
 						className='visitor-stats freeze-head-and-col-fixed'
 						celled 
 						striped 
 						unstackable
 						attached
-						style={this.state.visitorStatsFixed
-								? this.state.visitorStatsTableStyleFixed : visitorStatsTableStyle}
+						style={visitorStatsTableStyle}
+						// style={this.state.visitorStatsFixed
+								// ? this.state.visitorStatsTableStyleFixed : visitorStatsTableStyle}
 						// className={false ? 'freeze-head-and-col' : 'freeze-head-and-col-fixed'}
 					>
 					    <Table.Header>
@@ -728,6 +732,7 @@ class GameInfo extends Component {
 					      </Table.Row>
 					    </Table.Footer>
 				    </Table>
+
 				{/*</div>*/}
 				</div>
 
