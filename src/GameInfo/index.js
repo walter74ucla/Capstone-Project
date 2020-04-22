@@ -120,17 +120,17 @@ class GameInfo extends Component {
 				// right: 0,
 				zIndex: 0,
 			},
-			visitorStatsTableStyleFixed: {// works for vertical scroll, not horizonal scroll, yet
-				...visitorStatsTableStyle,
-				border: '',
-				backgroundColor: '',
-				position: '',
-				position: '',
-				top: 0, 
-				// left: 0, 
-				// right: 0,
-				zIndex: 0,
-			},
+			// visitorStatsTableStyleFixed: {// works for vertical scroll, not horizonal scroll, yet
+			// 	...visitorStatsTableStyle,
+			// 	border: '',
+			// 	backgroundColor: '',
+			// 	position: '',
+			// 	position: '',
+			// 	top: 0, 
+			// 	// left: 0, 
+			// 	// right: 0,
+			// 	zIndex: 0,
+			// },
 			// blankRowTableStyleRel: {// works for vertical scroll, not horizonal scroll, yet
 			// 	...blankRowTableStyle,
 			// 	border: '',
@@ -338,7 +338,7 @@ class GameInfo extends Component {
 	    	this.setState({
 	    		gameScoreFixed: (gameScorePosTop[0] <= 0) ? true : false,
 	    		visitorNameFixed: (visitorNamePosTop[0] <= height1Array[0]) ? true : false,
-				visitorStatsFixed: (visitorStatsPosTop[0] <= height2Array[0]) ? true : false,
+				// visitorStatsFixed: (visitorStatsPosTop[0] <= height2Array[0]) ? true : false,
 				// blankRowFixed: (topSPBRT <= height3) ? true : false,
 				homeNameFixed: (homeNamePosTop[0] <= height1Array[0]) ? true : false,
 	    		// homeStatsFixed: (topSPHST <= height6) ? true : false,
@@ -373,18 +373,18 @@ class GameInfo extends Component {
 						position: '-webkit-sticky',
 						position: 'sticky',
 					},
-					visitorStatsTableStyleFixed: {
-						...visitorStatsTableStyle,
-						border: '2px solid orange',
-						// backgroundColor: 'teal',
-						// position: 'relative',
-						top: height2Array[0], // height of game score and visitor name table elements
-						// left: 0, 
-						// right: 0,
-						zIndex: 100,
-						position: '-webkit-sticky',
-						position: 'sticky',
-					},
+					// visitorStatsTableStyleFixed: {
+					// 	...visitorStatsTableStyle,
+					// 	border: '2px solid orange',
+					// 	// backgroundColor: 'teal',
+					// 	// position: 'relative',
+					// 	top: height2Array[0], // height of game score and visitor name table elements
+					// 	// left: 0, 
+					// 	// right: 0,
+					// 	zIndex: 100,
+					// 	position: '-webkit-sticky',
+					// 	position: 'sticky',
+					// },
 					// blankRowTableStyleRel: {
 					// 	...blankRowTableStyle,
 					// 	border: '2px solid silver',
@@ -575,111 +575,101 @@ class GameInfo extends Component {
 				: 	
 			<li key={game.gameId}> {/*make this a List Item*/}
 			  	
-			  	{/*<div
-			  		id='game-score-container'
-			  		style={this.state.gameScoreFixedTop ? gameScoreContainerStyleFixedTop : gameScoreContainerStyle}
-			  		// ref={this.getElementPosition}
-			  		// index.js:1375 Warning: React does not recognize the `getElementPosition` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `getelementposition` instead.
-			  		// Warning: Invalid value for prop `getelementposition` on <div> tag. Either remove it from the element, or pass a string or number value to keep it in the DOM. For details, see https://fb.me/react-attribute-behavior
-			  		// getelementposition={(e) => this.getElementPosition(e)}
-			  		className={!this.props.gameScoreFixed ? 'game-score-container' : 'game-score-container-fixed'}
-
-			  	>*/}
-
-			    <Table
-			    	// https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity
-			    	className='game-score'
-			    	unstackable 
-			    	attached='top'
-			    	textAlign='center'
-			    	style={(this.state.gameScoreFixed) 
-			    			? this.state.gameScoreTableStyleFixed : gameScoreTableStyle}
-			    >
-			    	<Table.Header>
-				      	<Table.Row>
-				        	<Table.HeaderCell>	
-			        			<Header as='h4'>
-            						{game.vTeam.shortName}
-						        </Header>
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-				        		<Header as='h4'>
-            						{game.vTeam.score.points}
-						        </Header>
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-			        			<Header as='h4'>
-            						{game.currentPeriod !== "" ? "FINAL" : null}
-						        </Header>
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-			       				<Header as='h4'>
-            						{game.hTeam.score.points}
-						        </Header>
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-			        			<Header as='h4'>
-            						{game.hTeam.shortName}
-						        </Header>
-				        	</Table.HeaderCell>
-				      	</Table.Row>
-				      	<Table.Row>
-				      		<Table.HeaderCell>
-				        		<Header as='h4' image>
-				        			<Image src={teamLogos.find(teamLogo => 
-				        				teamLogo.teamId === game.vTeam.teamId).logo} size='mini' />
-				        		</Header>
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-			        			
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-			        			<Header as='h4'>
-            						{game.currentPeriod === "5/4" ? "OT" 
-            							: game.currentPeriod === "6/4" ? "2OT"
-            							: game.currentPeriod === "7/4" ? "3OT"
-            							: game.currentPeriod === "8/4" ? "4OT"
-            							: game.currentPeriod === "9/4" ? "5OT"
-            							: null
-            						}
-						        </Header>
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-			        			
-				        	</Table.HeaderCell>
-				        	<Table.HeaderCell>
-				        		<Header as='h4' image>
-				        			<Image src={teamLogos.find(teamLogo => 
-				        				teamLogo.teamId === game.hTeam.teamId).logo} size='mini' />
-				        		</Header>
-				        	</Table.HeaderCell>
-				      	</Table.Row>
-					</Table.Header>
-			    </Table>
-			   	{/*</div>*/}
+			  	<div id='game-score-container'>
+			  		<div id='game-score-inside-container'>
+					    <Table
+					    	// https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity
+					    	className='game-score'
+					    	unstackable 
+					    	attached='top'
+					    	textAlign='center'
+					    	style={(this.state.gameScoreFixed) 
+					    			? this.state.gameScoreTableStyleFixed : gameScoreTableStyle}
+					    >
+					    	<Table.Header>
+						      	<Table.Row>
+						        	<Table.HeaderCell>	
+					        			<Header as='h4'>
+		            						{game.vTeam.shortName}
+								        </Header>
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+						        		<Header as='h4'>
+		            						{game.vTeam.score.points}
+								        </Header>
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+					        			<Header as='h4'>
+		            						{game.currentPeriod !== "" ? "FINAL" : null}
+								        </Header>
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+					       				<Header as='h4'>
+		            						{game.hTeam.score.points}
+								        </Header>
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+					        			<Header as='h4'>
+		            						{game.hTeam.shortName}
+								        </Header>
+						        	</Table.HeaderCell>
+						      	</Table.Row>
+						      	<Table.Row>
+						      		<Table.HeaderCell>
+						        		<Header as='h4' image>
+						        			<Image src={teamLogos.find(teamLogo => 
+						        				teamLogo.teamId === game.vTeam.teamId).logo} size='mini' />
+						        		</Header>
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+					        			
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+					        			<Header as='h4'>
+		            						{game.currentPeriod === "5/4" ? "OT" 
+		            							: game.currentPeriod === "6/4" ? "2OT"
+		            							: game.currentPeriod === "7/4" ? "3OT"
+		            							: game.currentPeriod === "8/4" ? "4OT"
+		            							: game.currentPeriod === "9/4" ? "5OT"
+		            							: null
+		            						}
+								        </Header>
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+					        			
+						        	</Table.HeaderCell>
+						        	<Table.HeaderCell>
+						        		<Header as='h4' image>
+						        			<Image src={teamLogos.find(teamLogo => 
+						        				teamLogo.teamId === game.hTeam.teamId).logo} size='mini' />
+						        		</Header>
+						        	</Table.HeaderCell>
+						      	</Table.Row>
+							</Table.Header>
+					    </Table>
+			   		</div>
+			   	</div>
 			   	{/*<br/>*/}
-				{/*<div 
-					id='visitor-name-container' 
-					// style={this.state.visitorNameFixedTop ? 
-							// visitorNameContainerStyleFixedTop : visitorNameContainerStyle}
-				>*/}
-			    <Table 
-			    	className='visitor-name' 
-			    	unstackable 
-			    	attached
-			    	// className={this.state.visitorNameFixedTop ? 'visitor-name-fixed' : 'visitor-name'}
-			    	style={this.state.visitorNameFixed
-			    			? this.state.visitorNameTableStyleFixed : visitorNameTableStyle}
-			    	// style={this.state.visitorNameTableStyleFixedLeft}
+				<div id='visitor-name-container'>
+					<div id='visitor-name-inside-container'>
+					    <Table 
+					    	className='visitor-name' 
+					    	unstackable 
+					    	attached
+					    	// className={this.state.visitorNameFixedTop ? 'visitor-name-fixed' : 'visitor-name'}
+					    	style={this.state.visitorNameFixed
+					    			? this.state.visitorNameTableStyleFixed : visitorNameTableStyle}
+					    	// style={this.state.visitorNameTableStyleFixedLeft}
 
-			    >
-				    <Table.Header>
-				      <Table.Row>
-				        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
-				      </Table.Row>
-				    </Table.Header>
-				</Table>
-				{/*</div>*/}
+					    >
+						    <Table.Header>
+						      <Table.Row>
+						        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
+						      </Table.Row>
+						    </Table.Header>
+						</Table>
+					</div>
+				</div>
 				{/*<br/>*/}
 				{/*<div 
 					// this div is necessary to prevent the game score and vistior name tables from horizontal scrolling
