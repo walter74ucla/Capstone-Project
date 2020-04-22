@@ -681,15 +681,14 @@ class GameInfo extends Component {
 				</Table>
 				{/*</div>*/}
 				{/*<br/>*/}
-				<div 
+				{/*<div 
 					// this div is necessary to prevent the game score and vistior name tables from horizontal scrolling
 					id='visitor-stats-container'
 					// style={this.state.visitorStatsFixed
 								// ? this.state.visitorStatsTableStyleFixed : visitorStatsTableStyle}
-				>
+				>*/}
 				{/*<div id='visitor-stats-inside-container'>*/}
-					{/*<div>Dummy Div to push its Table element sibling to make sticky work</div>
-				    <div>Dummy Div to push its Table element sibling to make sticky work</div>*/}
+	
 					<Table 
 						className='visitor-stats freeze-head-and-col-fixed'
 						celled 
@@ -734,7 +733,7 @@ class GameInfo extends Component {
 				    </Table>
 
 				{/*</div>*/}
-				</div>
+				{/*</div>*/}
 
 				    {/*<div 
 						id='home-name-container' 
