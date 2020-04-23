@@ -57,9 +57,10 @@ const visitorNameTableStyle = {
 	backgroundColor: 'grey',
 }
 
-const visitorStatsTableStyle = { // on the wrapper div container
+const visitorStatsTableStyle = {
 	border: '2px solid brown',
 	// backgroundColor: 'yellow',
+	// marginLeft: 15,
 }
 
 const blankRowTableStyle = {
@@ -80,9 +81,7 @@ const homeStatsTableStyle = {
 const footerStyleVHTot = { // puts the top border on the visitors and home totals
   // backgroundColor: 'purple',
   // color: 'white',
-  borderTopColor: 'black',
-  borderTopStyle: 'solid',
-  borderTopWidth: 1,
+  borderTop: '1px solid black',
 }
 
 // passing props from boxscore container
@@ -99,7 +98,7 @@ class GameInfo extends Component {
 			// blankRowRel: false,
 			homeNameFixed: false,
 			homeStatsFixed: false,
-			gameScoreTableStyleFixed: {// works for vertical scroll, not horizonal scroll, yet
+			gameScoreTableStyleFixed: {
 				...gameScoreTableStyle,
 				border: '',
 				backgroundColor: '',
@@ -109,7 +108,7 @@ class GameInfo extends Component {
 				// right: 0,
 				zIndex: 0,
 			},
-			visitorNameTableStyleFixed: {// works for vertical scroll, not horizonal scroll, yet
+			visitorNameTableStyleFixed: {
 				...visitorNameTableStyle,
 				border: '',
 				backgroundColor: '',
@@ -120,17 +119,18 @@ class GameInfo extends Component {
 				// right: 0,
 				zIndex: 0,
 			},
-			// visitorStatsTableStyleFixed: {// works for vertical scroll, not horizonal scroll, yet
-			// 	...visitorStatsTableStyle,
-			// 	border: '',
-			// 	backgroundColor: '',
-			// 	position: '',
-			// 	position: '',
-			// 	top: 0, 
-			// 	// left: 0, 
-			// 	// right: 0,
-			// 	zIndex: 0,
-			// },
+			visitorStatsTableStyleFixed: {
+				...visitorStatsTableStyle,
+				border: '',
+				backgroundColor: '',
+				position: '',
+				position: '',
+				top: 0, 
+				// left: 0, 
+				// right: 0,
+				zIndex: 0,
+				overflow: '',
+			},
 			// blankRowTableStyleRel: {// works for vertical scroll, not horizonal scroll, yet
 			// 	...blankRowTableStyle,
 			// 	border: '',
@@ -338,7 +338,7 @@ class GameInfo extends Component {
 	    	this.setState({
 	    		gameScoreFixed: (gameScorePosTop[0] <= 0) ? true : false,
 	    		visitorNameFixed: (visitorNamePosTop[0] <= height1Array[0]) ? true : false,
-				// visitorStatsFixed: (visitorStatsPosTop[0] <= height2Array[0]) ? true : false,
+				visitorStatsFixed: (visitorStatsPosTop[0] <= height2Array[0]) ? true : false,
 				// blankRowFixed: (topSPBRT <= height3) ? true : false,
 				homeNameFixed: (homeNamePosTop[0] <= height1Array[0]) ? true : false,
 	    		// homeStatsFixed: (topSPHST <= height6) ? true : false,
@@ -373,18 +373,19 @@ class GameInfo extends Component {
 						position: '-webkit-sticky',
 						position: 'sticky',
 					},
-					// visitorStatsTableStyleFixed: {
-					// 	...visitorStatsTableStyle,
-					// 	border: '2px solid orange',
-					// 	// backgroundColor: 'teal',
-					// 	// position: 'relative',
-					// 	top: height2Array[0], // height of game score and visitor name table elements
-					// 	// left: 0, 
-					// 	// right: 0,
-					// 	zIndex: 100,
-					// 	position: '-webkit-sticky',
-					// 	position: 'sticky',
-					// },
+					visitorStatsTableStyleFixed: {
+						...visitorStatsTableStyle,
+						border: '2px solid orange',
+						// backgroundColor: 'teal',
+						// position: 'relative',
+						top: height2Array[0], // height of game score and visitor name table elements
+						// left: 0, 
+						// right: 0,
+						zIndex: 35,
+						position: '-webkit-sticky',
+						position: 'sticky',
+						overflow: 'auto',
+					},
 					// blankRowTableStyleRel: {
 					// 	...blankRowTableStyle,
 					// 	border: '2px solid silver',
@@ -671,16 +672,16 @@ class GameInfo extends Component {
 					</div>
 				</div>
 				{/*<br/>*/}
-				{/*<div 
+				<div 
 					// this div is necessary to prevent the game score and vistior name tables from horizontal scrolling
 					id='visitor-stats-container'
 					// style={this.state.visitorStatsFixed
 								// ? this.state.visitorStatsTableStyleFixed : visitorStatsTableStyle}
-				>*/}
-				{/*<div id='visitor-stats-inside-container'>*/}
+				>
+				<div id='visitor-stats-inside-container'>
 	
 					<Table 
-						className='visitor-stats freeze-head-and-col-fixed'
+						className='visitor-stats'
 						celled 
 						striped 
 						unstackable
@@ -722,8 +723,8 @@ class GameInfo extends Component {
 					    </Table.Footer>
 				    </Table>
 
-				{/*</div>*/}
-				{/*</div>*/}
+				</div>
+				</div>
 
 				    {/*<div 
 						id='home-name-container' 

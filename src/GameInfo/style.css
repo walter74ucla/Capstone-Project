@@ -38,19 +38,19 @@ body {
 }
 
 /*These containers are necessary for scrolling within them and not the entire document*/
-#visitor-stats-container, #home-stats-container {
+#home-stats-container { /*#visitor-stats-container,*/
 	overflow: auto;
 	/*overflow-x: scroll;*/
 	/*overflow-y: scroll;*/
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-#visitor-stats-container::-webkit-scrollbar, #home-stats-container::-webkit-scrollbar {
+#home-stats-container::-webkit-scrollbar { /*#visitor-stats-container::-webkit-scrollbar,*/
     display: none;
 }
 
 /* Hide scrollbar for IE and Edge */
-#visitor-stats-container, #home-stats-container {
+#home-stats-container { /*#visitor-stats-container,*/
     -ms-overflow-style: none;
 }
 
@@ -62,13 +62,6 @@ body {
 	/*left: 0px; */
 	/*right: 0px;*/
 	/*z-index: 10;*/
-}
-
-.visitor-stats {
-	border: 2px solid brown;
-	background-color: yellow;
-	margin: 0 auto; /*this centers the element*/
-	/*position: absolute;*/
 }
 
 /*making this width super wide helps the inner table stick horizontally*/
@@ -117,6 +110,29 @@ body {
   left: 0px;
 }
 
+#visitor-stats-container {
+	border: 2px solid gray;
+	background-color: green;
+	/*overflow: auto;*/
+	width: 200vw; /*visitor or home stats table width, whatever is larger*/
+	/*position: -webkit-sticky;*/
+	/*position: sticky;*/
+	/*top: 155px;  game score plus visitor name table heights*/
+	/*position: fixed; This does not show up on mobile unless top or bottom: 0px; is added*/
+	/*left: 0px; This does not show up on mobile unless top or bottom: 0px; is added*/
+	/*right: 0px; This does not show up on mobile unless top or bottom: 0px; is added*/
+}
+
+/*#visitor-stats-inside-container {
+  border: 2px solid lime;
+  background-color: maroon;
+  width: 100vw; Relative to 1% of the width of the viewport
+  /*margin: 0 auto; this centers the element*/
+  /*position: -webkit-sticky;
+  position: sticky;
+  left: 0px;
+}*/
+
 /*Experimental*/
 .game-info { /*seems like I need overflow to get the onScroll to work. I hope to hide the scroll bar, one day*/
 	overflow: auto;
@@ -145,7 +161,7 @@ body {
 .freeze-head-and-col-fixed thead tr:first-of-type th {
 	position: -webkit-sticky;
 	position: sticky;
-	top: 152px; /*100 + 47 = 147, height of the two containers above this one*/
+	top: 0px; /*100 + 47 = 147, height of the two containers above this one*/
 	background-color: cyan;
 	z-index: 0;
 }
