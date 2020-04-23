@@ -576,8 +576,8 @@ class GameInfo extends Component {
 				: 	
 			<li key={game.gameId}> {/*make this a List Item*/}
 			  	
-			  	<div id='game-score-container'>
-			  		<div id='game-score-inside-container'>
+			  	{/*<div id='game-score-container'>*/}
+			  		{/*<div id='game-score-inside-container'>*/}
 					    <Table
 					    	// https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity
 					    	className='game-score'
@@ -648,11 +648,11 @@ class GameInfo extends Component {
 						      	</Table.Row>
 							</Table.Header>
 					    </Table>
-			   		</div>
-			   	</div>
+			   		{/*</div>*/}
+			   	{/*</div>*/}
 			   	{/*<br/>*/}
-				<div id='visitor-name-container'>
-					<div id='visitor-name-inside-container'>
+				{/*<div id='visitor-name-container'>*/}
+					{/*<div id='visitor-name-inside-container'>*/}
 					    <Table 
 					    	className='visitor-name' 
 					    	unstackable 
@@ -669,8 +669,8 @@ class GameInfo extends Component {
 						      </Table.Row>
 						    </Table.Header>
 						</Table>
-					</div>
-				</div>
+					{/*</div>*/}
+				{/*</div>*/}
 				{/*<br/>*/}
 				<div 
 					// this div is necessary to prevent the game score and vistior name tables from horizontal scrolling
@@ -678,7 +678,7 @@ class GameInfo extends Component {
 					// style={this.state.visitorStatsFixed
 								// ? this.state.visitorStatsTableStyleFixed : visitorStatsTableStyle}
 				>
-				<div id='visitor-stats-inside-container'>
+				{/*<div id='visitor-stats-inside-container'>*/}
 	
 					<Table 
 						className='visitor-stats'
@@ -723,7 +723,7 @@ class GameInfo extends Component {
 					    </Table.Footer>
 				    </Table>
 
-				</div>
+				{/*</div>*/}
 				</div>
 
 				    {/*<div 

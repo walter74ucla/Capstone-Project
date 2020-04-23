@@ -38,19 +38,19 @@ body {
 }
 
 /*These containers are necessary for scrolling within them and not the entire document*/
-#home-stats-container { /*#visitor-stats-container,*/
+#visitor-stats-container, #home-stats-container { 
 	overflow: auto;
 	/*overflow-x: scroll;*/
 	/*overflow-y: scroll;*/
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-#home-stats-container::-webkit-scrollbar { /*#visitor-stats-container::-webkit-scrollbar,*/
+#visitor-stats-container::-webkit-scrollbar, #home-stats-container::-webkit-scrollbar { 
     display: none;
 }
 
 /* Hide scrollbar for IE and Edge */
-#home-stats-container { /*#visitor-stats-container,*/
+#visitor-stats-container, #home-stats-container { 
     -ms-overflow-style: none;
 }
 
@@ -139,8 +139,9 @@ body {
 .visitor-stats thead tr:first-of-type th {
 	position: -webkit-sticky;
 	position: sticky;
-	top: 155px; /*game score plus visitor name table heights*/
+	top: 0px; /*game score plus visitor name table heights*/
 	background-color: cyan;
+
 }
 
 /*Fix the first column  to the left...tbody*/
