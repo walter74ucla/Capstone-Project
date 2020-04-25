@@ -123,6 +123,7 @@ body {
 	/*position: fixed; This does not show up on mobile unless top or bottom: 0px; is added*/
 	/*left: 0px; This does not show up on mobile unless top or bottom: 0px; is added*/
 	/*right: 0px; This does not show up on mobile unless top or bottom: 0px; is added*/
+	/*position: relative;*/
 }
 
 #visitor-stats-inside-container {
@@ -136,12 +137,12 @@ body {
 }
 
 /*Fix the header to the top...thead...1st row*/
-.visitor-stats thead tr:first-of-type th {
-	position: -webkit-sticky;
-	position: sticky;
+#visitor-stats-container table thead tr:first-of-type th {
+	position: -webkit-sticky; /*sticky does not work here*/
+	position: sticky; /*sticky does not work here*/
 	top: 0px; /*game score plus visitor name table heights*/
+	/*the top XXpx just shoves the th down a bit and nothing scrolls under it*/
 	background-color: cyan;
-
 }
 
 /*Fix the first column  to the left...tbody*/
