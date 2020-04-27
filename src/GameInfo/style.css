@@ -127,8 +127,8 @@ body {
 }
 
 #visitor-stats-inside-container {
-  /*border: 2px solid lime;*/
-  /*background-color: maroon;*/
+  border: 2px solid lime;
+  background-color: maroon;
   /*width: 100vw; Relative to 1% of the width of the viewport*/
   /*margin: 0 auto; this centers the element*/
   /*position: -webkit-sticky;*/

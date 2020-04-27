@@ -60,6 +60,9 @@ const visitorNameTableStyle = {
 const visitorStatsDivStyle = {
 	border: '2px solid silver',
 	backgroundColor: 'black',
+	height: 'calc(100vh - 155px)', // 50?? width: calc(100% - 100px);
+	width: '100vw',
+	overflow: 'auto',
 }
 
 const visitorStatsTableStyle = {
@@ -422,7 +425,7 @@ class GameInfo extends Component {
 						// backgroundColor: 'teal',
 						// position: 'relative',
 						top: height2Array[0], // height of game score and visitor name table elements
-						zIndex: 35,
+						zIndex: 35, // mess with this
 						position: '-webkit-sticky',
 						position: 'sticky',
 					},
@@ -755,9 +758,9 @@ class GameInfo extends Component {
 								? this.state.visitorStatsDivStyleFixed : visitorStatsDivStyle}
 
 				>
-				{/*<div id='visitor-stats-inside-container'>*/}
+				<div id='visitor-stats-inside-container'>
 	
-					{/*<Table 
+					<Table 
 						id='visitor-stats-1'
 						className='visitor-stats'
 						// singleLine
@@ -765,51 +768,6 @@ class GameInfo extends Component {
 						striped 
 						unstackable
 						attached
-						style={visitorStatsTableStyle}
-						// style={this.state.visitorStatsFixedHeader
-								// ? this.state.visitorStatsHeaderStyleFixed : {}}
-						// className={false ? 'freeze-head-and-col' : 'freeze-head-and-col-fixed'}
-					>
-					    <Table.Header>
-					      <Table.Row>
-					        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
-					        {/*<Table.HeaderCell>Player</Table.HeaderCell>
-					        <Table.HeaderCell>MIN</Table.HeaderCell>
-					        <Table.HeaderCell>PTS</Table.HeaderCell>
-					        <Table.HeaderCell>REB</Table.HeaderCell>
-					        <Table.HeaderCell>AST</Table.HeaderCell>
-					        <Table.HeaderCell>F</Table.HeaderCell>
-					        <Table.HeaderCell>STL</Table.HeaderCell>
-					        <Table.HeaderCell>TO</Table.HeaderCell>
-					        <Table.HeaderCell>BLK</Table.HeaderCell>
-					      </Table.Row>
-					    </Table.Header>
-						<Table.Body>
-					    	{playerRowV}
-					    </Table.Body>
-					    <Table.Footer>
-					      <Table.Row>
-					        <Table.HeaderCell style={footerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
-					      </Table.Row>
-					    </Table.Footer>
-				    </Table>*/}
-				    <Table 
-						id='visitor-stats-2'
-						className='visitor-stats'
-						// singleLine
-						celled 
-						striped 
-						unstackable
-						attached
-						// style={visitorStatsTableStyle}
 						// style={this.state.visitorStatsFixed
 								// ? this.state.visitorStatsTableStyleFixed : visitorStatsTableStyle}
 						// className={false ? 'freeze-head-and-col' : 'freeze-head-and-col-fixed'}
@@ -828,10 +786,13 @@ class GameInfo extends Component {
 					        <Table.HeaderCell>BLK</Table.HeaderCell>
 					      </Table.Row>
 					    </Table.Header>
-						{/*<Table.Body>
+						<Table.Body>
 					    	{playerRowV}
-					    </Table.Body>*/}
-					    <Table.Footer>
+					    </Table.Body>
+					    <Table.Footer
+					    	// style={this.state.visitorStatsDivFixed
+								// ? {visibility: 'hidden', zIndex: 0 /*mess with this???*/,} : {}}
+					    >
 					      <Table.Row>
 					        <Table.HeaderCell style={footerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
 					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
@@ -845,7 +806,51 @@ class GameInfo extends Component {
 					      </Table.Row>
 					    </Table.Footer>
 				    </Table>
-				{/*</div>*/}
+				    {/*<Table 
+						id='visitor-stats-2'
+						className='visitor-stats'
+						// singleLine
+						celled 
+						striped 
+						unstackable
+						attached
+						// style={visitorStatsTableStyle}
+						// style={this.state.visitorStatsFixed
+								// ? this.state.visitorStatsTableStyleFixed : visitorStatsTableStyle}
+						// className={false ? 'freeze-head-and-col' : 'freeze-head-and-col-fixed'}
+					>
+					    <Table.Header>
+					      <Table.Row>
+					        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
+					        {/*<Table.HeaderCell>Player</Table.HeaderCell>
+					        <Table.HeaderCell>MIN</Table.HeaderCell>
+					        <Table.HeaderCell>PTS</Table.HeaderCell>
+					        <Table.HeaderCell>REB</Table.HeaderCell>
+					        <Table.HeaderCell>AST</Table.HeaderCell>
+					        <Table.HeaderCell>F</Table.HeaderCell>
+					        <Table.HeaderCell>STL</Table.HeaderCell>
+					        <Table.HeaderCell>TO</Table.HeaderCell>
+					        <Table.HeaderCell>BLK</Table.HeaderCell>
+					      </Table.Row>
+					    </Table.Header>
+						{/*<Table.Body>
+					    	{playerRowV}
+					    </Table.Body>*/}
+					    {/*<Table.Footer>
+					      <Table.Row>
+					        <Table.HeaderCell style={footerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
+					      </Table.Row>
+					    </Table.Footer>
+				    </Table>*/}
+				</div>
 				</div>
 
 				    {/*<div 
