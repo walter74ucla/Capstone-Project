@@ -624,6 +624,7 @@ class GameInfo extends Component {
 		return(
 			game.startTimeUTC.length === 10
 				?	null
+<<<<<<< HEAD
 				: 	
 			<li key={game.gameId}> {/*make this a List Item*/}
 
@@ -822,6 +823,7 @@ class GameInfo extends Component {
 	    )
 	}
 }
+
 
 export default GameInfo;
 

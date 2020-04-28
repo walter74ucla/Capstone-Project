@@ -473,6 +473,7 @@ class BoxscoreContainer extends Component {
     	console.log('leftScrollPos: ', leftScrollPos);
     	console.log('topScrollPos: ', topScrollPos);
     	console.log('tagName: ', tagName);	
+
     	this.setState({
     		isHorScroll: leftScrollPos !== 0 ? true : false
     	})	
@@ -592,6 +593,7 @@ class BoxscoreContainer extends Component {
 		      				byGameTotals={this.state.gameTotalsByGame}
 		      				byGamePlayerInfo={this.state.playerInfoByGame}
 		      				byGamePlayerInfoName={this.state.playerInfoByGameName}
+		      				
 		      				stickGameScore={this.stickGameScore}
 		      				unstickGameScore={this.unstickGameScore}
 		      				gameScoreFixed={this.state.gameScoreFixed}

@@ -85,8 +85,8 @@ body {
 #visitor-individual-stats td:first-of-type {
 	position: -webkit-sticky;
 	position: sticky;
+	left: 0;
 	/*background-color: white;*/
-	left: 0px;
 	font-weight: bold;
 	border-right: 2px outset #F9FAFB;
 }
@@ -126,7 +126,6 @@ body {
 	top: 103px; /* game-score-container height*/
 	/*border: 2px solid navy;*/
   	/*background-color: olive;*/
-
 }
 
 /*Fix the home name header to the top...2nd row*/
