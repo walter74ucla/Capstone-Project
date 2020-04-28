@@ -1,5 +1,5 @@
 // https://www.w3schools.com/react/react_events.asp
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 import { Table, Header, Image, Grid, Visibility } from 'semantic-ui-react';
 import './style.css';
 
@@ -47,44 +47,44 @@ const gameInfoListStyle = {
 	padding: 0,
 }
 
-const gameScoreTableStyle = {
-	border: '2px solid gold',
-	backgroundColor: 'lightblue',
-}
+// const gameScoreTableStyle = {
+// 	border: '2px solid gold',
+// 	backgroundColor: 'lightblue',
+// }
 
-const visitorNameTableStyle = {
-	border: '2px solid blue',
-	backgroundColor: 'grey',
-}
+// const visitorNameTableStyle = {
+// 	border: '2px solid blue',
+// 	backgroundColor: 'grey',
+// }
 
-const visitorStatsDivStyle = {
-	border: '2px solid silver',
-	backgroundColor: 'black',
-	height: 'calc(100vh - 155px)', // 50?? width: calc(100% - 100px);
-	width: '100vw',
-	overflow: 'auto',
-}
+// const visitorStatsDivStyle = {
+// 	border: '2px solid silver',
+// 	backgroundColor: 'black',
+// 	height: 'calc(100vh - 155px)', // 50?? width: calc(100% - 100px);
+// 	width: '100vw',
+// 	overflow: 'auto',
+// }
 
-const visitorStatsTableStyle = {
-	border: '2px solid brown',
-	// backgroundColor: 'yellow',
-	// marginLeft: 15,
-}
+// const visitorStatsTableStyle = {
+// 	border: '2px solid brown',
+// 	// backgroundColor: 'yellow',
+// 	// marginLeft: 15,
+// }
 
-const blankRowTableStyle = {
-	border: '2px solid purple',
-	backgroundColor: 'red',
-}
+// const blankRowTableStyle = {
+// 	border: '2px solid purple',
+// 	backgroundColor: 'red',
+// }
 
-const homeNameTableStyle = {
-	border: '2px solid red',
-	backgroundColor: 'white',
-}
+// const homeNameTableStyle = {
+// 	border: '2px solid red',
+// 	backgroundColor: 'white',
+// }
 
-const homeStatsTableStyle = {
-	border: '2px solid olive',
-	// backgroundColor: 'aqua',
-}
+// const homeStatsTableStyle = {
+// 	border: '2px solid olive',
+// 	// backgroundColor: 'aqua',
+// }
 
 const footerStyleVHTot = { // puts the top border on the visitors and home totals
   // backgroundColor: 'purple',
@@ -97,46 +97,45 @@ class GameInfo extends Component {
 	constructor() {
 		super();
 		this.state = {
-			gameListIndex: [],
 			gSTablesObj: [], // game score tables HTML Collection object
 			gSTArray: [], // game score table array
-			gameScoreTableFixed: false,
-			visitorNameTableFixed: false,
-			visitorStatsDivFixed: false,
-			visitorStatsFixedHeader: false,
-			visitorStatsFixed: false,
+			// gameScoreTableFixed: false,
+			// visitorNameTableFixed: false,
+			// visitorStatsDivFixed: false,
+			// visitorStatsFixedHeader: false,
+			// visitorStatsFixed: false,
 			// blankRowRel: false,
-			homeNameFixed: false,
-			homeStatsFixed: false,
-			gameScoreTableStyleFixed: {
-				...gameScoreTableStyle,
-				border: '',
-				backgroundColor: '',
-				position: '',
-				top: 0,
-				// left: 0, 
-				// right: 0,
-				zIndex: 0,
-			},
-			visitorNameTableStyleFixed: {
-				...visitorNameTableStyle,
-				border: '',
-				backgroundColor: '',
-				position: '',
-				position: '',
-				top: 0, 
-				// left: 0, 
-				// right: 0,
-				zIndex: 0,
-			},
-			visitorStatsDivStyleFixed: {
-				border: '',
-				backgroundColor: '',
-				position: '',
-				position: '',
-				top: 0, 
-				zIndex: 0,
-			},
+			// homeNameFixed: false,
+			// homeStatsFixed: false,
+			// gameScoreTableStyleFixed: {
+			// 	...gameScoreTableStyle,
+			// 	border: '',
+			// 	backgroundColor: '',
+			// 	position: '',
+			// 	top: 0,
+			// 	// left: 0, 
+			// 	// right: 0,
+			// 	zIndex: 0,
+			// },
+			// visitorNameTableStyleFixed: {
+			// 	...visitorNameTableStyle,
+			// 	border: '',
+			// 	backgroundColor: '',
+			// 	position: '',
+			// 	position: '',
+			// 	top: 0, 
+			// 	// left: 0, 
+			// 	// right: 0,
+			// 	zIndex: 0,
+			// },
+			// visitorStatsDivStyleFixed: {
+			// 	border: '',
+			// 	backgroundColor: '',
+			// 	position: '',
+			// 	position: '',
+			// 	top: 0, 
+			// 	zIndex: 0,
+			// },
 			// visitorStatsHeaderStyleFixed: {
 			// 	border: '',
 			// 	backgroundColor: '',
@@ -145,18 +144,18 @@ class GameInfo extends Component {
 			// 	top: 0, 
 			// 	zIndex: 0,
 			// },
-			visitorStatsTableStyleFixed: {
-				...visitorStatsTableStyle,
-				border: '',
-				backgroundColor: '',
-				position: '',
-				position: '',
-				top: 0, 
-				// left: 0, 
-				// right: 0,
-				zIndex: 0,
-				// overflow: '',
-			},
+			// visitorStatsTableStyleFixed: {
+			// 	...visitorStatsTableStyle,
+			// 	border: '',
+			// 	backgroundColor: '',
+			// 	position: '',
+			// 	position: '',
+			// 	top: 0, 
+			// 	// left: 0, 
+			// 	// right: 0,
+			// 	zIndex: 0,
+			// 	// overflow: '',
+			// },
 			// blankRowTableStyleRel: {// works for vertical scroll, not horizonal scroll, yet
 			// 	...blankRowTableStyle,
 			// 	border: '',
@@ -168,32 +167,31 @@ class GameInfo extends Component {
 			// 	// right: 0,
 			// 	zIndex: 0,
 			// },
-			homeNameTableStyleFixed: {// works for vertical scroll, not horizonal scroll, yet
-				...homeNameTableStyle,
-				border: '',
-				backgroundColor: '',
-				position: '',
-				position: '',
-				top: 0, // height of game score table element
-				// left: 0, 
-				// right: 0,
-				zIndex: 0,
-			},
-			homeStatsTableStyleFixed: {// works for vertical scroll, not horizonal scroll, yet
-				...homeStatsTableStyle,
-				border: '',
-				backgroundColor: '',
-				position: '',
-				position: '',
-				top: 0, // height of game score and home name table elements
-				// left: 0, 
-				// right: 0,
-				zIndex: 0,
-			},
+			// homeNameTableStyleFixed: {// works for vertical scroll, not horizonal scroll, yet
+			// 	...homeNameTableStyle,
+			// 	border: '',
+			// 	backgroundColor: '',
+			// 	position: '',
+			// 	position: '',
+			// 	top: 0, // height of game score table element
+			// 	// left: 0, 
+			// 	// right: 0,
+			// 	zIndex: 0,
+			// },
+			// homeStatsTableStyleFixed: {// works for vertical scroll, not horizonal scroll, yet
+			// 	...homeStatsTableStyle,
+			// 	border: '',
+			// 	backgroundColor: '',
+			// 	position: '',
+			// 	position: '',
+			// 	top: 0, // height of game score and home name table elements
+			// 	// left: 0, 
+			// 	// right: 0,
+			// 	zIndex: 0,
+			// },
 		}
 	}
 
-	contextRef = createRef();
 
 	// Adds an event listener when the component is mount.
 	componentDidMount(){
@@ -380,55 +378,55 @@ class GameInfo extends Component {
     		})
 	    
 	    	this.setState({
-	    		gameScoreTableFixed: (gameScoreTablePosTop[0] <= 0) ? true : false,
-	    		visitorNameTableFixed: (visitorNameTablePosTop[0] <= height1Array[0]) ? true : false,
-	    		visitorStatsDivFixed: (visitorStatsDivPosTop[0] <= height2Array[0]) ? true : false,
+	    		// gameScoreTableFixed: (gameScoreTablePosTop[0] <= 0) ? true : false,
+	    		// visitorNameTableFixed: (visitorNameTablePosTop[0] <= height1Array[0]) ? true : false,
+	    		// visitorStatsDivFixed: (visitorStatsDivPosTop[0] <= height2Array[0]) ? true : false,
 				// visitorStatsFixedHeader: (visitorStatsPosTop[0] <= height2Array[0]) ? true : false,
-				visitorStatsTableFixed: (visitorStatsTablePosTop[0] <= height2Array[0]) ? true : false,
+				// visitorStatsTableFixed: (visitorStatsTablePosTop[0] <= height2Array[0]) ? true : false,
 				// blankRowFixed: (topSPBRT <= height3) ? true : false,
-				homeNameFixed: (homeNamePosTop[0] <= height1Array[0]) ? true : false,
+				// homeNameFixed: (homeNamePosTop[0] <= height1Array[0]) ? true : false,
 	    		// homeStatsFixed: (topSPHST <= height6) ? true : false,
 	    	})
 
 		    	this.setState({
-		   			gameScoreTableStyleFixed: 
-						// (gameScorePosTop[0] <= 0) && (gameScoreTables.item(0) === gameScoreTableArray[0])
-						// ?
-						{...gameScoreTableStyle,
-						border: '2px solid purple',
-						backgroundColor: 'silver',
-						// position: 'fixed',
-						top: 0,
-						// left: 0, 
-						// right: 0,
-						zIndex: 50,
-						position: '-webkit-sticky',
-						position: 'sticky'}
-						// :
-						// {...gameScoreTableStyle}
-					,
-					visitorNameTableStyleFixed: {
-						...visitorNameTableStyle,
-						border: '2px solid green',
-						backgroundColor: 'gold',
-						// position: 'fixed',
-						top: height1Array[0], // height of game score table element
-						// left: 0, 
-						// right: 0,
-						zIndex: 40,
-						position: '-webkit-sticky',
-						position: 'sticky',
-					},
-					visitorStatsDivStyleFixed: {
-						...visitorStatsDivStyle,
-						border: '2px solid lime',
-						// backgroundColor: 'teal',
-						// position: 'relative',
-						top: height2Array[0], // height of game score and visitor name table elements
-						zIndex: 35, // mess with this
-						position: '-webkit-sticky',
-						position: 'sticky',
-					},
+		   			// gameScoreTableStyleFixed: 
+					// 	// (gameScorePosTop[0] <= 0) && (gameScoreTables.item(0) === gameScoreTableArray[0])
+					// 	// ?
+					// 	{...gameScoreTableStyle,
+					// 	border: '2px solid purple',
+					// 	backgroundColor: 'silver',
+					// 	// position: 'fixed',
+					// 	top: 0,
+					// 	// left: 0, 
+					// 	// right: 0,
+					// 	zIndex: 50,
+					// 	position: '-webkit-sticky',
+					// 	position: 'sticky'}
+					// 	// :
+					// 	// {...gameScoreTableStyle}
+					// ,
+					// visitorNameTableStyleFixed: {
+					// 	...visitorNameTableStyle,
+					// 	border: '2px solid green',
+					// 	backgroundColor: 'gold',
+					// 	// position: 'fixed',
+					// 	top: height1Array[0], // height of game score table element
+					// 	// left: 0, 
+					// 	// right: 0,
+					// 	zIndex: 40,
+					// 	position: '-webkit-sticky',
+					// 	position: 'sticky',
+					// },
+					// visitorStatsDivStyleFixed: {
+					// 	...visitorStatsDivStyle,
+					// 	border: '2px solid lime',
+					// 	// backgroundColor: 'teal',
+					// 	// position: 'relative',
+					// 	top: height2Array[0], // height of game score and visitor name table elements
+					// 	zIndex: 35, // mess with this
+					// 	position: '-webkit-sticky',
+					// 	position: 'sticky',
+					// },
 					// visitorStatsHeaderStyleFixed: {
 					// 	border: '2px solid navy',
 					// 	backgroundColor: 'olive',
@@ -437,19 +435,19 @@ class GameInfo extends Component {
 					// 	top: height2Array[0], // height of game score and visitor name table elements
 					// 	zIndex: 35,
 					// },
-					visitorStatsTableStyleFixed: {
-						...visitorStatsTableStyle,
-						border: '2px solid orange',
-						// backgroundColor: 'teal',
-						// position: 'relative',
-						top: height2Array[0], // height of game score and visitor name table elements
-						// left: 0, 
-						// right: 0,
-						zIndex: 35,
-						position: '-webkit-sticky',
-						position: 'sticky',
-						// overflow: 'auto',
-					},
+					// visitorStatsTableStyleFixed: {
+					// 	...visitorStatsTableStyle,
+					// 	border: '2px solid orange',
+					// 	// backgroundColor: 'teal',
+					// 	// position: 'relative',
+					// 	top: height2Array[0], // height of game score and visitor name table elements
+					// 	// left: 0, 
+					// 	// right: 0,
+					// 	zIndex: 35,
+					// 	position: '-webkit-sticky',
+					// 	position: 'sticky',
+					// 	// overflow: 'auto',
+					// },
 					// blankRowTableStyleRel: {
 					// 	...blankRowTableStyle,
 					// 	border: '2px solid silver',
@@ -462,54 +460,42 @@ class GameInfo extends Component {
 					// 	position: '-webkit-sticky',
 					// 	position: 'sticky',
 					// },
-					homeNameTableStyleFixed: {
-						...homeNameTableStyle,
-						border: '2px solid fuchsia',
-						backgroundColor: 'lime',
-						// position: 'fixed',
-						top: height1Array[0], // height of game score table element
-						// left: 0, 
-						// right: 0,
-						zIndex: 45,
-						// (i > 0 && viewportHeight - homeNamePosTop[i] > 0) ? -10 : 45,
-						position: '-webkit-sticky',
-						position: 'sticky',
-					},
-					homeStatsTableStyleFixed: {
-						...homeStatsTableStyle,
-						border: '2px solid maroon',
-						// backgroundColor: 'navy',
-						// position: 'relative',
-						//*** top: height7, // height of game score and home name table elements
-						// left: 0, 
-						// right: 0,
-						zIndex: 0,
-						position: '-webkit-sticky',
-						position: 'sticky',
-					},
+					// homeNameTableStyleFixed: {
+					// 	...homeNameTableStyle,
+					// 	border: '2px solid fuchsia',
+					// 	backgroundColor: 'lime',
+					// 	// position: 'fixed',
+					// 	top: height1Array[0], // height of game score table element
+					// 	// left: 0, 
+					// 	// right: 0,
+					// 	zIndex: 45,
+					// 	// (i > 0 && viewportHeight - homeNamePosTop[i] > 0) ? -10 : 45,
+					// 	position: '-webkit-sticky',
+					// 	position: 'sticky',
+					// },
+					// homeStatsTableStyleFixed: {
+					// 	...homeStatsTableStyle,
+					// 	border: '2px solid maroon',
+					// 	// backgroundColor: 'navy',
+					// 	// position: 'relative',
+					// 	//*** top: height7, // height of game score and home name table elements
+					// 	// left: 0, 
+					// 	// right: 0,
+					// 	zIndex: 0,
+					// 	position: '-webkit-sticky',
+					// 	position: 'sticky',
+					// },
 		    	})
 
 	    }	
-  
-	    	
-		
-
-    		
     	
     }
 
-    getElementToBeTracked = () => {
-    	const gameScoreContainerDiv = document.getElementsByClassName("game-score-container")[0];
-    	console.log('gameScoreContainerDiv: ', gameScoreContainerDiv);
-    	// this.getElementPosition(gameScoreContainerDiv);
-    }
+    
     // https://plainjs.com/javascript/styles/get-the-position-of-an-element-relative-to-the-document-24/
     // https://www.w3adda.com/react-js-tutorial/reactjs-refs
     // https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
-    getElementPosition = (element) => {// works with a ref, but get TypeError: e.getBoundingClientRect 
-    							// is not a function when added to the componentdidmount/willunmount
-    							// eventlisteners.  Because as soon as I scroll the e becomes the 
-    							// document
+    getElementPosition = (element) => {
 		console.log('element: ', element);
     	let rect = element.getBoundingClientRect(),
     	scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
@@ -538,16 +524,15 @@ class GameInfo extends Component {
 		// console.log(this.props.byGamePlayerInfoName[0][0].api.players[0].playerId);
 		console.log('gSTablesObj: ', this.state.gSTablesObj);
 		console.log('gSTArray: ', this.state.gSTArray);
-		console.log('gameScoreTableFixed: ', this.state.gameScoreTableFixed);
-		console.log('visitorNameTableFixed: ', this.state.visitorNameTableFixed);
-		console.log('visitorStatsDivFixed: ', this.state.visitorStatsDivFixed);
-		console.log('visitorStatsFixedHeader: ', this.state.visitorStatsFixedHeader);
-		console.log('visitorStatsTableFixed: ', this.state.visitorStatsTableFixed);
-		console.log('blankRowFixed: ', this.state.blankRowFixed);
-		console.log('homeNameFixed: ', this.state.homeNameFixed);
-		console.log('homeStatsFixed: ', this.state.homeStatsFixed);
-		console.log('gameListIndex: ', this.state.gameListIndex);
-		console.log('gameListIndex: ', this.state.gameListIndex[0]);
+		// console.log('gameScoreTableFixed: ', this.state.gameScoreTableFixed);
+		// console.log('visitorNameTableFixed: ', this.state.visitorNameTableFixed);
+		// console.log('visitorStatsDivFixed: ', this.state.visitorStatsDivFixed);
+		// console.log('visitorStatsFixedHeader: ', this.state.visitorStatsFixedHeader);
+		// console.log('visitorStatsTableFixed: ', this.state.visitorStatsTableFixed);
+		// console.log('blankRowFixed: ', this.state.blankRowFixed);
+		// console.log('homeNameFixed: ', this.state.homeNameFixed);
+		// console.log('homeStatsFixed: ', this.state.homeStatsFixed);
+		
 
 		if (this.props.byGameTotals[0].api.statistics.length === 0) {
 			return null
@@ -633,7 +618,7 @@ class GameInfo extends Component {
 					    </Table.Row>
 					));	
 
-		console.log('counter: ', counter);
+		// console.log('counter: ', counter);
 		counter+=1
 
 		return(
@@ -700,9 +685,7 @@ class GameInfo extends Component {
 						        				teamLogo.teamId === game.vTeam.teamId).logo} size='mini' />
 						        		</Header>
 						        	</Table.HeaderCell>
-						        	<Table.HeaderCell>
-					        			
-						        	</Table.HeaderCell>
+						        	<Table.HeaderCell></Table.HeaderCell>
 						        	<Table.HeaderCell>
 					        			<Header as='h4'>
 		            						{game.currentPeriod === "5/4" ? "OT" 
@@ -714,9 +697,7 @@ class GameInfo extends Component {
 		            						}
 								        </Header>
 						        	</Table.HeaderCell>
-						        	<Table.HeaderCell>
-					        			
-						        	</Table.HeaderCell>
+						        	<Table.HeaderCell></Table.HeaderCell>
 						        	<Table.HeaderCell>
 						        		<Header as='h4' image>
 						        			<Image src={teamLogos.find(teamLogo => 
@@ -728,115 +709,97 @@ class GameInfo extends Component {
 					    </Table>
 					</div>
 				</div>
-				{/*<div id='visitor-name-container'>
-					<div id='visitor-name-inside-container'>
-						<Table
-							className='visitor-name'
-					    	unstackable 
-					    	attached
-					    >
-							<Table.Header>      	
-						      	<Table.Row>
-							        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
-							    </Table.Row>
-							</Table.Header>
-						</Table>
-					</div>
-				</div>*/}
-						<Table
-							className='visitor-stats'
-					    	celled
-					    	striped
-					    	unstackable 
-					    	attached
-					    >
-							<Table.Header id='visitor-name'>
-								<Table.Row>
-							        <Table.HeaderCell colSpan='4'>{game.vTeam.fullName}</Table.HeaderCell>
-							        <Table.HeaderCell colSpan='5'></Table.HeaderCell>
-							    </Table.Row>
-						      	<Table.Row>
-							        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
-							        <Table.HeaderCell>Player</Table.HeaderCell>
-							        <Table.HeaderCell>MIN</Table.HeaderCell>
-							        <Table.HeaderCell>PTS</Table.HeaderCell>
-							        <Table.HeaderCell>REB</Table.HeaderCell>
-							        <Table.HeaderCell>AST</Table.HeaderCell>
-							        <Table.HeaderCell>F</Table.HeaderCell>
-							        <Table.HeaderCell>STL</Table.HeaderCell>
-							        <Table.HeaderCell>TO</Table.HeaderCell>
-							        <Table.HeaderCell>BLK</Table.HeaderCell>
-						      	</Table.Row>
-							</Table.Header>
-							<Table.Body id='visitor-individual-stats'>
-						    	{playerRowV}
-						    </Table.Body>
-						    <Table.Footer id='visitor-total-stats'>
-						      <Table.Row>
-						        <Table.HeaderCell style={footerStyleVHTot}>Visitor Totals:</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
-						      </Table.Row>
-						    </Table.Footer>
-					    </Table>
-					    <Table id='blank-row' unstackable attached>
-					    	<Table.Body>
-						    	<Table.Row>
-						    		<Table.Cell></Table.Cell>
-					    		</Table.Row>
-				    		</Table.Body>
-					    </Table>
-					    <Table 
-					    	className='home-stats' 
-					    	celled
-					    	striped
-					    	unstackable 
-					    	attached='bottom'
-					    	// style={this.state.homeNameFixed
-					    			// ? this.state.homeNameTableStyleFixed : homeNameTableStyle}
-					    >
-						    <Table.Header id='home-name'>
-								<Table.Row>
-							        <Table.HeaderCell colSpan='4'>{game.hTeam.fullName}</Table.HeaderCell>
-							        <Table.HeaderCell colSpan='5'></Table.HeaderCell>
-							    </Table.Row>
-						      	<Table.Row>
-							        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
-							        <Table.HeaderCell>Player</Table.HeaderCell>
-							        <Table.HeaderCell>MIN</Table.HeaderCell>
-							        <Table.HeaderCell>PTS</Table.HeaderCell>
-							        <Table.HeaderCell>REB</Table.HeaderCell>
-							        <Table.HeaderCell>AST</Table.HeaderCell>
-							        <Table.HeaderCell>F</Table.HeaderCell>
-							        <Table.HeaderCell>STL</Table.HeaderCell>
-							        <Table.HeaderCell>TO</Table.HeaderCell>
-							        <Table.HeaderCell>BLK</Table.HeaderCell>
-						      	</Table.Row>
-							</Table.Header>
-							<Table.Body id='home-individual-stats'>
-						    	{playerRowH}
-						    </Table.Body>
-						    <Table.Footer id='home-total-stats'>
-								<Table.Row>
-									<Table.HeaderCell style={footerStyleVHTot}>Home Totals:</Table.HeaderCell>
-									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].min}</Table.HeaderCell>
-									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].points}</Table.HeaderCell>
-									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].totReb}</Table.HeaderCell>
-									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].assists}</Table.HeaderCell>
-									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].pFouls}</Table.HeaderCell>
-									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].steals}</Table.HeaderCell>
-									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].turnovers}</Table.HeaderCell>
-									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].blocks}</Table.HeaderCell>
-								</Table.Row>
-						    </Table.Footer>
-						</Table>
-			   		{/*</div>*/}
+					<Table
+						className='visitor-stats'
+				    	celled
+				    	striped
+				    	unstackable 
+				    	attached
+				    >
+						<Table.Header id='visitor-name'>
+							<Table.Row>
+						        <Table.HeaderCell colSpan='4'>{game.vTeam.fullName}</Table.HeaderCell>
+						        <Table.HeaderCell colSpan='5'></Table.HeaderCell>
+						    </Table.Row>
+					      	<Table.Row>
+						        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
+						        <Table.HeaderCell>Player</Table.HeaderCell>
+						        <Table.HeaderCell>MIN</Table.HeaderCell>
+						        <Table.HeaderCell>PTS</Table.HeaderCell>
+						        <Table.HeaderCell>REB</Table.HeaderCell>
+						        <Table.HeaderCell>AST</Table.HeaderCell>
+						        <Table.HeaderCell>F</Table.HeaderCell>
+						        <Table.HeaderCell>STL</Table.HeaderCell>
+						        <Table.HeaderCell>TO</Table.HeaderCell>
+						        <Table.HeaderCell>BLK</Table.HeaderCell>
+					      	</Table.Row>
+						</Table.Header>
+						<Table.Body id='visitor-individual-stats'>
+					    	{playerRowV}
+					    </Table.Body>
+					    <Table.Footer id='visitor-total-stats'>
+					      <Table.Row>
+					        <Table.HeaderCell style={footerStyleVHTot}>Visitor Totals:</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
+					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
+					      </Table.Row>
+					    </Table.Footer>
+				    </Table>
+				    <Table id='blank-row' unstackable attached>
+				    	<Table.Body>
+					    	<Table.Row>
+					    		<Table.Cell></Table.Cell>
+				    		</Table.Row>
+			    		</Table.Body>
+				    </Table>
+				    <Table 
+				    	className='home-stats' 
+				    	celled
+				    	striped
+				    	unstackable 
+				    	attached='bottom'
+				    >
+					    <Table.Header id='home-name'>
+							<Table.Row>
+						        <Table.HeaderCell colSpan='4'>{game.hTeam.fullName}</Table.HeaderCell>
+						        <Table.HeaderCell colSpan='5'></Table.HeaderCell>
+						    </Table.Row>
+					      	<Table.Row>
+						        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
+						        <Table.HeaderCell>Player</Table.HeaderCell>
+						        <Table.HeaderCell>MIN</Table.HeaderCell>
+						        <Table.HeaderCell>PTS</Table.HeaderCell>
+						        <Table.HeaderCell>REB</Table.HeaderCell>
+						        <Table.HeaderCell>AST</Table.HeaderCell>
+						        <Table.HeaderCell>F</Table.HeaderCell>
+						        <Table.HeaderCell>STL</Table.HeaderCell>
+						        <Table.HeaderCell>TO</Table.HeaderCell>
+						        <Table.HeaderCell>BLK</Table.HeaderCell>
+					      	</Table.Row>
+						</Table.Header>
+						<Table.Body id='home-individual-stats'>
+					    	{playerRowH}
+					    </Table.Body>
+					    <Table.Footer id='home-total-stats'>
+							<Table.Row>
+								<Table.HeaderCell style={footerStyleVHTot}>Home Totals:</Table.HeaderCell>
+								<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].min}</Table.HeaderCell>
+								<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].points}</Table.HeaderCell>
+								<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].totReb}</Table.HeaderCell>
+								<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].assists}</Table.HeaderCell>
+								<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].pFouls}</Table.HeaderCell>
+								<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].steals}</Table.HeaderCell>
+								<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].turnovers}</Table.HeaderCell>
+								<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].blocks}</Table.HeaderCell>
+							</Table.Row>
+					    </Table.Footer>
+					</Table>
 			<br/>
 			<br/>
 			</li>
