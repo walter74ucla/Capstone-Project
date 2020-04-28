@@ -654,46 +654,46 @@ class GameInfo extends Component {
 	                />
 		        </div>*/}
 			  	
-			  	{/*<div id='game-score-container'>*/}
-			  		{/*<div id='game-score-inside-container'>*/}
+			  	<div id='game-score-container'>
+			  		<div id='game-score-inside-container'>
 					    <Table
 					    	// https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity
 					    	className='game-score'
 					    	unstackable 
 					    	attached='top'
-					    	textAlign='center'
-					    	style={(this.state.gameScoreTableFixed) 
-					    			? this.state.gameScoreTableStyleFixed : gameScoreTableStyle}
+					    	// textAlign='center'
+					    	// style={(this.state.gameScoreTableFixed) 
+					    			// ? this.state.gameScoreTableStyleFixed : gameScoreTableStyle}
 					    >
 					    	<Table.Header>
-						      	<Table.Row>
-						        	<Table.HeaderCell>	
+						      	<Table.Row textAlign='center'>
+						        	<Table.HeaderCell style={{}}>	
 					        			<Header as='h4'>
 		            						{game.vTeam.shortName}
 								        </Header>
 						        	</Table.HeaderCell>
-						        	<Table.HeaderCell>
+						        	<Table.HeaderCell style={{}}>
 						        		<Header as='h4'>
 		            						{game.vTeam.score.points}
 								        </Header>
 						        	</Table.HeaderCell>
-						        	<Table.HeaderCell>
+						        	<Table.HeaderCell style={{}}>
 					        			<Header as='h4'>
 		            						{game.currentPeriod !== "" ? "FINAL" : null}
 								        </Header>
 						        	</Table.HeaderCell>
-						        	<Table.HeaderCell>
+						        	<Table.HeaderCell style={{}}>
 					       				<Header as='h4'>
 		            						{game.hTeam.score.points}
 								        </Header>
 						        	</Table.HeaderCell>
-						        	<Table.HeaderCell>
+						        	<Table.HeaderCell style={{}}>
 					        			<Header as='h4'>
 		            						{game.hTeam.shortName}
 								        </Header>
 						        	</Table.HeaderCell>
 						      	</Table.Row>
-						      	<Table.Row>
+						      	<Table.Row textAlign='center'>
 						      		<Table.HeaderCell>
 						        		<Header as='h4' image>
 						        			<Image src={teamLogos.find(teamLogo => 
@@ -724,8 +724,80 @@ class GameInfo extends Component {
 						        		</Header>
 						        	</Table.HeaderCell>
 						      	</Table.Row>
-							</Table.Header>
+							</Table.Header>						      		
 					    </Table>
+					</div>
+				</div>
+				{/*<div id='visitor-name-container'>
+					<div id='visitor-name-inside-container'>
+						<Table
+							className='visitor-name'
+					    	unstackable 
+					    	attached
+					    >
+							<Table.Header>      	
+						      	<Table.Row>
+							        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
+							    </Table.Row>
+							</Table.Header>
+						</Table>
+					</div>
+				</div>*/}
+						<Table
+							className='visitor-stats'
+					    	celled
+					    	striped
+					    	unstackable 
+					    	attached
+					    >
+							<Table.Header id='visitor-name'>
+								<Table.Row>
+							        <Table.HeaderCell colSpan='4'>{game.vTeam.fullName}</Table.HeaderCell>
+							        <Table.HeaderCell colSpan='5'></Table.HeaderCell>
+							    </Table.Row>
+						      	<Table.Row>
+							        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
+							        <Table.HeaderCell>Player</Table.HeaderCell>
+							        <Table.HeaderCell>MIN</Table.HeaderCell>
+							        <Table.HeaderCell>PTS</Table.HeaderCell>
+							        <Table.HeaderCell>REB</Table.HeaderCell>
+							        <Table.HeaderCell>AST</Table.HeaderCell>
+							        <Table.HeaderCell>F</Table.HeaderCell>
+							        <Table.HeaderCell>STL</Table.HeaderCell>
+							        <Table.HeaderCell>TO</Table.HeaderCell>
+							        <Table.HeaderCell>BLK</Table.HeaderCell>
+						      	</Table.Row>
+							</Table.Header>
+							<Table.Body id='visitor-individual-stats'>
+						    	{playerRowV}
+						    </Table.Body>
+						    <Table.Footer id='visitor-total-stats'>
+						      <Table.Row>
+						        <Table.HeaderCell style={footerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
+						      </Table.Row>
+						    </Table.Footer>
+					    </Table>
+					    <Table 
+					    	className='home-name' 
+					    	unstackable 
+					    	attached
+					    	// style={this.state.homeNameFixed
+					    			// ? this.state.homeNameTableStyleFixed : homeNameTableStyle}
+					    >
+						    <Table.Header>
+						      <Table.Row>
+						        <Table.HeaderCell>{game.hTeam.fullName}</Table.HeaderCell>
+						      </Table.Row>
+						    </Table.Header>
+						</Table>
 			   		{/*</div>*/}
 			   	{/*</div>*/}
 			   	{/*<br/>*/}
@@ -733,6 +805,8 @@ class GameInfo extends Component {
 					{/*<div id='visitor-name-inside-container'>*/}
 					    <Table 
 					    	className='visitor-name' 
+					    	celled
+					    	striped
 					    	unstackable 
 					    	attached
 					    	// className={this.state.visitorNameFixedTop ? 'visitor-name-fixed' : 'visitor-name'}
@@ -743,9 +817,40 @@ class GameInfo extends Component {
 					    >
 						    <Table.Header>
 						      <Table.Row>
-						        <Table.HeaderCell>{game.vTeam.fullName}</Table.HeaderCell>
+						        <Table.HeaderCell colSpan='4'>{game.vTeam.fullName}</Table.HeaderCell>
+						      </Table.Row>
+						      <Table.Row>
+						        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
+						        <Table.HeaderCell>Player</Table.HeaderCell>
+						        <Table.HeaderCell>MIN</Table.HeaderCell>
+						        <Table.HeaderCell>PTS</Table.HeaderCell>
+						        <Table.HeaderCell>REB</Table.HeaderCell>
+						        <Table.HeaderCell>AST</Table.HeaderCell>
+						        <Table.HeaderCell>F</Table.HeaderCell>
+						        <Table.HeaderCell>STL</Table.HeaderCell>
+						        <Table.HeaderCell>TO</Table.HeaderCell>
+						        <Table.HeaderCell>BLK</Table.HeaderCell>
 						      </Table.Row>
 						    </Table.Header>
+						    <Table.Body>
+						    	{playerRowV}
+						    </Table.Body>
+						    <Table.Footer
+						    	// style={this.state.visitorStatsDivFixed
+									// ? {visibility: 'hidden', zIndex: 0 /*mess with this???*/,} : {}}
+						    >
+						      <Table.Row>
+						        <Table.HeaderCell style={footerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
+						      </Table.Row>
+						    </Table.Footer>
 						</Table>
 					{/*</div>*/}
 				{/*</div>*/}
@@ -786,9 +891,9 @@ class GameInfo extends Component {
 					        <Table.HeaderCell>BLK</Table.HeaderCell>
 					      </Table.Row>
 					    </Table.Header>
-						<Table.Body>
+						{/*<Table.Body>
 					    	{playerRowV}
-					    </Table.Body>
+					    </Table.Body>*/}
 					    <Table.Footer
 					    	// style={this.state.visitorStatsDivFixed
 								// ? {visibility: 'hidden', zIndex: 0 /*mess with this???*/,} : {}}

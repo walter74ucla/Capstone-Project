@@ -2,6 +2,126 @@ body {
 	overflow: visible;  /*It seems like the default is overflow-x: hidden;*/
 }
 
+/*style the game score table element*/
+.game-score thead tr:first-of-type th {
+	border: 2px solid blue;
+	background-color: fuchsia;
+	/*width: 20vw;*/
+
+}
+
+.game-score thead tr:nth-of-type(2) th {
+	border: 2px solid gray;
+	background-color: green;
+	/*width: 20vw;*/
+}
+
+/*making this width super wide helps the inner table stick horizontally*/
+#game-score-container {
+	border: 2px solid lime;
+	background-color: maroon;
+	width: 140vw; /*visitor or home stats table width, whatever is larger*/
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0px;
+	left: 0px; /*This does not show up on mobile unless top or bottom: 0px; is added*/
+	z-index: 50;
+}
+
+/*this width fills the viewport so the inner table sticks horizontally*/
+#game-score-inside-container {
+  border: 2px solid navy;
+  background-color: olive;
+  width: 100vw; /*Relative to 1% of the width of the viewport*/
+  /*margin: 0 auto; this centers the element*/
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0px;
+}
+
+/*this worked when I moved visitor stats inside of visitor name table.  position sticky left 0px worked when adding colSpan attribute on visitor name row.*/
+/*.visitor-name thead tr:first-of-type th:first-of-type { 
+	border: 2px solid black;
+	background-color: aqua;
+	position: -webkit-sticky;
+	position: sticky;
+	left: 0px;
+	top: 117px; height of the game-score-container
+}*/
+
+
+/*Fix the visitor name header to the top...1st row*/
+#visitor-name tr:first-of-type th {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 117px; /* game-score-container height*/
+	/*border: 2px solid blue;*/
+  	background-color: yellow;
+
+}
+
+/*Fix the visitor name header to the top...2nd row*/
+#visitor-name tr:nth-of-type(2) th {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 166px; /* 117 + 49, game-score-container height plus visitor name row height*/
+	/*border: 2px solid black;*/
+  	background-color: aqua;	
+}
+
+/* Edit: first cell fixed always...1st row */
+#visitor-name tr:first-of-type th:first-of-type {
+	z-index: 10;
+	left: 0;
+	/*background-color: black;*/
+}
+
+/* Edit: first cell fixed always...2nd row */
+#visitor-name tr:nth-of-type(2) th:first-of-type {
+	z-index: 10;
+	left: 0;
+	/*background-color: black;*/
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Fix the first column  to the left*/
+#visitor-individual-stats td:first-of-type {
+	position: -webkit-sticky;
+	position: sticky;
+	/*background-color: white;*/
+	left: 0px;
+	font-weight: bold;
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Zebra Stripe the first cell of the table rows*/
+#visitor-individual-stats tr:nth-child(odd) td:first-of-type {
+	background-color: #FFFFFF;
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Zebra Stripe the first cell of the table rows*/
+#visitor-individual-stats tr:nth-child(even) td:first-of-type{
+	background-color: #F9FAFB;
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Bold the Footer*/
+#visitor-total-stats tr:first-of-type th {
+	font-weight: bold;
+}
+
+/* Edit: 1st cell fixed always...1st row */
+#visitor-total-stats tr:first-of-type th:first-of-type {
+	z-index: 9;
+	left: 0;
+	/*background-color: black;*/
+	border-right: 2px outset #F9FAFB;
+	position: -webkit-sticky;
+	position: sticky;
+}
+
+
 /*Experimental*/
 .boxscore-container {
 	overflow-x: scroll;
@@ -64,53 +184,8 @@ body {
 	/*z-index: 10;*/
 }
 
-/*making this width super wide helps the inner table stick horizontally*/
-#game-score-container {
-	border: 2px solid black;
-	background-color: red;
-	width: 200vw; /*visitor or home stats table width, whatever is larger*/
-	position: -webkit-sticky;
-	position: sticky;
-	top: 0px;
-	/*position: fixed; This does not show up on mobile unless top or bottom: 0px; is added*/
-	left: 0px; /*This does not show up on mobile unless top or bottom: 0px; is added*/
-	/*right: 0px; This does not show up on mobile unless top or bottom: 0px; is added*/
-	z-index: 50;
-}
 
-/*this width fills the viewport so the inner table sticks horizontally*/
-#game-score-inside-container {
-  border: 2px solid pink;
-  background-color: purple;
-  width: 100vw; /*Relative to 1% of the width of the viewport*/
-  /*margin: 0 auto; this centers the element*/
-  position: -webkit-sticky;
-  position: sticky;
-  left: 0px;
-}
 
-#visitor-name-container {
-	border: 2px solid aqua;
-	background-color: black;
-	width: 200vw; /*visitor or home stats table width, whatever is larger*/
-	position: -webkit-sticky;
-	position: sticky;
-	top: 105px; /* game score table height*/
-	/*position: fixed; This does not show up on mobile unless top or bottom: 0px; is added*/
-	left: 0px; /*This does not show up on mobile unless top or bottom: 0px; is added*/
-	/*right: 0px; This does not show up on mobile unless top or bottom: 0px; is added*/
-	z-index: 40;
-}
-
-#visitor-name-inside-container {
-  border: 2px solid blue;
-  background-color: fuchsia;
-  width: 100vw; /*Relative to 1% of the width of the viewport*/
-  /*margin: 0 auto; this centers the element*/
-  position: -webkit-sticky;
-  position: sticky;
-  left: 0px;
-}
 
 #visitor-stats-container {
 	border: 2px solid gray;
@@ -136,59 +211,10 @@ body {
   /*left: 0px;*/
 }
 
-/*Fix the header to the top...thead...1st row*/
-#visitor-stats-container table thead tr:first-of-type th {
-	position: -webkit-sticky; /*sticky does not work here*/
-	position: sticky; /*sticky does not work here*/
-	top: 0px; /*game score plus visitor name table heights*/
-	/*the top XXpx just shoves the th down a bit and nothing scrolls under it*/
-	background-color: cyan;
-}
 
-/*Fix the first column  to the left...tbody*/
-.visitor-stats tbody td:first-of-type{
-	position: -webkit-sticky;
-	position: sticky;
-	/*background-color: white;*/
-	left: 0px;
-	font-weight: bold;
-	border-right: 2px outset #F9FAFB;
-}
 
-/* Edit: corner fixed always...thead...1st row */
-.visitor-stats thead tr:first-of-type th:first-of-type{
-	z-index: 10;
-	left: 0;
-	/*background-color: black;*/
-	border-right: 2px outset #F9FAFB;
-}
 
-/*Zebra Stripe the first cell of the table rows*/
-.visitor-stats tr:nth-child(odd) td:first-of-type{
-	background-color: #FFFFFF;
-	border-right: 2px outset #F9FAFB;
-}
 
-/*Zebra Stripe the first cell of the table rows*/
-.visitor-stats tr:nth-child(even) td:first-of-type{
-	background-color: #F9FAFB;
-	border-right: 2px outset #F9FAFB;
-}
-
-/*Bold the Footer*/
-.visitor-stats tfoot tr:first-of-type th {
-	font-weight: bold;
-}
-
-/* Edit: 1st cell fixed always...tfoot...1st row */
-.visitor-stats tfoot tr:first-of-type th:first-of-type{
-	z-index: 9;
-	left: 0;
-	/*background-color: black;*/
-	border-right: 2px outset #F9FAFB;
-	position: -webkit-sticky;
-	position: sticky;
-}
 
 /*Experimental*/
 .game-info { /*seems like I need overflow to get the onScroll to work. I hope to hide the scroll bar, one day*/
@@ -316,6 +342,27 @@ body {
 }
 
 
+/*Do not need this any more*/
+/*#visitor-name-container {*/
+	/*border: 2px solid purple;*/
+	/*background-color: red;*/
+	/*width: 140vw; visitor or home stats table width, whatever is larger*/
+	/*position: -webkit-sticky;*/
+	/*position: sticky;*/
+	/*top: 105px;  game score table height*/
+	/*left: 0px; This does not show up on mobile unless top or bottom: 0px; is added*/
+	/*z-index: 40;*/
+/*}*/
+
+/*#visitor-name-inside-container {*/
+  /*border: 2px solid silver;*/
+  /*background-color: teal;*/
+  /*width: 100vw; Relative to 1% of the width of the viewport*/
+  /*margin: 0 auto; this centers the element*/
+  /*position: -webkit-sticky;*/
+  /*position: sticky;*/
+  /*left: 0px;*/
+/*}*/
 
 
 
