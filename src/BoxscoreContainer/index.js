@@ -23,7 +23,7 @@ const fixedOverlayStyle = {
   ...overlayStyle,
   position: 'fixed', // Fixed/sticky position
   // top: '80px',
-  zIndex: 10,
+  zIndex: 60,
   bottom: '0px', // Place the button 0px from the bottom of the page 
   right: '0px', // Place the button 0px from the right
 }
@@ -96,6 +96,7 @@ class BoxscoreContainer extends Component {
 		    },
 		    overlayFixed: false,
 		    isHorScroll: false, // checks if element is scrolled horizontally
+		    gameScoreFixed: false,
 		}
 	}
 	
@@ -432,9 +433,15 @@ class BoxscoreContainer extends Component {
     // is the component on the dom? ComponentDidMount
     // any calls to an external data source that we want connected
     // as soon as our app is loaded we call it in componentDidMount
-    	this.getSelectedDateGameData(null, true)
-    
+    	this.getSelectedDateGameData(null, true);
+    	// window.addEventListener("scroll", this.getElementPosition);
+
   	}
+
+  	// Remove the event listener when the component is unmount.
+	componentWillUnmount() {
+		// window.removeEventListener("scroll", this.getElementPosition);
+	}
 
   	getInputDate = (day, selected) => {
 	    // e.preventDefault();
@@ -446,25 +453,42 @@ class BoxscoreContainer extends Component {
     }
 
     stickOverlay = () => this.setState({ overlayFixed: true });
-    
     unStickOverlay = () => this.setState({ overlayFixed: false });
 
     scrollToTop = () => {
     	document.documentElement.scrollTop = 0;
     }
 
-    handleScroll = (e) => {
+    // stickGameScore = () => this.setState({ gameScoreFixed: true });
+    // unstickGameScore = () => this.setState({ gameScoreFixed: false });
+
+    //See if this works with the ref
+    handleScrollE = (e) => { // this works on an element inside a container with scrollbars
     	let element = e.target;
     	const leftScrollPos = element.scrollLeft;
+    	const topScrollPos = element.scrollTop;
     	const tagName = element.tagName;
     	console.log('e: ', e);
     	console.log('element: ', element);
     	console.log('leftScrollPos: ', leftScrollPos);
+    	console.log('topScrollPos: ', topScrollPos);
     	console.log('tagName: ', tagName);	
-    	
+
     	this.setState({
     		isHorScroll: leftScrollPos !== 0 ? true : false
-    	})
+    	})	
+    }
+
+
+    // https://plainjs.com/javascript/styles/get-the-position-of-an-element-relative-to-the-document-24/
+    // https://www.w3adda.com/react-js-tutorial/reactjs-refs
+    getElementPosition = (e) => {// works with a ref, but get TypeError: e.getBoundingClientRect is not a function when added to the componentdidmount/willunmount eventlisteners
+    	let rect = e.getBoundingClientRect(),
+    	scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    	scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    	console.log('e: ', e);
+    	console.log('rect: ', rect);
+    	return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
     }
 
   	render() {
@@ -473,8 +497,13 @@ class BoxscoreContainer extends Component {
 	  	// console.log(this.state.selectedDay);
 	  	// console.log(this.state.selectedGames.length);
 	  	const { overlayFixed } = this.state;
+
+	  	
+
 	  	return(
 	  		<React.Fragment>
+      		{/*<div className='boxscore-container' onScroll={(e) => this.handleScrollE(e)}>*/}
+      		{/*<div className='boxscore-container-scroll'>*/}
       			<Grid columns={3} stackable>
 				    <Grid.Row stretched>
 				      	<Grid.Column>
@@ -564,14 +593,26 @@ class BoxscoreContainer extends Component {
 		      				byGameTotals={this.state.gameTotalsByGame}
 		      				byGamePlayerInfo={this.state.playerInfoByGame}
 		      				byGamePlayerInfoName={this.state.playerInfoByGameName}
-		      				handleScroll={this.handleScroll}
+		      				
+		      				stickGameScore={this.stickGameScore}
+		      				unstickGameScore={this.unstickGameScore}
+		      				gameScoreFixed={this.state.gameScoreFixed}
+
+		      				handleScrollE={this.handleScrollE}
 		      				isHorScroll={this.state.isHorScroll}
+		      				getElementPosition={this.getElementPosition}
 		      			/>
 		      		: null	
 			    }
-			    
+			{/*</div>*/}
+			{/*</div>*/}   
     		</React.Fragment>
+    			
   		)
+// let element = document.querySelector(".game-score-container");
+// console.log(element);
+// let elementPosition = this.getElementPosition(element);
+// console.log(elementPosition.left, elementPosition.top);
   	}
 
 }

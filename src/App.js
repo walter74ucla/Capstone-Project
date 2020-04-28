@@ -6,6 +6,7 @@ import Register from './Register';
 import BoxscoreContainer from './BoxscoreContainer';
 import SelectFavoriteTeams from './SelectFavoriteTeamsForm';
 import HeaderComponent from './HeaderComponent';
+import FooterComponent from './FooterComponent';
 import { Route, Switch } from 'react-router-dom';
 
 
@@ -68,6 +69,7 @@ class App extends Component {
             <Route exact path="/favorite_teams" component={ SelectFavoriteTeams } />
             <Route component={My404} />
           </Switch>
+        <FooterComponent />
       </main>
       )
   }

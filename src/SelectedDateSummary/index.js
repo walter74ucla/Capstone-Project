@@ -68,7 +68,14 @@ function SelectedDateSummary (props) {
 					<li key={game.gameId}>
 					    {game.vTeam.shortName + " "}
 					    {game.vTeam.score.points + " "}
-					    {game.currentPeriod === "4/4" ? "FINAL " : "FINAL/OT "}
+					    {game.currentPeriod === "4/4" ? "FINAL " 
+            							: game.currentPeriod === "5/4" ? "FINAL/OT "
+            							: game.currentPeriod === "6/4" ? "FINAL/2OT "
+            							: game.currentPeriod === "7/4" ? "FINAL/3OT "
+            							: game.currentPeriod === "8/4" ? "FINAL/4OT "
+            							: game.currentPeriod === "9/4" ? "FINAL/5OT "
+            							: null
+            						}
 					    {game.hTeam.score.points + " "}
 					    {game.hTeam.shortName}
 					</li>

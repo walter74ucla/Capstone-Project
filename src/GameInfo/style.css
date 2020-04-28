@@ -2,72 +2,207 @@ body {
 	overflow: visible;  /*It seems like the default is overflow-x: hidden;*/
 }
 
-.game-score {
-	/*max-width: 360px;*/
-	border: 2px solid purple;
-	height: 46px;
-	width: auto;
+/*style the game score table element*/
+.game-score thead tr:first-of-type th {
+	/*border: 2px solid blue;*/
+	/*background-color: fuchsia;*/
+	/*width: 20vw;*/
+
 }
 
-.game-info { /*seems like I need overflow to get the onScroll to work. I hope to hide the scroll bar, one day*/
-	overflow: auto;
-	/*overflow-x: hidden;*/
+.game-score thead tr:nth-of-type(2) th {
+	/*border: 2px solid gray;*/
+	/*background-color: green;*/
+	/*width: 20vw;*/
 }
 
-.boxscore-table-vis {
-	/*position: relative;*/
-}
-
-/*Fix the header to the top*/
-.freeze-head-and-col tr:first-of-type th {
+/*making this width super wide helps the inner table stick horizontally*/
+#game-score-container {
+	/*border: 2px solid lime;*/
+	/*background-color: maroon;*/
+	width: 140vw; /*visitor or home stats table width, whatever is larger*/
 	position: -webkit-sticky;
 	position: sticky;
-	top: 0;
-	/*background-color: cyan;*/
+	top: 0px;
+	left: 0px; /*This does not show up on mobile unless top or bottom: 0px; is added*/
+	z-index: 50;
 }
 
-/*Fix the first column  to the left*/
-.freeze-head-and-col td:first-of-type {
+/*this width fills the viewport so the inner table sticks horizontally*/
+#game-score-inside-container {
+  /*border: 2px solid navy;*/
+  /*background-color: olive;*/
+  width: 100vw; /*Relative to 1% of the width of the viewport*/
+  /*margin: 0 auto; this centers the element*/
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0px;
+}
+
+
+/*Fix the visitor name header to the top...1st row*/
+#visitor-name tr:first-of-type th {
 	position: -webkit-sticky;
 	position: sticky;
+	top: 103px; /* game-score-container height*/
+	/*border: 2px solid blue;*/
+  	/*background-color: yellow;*/
+
+}
+
+/*Fix the visitor name header to the top...2nd row*/
+#visitor-name tr:nth-of-type(2) th {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 149px; /* 103 + 46, game-score-container height plus visitor name row height*/
+	/*border: 2px solid black;*/
+  	/*background-color: aqua;	*/
+}
+
+/* Edit: first cell fixed always...1st row */
+#visitor-name tr:first-of-type th:first-of-type {
+	z-index: 10;
 	left: 0;
-	/*background-color: white;*/
-	font-weight: bold;
+	/*background-color: black;*/
 }
 
-/* Edit: corner fixed always */
-.freeze-head-and-col tr:first-of-type th:first-of-type {
-	z-index:100;
+/*Need this to get the second part of the colSpan get a z-index*/
+#visitor-name tr:first-of-type th:nth-of-type(2) {
+	z-index: 9;
+	left: 0;
+	/*background-color: black;*/
+}
+
+/* Edit: first cell fixed always...2nd row */
+#visitor-name tr:nth-of-type(2) th:first-of-type {
+	z-index: 8;
 	left: 0;
 	/*background-color: black;*/
 	border-right: 2px outset #F9FAFB;
 }
 
-/*Zebra Stripe the first cell of the table rows*/
-.freeze-head-and-col tr:nth-child(even) td:first-of-type {
-	background-color: #F9FAFB;
+/*Fix the first column  to the left*/
+#visitor-individual-stats td:first-of-type {
+	position: -webkit-sticky;
+	position: sticky;
+	left: 0;
+	/*background-color: white;*/
+	font-weight: bold;
 	border-right: 2px outset #F9FAFB;
 }
 
 /*Zebra Stripe the first cell of the table rows*/
-.freeze-head-and-col tr:nth-child(odd) td:first-of-type {
+#visitor-individual-stats tr:nth-child(odd) td:first-of-type {
 	background-color: #FFFFFF;
 	border-right: 2px outset #F9FAFB;
 }
 
-/*Fix the Team Name Row to the left*/
-.freeze-header {
+/*Zebra Stripe the first cell of the table rows*/
+#visitor-individual-stats tr:nth-child(even) td:first-of-type {
+	background-color: #F9FAFB;
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Bold the Footer*/
+#visitor-total-stats tr:first-of-type th {
+	font-weight: bold;
+}
+
+/* Edit: 1st cell fixed always...1st row */
+#visitor-total-stats tr:first-of-type th:first-of-type {
+	z-index: 5;
+	left: 0;
+	/*background-color: black;*/
+	border-right: 2px outset #F9FAFB;
 	position: -webkit-sticky;
 	position: sticky;
-	left: 0;
-	z-index: 10;
-	background-color: red;
-	border: 2px solid green;
 }
 
 
+/*Fix the home name header to the top...1st row*/
+#home-name tr:first-of-type th {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 103px; /* game-score-container height*/
+	/*border: 2px solid navy;*/
+  	/*background-color: olive;*/
+}
+
+/*Fix the home name header to the top...2nd row*/
+#home-name tr:nth-of-type(2) th {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 149px; /* 103 + 46, game-score-container height plus visitor name row height*/
+	/*border: 2px solid lime;*/
+  	/*background-color: maroon;*/
+}
+
+/* Edit: first cell fixed always...1st row */
+#home-name tr:first-of-type th:first-of-type {
+	z-index: 10;
+	left: 0;
+	/*background-color: black;*/
+}
+
+/*Need this to get the second part of the colSpan get a z-index*/
+#home-name tr:first-of-type th:nth-of-type(2) {
+	z-index: 9;
+	left: 0;
+	/*background-color: black;*/
+}
+
+/* Edit: first cell fixed always...2nd row */
+#home-name tr:nth-of-type(2) th:first-of-type {
+	z-index: 8;
+	left: 0;
+	/*background-color: black;*/
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Fix the first column  to the left*/
+#home-individual-stats td:first-of-type {
+	position: -webkit-sticky;
+	position: sticky;
+	/*background-color: white;*/
+	left: 0px;
+	font-weight: bold;
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Zebra Stripe the first cell of the table rows*/
+#home-individual-stats tr:nth-child(odd) td:first-of-type {
+	background-color: #FFFFFF;
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Zebra Stripe the first cell of the table rows*/
+#home-individual-stats tr:nth-child(even) td:first-of-type {
+	background-color: #F9FAFB;
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Bold the Footer*/
+#home-total-stats tr:first-of-type th {
+	font-weight: bold;
+}
+
+/* Edit: 1st cell fixed always...1st row */
+#home-total-stats tr:first-of-type th:first-of-type {
+	z-index: 5;
+	left: 0;
+	/*background-color: black;*/
+	border-right: 2px outset #F9FAFB;
+	position: -webkit-sticky;
+	position: sticky;
+}
 
 
+/*https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp*/
 
+
+/*@media only screen and (max-width: 768px) {
+
+}
+*/
 
 
