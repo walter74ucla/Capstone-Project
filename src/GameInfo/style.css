@@ -76,9 +76,16 @@ body {
 	/*background-color: black;*/
 }
 
+/*Need this to get the second part of the colSpan get a z-index*/
+#visitor-name tr:first-of-type th:nth-of-type(2) {
+	z-index: 10;
+	left: 0;
+	/*background-color: black;*/
+}
+
 /* Edit: first cell fixed always...2nd row */
 #visitor-name tr:nth-of-type(2) th:first-of-type {
-	z-index: 10;
+	z-index: 8;
 	left: 0;
 	/*background-color: black;*/
 	border-right: 2px outset #F9FAFB;
@@ -101,7 +108,7 @@ body {
 }
 
 /*Zebra Stripe the first cell of the table rows*/
-#visitor-individual-stats tr:nth-child(even) td:first-of-type{
+#visitor-individual-stats tr:nth-child(even) td:first-of-type {
 	background-color: #F9FAFB;
 	border-right: 2px outset #F9FAFB;
 }
@@ -113,7 +120,85 @@ body {
 
 /* Edit: 1st cell fixed always...1st row */
 #visitor-total-stats tr:first-of-type th:first-of-type {
-	z-index: 9;
+	z-index: 5;
+	left: 0;
+	/*background-color: black;*/
+	border-right: 2px outset #F9FAFB;
+	position: -webkit-sticky;
+	position: sticky;
+}
+
+/*Fix the home name header to the top...1st row*/
+#home-name tr:first-of-type th {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 117px; /* game-score-container height*/
+	/*border: 2px solid navy;*/
+  	background-color: olive;
+
+}
+
+/*Fix the home name header to the top...2nd row*/
+#home-name tr:nth-of-type(2) th {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 166px; /* 117 + 49, game-score-container height plus visitor name row height*/
+	/*border: 2px solid lime;*/
+  	background-color: maroon;	
+}
+
+/* Edit: first cell fixed always...1st row */
+#home-name tr:first-of-type th:first-of-type {
+	z-index: 10;
+	left: 0;
+	/*background-color: black;*/
+}
+
+/*Need this to get the second part of the colSpan get a z-index*/
+#home-name tr:first-of-type th:nth-of-type(2) {
+	z-index: 10;
+	left: 0;
+	/*background-color: black;*/
+}
+
+/* Edit: first cell fixed always...2nd row */
+#home-name tr:nth-of-type(2) th:first-of-type {
+	z-index: 8;
+	left: 0;
+	/*background-color: black;*/
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Fix the first column  to the left*/
+#home-individual-stats td:first-of-type {
+	position: -webkit-sticky;
+	position: sticky;
+	/*background-color: white;*/
+	left: 0px;
+	font-weight: bold;
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Zebra Stripe the first cell of the table rows*/
+#home-individual-stats tr:nth-child(odd) td:first-of-type {
+	background-color: #FFFFFF;
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Zebra Stripe the first cell of the table rows*/
+#home-individual-stats tr:nth-child(even) td:first-of-type {
+	background-color: #F9FAFB;
+	border-right: 2px outset #F9FAFB;
+}
+
+/*Bold the Footer*/
+#home-total-stats tr:first-of-type th {
+	font-weight: bold;
+}
+
+/* Edit: 1st cell fixed always...1st row */
+#home-total-stats tr:first-of-type th:first-of-type {
+	z-index: 5;
 	left: 0;
 	/*background-color: black;*/
 	border-right: 2px outset #F9FAFB;

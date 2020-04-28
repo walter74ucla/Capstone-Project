@@ -274,33 +274,33 @@ class GameInfo extends Component {
 	    		console.log('Heck No! gameScoreTables.item(0) !== gameScoreTable');
 	    	}
 
-	    	const visitorNameTable = document.getElementsByClassName("visitor-name")[i];
-	    	console.log('visitorNameTable: ', visitorNameTable);
-	    	const vNTObjPos = this.getElementPosition(visitorNameTable); // visitor name table element object position
-	    	console.log('vNTObjPos: ', vNTObjPos);
-	    	const leftSPVNT = vNTObjPos.left; // left scroll position visitor name table element
-	    	const topSPVNT = vNTObjPos.top; // top scroll position visitor name table element
-	    	console.log('leftSPVNT: ', leftSPVNT);
-	    	console.log('topSPVNT: ', topSPVNT);
-	    	const visitorNameTableHeight = vNTObjPos.height; // height of visitor name table element
-	    	console.log('visitorNameTableHeight: ', visitorNameTableHeight);
-	    	visitorNameTableArray.push(visitorNameTable);
-	    	visitorNameTablePosTop.push(topSPVNT);
-	    	visitorNameTablePosHeight.push(visitorNameTableHeight);
+	    	// const visitorNameTable = document.getElementsByClassName("visitor-name")[i];
+	    	// console.log('visitorNameTable: ', visitorNameTable);
+	    	// const vNTObjPos = this.getElementPosition(visitorNameTable); // visitor name table element object position
+	    	// console.log('vNTObjPos: ', vNTObjPos);
+	    	// const leftSPVNT = vNTObjPos.left; // left scroll position visitor name table element
+	    	// const topSPVNT = vNTObjPos.top; // top scroll position visitor name table element
+	    	// console.log('leftSPVNT: ', leftSPVNT);
+	    	// console.log('topSPVNT: ', topSPVNT);
+	    	// const visitorNameTableHeight = vNTObjPos.height; // height of visitor name table element
+	    	// console.log('visitorNameTableHeight: ', visitorNameTableHeight);
+	    	// visitorNameTableArray.push(visitorNameTable);
+	    	// visitorNameTablePosTop.push(topSPVNT);
+	    	// visitorNameTablePosHeight.push(visitorNameTableHeight);
 
-	    	const visitorStatsDiv = document.getElementById("visitor-stats-container");
-	    	console.log('visitorStatsDiv: ', visitorStatsDiv);
-	    	const vSDObjPos = this.getElementPosition(visitorStatsDiv); // visitor stats div element object position
-	    	console.log('vSDObjPos: ', vSDObjPos);
-	    	const leftSPVSD = vSDObjPos.left; // left scroll position visitor stats div element
-	    	const topSPVSD = vSDObjPos.top; // top scroll position visitor stats div element
-	    	console.log('leftSPVST: ', leftSPVSD);
-	    	console.log('topSPVST: ', topSPVSD);
-	    	const visitorStatsDivHeight = vSDObjPos.height; // height of visitor stats div element
-	    	console.log('visitorStatsDivHeight: ', visitorStatsDivHeight);
-	    	visitorStatsDivArray.push(visitorStatsDiv);
-	    	visitorStatsDivPosTop.push(topSPVSD);
-	    	visitorStatsDivPosHeight.push(visitorStatsDivHeight);
+	    	// const visitorStatsDiv = document.getElementById("visitor-stats-container");
+	    	// console.log('visitorStatsDiv: ', visitorStatsDiv);
+	    	// const vSDObjPos = this.getElementPosition(visitorStatsDiv); // visitor stats div element object position
+	    	// console.log('vSDObjPos: ', vSDObjPos);
+	    	// const leftSPVSD = vSDObjPos.left; // left scroll position visitor stats div element
+	    	// const topSPVSD = vSDObjPos.top; // top scroll position visitor stats div element
+	    	// console.log('leftSPVST: ', leftSPVSD);
+	    	// console.log('topSPVST: ', topSPVSD);
+	    	// const visitorStatsDivHeight = vSDObjPos.height; // height of visitor stats div element
+	    	// console.log('visitorStatsDivHeight: ', visitorStatsDivHeight);
+	    	// visitorStatsDivArray.push(visitorStatsDiv);
+	    	// visitorStatsDivPosTop.push(topSPVSD);
+	    	// visitorStatsDivPosHeight.push(visitorStatsDivHeight);
 
 	    	const visitorStatsTable = document.getElementsByClassName("visitor-stats")[i];
 	    	console.log('visitorStatsTable: ', visitorStatsTable);
@@ -316,30 +316,30 @@ class GameInfo extends Component {
 	    	visitorStatsTablePosTop.push(topSPVST);
 	    	visitorStatsTablePosHeight.push(visitorStatsTableHeight);
 
-	    	const blankRowTable = document.getElementsByClassName("blank-row")[i];
-	    	console.log('blankRowTable: ', blankRowTable);
-	    	const bRTObjPos = this.getElementPosition(blankRowTable); // blank row table element object position
-	    	console.log('bRTObjPos: ', bRTObjPos);
-	    	const leftSPBRT = bRTObjPos.left; // left scroll position blank row table element
-	    	const topSPBRT = bRTObjPos.top; // top scroll position blank row table element
-	    	console.log('leftSPBRT: ', leftSPBRT);
-	    	console.log('topSPBRT: ', topSPBRT);
-	    	const blankRowHeight = bRTObjPos.height; // height of blank row table element
-	    	console.log('blankRowHeight: ', blankRowHeight);
+	    	// const blankRowTable = document.getElementsByClassName("blank-row")[i];
+	    	// console.log('blankRowTable: ', blankRowTable);
+	    	// const bRTObjPos = this.getElementPosition(blankRowTable); // blank row table element object position
+	    	// console.log('bRTObjPos: ', bRTObjPos);
+	    	// const leftSPBRT = bRTObjPos.left; // left scroll position blank row table element
+	    	// const topSPBRT = bRTObjPos.top; // top scroll position blank row table element
+	    	// console.log('leftSPBRT: ', leftSPBRT);
+	    	// console.log('topSPBRT: ', topSPBRT);
+	    	// const blankRowHeight = bRTObjPos.height; // height of blank row table element
+	    	// console.log('blankRowHeight: ', blankRowHeight);
 
-	    	const homeNameTable = document.getElementsByClassName("home-name")[i];
-	    	console.log('homeNameTable: ', homeNameTable);
-	    	const hNTObjPos = this.getElementPosition(homeNameTable); // home name table element object position
-	    	console.log('hNTObjPos: ', hNTObjPos);
-	    	const leftSPHNT = hNTObjPos.left; // left scroll position home name table element
-	    	const topSPHNT = hNTObjPos.top; // top scroll position home name table element
-	    	console.log('leftSPHNT: ', leftSPHNT);
-	    	console.log('topSPHNT: ', topSPHNT);
-	    	const homeNameHeight = hNTObjPos.height; // height of home name table element
-	    	console.log('homeNameHeight: ', homeNameHeight);
-	    	homeNameTableArray.push(homeNameTable);
-	    	homeNamePosTop.push(topSPHNT);
-	    	homeNamePosHeight.push(homeNameHeight);
+	    	// const homeNameTable = document.getElementsByClassName("home-name")[i];
+	    	// console.log('homeNameTable: ', homeNameTable);
+	    	// const hNTObjPos = this.getElementPosition(homeNameTable); // home name table element object position
+	    	// console.log('hNTObjPos: ', hNTObjPos);
+	    	// const leftSPHNT = hNTObjPos.left; // left scroll position home name table element
+	    	// const topSPHNT = hNTObjPos.top; // top scroll position home name table element
+	    	// console.log('leftSPHNT: ', leftSPHNT);
+	    	// console.log('topSPHNT: ', topSPHNT);
+	    	// const homeNameHeight = hNTObjPos.height; // height of home name table element
+	    	// console.log('homeNameHeight: ', homeNameHeight);
+	    	// homeNameTableArray.push(homeNameTable);
+	    	// homeNamePosTop.push(topSPHNT);
+	    	// homeNamePosHeight.push(homeNameHeight);
 
 	    	const homeStatsTable = document.getElementsByClassName("home-stats")[i];
 	    	console.log('homeStatsTable: ', homeStatsTable);
@@ -354,13 +354,13 @@ class GameInfo extends Component {
 
 	    	const height1 = gameScoreTableHeight;
 	    	height1Array.push(height1);
-	    	const height2 = height1 + visitorNameTableHeight;
-	    	height2Array.push(height2);
-	    	const height3 = height2 + visitorStatsDivHeight;
-	    	const height4 = height3 + blankRowHeight;
-	    	const height5 = height4 + homeNameHeight;
-	    	const height6 = height5 + homeStatsHeight;
-	    	const height7 = gameScoreTableHeight + homeNameHeight;
+	    	// const height2 = height1 + visitorNameTableHeight;
+	    	// height2Array.push(height2);
+	    	// const height3 = height2 + visitorStatsDivHeight;
+	    	// const height4 = height3 + blankRowHeight;
+	    	// const height5 = height4 + homeNameHeight;
+	    	// const height6 = height5 + homeStatsHeight;
+	    	// const height7 = gameScoreTableHeight + homeNameHeight;
 
 
 	    	console.log('gameScoreTablePosTop: ', gameScoreTablePosTop);
@@ -773,7 +773,7 @@ class GameInfo extends Component {
 						    </Table.Body>
 						    <Table.Footer id='visitor-total-stats'>
 						      <Table.Row>
-						        <Table.HeaderCell style={footerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
+						        <Table.HeaderCell style={footerStyleVHTot}>Visitor Totals:</Table.HeaderCell>
 						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
 						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
 						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
@@ -785,273 +785,62 @@ class GameInfo extends Component {
 						      </Table.Row>
 						    </Table.Footer>
 					    </Table>
+					    <Table id='blank-row' unstackable attached>
+					    	<Table.Body>
+						    	<Table.Row>
+						    		<Table.Cell></Table.Cell>
+					    		</Table.Row>
+				    		</Table.Body>
+					    </Table>
 					    <Table 
-					    	className='home-name' 
-					    	unstackable 
-					    	attached
-					    	// style={this.state.homeNameFixed
-					    			// ? this.state.homeNameTableStyleFixed : homeNameTableStyle}
-					    >
-						    <Table.Header>
-						      <Table.Row>
-						        <Table.HeaderCell>{game.hTeam.fullName}</Table.HeaderCell>
-						      </Table.Row>
-						    </Table.Header>
-						</Table>
-			   		{/*</div>*/}
-			   	{/*</div>*/}
-			   	{/*<br/>*/}
-				{/*<div id='visitor-name-container'>*/}
-					{/*<div id='visitor-name-inside-container'>*/}
-					    <Table 
-					    	className='visitor-name' 
+					    	className='home-stats' 
 					    	celled
 					    	striped
 					    	unstackable 
-					    	attached
-					    	// className={this.state.visitorNameFixedTop ? 'visitor-name-fixed' : 'visitor-name'}
-					    	style={this.state.visitorNameTableFixed
-					    			? this.state.visitorNameTableStyleFixed : visitorNameTableStyle}
-					    	// style={this.state.visitorNameTableStyleFixedLeft}
-
+					    	attached='bottom'
+					    	// style={this.state.homeNameFixed
+					    			// ? this.state.homeNameTableStyleFixed : homeNameTableStyle}
 					    >
-						    <Table.Header>
-						      <Table.Row>
-						        <Table.HeaderCell colSpan='4'>{game.vTeam.fullName}</Table.HeaderCell>
-						      </Table.Row>
-						      <Table.Row>
-						        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
-						        <Table.HeaderCell>Player</Table.HeaderCell>
-						        <Table.HeaderCell>MIN</Table.HeaderCell>
-						        <Table.HeaderCell>PTS</Table.HeaderCell>
-						        <Table.HeaderCell>REB</Table.HeaderCell>
-						        <Table.HeaderCell>AST</Table.HeaderCell>
-						        <Table.HeaderCell>F</Table.HeaderCell>
-						        <Table.HeaderCell>STL</Table.HeaderCell>
-						        <Table.HeaderCell>TO</Table.HeaderCell>
-						        <Table.HeaderCell>BLK</Table.HeaderCell>
-						      </Table.Row>
-						    </Table.Header>
-						    <Table.Body>
-						    	{playerRowV}
+						    <Table.Header id='home-name'>
+								<Table.Row>
+							        <Table.HeaderCell colSpan='4'>{game.hTeam.fullName}</Table.HeaderCell>
+							        <Table.HeaderCell colSpan='5'></Table.HeaderCell>
+							    </Table.Row>
+						      	<Table.Row>
+							        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
+							        <Table.HeaderCell>Player</Table.HeaderCell>
+							        <Table.HeaderCell>MIN</Table.HeaderCell>
+							        <Table.HeaderCell>PTS</Table.HeaderCell>
+							        <Table.HeaderCell>REB</Table.HeaderCell>
+							        <Table.HeaderCell>AST</Table.HeaderCell>
+							        <Table.HeaderCell>F</Table.HeaderCell>
+							        <Table.HeaderCell>STL</Table.HeaderCell>
+							        <Table.HeaderCell>TO</Table.HeaderCell>
+							        <Table.HeaderCell>BLK</Table.HeaderCell>
+						      	</Table.Row>
+							</Table.Header>
+							<Table.Body id='home-individual-stats'>
+						    	{playerRowH}
 						    </Table.Body>
-						    <Table.Footer
-						    	// style={this.state.visitorStatsDivFixed
-									// ? {visibility: 'hidden', zIndex: 0 /*mess with this???*/,} : {}}
-						    >
-						      <Table.Row>
-						        <Table.HeaderCell style={footerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
-						        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
-						      </Table.Row>
+						    <Table.Footer id='home-total-stats'>
+								<Table.Row>
+									<Table.HeaderCell style={footerStyleVHTot}>Home Totals:</Table.HeaderCell>
+									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].min}</Table.HeaderCell>
+									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].points}</Table.HeaderCell>
+									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].totReb}</Table.HeaderCell>
+									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].assists}</Table.HeaderCell>
+									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].pFouls}</Table.HeaderCell>
+									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].steals}</Table.HeaderCell>
+									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].turnovers}</Table.HeaderCell>
+									<Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].blocks}</Table.HeaderCell>
+								</Table.Row>
 						    </Table.Footer>
 						</Table>
-					{/*</div>*/}
-				{/*</div>*/}
-				{/*<br/>*/}
-
-				<div 
-					// this div is necessary to prevent the game score and vistior name tables from horizontal scrolling
-					id='visitor-stats-container'
-					style={this.state.visitorStatsDivFixed
-								? this.state.visitorStatsDivStyleFixed : visitorStatsDivStyle}
-
-				>
-				<div id='visitor-stats-inside-container'>
-	
-					<Table 
-						id='visitor-stats-1'
-						className='visitor-stats'
-						// singleLine
-						celled 
-						striped 
-						unstackable
-						attached
-						// style={this.state.visitorStatsFixed
-								// ? this.state.visitorStatsTableStyleFixed : visitorStatsTableStyle}
-						// className={false ? 'freeze-head-and-col' : 'freeze-head-and-col-fixed'}
-					>
-					    <Table.Header>
-					      <Table.Row>
-					        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
-					        <Table.HeaderCell>Player</Table.HeaderCell>
-					        <Table.HeaderCell>MIN</Table.HeaderCell>
-					        <Table.HeaderCell>PTS</Table.HeaderCell>
-					        <Table.HeaderCell>REB</Table.HeaderCell>
-					        <Table.HeaderCell>AST</Table.HeaderCell>
-					        <Table.HeaderCell>F</Table.HeaderCell>
-					        <Table.HeaderCell>STL</Table.HeaderCell>
-					        <Table.HeaderCell>TO</Table.HeaderCell>
-					        <Table.HeaderCell>BLK</Table.HeaderCell>
-					      </Table.Row>
-					    </Table.Header>
-						{/*<Table.Body>
-					    	{playerRowV}
-					    </Table.Body>*/}
-					    <Table.Footer
-					    	// style={this.state.visitorStatsDivFixed
-								// ? {visibility: 'hidden', zIndex: 0 /*mess with this???*/,} : {}}
-					    >
-					      <Table.Row>
-					        <Table.HeaderCell style={footerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
-					      </Table.Row>
-					    </Table.Footer>
-				    </Table>
-				    {/*<Table 
-						id='visitor-stats-2'
-						className='visitor-stats'
-						// singleLine
-						celled 
-						striped 
-						unstackable
-						attached
-						// style={visitorStatsTableStyle}
-						// style={this.state.visitorStatsFixed
-								// ? this.state.visitorStatsTableStyleFixed : visitorStatsTableStyle}
-						// className={false ? 'freeze-head-and-col' : 'freeze-head-and-col-fixed'}
-					>
-					    <Table.Header>
-					      <Table.Row>
-					        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
-					        {/*<Table.HeaderCell>Player</Table.HeaderCell>
-					        <Table.HeaderCell>MIN</Table.HeaderCell>
-					        <Table.HeaderCell>PTS</Table.HeaderCell>
-					        <Table.HeaderCell>REB</Table.HeaderCell>
-					        <Table.HeaderCell>AST</Table.HeaderCell>
-					        <Table.HeaderCell>F</Table.HeaderCell>
-					        <Table.HeaderCell>STL</Table.HeaderCell>
-					        <Table.HeaderCell>TO</Table.HeaderCell>
-					        <Table.HeaderCell>BLK</Table.HeaderCell>
-					      </Table.Row>
-					    </Table.Header>
-						{/*<Table.Body>
-					    	{playerRowV}
-					    </Table.Body>*/}
-					    {/*<Table.Footer>
-					      <Table.Row>
-					        <Table.HeaderCell style={footerStyleVHTot}>Visitor's Totals:</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].min}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].points}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].totReb}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].assists}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].pFouls}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].steals}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].turnovers}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameV.api.statistics[0].blocks}</Table.HeaderCell>
-					      </Table.Row>
-					    </Table.Footer>
-				    </Table>*/}
-				</div>
-				</div>
-
-				    {/*<div 
-						id='home-name-container' 
-						// style={this.state.homeNameFixedTop ? 
-								// homeNameContainerStyleFixedTop : homeNameContainerStyle}
-					>*/}
-				<Table 
-					className='blank-row' 
-					unstackable 
-					attached
-					// style={this.state.blankRowFixed && this.state.gameListIndex[counter] === counter
-							// ? this.state.blankRowTableStyleFixed : blankRowTableStyle}
-				>
-				    <Table.Body>
-				      <Table.Row>
-				        <Table.Cell></Table.Cell>
-				      </Table.Row>
-				    </Table.Body>
-				</Table>	  
-
-			    <Table 
-			    	className='home-name' 
-			    	unstackable 
-			    	attached
-			    	style={this.state.homeNameFixed
-			    			? this.state.homeNameTableStyleFixed : homeNameTableStyle}
-			    >
-				    <Table.Header>
-				      <Table.Row>
-				        <Table.HeaderCell>{game.hTeam.fullName}</Table.HeaderCell>
-				      </Table.Row>
-				    </Table.Header>
-				</Table>	
-				
-
-				<div id='home-stats-container'>
-					<Table 
-						className='home-stats freeze-head-and-col-fixed' 
-						celled 
-						striped 
-						unstackable 
-						attached 
-						style={this.state.homeStatsFixed
-								? this.state.homeStatsTableStyleFixed : homeStatsTableStyle}
-						// className={false ? 'freeze-head-and-col' : 'freeze-head-and-col-fixed'}
-					>
-					    <Table.Header>
-					      <Table.Row>
-					        {/*<Table.HeaderCell>Player ID</Table.HeaderCell>*/}
-					        <Table.HeaderCell>Player</Table.HeaderCell>
-					        <Table.HeaderCell>MIN</Table.HeaderCell>
-					        <Table.HeaderCell>PTS</Table.HeaderCell>
-					        <Table.HeaderCell>REB</Table.HeaderCell>
-					        <Table.HeaderCell>AST</Table.HeaderCell>
-					        <Table.HeaderCell>F</Table.HeaderCell>
-					        <Table.HeaderCell>STL</Table.HeaderCell>
-					        <Table.HeaderCell>TO</Table.HeaderCell>
-					        <Table.HeaderCell>BLK</Table.HeaderCell>
-					      </Table.Row>
-					    </Table.Header>
-						<Table.Body>
-					    	{playerRowH}
-					    </Table.Body>
-					    <Table.Footer>
-					      <Table.Row>
-					        <Table.HeaderCell style={footerStyleVHTot}>Home Totals:</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].min}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].points}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].totReb}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].assists}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].pFouls}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].steals}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].turnovers}</Table.HeaderCell>
-					        <Table.HeaderCell style={footerStyleVHTot}>{byGameTotalsGameH.api.statistics[1].blocks}</Table.HeaderCell>
-					      </Table.Row>
-					      {/*<Table.Row>
-					      	<Table.HeaderCell></Table.HeaderCell>
-					      </Table.Row>*/}
-					    </Table.Footer>
-				    </Table>
-				    <Table 
-				    	className='home-stats-bottom' // this table is necessary to get the last footer row data to show above the Footer Component
-				  		unstackable
-				  		attached='bottom'
-					>
-					    <Table.Header>
-					      <Table.Row>
-					        <Table.HeaderCell></Table.HeaderCell>
-					      </Table.Row>
-					    </Table.Header>
-					</Table>
-			    </div>
-
+			   		{/*</div>*/}
+			<br/>
 			<br/>
 			</li>
+
 		)})
 		// this.getListObjectIndex() // breaks the app
 		// {console.log('listObjArrayIndex: ', listObjArrayIndex)} // yields an empty array
