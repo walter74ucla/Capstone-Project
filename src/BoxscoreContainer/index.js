@@ -343,6 +343,7 @@ class BoxscoreContainer extends Component {
 					todayPlusOne: parsedSelectedDatePlusOne,
 					tInputDate: dateStringAPI,
 					tInputDatePlusOne: dateStringAPIPlusOne,
+					isLoading: false,
 				})
 			} else {
                 this.setState({
