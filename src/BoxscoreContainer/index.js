@@ -307,11 +307,15 @@ class BoxscoreContainer extends Component {
 			// console.log(this.state.playerInfoByGame);
 			// want the game to be finished before getting player name
 			// console.log(selectedGames[0].vTeam.score.points);
+
+			// ***Think about showing In Progress Boxscores***
 			
 			if (gamesFinished.length > 0 
 				&& gamesFinished[0].vTeam.score.points > 0){
 				let multipleGames = [];
-					for (let i=0; i<this.state.playerInfoByGame.length; i++){
+				// console.log(this.state.playerInfoByGame.length);
+				// console.log(gamesFinished.length);
+					for (let i=0; i<gamesFinished.length; i++){
 						let playerNamesForOneGame
 							await Promise.all(this.state.playerInfoByGame[i].api.statistics.map(player => {
 							// console.log('Player is: ', player);
@@ -324,14 +328,14 @@ class BoxscoreContainer extends Component {
 							      playerInfoByGameName: playerNamesForOneGame,
 							    })	
 								// console.log('playerNamesForOneGame in promiseall:', playerNamesForOneGame);
-								console.log(playerNamesForOneGame[0].api.players[0].lastName);
+								console.log(playerNamesForOneGame[0].api.players[0].lastName);		
 							})
 							
 							multipleGames[i] = this.state.playerInfoByGameName;
 							this.setState({
 							      playerInfoByGameName: multipleGames,
 							    })
-							// console.log(multipleGames);	
+							// console.log('multiple games: ', multipleGames);
 					}
 			}
 		
